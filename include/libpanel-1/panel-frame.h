@@ -1,0 +1,81 @@
+/* panel-frame.h
+ *
+ * Copyright 2021 Christian Hergert <chergert@redhat.com>
+ *
+ * This file is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This file is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ */
+
+#pragma once
+
+#include <gtk/gtk.h>
+
+#include "panel-frame-header.h"
+#include "panel-widget.h"
+#include "panel-version-macros.h"
+
+G_BEGIN_DECLS
+
+#define PANEL_TYPE_FRAME (panel_frame_get_type())
+
+PANEL_AVAILABLE_IN_ALL
+G_DECLARE_DERIVABLE_TYPE (PanelFrame, panel_frame, PANEL, FRAME, GtkWidget)
+
+struct _PanelFrameClass
+{
+  GtkWidgetClass parent_class;
+
+  /*< private >*/
+  gpointer _reserved[8];
+};
+
+PANEL_AVAILABLE_IN_ALL
+GtkWidget         *panel_frame_new               (void);
+PANEL_AVAILABLE_IN_ALL
+PanelFrameHeader  *panel_frame_get_header        (PanelFrame       *self);
+PANEL_AVAILABLE_IN_ALL
+void               panel_frame_set_header        (PanelFrame       *self,
+                                                  PanelFrameHeader *header);
+PANEL_AVAILABLE_IN_ALL
+gboolean           panel_frame_get_empty         (PanelFrame       *self);
+PANEL_AVAILABLE_IN_ALL
+void               panel_frame_add               (PanelFrame       *self,
+                                                  PanelWidget      *panel);
+PANEL_AVAILABLE_IN_ALL
+void               panel_frame_add_before        (PanelFrame       *self,
+                                                  PanelWidget      *panel,
+                                                  PanelWidget      *sibling);
+PANEL_AVAILABLE_IN_ALL
+void               panel_frame_remove            (PanelFrame       *self,
+                                                  PanelWidget      *panel);
+PANEL_AVAILABLE_IN_ALL
+void               panel_frame_set_visible_child (PanelFrame       *self,
+                                                  PanelWidget      *widget);
+PANEL_AVAILABLE_IN_ALL
+PanelWidget       *panel_frame_get_visible_child (PanelFrame       *self);
+PANEL_AVAILABLE_IN_ALL
+PanelWidget       *panel_frame_get_page          (PanelFrame       *self,
+                                                  guint             n);
+PANEL_AVAILABLE_IN_ALL
+GtkSelectionModel *panel_frame_get_pages         (PanelFrame       *self);
+PANEL_AVAILABLE_IN_ALL
+guint              panel_frame_get_n_pages       (PanelFrame       *self);
+PANEL_AVAILABLE_IN_ALL
+GtkWidget         *panel_frame_get_placeholder   (PanelFrame       *self);
+PANEL_AVAILABLE_IN_ALL
+void               panel_frame_set_placeholder   (PanelFrame       *self,
+                                                  GtkWidget        *placeholder);
+
+G_END_DECLS

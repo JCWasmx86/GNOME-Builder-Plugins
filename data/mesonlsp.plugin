@@ -1,0 +1,14 @@
+[Plugin]
+Authors=JCWasmx86
+Copyright=JCWasmx86
+Description=Provides MesonLSP integration
+Loader=C
+Module=mesonlsp
+Name=Cabal Integration
+X-Category=lsps
+X-Hover-Provider-Languages=meson
+X-Symbol-Resolver-Languages=meson
+X-Symbol-Resolver-Languages-Priority=800
+X-Highlighter-Languages=meson
+X-Highlighter-Languages-Priority=100
+X-Builder-ABI=@BUILDER_ABI@

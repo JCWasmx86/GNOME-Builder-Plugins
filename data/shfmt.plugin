@@ -1,0 +1,10 @@
+[Plugin]
+Authors=JCWasmx86
+Copyright=JCWasmx86
+Description=Provides shfmt integration
+Loader=C
+Module=shfmt
+Name=Shfmt Integration
+X-Formatter-Languages=sh
+X-Formatter-Languages-Priority=200
+X-Builder-ABI=@BUILDER_ABI@

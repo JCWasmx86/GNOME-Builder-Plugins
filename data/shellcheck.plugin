@@ -1,0 +1,10 @@
+[Plugin]
+Authors=JCWasmx86
+Copyright=JCWasmx86
+Description=Provides shellcheck integration
+Loader=C
+Module=shellcheck
+Name=Shellcheck Integration
+X-Diagnostic-Provider-Languages=sh
+X-Diagnostic-Provider-Languages-Priority=100
+X-Builder-ABI=@BUILDER_ABI@

@@ -1,0 +1,11 @@
+[Plugin]
+Authors=JCWasmx86
+Copyright=JCWasmx86
+Description=Provides cabal integration
+Loader=C
+Module=cabal
+Name=Cabal Integration
+X-Category=buildsystems
+X-Project-File-Filter-Name=Cabal
+X-Project-File-Filter-Pattern=*.cabal
+X-Builder-ABI=@BUILDER_ABI@

@@ -1,0 +1,19 @@
+[Plugin]
+Authors=Christian Hergert <christian@hergert.me>, JCWasmx86 <JCWasmx86@t-online.de>
+Copyright=Copyright © 2022 Christian Hergert
+Description=Provides clangd integration
+Loader=C
+Module=clangd_gb
+Name=Clangd Integration
+X-Category=lsps
+X-Code-Action-Languages=c,chdr,cpp,cpphdr,objc
+X-Completion-Provider-Languages=c,chdr,cpp,cpphdr,objc
+X-Diagnostic-Provider-Languages=c,chdr,cpp,cpphdr,objc
+X-Diagnostic-Provider-Languages-Priority=200
+X-Formatter-Languages=c,chdr,cpp,cpphdr,objc
+X-Highlighter-Languages=c,chdr,cpp,cpphdr,objc
+X-Hover-Provider-Languages=c,chdr,cpp,cpphdr,objc
+X-Rename-Provider-Languages=c,chdr,cpp,cpphdr,objc
+X-Symbol-Resolver-Languages=c,chdr,cpp,cpphdr,objc
+X-Symbol-Resolver-Languages-Priority=200
+X-Builder-ABI=@BUILDER_ABI@
