@@ -33,6 +33,8 @@ inc = include_directories (
 dependencies = [
 	dependency('gobject-2.0'),
 	dependency('glib-2.0'),
+	dependency('gee-0.8'),
+	dependency('json-glib-1.0'),
 	meson.get_compiler('vala').find_library('ide', dirs: vapi_dir),
 	dependency('gtk4'),
 	dependency('gtksourceview-5'),
@@ -42,10 +44,12 @@ dependencies = [
 	meson.get_compiler('vala').find_library('panel-1', dirs: vapi_dir),
 	meson.get_compiler('vala').find_library('template-1.0', dirs: vapi_dir),
 ]
+gnome = import('gnome')
 subdir('cabal')
 subdir('clangd')
 subdir('data')
 subdir('hls')
+subdir('icon_installer')
 subdir('meson')
 subdir('shellcheck')
 subdir('shfmt')

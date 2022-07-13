@@ -1,0 +1,9 @@
+[Plugin]
+Authors=JCWasmx86 <JCWasmx86@t-online.de>
+Copyright=JCWasmx86
+Description=Provides ability to install icons
+Loader=C
+Module=icon_installer
+Name=Install icons easily
+X-Workspace-Kind=primary;
+X-Builder-ABI=@BUILDER_ABI@
