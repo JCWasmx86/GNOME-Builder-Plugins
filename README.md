@@ -7,6 +7,7 @@ guaranteed.
 - cabal: Integration for the cabal buildsystem
 - clangd: (Copied from upstream, converted to Vala): Clangd integration
 - hls: Integration for the Haskell Language Server
+- icon_installer: Allow installing icons easily in your project
 - jdtls: Integration for the Eclipse Java Language Server
 - meson: Integration for my meson language server
 - shellcheck: Shellcheck integration

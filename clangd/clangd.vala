@@ -30,9 +30,11 @@ class ClangdService : Ide.LspService {
 	public override void configure_launcher (Ide.Pipeline pipeline, Ide.SubprocessLauncher launcher) {
 		critical ("compile-commands.json: %s", pipeline.get_builddir ());
 		launcher.push_argv ("--completion-style=detailed");
-		launcher.push_argv ("-j=8");
+		launcher.push_argv ("-j=4");
 		launcher.push_argv ("--malloc-trim");
 		launcher.push_argv ("--log=verbose");
+		launcher.push_argv ("--compile-commands-dir=" + pipeline.get_builddir ());
+		launcher.push_argv ("--pch-storage=memory");
 	}
 	public override void configure_client (Ide.LspClient client) {
 		client.add_language ("c");

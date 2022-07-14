@@ -50,6 +50,8 @@ public class StackPipelineAddin : Ide.Object, Ide.PipelineAddin {
 	public void load (Ide.Pipeline pipeline) {
 		var context = this.get_context ();
 		var srcdir = pipeline.get_srcdir ();
+		if (! (Ide.BuildSystem.from_context (context) is StackBuildSystem))
+			return;
 		try {
 			var build_launcher = pipeline.create_launcher ();
 			build_launcher.set_cwd (srcdir);
