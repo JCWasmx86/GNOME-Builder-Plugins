@@ -3287,7 +3287,7 @@ namespace Ide {
 		public async string[] get_build_flags_async (GLib.File file, GLib.Cancellable? cancellable) throws GLib.Error;
 		public async GLib.HashTable<Ide.File,string[]> get_build_flags_for_dir_async (GLib.File directory, GLib.Cancellable? cancellable) throws GLib.Error;
 		public async GLib.HashTable<Ide.File,string[]> get_build_flags_for_files_async (GLib.GenericArray<GLib.File> files, GLib.Cancellable? cancellable) throws GLib.Error;
-		public string get_builddir (Ide.Pipeline pipeline);
+		public virtual string get_builddir (Ide.Pipeline pipeline);
 		public abstract string get_display_name ();
 		public abstract string get_id ();
 		public abstract int get_priority ();

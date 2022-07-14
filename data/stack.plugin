@@ -6,6 +6,6 @@ Loader=C
 Module=stack
 Name=Stack Integration
 X-Category=buildsystems
-X-Project-File-Filter-Name=Stack
+X-Project-File-Filter-Name=Stack (stack.yaml)
 X-Project-File-Filter-Pattern=stack.yaml
 X-Builder-ABI=@BUILDER_ABI@

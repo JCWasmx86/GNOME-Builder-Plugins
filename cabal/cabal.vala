@@ -19,8 +19,10 @@
  */
 
 public class CabalBuildSystemDiscovery : Ide.SimpleBuildSystemDiscovery {
-	public CabalBuildSystemDiscovery () {
+	construct {
 		this.glob = "*.cabal";
+		this.priority = 900;
+		this.hint = "cabal";
 	}
 }
 
@@ -36,7 +38,11 @@ public class CabalBuildSystem : Ide.Object, Ide.BuildSystem {
 	}
 
 	public int get_priority () {
-		return 2000;
+		return 900;
+	}
+
+	public override string get_builddir (Ide.Pipeline pipeline) {
+		return pipeline.get_srcdir ();
 	}
 }
 
@@ -50,15 +56,18 @@ public class CabalPipelineAddin : Ide.Object, Ide.PipelineAddin {
 	public void load (Ide.Pipeline pipeline) {
 		var context = this.get_context ();
 		var srcdir = pipeline.get_srcdir ();
-		if (!(Ide.BuildSystem.from_context (context) is CabalBuildSystem))
+		if (!(Ide.BuildSystem.from_context (context) is CabalBuildSystem)) {
+			info ("Not a cabal build system");
 			return;
+		}
 		try {
+			var cabal = Environment.get_home_dir () + "/.ghcup/bin/cabal";
 			var build_launcher = pipeline.create_launcher ();
 			build_launcher.set_cwd (srcdir);
-			build_launcher.push_args (new string[] { "cabal", "build" });
+			build_launcher.push_args (new string[] { cabal, "build" });
 			var clean_launcher = pipeline.create_launcher ();
 			clean_launcher.set_cwd (srcdir);
-			clean_launcher.push_args (new string[] { "cabal", "clean" });
+			clean_launcher.push_args (new string[] { cabal, "clean" });
 			var build_stage = new Ide.PipelineStageLauncher (context, build_launcher);
 			build_stage.set_name ("Building project");
 			build_stage.set_clean_launcher (clean_launcher);
@@ -69,7 +78,7 @@ public class CabalPipelineAddin : Ide.Object, Ide.PipelineAddin {
 			this.track (id);
 			var install_launcher = pipeline.create_launcher ();
 			install_launcher.set_cwd (srcdir);
-			install_launcher.push_args (new string[] { "cabal", "install" });
+			install_launcher.push_args (new string[] { cabal, "install" });
 			var install_stage = new Ide.PipelineStageLauncher (context, install_launcher);
 			install_stage.set_name ("Installing project");
 			id = pipeline.attach (Ide.PipelinePhase.INSTALL, 0, install_stage);
