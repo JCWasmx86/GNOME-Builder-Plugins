@@ -5,6 +5,8 @@ project('builder_plugins', 'vala', 'c',
 
 vapi_dir = meson.current_source_dir() / 'vapi'
 add_project_arguments(['--vapidir', vapi_dir], language: 'vala')
+add_project_arguments(['-g3'], language: 'c')
+
 inc_dir = meson.project_source_root() / 'include'
 inc = include_directories (
 	'include/libide/code',
