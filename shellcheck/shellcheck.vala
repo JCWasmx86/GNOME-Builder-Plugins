@@ -19,10 +19,20 @@
  */
 
 public class ShellcheckDiagnosticProvider : Ide.DiagnosticTool {
+	construct {
+		this.program_name = "shellcheck";
+	}
 	public override void populate_diagnostics (Ide.Diagnostics diagnostics, GLib.File file, string stdout_buf, string stderr_buf) {
+		warning ("Populating shellcheck diagnostics");
+		if (stdout_buf == null)
+			return;
 		var lines = stdout_buf.split ("\n");
 		foreach (var line in lines) {
+			if (line == null || line.strip () == "")
+				continue;
 			var parts = line.split (" ", 3);
+			if (parts.length != 3 || parts[0] == null || parts[0].strip () == "")
+				continue;
 			var raw_loc = parts[0].split (":");
 			var start = new Ide.Location (file, int.parse (raw_loc[1]) - 1, int.parse (raw_loc[2]));
 			var severity = Ide.DiagnosticSeverity.IGNORED;
@@ -46,6 +56,7 @@ public class ShellcheckDiagnosticProvider : Ide.DiagnosticTool {
 	public override void configure_launcher (Ide.SubprocessLauncher launcher, GLib.File file, GLib.Bytes contents, string language_id) {
 		launcher.push_argv ("--format=gcc");
 		launcher.push_argv ("-");
+		launcher.setenv ("SHELL", "/bin/bash", false);
 	}
 	public override bool can_diagnose (GLib.File file, GLib.Bytes contents, string language_id) {
 		return language_id == "sh";
@@ -55,5 +66,5 @@ public class ShellcheckDiagnosticProvider : Ide.DiagnosticTool {
 public void peas_register_types (TypeModule module) {
 	var obj = (Peas.ObjectModule) module;
 	obj.register_extension_type (typeof (Ide.DiagnosticProvider), typeof (ShellcheckDiagnosticProvider));
-	info ("Loaded shfmt plugin");
+	info ("Loaded shellcheck plugin");
 }

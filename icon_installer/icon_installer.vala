@@ -60,7 +60,6 @@ public class IconInstallerImage : Gtk.Box {
 		this.append (img);
 		var ctrl = new Gtk.GestureClick ();
 		ctrl.pressed.connect ((n, x, y) => {
-			warning ("%d %lf %lf %u", n, x, y, ctrl.button);
 			ctrl.propagation_phase = Gtk.PropagationPhase.BUBBLE;
 			File? path;
 			try {
@@ -71,7 +70,6 @@ public class IconInstallerImage : Gtk.Box {
 			if (path == null) {
 				path = workdir.get_child ("data").get_child ("resources.gresource.xml");
 			}
-			warning ("Found path: %s", path.get_path ());
 			Idle.add (() => {
 				var window = new Gtk.Dialog ();
 				window.title = "Install icon %s".printf (str);
@@ -164,7 +162,6 @@ public class IconInstallerImage : Gtk.Box {
 		}
 
 		if (gresource.query_exists ()) {
-			warning ("Patching resource");
 			string data = "";
 			FileUtils.get_contents (gresource.get_path (), out data);
 			var new_str = new StringBuilder ();
