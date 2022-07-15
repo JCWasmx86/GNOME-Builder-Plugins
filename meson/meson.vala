@@ -24,8 +24,8 @@ extern void bind_client (Ide.Object self);
 public class MesonService : Ide.LspService {
 	construct {
 		this.set_inherit_stderr (true);
-		this.search_path = new string[] {"/usr/local/bin", "/usr/bin", "/var/run/host/usr/bin", "/var/run/host/usr/local/bin"};
-		this.set_program ("/var/run/host/usr/local/bin/meson_lsp");
+		// this.search_path = new string[] {"/usr/local/bin", "/usr/bin", "/var/run/host/usr/bin", "/var/run/host/usr/local/bin"};
+		this.set_program ("meson_lsp");
 	}
 
 	public override void configure_launcher (Ide.Pipeline pipeline, Ide.SubprocessLauncher launcher) {

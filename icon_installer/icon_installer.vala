@@ -56,7 +56,7 @@ public class IconInstallerImage : Gtk.Box {
 		this.spacing = 2;
 		var img = new Gtk.Image.from_icon_name (str);
 		img.pixel_size = 32;
-		img.tooltip_text = str;
+		img.tooltip_text = str.substring (5);
 		this.append (img);
 		var ctrl = new Gtk.GestureClick ();
 		ctrl.pressed.connect ((n, x, y) => {

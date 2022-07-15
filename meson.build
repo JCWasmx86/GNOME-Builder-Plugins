@@ -2,6 +2,17 @@ project('builder_plugins', 'vala', 'c',
 	version: '0.1.0',
 	meson_version: '>= 0.59.0',
 )
+c = run_command('whoami', check: true)
+assert (c.returncode () == 0, 'whoami failed????')
+user_name = c.stdout().strip()
+if user_name == 'root'
+	error('Don\'t run as root!')
+endif
+#if c.stdout().strip() == 'root'
+#	error('Don't run as root!')
+#endif
+
+install_dir='/home' / user_name / '.local/share/gnome-builder/plugins'
 
 vapi_dir = meson.current_source_dir() / 'vapi'
 add_project_arguments(['--vapidir', vapi_dir], language: 'vala')
