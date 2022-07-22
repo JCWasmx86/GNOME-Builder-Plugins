@@ -24,13 +24,12 @@ extern void bind_client (Ide.Object self);
 public class MesonService : Ide.LspService {
 	construct {
 		this.set_inherit_stderr (true);
-		// this.search_path = new string[] {"/usr/local/bin", "/usr/bin", "/var/run/host/usr/bin", "/var/run/host/usr/local/bin"};
+		this.search_path = new string[] {"/usr/local/bin", "/usr/bin", "/var/run/host/usr/bin", "/var/run/host/usr/local/bin"};
 		this.set_program ("meson_lsp");
 	}
 
 	public override void configure_launcher (Ide.Pipeline pipeline, Ide.SubprocessLauncher launcher) {
-		launcher.set_environ (new string[] {"G_MESSAGES_DEBUG=all", "G_DEBUG=fatal-criticals", "DISPLAY=:0"});
-		launcher.run_on_host = true;
+		launcher.set_environ (new string[] {"G_MESSAGES_DEBUG=all", "G_DEBUG=fatal-criticals"});
 	}
 	public override void configure_client (Ide.LspClient client) {
 		client.add_language ("meson");

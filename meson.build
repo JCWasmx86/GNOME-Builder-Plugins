@@ -8,9 +8,6 @@ user_name = c.stdout().strip()
 if user_name == 'root'
 	error('Don\'t run as root!')
 endif
-#if c.stdout().strip() == 'root'
-#	error('Don't run as root!')
-#endif
 
 install_dir='/home' / user_name / '.local/share/gnome-builder/plugins'
 
@@ -67,3 +64,4 @@ subdir('meson')
 subdir('shellcheck')
 subdir('shfmt')
 subdir('stack')
+subdir('texlab')

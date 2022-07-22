@@ -76,7 +76,8 @@ class ClangdHighlighter : Ide.LspHighlighter, Ide.Highlighter {
 
 public class ClangdHoverProvider : Ide.LspHoverProvider, GtkSource.HoverProvider {
 	public override void prepare () {
-		this.priority = 800;
+		this.priority = 80000;
+		this.category = "Clang";
 		bind_client (this);
 	}
 }

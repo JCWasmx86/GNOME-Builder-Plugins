@@ -63,7 +63,7 @@ public class StackPipelineAddin : Ide.Object, Ide.PipelineAddin {
 		try {
 			var build_launcher = pipeline.create_launcher ();
 			build_launcher.set_cwd (srcdir);
-			build_launcher.run_on_host = true;
+			build_launcher.append_path (Environment.get_home_dir () + "/.ghcup/bin");
 			var stack = Environment.get_home_dir () + "/.ghcup/bin/stack";
 			build_launcher.push_args (new string[] { stack, "build" });
 			var clean_launcher = pipeline.create_launcher ();

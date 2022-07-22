@@ -1,0 +1,18 @@
+[Plugin]
+Authors=JCWasmx86 <JCWasmx86@t-online.de>
+Copyright=JCWasmx86
+Description=Provides texlab integration
+Loader=C
+Module=texlab
+Name=HLS Integration
+X-Category=lsps
+X-Completion-Provider-Languages=latex,bibtex
+X-Diagnostic-Provider-Languages=latex,bibtex
+X-Diagnostic-Provider-Languages-Priority=200
+X-Formatter-Languages=latex,bibtex
+X-Highlighter-Languages=latex,bibtex
+X-Hover-Provider-Languages=latex,bibtex
+X-Rename-Provider-Languages=latex,bibtex
+X-Symbol-Resolver-Languages=latex,bibtex
+X-Symbol-Resolver-Languages-Priority=200
+X-Builder-ABI=@BUILDER_ABI@
