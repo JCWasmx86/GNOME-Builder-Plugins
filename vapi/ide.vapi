@@ -3747,8 +3747,8 @@ namespace Ide {
 		public abstract string get_id ();
 		public abstract int get_priority ();
 		public string? get_project_version ();
-		public abstract bool supports_language (string language);
-		public abstract bool supports_toolchain (Ide.Toolchain toolchain);
+		public bool supports_language (string language);
+		public bool supports_toolchain (Ide.Toolchain toolchain);
 		[NoAccessorMethod]
 		public abstract GLib.File project_file { owned get; construct; }
 	}

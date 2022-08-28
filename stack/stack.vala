@@ -41,7 +41,7 @@ public class StackBuildSystem : Ide.Object, Ide.BuildSystem {
 		return 800;
 	}
 
-	public override string get_builddir (Ide.Pipeline pipeline) {
+	public string get_builddir (Ide.Pipeline pipeline) {
 		return pipeline.get_srcdir ();
 	}
 }

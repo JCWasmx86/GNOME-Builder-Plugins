@@ -41,7 +41,7 @@ public class CabalBuildSystem : Ide.Object, Ide.BuildSystem {
 		return 900;
 	}
 
-	public override string get_builddir (Ide.Pipeline pipeline) {
+	public string get_builddir (Ide.Pipeline pipeline) {
 		return pipeline.get_srcdir ();
 	}
 }
