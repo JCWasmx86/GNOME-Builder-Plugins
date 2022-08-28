@@ -1331,7 +1331,7 @@ namespace Ide {
 		[CCode (has_construct_function = false)]
 		protected HtmlGenerator ();
 		[CCode (has_construct_function = false)]
-		public HtmlGenerator.for_buffer (Gtk.TextBuffer buffer);
+		protected HtmlGenerator.for_buffer (Gtk.TextBuffer buffer);
 		public virtual async GLib.Bytes generate_async (GLib.Cancellable? cancellable) throws GLib.Error;
 		public unowned string get_base_uri ();
 		public void set_base_uri (string base_uri);
@@ -3739,14 +3739,14 @@ namespace Ide {
 	public interface BuildSystem : Ide.Object {
 		public static unowned Ide.BuildSystem? from_context (Ide.Context context);
 		[CCode (array_length = false, array_null_terminated = true)]
-		public abstract async string[] get_build_flags_async (GLib.File file, GLib.Cancellable? cancellable) throws GLib.Error;
+		public async string[] get_build_flags_async (GLib.File file, GLib.Cancellable? cancellable) throws GLib.Error;
 		public async GLib.HashTable<Ide.File,string[]> get_build_flags_for_dir_async (GLib.File directory, GLib.Cancellable? cancellable) throws GLib.Error;
-		public abstract async GLib.HashTable<Ide.File,string[]> get_build_flags_for_files_async (GLib.GenericArray<GLib.File> files, GLib.Cancellable? cancellable) throws GLib.Error;
+		public async GLib.HashTable<Ide.File,string[]> get_build_flags_for_files_async (GLib.GenericArray<GLib.File> files, GLib.Cancellable? cancellable) throws GLib.Error;
 		public abstract string get_builddir (Ide.Pipeline pipeline);
 		public abstract string get_display_name ();
 		public abstract string get_id ();
 		public abstract int get_priority ();
-		public abstract string? get_project_version ();
+		public string? get_project_version ();
 		public abstract bool supports_language (string language);
 		public abstract bool supports_toolchain (Ide.Toolchain toolchain);
 		[NoAccessorMethod]
