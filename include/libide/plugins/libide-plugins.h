@@ -27,6 +27,8 @@ G_BEGIN_DECLS
 #define IDE_PLUGINS_INSIDE
 # include "ide-extension-adapter.h"
 # include "ide-extension-set-adapter.h"
+# include "ide-plugin.h"
+# include "ide-plugin-section.h"
 #undef IDE_PLUGINS_INSIDE
 
 G_END_DECLS

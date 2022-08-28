@@ -91,11 +91,15 @@ static inline gboolean
 ide_set_string (char       **ptr,
                 const char  *str)
 {
+  char *copy;
+
   if (*ptr == str || g_strcmp0 (*ptr, str) == 0)
     return FALSE;
 
+  copy = g_strdup (str);
   g_clear_pointer (ptr, g_free);
-  *ptr = g_strdup (str);
+  *ptr = copy;
+
   return TRUE;
 }
 
@@ -103,14 +107,10 @@ static inline void
 ide_take_string (char **ptr,
                  char  *str)
 {
-  if (*ptr == str || g_strcmp0 (*ptr, str) == 0)
-    {
-      g_free (str);
-      return;
-    }
-
-  g_clear_pointer (ptr, g_free);
-  *ptr = g_steal_pointer (&str);
+  if (*ptr == NULL && str == NULL)
+    return;
+  g_free (*ptr);
+  *ptr = str;
 }
 
 static inline void
@@ -308,6 +308,96 @@ ide_steal_fd (int *fd)
   *fd = -1;
   return ret;
 }
+
+#define IDE_DEFINE_BOOLEAN_PROPERTY(name, value, flags, PROP)               \
+  properties[PROP_##PROP] =                                                 \
+    g_param_spec_boolean(name, NULL, NULL, value,                           \
+        (flags|G_PARAM_EXPLICIT_NOTIFY|G_PARAM_STATIC_STRINGS));
+#define IDE_DEFINE_BOOLEAN_GETTER(symbol, Symbol, TYPE, name)               \
+gboolean symbol##_get_##name (Symbol *self)                                 \
+{                                                                           \
+  g_return_val_if_fail (G_TYPE_CHECK_INSTANCE_TYPE (self, TYPE), FALSE);    \
+  return self->name;                                                        \
+}
+#define IDE_DEFINE_BOOLEAN_SETTER(symbol, Symbol, TYPE, name, PROP)         \
+void symbol##_set_##name (Symbol *self, gboolean name)                      \
+{                                                                           \
+  g_return_if_fail (G_TYPE_CHECK_INSTANCE_TYPE (self, TYPE));               \
+  name = !!name;                                                            \
+  if (name != self->name)                                                   \
+    {                                                                       \
+      self->name = name;                                                    \
+      g_object_notify_by_pspec (G_OBJECT (self), properties [PROP_##PROP]); \
+    }                                                                       \
+}
+#define IDE_DEFINE_BOOLEAN_GETTER_PRIVATE(symbol, Symbol, TYPE, name)       \
+gboolean symbol##_get_##name (Symbol *self)                                 \
+{                                                                           \
+  Symbol##Private *priv = symbol##_get_instance_private(self);              \
+  g_return_val_if_fail (G_TYPE_CHECK_INSTANCE_TYPE (self, TYPE), FALSE);    \
+  return priv->name;                                                        \
+}
+#define IDE_DEFINE_BOOLEAN_SETTER_PRIVATE(symbol, Symbol, TYPE, name, PROP) \
+void symbol##_set_##name (Symbol *self, gboolean name)                      \
+{                                                                           \
+  Symbol##Private *priv = symbol##_get_instance_private(self);              \
+  g_return_if_fail (G_TYPE_CHECK_INSTANCE_TYPE (self, TYPE));               \
+  name = !!name;                                                            \
+  if (name != priv->name)                                                   \
+    {                                                                       \
+      priv->name = name;                                                    \
+      g_object_notify_by_pspec (G_OBJECT (self), properties [PROP_##PROP]); \
+    }                                                                       \
+}
+#define IDE_GET_PROPERTY_BOOLEAN(symbol, name, PROP)                        \
+  case PROP_##PROP:                                                         \
+    g_value_set_boolean (value, symbol##_get_##name (self));                \
+    break
+#define IDE_SET_PROPERTY_BOOLEAN(symbol, name, PROP)                        \
+  case PROP_##PROP:                                                         \
+    symbol##_set_##name (self, g_value_get_boolean (value));                \
+    break
+
+#define IDE_DEFINE_STRING_PROPERTY(name, value, flags, PROP)                \
+  properties[PROP_##PROP] =                                                 \
+    g_param_spec_string(name, NULL, NULL, value,                            \
+        (flags|G_PARAM_EXPLICIT_NOTIFY|G_PARAM_STATIC_STRINGS));
+#define IDE_DEFINE_STRING_GETTER(symbol, Symbol, TYPE, name)                \
+const char *symbol##_get_##name (Symbol *self)                              \
+{                                                                           \
+  g_return_val_if_fail (G_TYPE_CHECK_INSTANCE_TYPE (self, TYPE), NULL);     \
+  return self->name;                                                        \
+}
+#define IDE_DEFINE_STRING_SETTER(symbol, Symbol, TYPE, name, PROP)          \
+void symbol##_set_##name (Symbol *self, const char *name)                   \
+{                                                                           \
+  g_return_if_fail (G_TYPE_CHECK_INSTANCE_TYPE (self, TYPE));               \
+  if (ide_set_string (&self->name, name))                                   \
+    g_object_notify_by_pspec (G_OBJECT (self), properties [PROP_##PROP]);   \
+}
+#define IDE_DEFINE_STRING_GETTER_PRIVATE(symbol, Symbol, TYPE, name)        \
+const char *symbol##_get_##name (Symbol *self)                              \
+{                                                                           \
+  Symbol##Private *priv = symbol##_get_instance_private(self);              \
+  g_return_val_if_fail (G_TYPE_CHECK_INSTANCE_TYPE (self, TYPE), NULL);     \
+  return priv->name;                                                        \
+}
+#define IDE_DEFINE_STRING_SETTER_PRIVATE(symbol, Symbol, TYPE, name, PROP)  \
+void symbol##_set_##name (Symbol *self, const char *name)                   \
+{                                                                           \
+  Symbol##Private *priv = symbol##_get_instance_private(self);              \
+  g_return_if_fail (G_TYPE_CHECK_INSTANCE_TYPE (self, TYPE));               \
+  if (ide_set_string (&priv->name, name))                                   \
+    g_object_notify_by_pspec (G_OBJECT (self), properties [PROP_##PROP]);   \
+}
+#define IDE_GET_PROPERTY_STRING(symbol, name, PROP)                         \
+  case PROP_##PROP:                                                         \
+    g_value_set_string (value, symbol##_get_##name (self));                 \
+    break
+#define IDE_SET_PROPERTY_STRING(symbol, name, PROP)                         \
+  case PROP_##PROP:                                                         \
+    symbol##_set_##name (self, g_value_get_string (value));                 \
+    break
 
 G_END_DECLS
 

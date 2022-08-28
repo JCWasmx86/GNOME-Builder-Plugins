@@ -33,16 +33,6 @@ PANEL_AVAILABLE_IN_ALL
 G_DECLARE_FINAL_TYPE (PanelFrameSwitcher, panel_frame_switcher, PANEL, FRAME_SWITCHER, GtkWidget)
 
 PANEL_AVAILABLE_IN_ALL
-GtkWidget     *panel_frame_switcher_new                 (void);
-PANEL_AVAILABLE_IN_ALL
-const GdkRGBA *panel_frame_switcher_get_background_rgba (PanelFrameSwitcher *self);
-PANEL_AVAILABLE_IN_ALL
-const GdkRGBA *panel_frame_switcher_get_foreground_rgba (PanelFrameSwitcher *self);
-PANEL_AVAILABLE_IN_ALL
-void           panel_frame_switcher_set_background_rgba (PanelFrameSwitcher *self,
-                                                         const GdkRGBA      *background_rgba);
-PANEL_AVAILABLE_IN_ALL
-void           panel_frame_switcher_set_foreground_rgba (PanelFrameSwitcher *self,
-                                                         const GdkRGBA      *foreground_rgba);
+GtkWidget *panel_frame_switcher_new (void);
 
 G_END_DECLS

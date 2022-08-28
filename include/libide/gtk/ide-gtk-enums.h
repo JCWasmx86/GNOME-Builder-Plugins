@@ -14,6 +14,12 @@ _IDE_EXTERN
 GType ide_animation_mode_get_type (void);
 #define IDE_TYPE_ANIMATION_MODE (ide_animation_mode_get_type())
 
+/* enumerations from "ide-scrubber-revealer.h" */
+
+_IDE_EXTERN
+GType ide_scrubber_reveal_policy_get_type (void);
+#define IDE_TYPE_SCRUBBER_REVEAL_POLICY (ide_scrubber_reveal_policy_get_type())
+
 G_END_DECLS
 
 /* Generated data ends here */

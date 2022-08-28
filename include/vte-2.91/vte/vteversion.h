@@ -48,7 +48,7 @@ G_BEGIN_DECLS
  * The minor version number of the VTE library
  * (e.g. in version 3.1.4 this is 1).
  */
-#define VTE_MINOR_VERSION (69)
+#define VTE_MINOR_VERSION (71)
 
 /**
  * VTE_MICRO_VERSION:

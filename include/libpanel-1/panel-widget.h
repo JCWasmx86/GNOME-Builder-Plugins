@@ -34,10 +34,10 @@ G_DECLARE_DERIVABLE_TYPE (PanelWidget, panel_widget, PANEL, WIDGET, GtkWidget)
 
 struct _PanelWidgetClass
 {
-  GtkWidgetClass parent_instance;
+  GtkWidgetClass  parent_instance;
 
-  GtkWidget *(*get_default_focus) (PanelWidget *self);
-  void       (*presented)         (PanelWidget *self);
+  GtkWidget      *(*get_default_focus) (PanelWidget *self);
+  void            (*presented)         (PanelWidget *self);
 
   /*< private >*/
   gpointer _reserved[8];
@@ -49,89 +49,96 @@ struct _PanelWidgetClass
 #define PANEL_WIDGET_KIND_UTILITY  "utility"
 
 PANEL_AVAILABLE_IN_ALL
-GtkWidget         *panel_widget_new                 (void);
+GtkWidget         *panel_widget_new                           (void);
 PANEL_AVAILABLE_IN_ALL
-GtkWidget         *panel_widget_get_child           (PanelWidget       *self);
+GtkWidget         *panel_widget_get_child                     (PanelWidget                 *self);
 PANEL_AVAILABLE_IN_ALL
-void               panel_widget_set_child           (PanelWidget       *self,
-                                                     GtkWidget         *child);
+void               panel_widget_set_child                     (PanelWidget                 *self,
+                                                               GtkWidget                   *child);
 PANEL_AVAILABLE_IN_ALL
-const char        *panel_widget_get_title           (PanelWidget       *self);
+const char        *panel_widget_get_title                     (PanelWidget                 *self);
 PANEL_AVAILABLE_IN_ALL
-void               panel_widget_set_title           (PanelWidget       *self,
-                                                     const char        *title);
+void               panel_widget_set_title                     (PanelWidget                 *self,
+                                                               const char                  *title);
 PANEL_AVAILABLE_IN_ALL
-GIcon             *panel_widget_get_icon            (PanelWidget       *self);
+GIcon             *panel_widget_get_icon                      (PanelWidget                 *self);
 PANEL_AVAILABLE_IN_ALL
-void               panel_widget_set_icon            (PanelWidget       *self,
-                                                     GIcon             *icon);
+void               panel_widget_set_icon                      (PanelWidget                 *self,
+                                                               GIcon                       *icon);
 PANEL_AVAILABLE_IN_ALL
-const char        *panel_widget_get_icon_name       (PanelWidget       *self);
+const char        *panel_widget_get_icon_name                 (PanelWidget                 *self);
 PANEL_AVAILABLE_IN_ALL
-void               panel_widget_set_icon_name       (PanelWidget       *self,
-                                                     const char        *icon_name);
+void               panel_widget_set_icon_name                 (PanelWidget                 *self,
+                                                               const char                  *icon_name);
 PANEL_AVAILABLE_IN_ALL
-gboolean           panel_widget_get_reorderable     (PanelWidget       *self);
+gboolean           panel_widget_get_reorderable               (PanelWidget                 *self);
 PANEL_AVAILABLE_IN_ALL
-void               panel_widget_set_reorderable     (PanelWidget       *self,
-                                                     gboolean           reorderable);
+void               panel_widget_set_reorderable               (PanelWidget                 *self,
+                                                               gboolean                     reorderable);
 PANEL_AVAILABLE_IN_ALL
-gboolean           panel_widget_get_can_maximize    (PanelWidget       *self);
+gboolean           panel_widget_get_can_maximize              (PanelWidget                 *self);
 PANEL_AVAILABLE_IN_ALL
-void               panel_widget_set_can_maximize    (PanelWidget       *self,
-                                                     gboolean           can_maximize);
+void               panel_widget_set_can_maximize              (PanelWidget                 *self,
+                                                               gboolean                     can_maximize);
 PANEL_AVAILABLE_IN_ALL
-gboolean           panel_widget_get_modified        (PanelWidget       *self);
+gboolean           panel_widget_get_modified                  (PanelWidget                 *self);
 PANEL_AVAILABLE_IN_ALL
-void               panel_widget_set_modified        (PanelWidget       *self,
-                                                     gboolean           modified);
+void               panel_widget_set_modified                  (PanelWidget                 *self,
+                                                               gboolean                     modified);
 PANEL_AVAILABLE_IN_ALL
-gboolean           panel_widget_get_needs_attention (PanelWidget       *self);
+gboolean           panel_widget_get_needs_attention           (PanelWidget                 *self);
 PANEL_AVAILABLE_IN_ALL
-void               panel_widget_set_needs_attention (PanelWidget       *self,
-                                                     gboolean           needs_attention);
+void               panel_widget_set_needs_attention           (PanelWidget                 *self,
+                                                               gboolean                     needs_attention);
 PANEL_AVAILABLE_IN_ALL
-void               panel_widget_maximize            (PanelWidget       *self);
+void               panel_widget_maximize                      (PanelWidget                 *self);
 PANEL_AVAILABLE_IN_ALL
-void               panel_widget_unmaximize          (PanelWidget       *self);
+void               panel_widget_unmaximize                    (PanelWidget                 *self);
 PANEL_AVAILABLE_IN_ALL
-const char        *panel_widget_get_kind            (PanelWidget       *self);
+const char        *panel_widget_get_kind                      (PanelWidget                 *self);
 PANEL_AVAILABLE_IN_ALL
-void               panel_widget_set_kind            (PanelWidget       *self,
-                                                     const char        *kind);
+void               panel_widget_set_kind                      (PanelWidget                 *self,
+                                                               const char                  *kind);
 PANEL_AVAILABLE_IN_ALL
-gboolean           panel_widget_get_busy            (PanelWidget       *self);
+gboolean           panel_widget_get_busy                      (PanelWidget                 *self);
 PANEL_AVAILABLE_IN_ALL
-void               panel_widget_mark_busy           (PanelWidget       *self);
+void               panel_widget_mark_busy                     (PanelWidget                 *self);
 PANEL_AVAILABLE_IN_ALL
-void               panel_widget_unmark_busy         (PanelWidget       *self);
+void               panel_widget_unmark_busy                   (PanelWidget                 *self);
 PANEL_AVAILABLE_IN_ALL
-const GdkRGBA     *panel_widget_get_foreground_rgba (PanelWidget       *self);
+GMenuModel        *panel_widget_get_menu_model                (PanelWidget                 *self);
 PANEL_AVAILABLE_IN_ALL
-void               panel_widget_set_foreground_rgba (PanelWidget       *self,
-                                                     const GdkRGBA     *foreground_rgba);
+void               panel_widget_set_menu_model                (PanelWidget                 *self,
+                                                               GMenuModel                  *menu_model);
 PANEL_AVAILABLE_IN_ALL
-const GdkRGBA     *panel_widget_get_background_rgba (PanelWidget       *self);
+void               panel_widget_raise                         (PanelWidget                 *self);
 PANEL_AVAILABLE_IN_ALL
-void               panel_widget_set_background_rgba (PanelWidget       *self,
-                                                     const GdkRGBA     *background_rgba);
+GtkWidget         *panel_widget_get_default_focus             (PanelWidget                 *self);
 PANEL_AVAILABLE_IN_ALL
-GMenuModel        *panel_widget_get_menu_model      (PanelWidget       *self);
+gboolean           panel_widget_focus_default                 (PanelWidget                 *self);
 PANEL_AVAILABLE_IN_ALL
-void               panel_widget_set_menu_model      (PanelWidget       *self,
-                                                     GMenuModel        *menu_model);
+PanelSaveDelegate *panel_widget_get_save_delegate             (PanelWidget                 *self);
 PANEL_AVAILABLE_IN_ALL
-void               panel_widget_raise               (PanelWidget       *self);
+void               panel_widget_set_save_delegate             (PanelWidget                 *self,
+                                                               PanelSaveDelegate           *save_delegate);
 PANEL_AVAILABLE_IN_ALL
-GtkWidget         *panel_widget_get_default_focus   (PanelWidget       *self);
+void               panel_widget_close                         (PanelWidget                 *self);
 PANEL_AVAILABLE_IN_ALL
-gboolean           panel_widget_focus_default       (PanelWidget       *self);
+void               panel_widget_insert_action_group           (PanelWidget                 *self,
+                                                               const char                  *prefix,
+                                                               GActionGroup                *group);
 PANEL_AVAILABLE_IN_ALL
-PanelSaveDelegate *panel_widget_get_save_delegate   (PanelWidget       *self);
+void               panel_widget_class_install_action          (PanelWidgetClass            *widget_class,
+                                                               const char                  *action_name,
+                                                               const char                  *parameter_type,
+                                                               GtkWidgetActionActivateFunc  activate);
 PANEL_AVAILABLE_IN_ALL
-void               panel_widget_set_save_delegate   (PanelWidget       *self,
-                                                     PanelSaveDelegate *save_delegate);
+void               panel_widget_action_set_enabled            (PanelWidget                 *widget,
+                                                               const char                  *action_name,
+                                                               gboolean                     enabled);
 PANEL_AVAILABLE_IN_ALL
-void               panel_widget_close               (PanelWidget       *self);
+void               panel_widget_class_install_property_action (PanelWidgetClass            *widget_class,
+                                                               const char                  *action_name,
+                                                               const char                  *property_name);
 
 G_END_DECLS

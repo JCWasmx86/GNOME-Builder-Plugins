@@ -23,15 +23,14 @@
 #include <libide-core.h>
 
 #define IDE_THREADING_INSIDE
-
-#include "ide-cancellable.h"
-#include "ide-environment.h"
-#include "ide-environment-variable.h"
-#include "ide-subprocess-launcher.h"
-#include "ide-subprocess-supervisor.h"
-#include "ide-subprocess.h"
-#include "ide-task.h"
-#include "ide-thread-pool.h"
-#include "ide-unix-fd-map.h"
-
+# include "ide-cancellable.h"
+# include "ide-environment.h"
+# include "ide-environment-variable.h"
+# include "ide-search-path.h"
+# include "ide-subprocess-launcher.h"
+# include "ide-subprocess-supervisor.h"
+# include "ide-subprocess.h"
+# include "ide-task.h"
+# include "ide-thread-pool.h"
+# include "ide-unix-fd-map.h"
 #undef IDE_THREADING_INSIDE

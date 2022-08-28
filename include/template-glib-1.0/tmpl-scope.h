@@ -102,6 +102,9 @@ char      **tmpl_scope_list_symbols    (TmplScope         *self,
 TMPL_AVAILABLE_IN_3_36
 void        tmpl_scope_set_null        (TmplScope         *self,
                                         const char        *name);
+TMPL_AVAILABLE_IN_3_36
+char       *tmpl_scope_dup_string      (TmplScope         *self,
+                                        const char        *name);
 
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (TmplScope, tmpl_scope_unref)
 

@@ -36,6 +36,7 @@ inc = include_directories (
 	'include/libide/plugins',
 	'include/libide/terminal',
 	'include/libide/webkit',
+	'include/libide/tweaks',
 	'include/template-glib-1.0',
 	'include/libpanel-1',
 	'include/vte-2.91',

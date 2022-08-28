@@ -1,4 +1,4 @@
-/* ide-preferences-choice-row.h
+/* ide-cached-list-model.h
  *
  * Copyright 2022 Christian Hergert <chergert@redhat.com>
  *
@@ -20,15 +20,21 @@
 
 #pragma once
 
-#include <adwaita.h>
-
 #include <libide-core.h>
 
 G_BEGIN_DECLS
 
-#define IDE_TYPE_PREFERENCES_CHOICE_ROW (ide_preferences_choice_row_get_type())
+#define IDE_TYPE_CACHED_LIST_MODEL (ide_cached_list_model_get_type())
 
 IDE_AVAILABLE_IN_ALL
-G_DECLARE_FINAL_TYPE (IdePreferencesChoiceRow, ide_preferences_choice_row, IDE, PREFERENCES_CHOICE_ROW, AdwComboRow)
+G_DECLARE_FINAL_TYPE (IdeCachedListModel, ide_cached_list_model, IDE, CACHED_LIST_MODEL, GObject)
+
+IDE_AVAILABLE_IN_ALL
+IdeCachedListModel *ide_cached_list_model_new       (GListModel         *model);
+IDE_AVAILABLE_IN_ALL
+GListModel         *ide_cached_list_model_get_model (IdeCachedListModel *self);
+IDE_AVAILABLE_IN_ALL
+void                ide_cached_list_model_set_model (IdeCachedListModel *self,
+                                                     GListModel         *model);
 
 G_END_DECLS

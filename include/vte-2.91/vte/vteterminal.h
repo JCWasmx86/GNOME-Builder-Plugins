@@ -358,6 +358,10 @@ gboolean vte_terminal_get_allow_hyperlink(VteTerminal *terminal) _VTE_CXX_NOEXCE
 _VTE_PUBLIC
 gboolean vte_terminal_get_has_selection(VteTerminal *terminal) _VTE_CXX_NOEXCEPT _VTE_GNUC_NONNULL(1);
 
+_VTE_PUBLIC
+char* vte_terminal_get_text_selected(VteTerminal* terminal,
+                                     VteFormat format) _VTE_CXX_NOEXCEPT _VTE_GNUC_NONNULL(1);
+
 /* Set what happens when the user strikes backspace or delete. */
 _VTE_PUBLIC
 void vte_terminal_set_backspace_binding(VteTerminal *terminal,
@@ -421,6 +425,13 @@ _VTE_PUBLIC
 char *vte_terminal_hyperlink_check_event(VteTerminal *terminal,
                                          GdkEvent *event) _VTE_CXX_NOEXCEPT _VTE_GNUC_NONNULL(1, 2) G_GNUC_MALLOC;
 
+#elif _VTE_GTK == 4
+
+_VTE_PUBLIC
+char* vte_terminal_check_hyperlink_at(VteTerminal* terminal,
+                                      double x,
+                                      double y) _VTE_CXX_NOEXCEPT _VTE_GNUC_NONNULL(1) G_GNUC_MALLOC;
+
 #endif /* _VTE_GTK */
 
 /* Add a matching expression, returning the tag the widget assigns to that
@@ -464,6 +475,32 @@ gboolean vte_terminal_event_check_regex_simple(VteTerminal *terminal,
                                                gsize n_regexes,
                                                guint32 match_flags,
                                                char **matches) _VTE_CXX_NOEXCEPT _VTE_GNUC_NONNULL(1, 2);
+
+#elif _VTE_GTK == 4
+
+_VTE_PUBLIC
+char* vte_terminal_check_match_at(VteTerminal* terminal,
+                                  double x,
+                                  double y,
+                                  int* tag) _VTE_CXX_NOEXCEPT _VTE_GNUC_NONNULL(1) G_GNUC_MALLOC;
+
+_VTE_PUBLIC
+char** vte_terminal_check_regex_array_at(VteTerminal* terminal,
+                                         double x,
+                                         double y,
+                                         VteRegex** regexes,
+                                         gsize n_regexes,
+                                         guint32 match_flags,
+                                         gsize* n_matches) _VTE_CXX_NOEXCEPT _VTE_GNUC_NONNULL(1) G_GNUC_MALLOC;
+
+_VTE_PUBLIC
+gboolean vte_terminal_check_regex_simple_at(VteTerminal* terminal,
+                                            double x,
+                                            double y,
+                                            VteRegex** regexes,
+                                            gsize n_regexes,
+                                            guint32 match_flags,
+                                            char** matches) _VTE_CXX_NOEXCEPT _VTE_GNUC_NONNULL(1);
 
 #endif /* _VTE_GTK */
 
@@ -522,16 +559,12 @@ gboolean vte_terminal_get_input_enabled (VteTerminal *terminal) _VTE_CXX_NOEXCEP
 
 /* rarely useful functions */
 
-#if _VTE_GTK == 3
-
 _VTE_PUBLIC
 void vte_terminal_set_clear_background(VteTerminal* terminal,
                                        gboolean setting) _VTE_CXX_NOEXCEPT _VTE_GNUC_NONNULL(1);
 _VTE_PUBLIC
 void vte_terminal_get_color_background_for_draw(VteTerminal* terminal,
                                                 GdkRGBA* color) _VTE_CXX_NOEXCEPT _VTE_GNUC_NONNULL(1, 2);
-
-#endif /* _VTE_GTK == 3 */
 
 /* Writing contents out */
 _VTE_PUBLIC

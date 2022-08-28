@@ -1,6 +1,6 @@
-/* ide-fancy-tree-view.h
+/* ide-plugin-section.h
  *
- * Copyright 2017-2019 Christian Hergert <chergert@redhat.com>
+ * Copyright 2022 Christian Hergert <chergert@redhat.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,32 +20,24 @@
 
 #pragma once
 
-#if !defined (IDE_GTK_INSIDE) && !defined (IDE_GTK_COMPILATION)
-# error "Only <libide-gtk.h> can be included directly."
+#if !defined (IDE_PLUGINS_INSIDE) && !defined (IDE_PLUGINS_COMPILATION)
+# error "Only <libide-plugins.h> can be included directly."
 #endif
-
-#include <gtk/gtk.h>
 
 #include <libide-core.h>
 
+#include "ide-plugin.h"
+
 G_BEGIN_DECLS
 
-#define IDE_TYPE_FANCY_TREE_VIEW (ide_fancy_tree_view_get_type())
+#define IDE_TYPE_PLUGIN_SECTION (ide_plugin_section_get_type())
 
 IDE_AVAILABLE_IN_ALL
-G_DECLARE_DERIVABLE_TYPE (IdeFancyTreeView, ide_fancy_tree_view, IDE, FANCY_TREE_VIEW, GtkTreeView)
-
-struct _IdeFancyTreeViewClass
-{
-  GtkTreeViewClass parent_class;
-};
+G_DECLARE_FINAL_TYPE (IdePluginSection, ide_plugin_section, IDE, PLUGIN_SECTION, GObject)
 
 IDE_AVAILABLE_IN_ALL
-GtkWidget *ide_fancy_tree_view_new           (void);
+const char *ide_plugin_section_get_id      (IdePluginSection *self);
 IDE_AVAILABLE_IN_ALL
-void       ide_fancy_tree_view_set_data_func (IdeFancyTreeView      *self,
-                                              GtkCellLayoutDataFunc  func,
-                                              gpointer               func_data,
-                                              GDestroyNotify         func_data_destroy);
+GListModel *ide_plugin_section_get_plugins (IdePluginSection *self);
 
 G_END_DECLS

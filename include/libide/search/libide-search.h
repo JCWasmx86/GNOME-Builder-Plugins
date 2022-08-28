@@ -34,4 +34,5 @@
 # include "ide-search-provider.h"
 # include "ide-search-reducer.h"
 # include "ide-search-result.h"
+# include "ide-search-results.h"
 #undef IDE_SEARCH_INSIDE

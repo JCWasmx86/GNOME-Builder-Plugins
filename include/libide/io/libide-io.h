@@ -26,6 +26,7 @@
 G_BEGIN_DECLS
 
 #define IDE_IO_INSIDE
+# include "ide-cached-list-model.h"
 # include "ide-content-type.h"
 # include "ide-directory-reaper.h"
 # include "ide-file-transfer.h"

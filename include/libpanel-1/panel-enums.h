@@ -3,10 +3,10 @@
 
 #pragma once
 
-#include <glib-object.h>
-#include "panel-version-macros.h"
+            #include <glib-object.h>
+            #include "panel-version-macros.h"
 
-G_BEGIN_DECLS
+            G_BEGIN_DECLS
 
 /* enumerations from "panel-dock.h" */
 

@@ -44,6 +44,8 @@ struct _PanelFrameClass
 PANEL_AVAILABLE_IN_ALL
 GtkWidget         *panel_frame_new               (void);
 PANEL_AVAILABLE_IN_ALL
+gboolean           panel_frame_get_closeable     (PanelFrame       *self);
+PANEL_AVAILABLE_IN_ALL
 PanelFrameHeader  *panel_frame_get_header        (PanelFrame       *self);
 PANEL_AVAILABLE_IN_ALL
 void               panel_frame_set_header        (PanelFrame       *self,

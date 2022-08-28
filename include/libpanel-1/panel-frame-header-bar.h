@@ -36,16 +36,6 @@ GtkWidget      *panel_frame_header_bar_new                 (void);
 PANEL_AVAILABLE_IN_ALL
 GtkPopoverMenu *panel_frame_header_bar_get_menu_popover    (PanelFrameHeaderBar *self);
 PANEL_AVAILABLE_IN_ALL
-const GdkRGBA  *panel_frame_header_bar_get_foreground_rgba (PanelFrameHeaderBar *self);
-PANEL_AVAILABLE_IN_ALL
-void            panel_frame_header_bar_set_foreground_rgba (PanelFrameHeaderBar *self,
-                                                            const GdkRGBA       *foreground_rgba);
-PANEL_AVAILABLE_IN_ALL
-const GdkRGBA  *panel_frame_header_bar_get_background_rgba (PanelFrameHeaderBar *self);
-PANEL_AVAILABLE_IN_ALL
-void            panel_frame_header_bar_set_background_rgba (PanelFrameHeaderBar *self,
-                                                            const GdkRGBA       *background_rgba);
-PANEL_AVAILABLE_IN_ALL
 gboolean        panel_frame_header_bar_get_show_icon       (PanelFrameHeaderBar *self);
 PANEL_AVAILABLE_IN_ALL
 void            panel_frame_header_bar_set_show_icon       (PanelFrameHeaderBar *self,
