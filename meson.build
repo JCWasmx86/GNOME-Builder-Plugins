@@ -55,13 +55,44 @@ dependencies = [
 	meson.get_compiler('vala').find_library('template-1.0', dirs: vapi_dir),
 ]
 gnome = import('gnome')
-subdir('cabal')
-subdir('clangd')
+plugins = []
+
+if get_option('plugin_cabal').enabled()
+	subdir('cabal')
+	plugins += 'cabal.plugin'
+endif
+if get_option('plugin_clangd').enabled()
+	subdir('clangd')
+	plugins += 'clangd.plugin'
+endif
+
+if get_option('plugin_hls').enabled()
+	subdir('hls')
+	plugins += 'hls.plugin'
+endif
+if get_option('plugin_icon_installer').enabled()
+	subdir('icon_installer')
+	plugins += 'icon_installer.plugin'
+endif
+if get_option('plugin_meson').enabled()
+	subdir('meson')
+	plugins += 'mesonlsp.plugin'
+endif
+if get_option('plugin_shellcheck').enabled()
+	subdir('shellcheck')
+	plugins += 'shellcheck.plugin'
+endif
+if get_option('plugin_shfmt').enabled()
+	subdir('shfmt')
+	plugins += 'shfmt.plugin'
+endif
+if get_option('plugin_stack').enabled()
+	subdir('stack')
+	plugins += 'stack.plugin'
+endif
+if get_option('plugin_texlab').enabled()
+	subdir('texlab')
+	plugins += 'texlab.plugin'
+endif
+
 subdir('data')
-subdir('hls')
-subdir('icon_installer')
-subdir('meson')
-subdir('shellcheck')
-subdir('shfmt')
-subdir('stack')
-subdir('texlab')

@@ -1,14 +1,3 @@
-plugins = [
-	'shellcheck.plugin',
-	'shfmt.plugin',
-	'cabal.plugin',
-	'stack.plugin',
-	'mesonlsp.plugin',
-	'clangd.plugin',
-	'hls.plugin',
-	'icon_installer.plugin',
-	'texlab.plugin'
-]
 config = configuration_data()
 config.set('BUILDER_ABI', get_option('builder_abi'))
 foreach e : plugins
