@@ -30,7 +30,7 @@ public class StackBuildSystem : Ide.Object, Ide.BuildSystem {
 	[NoAccessorMethod]
 	public override GLib.File project_file { owned get; construct; }
 	public string get_id () {
-		return "Stack";
+		return "stack";
 	}
 
 	public string get_display_name () {
