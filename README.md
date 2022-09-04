@@ -8,8 +8,9 @@ guaranteed.
 - clangd: (Copied from upstream, converted to Vala): Clangd integration
 - hls: Integration for the Haskell Language Server
 - icon_installer: Allow installing icons easily in your project
-- jdtls: Integration for the Eclipse Java Language Server
+- jdtls: Integration for the Eclipse Java Language Server (TODO)
 - meson: Integration for my meson language server
 - shellcheck: Shellcheck integration
 - shfmt: Shfmt integration
 - stack: Integration for the stack buildsystem
+- texlab: LaTeX integration

@@ -61,9 +61,10 @@ public class CabalPipelineAddin : Ide.Object, Ide.PipelineAddin {
 			return;
 		}
 		try {
-			var cabal = Environment.get_home_dir () + "/.ghcup/bin/cabal";
 			var build_launcher = pipeline.create_launcher ();
 			build_launcher.set_cwd (srcdir);
+			build_launcher.append_path (Environment.get_home_dir () + "/.ghcup/bin");
+			var cabal = Environment.get_home_dir () + "/.ghcup/bin/cabal";
 			build_launcher.push_args (new string[] { cabal, "build" });
 			var clean_launcher = pipeline.create_launcher ();
 			clean_launcher.set_cwd (srcdir);
