@@ -10,6 +10,7 @@ guaranteed.
 - icon_installer: Allow installing icons easily in your project
 - jdtls: Integration for the Eclipse Java Language Server (TODO)
 - meson: Integration for my meson language server
+- pylint: Integration with Pylint
 - shellcheck: Shellcheck integration
 - shfmt: Shfmt integration
 - stack: Integration for the stack buildsystem

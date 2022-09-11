@@ -1,0 +1,10 @@
+[Plugin]
+Authors=JCWasmx86
+Copyright=JCWasmx86
+Description=Provides pylint integration
+Loader=C
+Module=pylint
+Name=Pylint Integration
+X-Diagnostic-Provider-Languages=python3
+X-Diagnostic-Provider-Languages-Priority=100
+X-Builder-ABI=@BUILDER_ABI@

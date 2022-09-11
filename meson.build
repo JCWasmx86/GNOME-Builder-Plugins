@@ -79,6 +79,10 @@ if get_option('plugin_meson').enabled()
 	subdir('meson')
 	plugins += 'mesonlsp.plugin'
 endif
+if get_option('plugin_pylint').enabled()
+	subdir('pylint')
+	plugins += 'pylint.plugin'
+endif
 if get_option('plugin_shellcheck').enabled()
 	subdir('shellcheck')
 	plugins += 'shellcheck.plugin'
