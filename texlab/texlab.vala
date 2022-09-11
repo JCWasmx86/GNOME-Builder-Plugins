@@ -89,5 +89,4 @@ public void peas_register_types (TypeModule module) {
 	obj.register_extension_type (typeof (GtkSource.HoverProvider), typeof (TexlabHoverProvider));
 	obj.register_extension_type (typeof (Ide.Highlighter), typeof (TexlabHighlighter));
 	obj.register_extension_type (typeof (Ide.RenameProvider), typeof (TexlabRenameProvider));
-	info ("Loaded texlab plugin");
 }

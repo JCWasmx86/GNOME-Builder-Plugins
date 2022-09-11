@@ -96,5 +96,4 @@ public void peas_register_types (TypeModule module) {
 	obj.register_extension_type (typeof (Ide.BuildSystemDiscovery), typeof (CabalBuildSystemDiscovery));
 	obj.register_extension_type (typeof (Ide.BuildSystem), typeof (CabalBuildSystem));
 	obj.register_extension_type (typeof (Ide.PipelineAddin), typeof (CabalPipelineAddin));
-	info ("Loaded cabal plugin");
 }

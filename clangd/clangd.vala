@@ -104,5 +104,4 @@ public void peas_register_types (TypeModule module) {
 	obj.register_extension_type (typeof (GtkSource.HoverProvider), typeof (ClangdHoverProvider));
 	obj.register_extension_type (typeof (Ide.RenameProvider), typeof (ClangdRenameProvider));
 	obj.register_extension_type (typeof (Ide.SymbolResolver), typeof (ClangdSymbolResolver));
-	info ("Loaded clangd plugin");
 }

@@ -102,5 +102,4 @@ public void peas_register_types (TypeModule module) {
 	obj.register_extension_type (typeof (GtkSource.HoverProvider), typeof (HlsHoverProvider));
 	obj.register_extension_type (typeof (Ide.RenameProvider), typeof (HlsRenameProvider));
 	obj.register_extension_type (typeof (Ide.SymbolResolver), typeof (HlsSymbolResolver));
-	info ("Loaded hls plugin");
 }

@@ -79,5 +79,4 @@ public class PylintDiagnosticProvider : Ide.DiagnosticTool {
 public void peas_register_types (TypeModule module) {
 	var obj = (Peas.ObjectModule) module;
 	obj.register_extension_type (typeof (Ide.DiagnosticProvider), typeof (PylintDiagnosticProvider));
-	info ("Loaded pylint plugin");
 }

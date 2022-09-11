@@ -66,5 +66,4 @@ public class ShellcheckDiagnosticProvider : Ide.DiagnosticTool {
 public void peas_register_types (TypeModule module) {
 	var obj = (Peas.ObjectModule) module;
 	obj.register_extension_type (typeof (Ide.DiagnosticProvider), typeof (ShellcheckDiagnosticProvider));
-	info ("Loaded shellcheck plugin");
 }

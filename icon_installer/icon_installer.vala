@@ -313,5 +313,4 @@ public void peas_register_types (TypeModule module) {
 	GLib.resources_register (r);
 	var obj = (Peas.ObjectModule) module;
 	obj.register_extension_type (typeof (Ide.WorkspaceAddin), typeof (IconInstallerWorkspaceAddin));
-	info ("Loaded icon_installer plugin");
 }

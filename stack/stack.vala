@@ -96,5 +96,4 @@ public void peas_register_types (TypeModule module) {
 	obj.register_extension_type (typeof (Ide.BuildSystemDiscovery), typeof (StackBuildSystemDiscovery));
 	obj.register_extension_type (typeof (Ide.BuildSystem), typeof (StackBuildSystem));
 	obj.register_extension_type (typeof (Ide.PipelineAddin), typeof (StackPipelineAddin));
-	info ("Loaded stack plugin");
 }

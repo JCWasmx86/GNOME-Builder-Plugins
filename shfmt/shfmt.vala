@@ -50,5 +50,4 @@ public class ShfmtFormatter : Ide.Object, Ide.Formatter {
 public void peas_register_types (TypeModule module) {
 	var obj = (Peas.ObjectModule) module;
 	obj.register_extension_type (typeof (Ide.Formatter), typeof (ShfmtFormatter));
-	info ("Loaded shfmt plugin");
 }

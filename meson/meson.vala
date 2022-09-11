@@ -67,5 +67,4 @@ public void peas_register_types (TypeModule module) {
 	obj.register_extension_type (typeof (Ide.SymbolResolver), typeof (MesonSymbolResolver));
 	obj.register_extension_type (typeof (GtkSource.HoverProvider), typeof (MesonHoverProvider));
 	obj.register_extension_type (typeof (Ide.Highlighter), typeof (MesonHighlighter));
-	info ("Loaded mesonlsp plugin");
 }
