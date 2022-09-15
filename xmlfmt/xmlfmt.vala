@@ -31,7 +31,6 @@ public class XmlFormatter : Ide.Object, Ide.Formatter {
 	}
 
 	public async bool format_async (Ide.Buffer buffer, Ide.FormatterOptions options, GLib.Cancellable? cancellable) throws Error {
-		warning ("Formatting using xmlfmt");
 		var doc = Xml.Parser.parse_doc (buffer.text);
 		if (doc == null) {
 			var err = Xml.get_last_error ();

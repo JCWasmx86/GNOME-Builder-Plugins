@@ -23,7 +23,6 @@ public class ShellcheckDiagnosticProvider : Ide.DiagnosticTool {
 		this.program_name = "shellcheck";
 	}
 	public override void populate_diagnostics (Ide.Diagnostics diagnostics, GLib.File file, string stdout_buf, string stderr_buf) {
-		warning ("Populating shellcheck diagnostics");
 		if (stdout_buf == null)
 			return;
 		var lines = stdout_buf.split ("\n");

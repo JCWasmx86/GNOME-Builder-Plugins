@@ -43,7 +43,6 @@ public class PylintDiagnosticProvider : Ide.DiagnosticTool {
 		this.program_name = "pylint";
 	}
 	public override void populate_diagnostics (Ide.Diagnostics diagnostics, GLib.File file, string stdout_buf, string stderr_buf) {
-		info ("Populating pylint diagnostics");
 		if (stdout_buf == null)
 			return;
 		var parser = new Json.Parser ();

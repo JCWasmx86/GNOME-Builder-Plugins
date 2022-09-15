@@ -28,7 +28,6 @@ class ClangdService : Ide.LspService {
 		this.set_inherit_stderr (true);
 	}
 	public override void configure_launcher (Ide.Pipeline pipeline, Ide.SubprocessLauncher launcher) {
-		critical ("compile-commands.json: %s", pipeline.get_builddir ());
 		launcher.push_argv ("--completion-style=detailed");
 		launcher.push_argv ("-j=4");
 		launcher.push_argv ("--malloc-trim");

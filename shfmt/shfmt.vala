@@ -29,7 +29,6 @@ public class ShfmtFormatter : Ide.Object, Ide.Formatter {
 	}
 
 	public async bool format_async (Ide.Buffer buffer, Ide.FormatterOptions options, GLib.Cancellable? cancellable) throws Error {
-		warning ("Formatting using shfmt");
 		var l = new Ide.SubprocessLauncher (GLib.SubprocessFlags.STDIN_PIPE | GLib.SubprocessFlags.STDOUT_PIPE | GLib.SubprocessFlags.STDERR_PIPE);
 		l.set_cwd ("/");
 		l.set_run_on_host (true);
