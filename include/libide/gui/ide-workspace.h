@@ -73,10 +73,10 @@ struct _IdeWorkspaceClass
                                           GError              **error);
   void          (*add_pane)              (IdeWorkspace         *self,
                                           IdePane              *pane,
-                                          IdePanelPosition     *position);
+                                          PanelPosition        *position);
   void          (*add_page)              (IdeWorkspace         *self,
                                           IdePage              *page,
-                                          IdePanelPosition     *position);
+                                          PanelPosition        *position);
   void          (*add_grid_column)       (IdeWorkspace         *self,
                                           guint                 column);
   void          (*add_overlay)           (IdeWorkspace         *self,
@@ -84,7 +84,7 @@ struct _IdeWorkspaceClass
   void          (*remove_overlay)        (IdeWorkspace         *self,
                                           GtkWidget            *overlay);
   PanelFrame   *(*get_frame_at_position) (IdeWorkspace         *self,
-                                          IdePanelPosition     *position);
+                                          PanelPosition        *position);
   void          (*restore_size)          (IdeWorkspace         *self,
                                           int                   width,
                                           int                   height);
@@ -126,15 +126,15 @@ IDE_AVAILABLE_IN_ALL
 IdeFrame       *ide_workspace_get_most_recent_frame         (IdeWorkspace          *self);
 IDE_AVAILABLE_IN_ALL
 PanelFrame     *ide_workspace_get_frame_at_position         (IdeWorkspace          *self,
-                                                             IdePanelPosition      *position);
+                                                             PanelPosition         *position);
 IDE_AVAILABLE_IN_ALL
 void            ide_workspace_add_pane                      (IdeWorkspace          *self,
                                                              IdePane               *pane,
-                                                             IdePanelPosition      *position);
+                                                             PanelPosition         *position);
 IDE_AVAILABLE_IN_ALL
 void            ide_workspace_add_page                      (IdeWorkspace          *self,
                                                              IdePage               *page,
-                                                             IdePanelPosition      *position);
+                                                             PanelPosition         *position);
 IDE_AVAILABLE_IN_ALL
 void            ide_workspace_add_grid_column               (IdeWorkspace          *self,
                                                              guint                  position);
@@ -146,5 +146,9 @@ void            ide_workspace_add_overlay                   (IdeWorkspace       
 IDE_AVAILABLE_IN_ALL
 void            ide_workspace_remove_overlay                (IdeWorkspace          *self,
                                                              GtkWidget             *widget);
+IDE_AVAILABLE_IN_ALL
+void            ide_workspace_inhibit_logout                (IdeWorkspace          *self);
+IDE_AVAILABLE_IN_ALL
+void            ide_workspace_uninhibit_logout              (IdeWorkspace          *self);
 
 G_END_DECLS

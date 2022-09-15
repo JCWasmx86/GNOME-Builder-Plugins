@@ -8,11 +8,11 @@
 
             G_BEGIN_DECLS
 
-/* enumerations from "panel-dock.h" */
+/* enumerations from "panel-types.h" */
 
 _PANEL_EXTERN
-GType panel_dock_position_get_type (void);
-#define PANEL_TYPE_DOCK_POSITION (panel_dock_position_get_type())
+GType panel_area_get_type (void);
+#define PANEL_TYPE_AREA (panel_area_get_type())
 
 G_END_DECLS
 

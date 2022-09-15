@@ -22,9 +22,7 @@
 
 #include <gtk/gtk.h>
 
-#include "panel-frame-header.h"
-#include "panel-widget.h"
-#include "panel-version-macros.h"
+#include "panel-types.h"
 
 G_BEGIN_DECLS
 

@@ -22,7 +22,7 @@
 
 #include <gtk/gtk.h>
 
-#include "panel-version-macros.h"
+#include "panel-types.h"
 
 G_BEGIN_DECLS
 
@@ -44,6 +44,8 @@ struct _PanelSaveDelegateClass
                            GError            **error);
   gboolean (*save)        (PanelSaveDelegate  *self,
                            GTask              *task);
+  void     (*discard)     (PanelSaveDelegate  *self);
+  void     (*close)       (PanelSaveDelegate  *self);
 
   /*< private >*/
   gpointer _reserved[8];
@@ -51,6 +53,11 @@ struct _PanelSaveDelegateClass
 
 PANEL_AVAILABLE_IN_ALL
 PanelSaveDelegate *panel_save_delegate_new           (void);
+PANEL_AVAILABLE_IN_ALL
+gboolean           panel_save_delegate_get_is_draft  (PanelSaveDelegate    *self);
+PANEL_AVAILABLE_IN_ALL
+void               panel_save_delegate_set_is_draft  (PanelSaveDelegate    *self,
+                                                      gboolean              is_draft);
 PANEL_AVAILABLE_IN_ALL
 const char        *panel_save_delegate_get_icon_name (PanelSaveDelegate    *self);
 PANEL_AVAILABLE_IN_ALL
@@ -85,5 +92,9 @@ PANEL_AVAILABLE_IN_ALL
 gboolean           panel_save_delegate_save_finish   (PanelSaveDelegate    *self,
                                                       GAsyncResult         *result,
                                                       GError              **error);
+PANEL_AVAILABLE_IN_ALL
+void               panel_save_delegate_close         (PanelSaveDelegate    *self);
+PANEL_AVAILABLE_IN_ALL
+void               panel_save_delegate_discard       (PanelSaveDelegate    *self);
 
 G_END_DECLS

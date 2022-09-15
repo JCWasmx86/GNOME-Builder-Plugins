@@ -22,18 +22,17 @@
 
 #include <gtk/gtk.h>
 
-#include "panel-dock.h"
-#include "panel-version-macros.h"
+#include "panel-types.h"
 
 G_BEGIN_DECLS
 
-#define PANEL_TYPE_DOCK_SWITCHER (panel_dock_switcher_get_type())
+#define PANEL_TYPE_TOGGLE_BUTTON (panel_toggle_button_get_type())
 
 PANEL_AVAILABLE_IN_ALL
-G_DECLARE_FINAL_TYPE (PanelDockSwitcher, panel_dock_switcher, PANEL, DOCK_SWITCHER, GtkWidget)
+G_DECLARE_FINAL_TYPE (PanelToggleButton, panel_toggle_button, PANEL, TOGGLE_BUTTON, GtkWidget)
 
 PANEL_AVAILABLE_IN_ALL
-GtkWidget *panel_dock_switcher_new (PanelDock         *dock,
-                                    PanelDockPosition  position);
+GtkWidget *panel_toggle_button_new (PanelDock *dock,
+                                    PanelArea  area);
 
 G_END_DECLS

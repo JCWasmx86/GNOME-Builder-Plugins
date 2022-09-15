@@ -1139,7 +1139,7 @@ namespace Ide {
 		[CCode (has_construct_function = false, type = "GtkWidget*")]
 		public Frame ();
 		public unowned Ide.FrameAddin? addin_find_by_module_name (string module_name);
-		public Ide.PanelPosition get_position ();
+		public Panel.Position get_position ();
 		public bool get_use_tabbar ();
 		public void set_use_tabbar (bool use_tabbar);
 		public bool use_tabbar { get; set; }
@@ -1331,7 +1331,7 @@ namespace Ide {
 		[CCode (has_construct_function = false)]
 		protected HtmlGenerator ();
 		[CCode (has_construct_function = false)]
-		protected HtmlGenerator.for_buffer (Gtk.TextBuffer buffer);
+		HtmlGenerator.for_buffer (Gtk.TextBuffer buffer);
 		public virtual async GLib.Bytes generate_async (GLib.Cancellable? cancellable) throws GLib.Error;
 		public unowned string get_base_uri ();
 		public void set_base_uri (string base_uri);
@@ -1775,7 +1775,7 @@ namespace Ide {
 		public bool get_failed ();
 		public virtual GLib.File? get_file_or_directory ();
 		public unowned string get_menu_id ();
-		public Ide.PanelPosition? get_position ();
+		public Panel.Position? get_position ();
 		public void mark_used ();
 		public void observe (Ide.Page location);
 		public void set_can_split (bool can_split);
@@ -1794,26 +1794,9 @@ namespace Ide {
 		[CCode (has_construct_function = false, type = "GtkWidget*")]
 		public Pane ();
 		public void destroy ();
-		public Ide.PanelPosition? get_position ();
+		public Panel.Position? get_position ();
 		public void observe (Ide.Pane location);
 		public void unobserve (Ide.Pane location);
-	}
-	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", ref_function = "ide_panel_position_ref", type_id = "ide_panel_position_get_type ()", unref_function = "ide_panel_position_unref")]
-	[Compact]
-	public class PanelPosition {
-		[CCode (has_construct_function = false)]
-		public PanelPosition ();
-		public bool get_column (out uint column);
-		public bool get_depth (out uint depth);
-		public bool get_edge (Panel.DockPosition edge);
-		public bool get_row (out uint row);
-		public bool is_indeterminate ();
-		public Ide.PanelPosition @ref ();
-		public void set_column (uint column);
-		public void set_depth (uint depth);
-		public void set_edge (Panel.DockPosition edge);
-		public void set_row (uint row);
-		public void unref ();
 	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", ref_function = "ide_pattern_spec_ref", type_id = "ide_pattern_spec_get_type ()", unref_function = "ide_pattern_spec_unref")]
 	[Compact]
@@ -2492,6 +2475,39 @@ namespace Ide {
 		protected SearchResults ();
 		public bool refilter (string query);
 	}
+	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_id = "ide_session_get_type ()")]
+	public sealed class Session : GLib.Object {
+		[CCode (has_construct_function = false)]
+		public Session ();
+		public void append (Ide.SessionItem item);
+		[CCode (has_construct_function = false)]
+		public Session.from_variant (GLib.Variant variant) throws GLib.Error;
+		public unowned Ide.SessionItem? get_item (uint position);
+		public uint get_n_items ();
+		public void insert (uint position, Ide.SessionItem item);
+		public void prepend (Ide.SessionItem item);
+		public void remove (Ide.SessionItem item);
+		public void remove_at (uint position);
+		public GLib.Variant to_variant ();
+	}
+	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_id = "ide_session_item_get_type ()")]
+	public sealed class SessionItem : GLib.Object {
+		[CCode (has_construct_function = false)]
+		public SessionItem ();
+		public unowned string? get_id ();
+		public GLib.Variant get_metadata_value (string key, GLib.VariantType? expected_type);
+		public unowned Panel.Position? get_position ();
+		public unowned string? get_type_hint ();
+		public bool has_metadata (string key, out GLib.VariantType? value_type);
+		public bool has_metadata_with_type (string key, GLib.VariantType expected_type);
+		public void set_id (string? id);
+		public void set_metadata_value (string key, GLib.Variant? value);
+		public void set_position (Panel.Position? position);
+		public void set_type_hint (string? type_hint);
+		public string id { get; set; }
+		public Panel.Position position { get; set; }
+		public string type_hint { get; set; }
+	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_id = "ide_settings_get_type ()")]
 	public sealed class Settings : GLib.Object, GLib.ActionGroup {
 		[CCode (has_construct_function = false)]
@@ -2507,6 +2523,8 @@ namespace Ide {
 		public uint get_uint (string key);
 		public GLib.Variant get_user_value (string key);
 		public GLib.Variant get_value (string key);
+		[CCode (has_construct_function = false)]
+		public Settings.relocatable_with_suffix (string project_id, string schema_id, string path_suffix);
 		public static string resolve_schema_path (string schema_id, string project_id, string path_suffix);
 		public void set_boolean (string key, bool val);
 		public void set_double (string key, double val);
@@ -2519,6 +2537,8 @@ namespace Ide {
 		public Settings.with_path (string project_id, string schema_id, string path);
 		[NoAccessorMethod]
 		public string path { owned get; construct; }
+		[NoAccessorMethod]
+		public string path_suffix { owned get; construct; }
 		[NoAccessorMethod]
 		public string project_id { owned get; construct; }
 		public string schema_id { get; construct; }
@@ -2599,24 +2619,32 @@ namespace Ide {
 	public class SourceView : GtkSource.View, Gtk.Accessible, Gtk.Buildable, Gtk.ConstraintTarget, Gtk.Scrollable {
 		[CCode (has_construct_function = false, type = "GtkWidget*")]
 		public SourceView ();
+		public void add_controller (int priority, owned Gtk.EventController controller);
 		public void append_menu (GLib.MenuModel menu_model);
 		public string dup_position_label ();
 		public unowned Pango.FontDescription get_font_desc ();
 		public bool get_highlight_current_line ();
+		public bool get_insert_matching_brace ();
 		public void get_iter_at_visual_position (Gtk.TextIter iter, uint line, uint line_offset);
+		public bool get_overwrite_braces ();
 		public void get_visual_position (uint line, uint line_column);
 		public double get_zoom_level ();
 		public static void jump_to_iter (Gtk.TextView text_view, Gtk.TextIter iter, double within_margin, bool use_align, double xalign, double yalign);
 		public void prepend_menu (GLib.MenuModel menu_model);
+		public void remove_controller (Gtk.EventController controller);
 		public void remove_menu (GLib.MenuModel menu_model);
 		public void scroll_to_insert ();
 		public void set_font_desc (Pango.FontDescription font_desc);
 		public void set_highlight_current_line (bool highlight_current_line);
+		public void set_insert_matching_brace (bool insert_matching_brace);
+		public void set_overwrite_braces (bool overwrite_braces);
 		public Pango.FontDescription font_desc { get; set; }
 		[NoAccessorMethod]
 		public int font_scale { get; set; }
+		public bool insert_matching_brace { get; set; }
 		[NoAccessorMethod]
 		public double line_height { get; set; }
+		public bool overwrite_braces { get; set; }
 		public double zoom_level { get; }
 		public signal void populate_menu ();
 	}
@@ -3665,8 +3693,8 @@ namespace Ide {
 		public bool has_project ();
 		public async bool load_project_async (Ide.ProjectInfo project_info, GLib.Type workspace_type, GLib.Cancellable? cancellable) throws GLib.Error;
 		public async void open_all_async ([CCode (array_length_cname = "n_files", array_length_pos = 1.5, array_length_type = "guint")] GLib.File[] files, string? hint, GLib.Cancellable? cancellable);
-		public async bool open_async (GLib.File file, string? hint, Ide.BufferOpenFlags flags, Ide.PanelPosition? position, GLib.Cancellable? cancellable) throws GLib.Error;
-		public async void open_at_async (GLib.File file, string? hint, int at_line, int at_line_offset, Ide.BufferOpenFlags flags, Ide.PanelPosition position, GLib.Cancellable? cancellable);
+		public async bool open_async (GLib.File file, string? hint, Ide.BufferOpenFlags flags, Panel.Position? position, GLib.Cancellable? cancellable) throws GLib.Error;
+		public async void open_at_async (GLib.File file, string? hint, int at_line, int at_line_offset, Ide.BufferOpenFlags flags, Panel.Position position, GLib.Cancellable? cancellable);
 		public void remove_workspace (Ide.Workspace workspace);
 		public async GLib.File resolve_file_async (string filename, GLib.Cancellable? cancellable) throws GLib.Error;
 		public void set_build_system (Ide.BuildSystem? build_system);
@@ -3682,8 +3710,8 @@ namespace Ide {
 		public void action_set_enabled (string action_name, bool enabled);
 		public virtual void add_grid_column (uint column);
 		public virtual void add_overlay (Gtk.Widget overlay);
-		public virtual void add_page (Ide.Page page, Ide.PanelPosition position);
-		public virtual void add_pane (Ide.Pane pane, Ide.PanelPosition position);
+		public virtual void add_page (Ide.Page page, Panel.Position position);
+		public virtual void add_pane (Ide.Pane pane, Panel.Position position);
 		public unowned Ide.WorkspaceAddin? addin_find_by_module_name (string module_name);
 		[NoWrapper]
 		public virtual async bool agree_to_close_async (GLib.Cancellable? cancellable) throws GLib.Error;
@@ -3694,11 +3722,12 @@ namespace Ide {
 		public virtual void foreach_page (Ide.PageCallback callback);
 		public unowned GLib.Cancellable get_cancellable ();
 		public unowned Ide.Context? get_context ();
-		public virtual unowned Panel.Frame? get_frame_at_position (Ide.PanelPosition position);
+		public virtual unowned Panel.Frame? get_frame_at_position (Panel.Position position);
 		public virtual unowned Ide.HeaderBar? get_header_bar ();
 		public virtual unowned Ide.Frame? get_most_recent_frame ();
 		public virtual unowned Ide.Page? get_most_recent_page ();
 		public unowned Panel.Statusbar? get_statusbar ();
+		public void inhibit_logout ();
 		[CCode (cname = "ide_workspace_class_install_action")]
 		public class void install_action (string action_name, string? parameter_type, Ide.ActionActivateFunc activate);
 		[CCode (cname = "ide_workspace_class_install_property_action")]
@@ -3710,6 +3739,7 @@ namespace Ide {
 		public virtual bool save_size (int width, int height);
 		[CCode (cname = "ide_workspace_class_set_kind")]
 		public class void set_kind (string kind);
+		public void uninhibit_logout ();
 		public Ide.Context context { get; }
 	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_cname = "IdeApplicationAddinInterface", type_id = "ide_application_addin_get_type ()")]
@@ -3739,16 +3769,16 @@ namespace Ide {
 	public interface BuildSystem : Ide.Object {
 		public static unowned Ide.BuildSystem? from_context (Ide.Context context);
 		[CCode (array_length = false, array_null_terminated = true)]
-		public async string[] get_build_flags_async (GLib.File file, GLib.Cancellable? cancellable) throws GLib.Error;
+		public virtual async string[] get_build_flags_async (GLib.File file, GLib.Cancellable? cancellable) throws GLib.Error;
 		public async GLib.HashTable<Ide.File,string[]> get_build_flags_for_dir_async (GLib.File directory, GLib.Cancellable? cancellable) throws GLib.Error;
-		public async GLib.HashTable<Ide.File,string[]> get_build_flags_for_files_async (GLib.GenericArray<GLib.File> files, GLib.Cancellable? cancellable) throws GLib.Error;
+		public virtual async GLib.HashTable<Ide.File,string[]> get_build_flags_for_files_async (GLib.GenericArray<GLib.File> files, GLib.Cancellable? cancellable) throws GLib.Error;
 		public abstract string get_builddir (Ide.Pipeline pipeline);
 		public abstract string get_display_name ();
 		public abstract string get_id ();
 		public abstract int get_priority ();
-		public string? get_project_version ();
-		public bool supports_language (string language);
-		public bool supports_toolchain (Ide.Toolchain toolchain);
+		public virtual string? get_project_version ();
+		public virtual bool supports_language (string language);
+		public virtual bool supports_toolchain (Ide.Toolchain toolchain);
 		[NoAccessorMethod]
 		public abstract GLib.File project_file { owned get; construct; }
 	}
@@ -3878,7 +3908,7 @@ namespace Ide {
 		public abstract void load ();
 		[NoWrapper]
 		public abstract void set_engine (Ide.HighlightEngine engine);
-		public abstract Gtk.TextIter update (Ide.HighlightCallback callback, Gtk.TextIter range_begin, Gtk.TextIter range_end);
+		public abstract Gtk.TextIter update (GLib.SList<Gtk.TextTag> tags_to_remove, Ide.HighlightCallback callback, Gtk.TextIter range_begin, Gtk.TextIter range_end);
 	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_cname = "IdeOmniBarAddinInterface", type_id = "ide_omni_bar_addin_get_type ()")]
 	public interface OmniBarAddin : GLib.Object {
@@ -3926,14 +3956,6 @@ namespace Ide {
 		public abstract void load ();
 		public abstract async GLib.ListModel search_async (string query, uint max_results, GLib.Cancellable? cancellable, out bool truncated) throws GLib.Error;
 		public abstract void unload ();
-	}
-	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_cname = "IdeSessionAddinInterface", type_id = "ide_session_addin_get_type ()")]
-	public interface SessionAddin : Ide.Object {
-		public abstract bool can_save_page (Ide.Page page);
-		[CCode (array_length = false, array_null_terminated = true)]
-		public abstract string[]? get_autosave_properties ();
-		public abstract async Ide.Page? restore_page_async (GLib.Variant state, GLib.Cancellable? cancellable) throws GLib.Error;
-		public abstract async GLib.Variant? save_page_async (Ide.Page page, GLib.Cancellable? cancellable) throws GLib.Error;
 	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_cname = "IdeShortcutProviderInterface", type_id = "ide_shortcut_provider_get_type ()")]
 	public interface ShortcutProvider : Ide.Object {
@@ -4072,9 +4094,11 @@ namespace Ide {
 		public abstract bool can_open (GLib.File file, string content_type, int priority);
 		public abstract void load (Ide.Workbench workbench);
 		public abstract async bool load_project_async (Ide.ProjectInfo project_info, GLib.Cancellable? cancellable) throws GLib.Error;
-		public abstract async bool open_async (GLib.File file, string content_type, int at_line, int at_line_offset, Ide.BufferOpenFlags flags, Ide.PanelPosition position, GLib.Cancellable? cancellable) throws GLib.Error;
+		public abstract async bool open_async (GLib.File file, string content_type, int at_line, int at_line_offset, Ide.BufferOpenFlags flags, Panel.Position position, GLib.Cancellable? cancellable) throws GLib.Error;
 		public abstract void project_loaded (Ide.ProjectInfo project_info);
 		public abstract GLib.ActionGroup? ref_action_group ();
+		public abstract void restore_session (Ide.Session session);
+		public abstract void save_session (Ide.Session session);
 		public abstract void unload (Ide.Workbench workbench);
 		public abstract async bool unload_project_async (Ide.ProjectInfo project_info, GLib.Cancellable? cancellable) throws GLib.Error;
 		public abstract void vcs_changed (Ide.Vcs? vcs);
@@ -4750,9 +4774,9 @@ namespace Ide {
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h")]
 	public static GtkSource.NewlineType editor_file_chooser_get_line_ending (Gtk.FileChooser chooser);
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h")]
-	public static void editor_focus_buffer (Ide.Workspace workspace, Ide.PanelPosition position, Ide.Buffer buffer);
+	public static void editor_focus_buffer (Ide.Workspace workspace, Panel.Position position, Ide.Buffer buffer);
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h")]
-	public static void editor_focus_location (Ide.Workspace workspace, Ide.PanelPosition position, Ide.Location location);
+	public static void editor_focus_location (Ide.Workspace workspace, Panel.Position position, Ide.Location location);
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h")]
 	public static GLib.Resource editor_get_resource ();
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h")]
@@ -4862,6 +4886,14 @@ namespace Ide {
 	public static Ide.SymbolKind lsp_decode_symbol_kind (uint kind);
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h")]
 	public static Ide.TextEdit? lsp_decode_text_edit (GLib.Variant text_edit, GLib.File gfile);
+	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h")]
+	public static bool panel_position_get_area (Panel.Position self, out Panel.Area? area);
+	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h")]
+	public static bool panel_position_get_column (Panel.Position self, out uint column);
+	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h")]
+	public static bool panel_position_get_depth (Panel.Position self, out uint depth);
+	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h")]
+	public static bool panel_position_get_row (Panel.Position self, out uint row);
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h")]
 	public static string path_collapse (string path);
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h")]

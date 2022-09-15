@@ -20,10 +20,12 @@
 
 #pragma once
 
+#include <adwaita.h>
+
 #define LIBPANEL_INSIDE
-# include "panel-dock.h"
-# include "panel-dock-switcher.h"
+# include "panel-types.h"
 # include "panel-enums.h"
+# include "panel-dock.h"
 # include "panel-frame.h"
 # include "panel-frame-header.h"
 # include "panel-frame-header-bar.h"
@@ -34,8 +36,11 @@
 # include "panel-init.h"
 # include "panel-omni-bar.h"
 # include "panel-paned.h"
+# include "panel-position.h"
 # include "panel-save-delegate.h"
+# include "panel-save-dialog.h"
 # include "panel-statusbar.h"
 # include "panel-theme-selector.h"
+# include "panel-toggle-button.h"
 # include "panel-widget.h"
 #undef LIBPANEL_INSIDE

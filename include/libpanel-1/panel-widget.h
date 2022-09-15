@@ -22,8 +22,7 @@
 
 #include <gtk/gtk.h>
 
-#include "panel-save-delegate.h"
-#include "panel-version-macros.h"
+#include "panel-types.h"
 
 G_BEGIN_DECLS
 
@@ -123,6 +122,8 @@ void               panel_widget_set_save_delegate             (PanelWidget      
                                                                PanelSaveDelegate           *save_delegate);
 PANEL_AVAILABLE_IN_ALL
 void               panel_widget_close                         (PanelWidget                 *self);
+PANEL_AVAILABLE_IN_ALL
+void               panel_widget_force_close                   (PanelWidget                 *self);
 PANEL_AVAILABLE_IN_ALL
 void               panel_widget_insert_action_group           (PanelWidget                 *self,
                                                                const char                  *prefix,

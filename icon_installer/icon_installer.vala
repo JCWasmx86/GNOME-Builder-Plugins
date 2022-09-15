@@ -28,8 +28,8 @@ public class IconInstallerWorkspaceAddin : GLib.Object, Ide.WorkspaceAddin {
 
 	}
 	public void load (Ide.Workspace workspace) {
-		var pos = new Ide.PanelPosition ();
-		pos.set_edge (Panel.DockPosition.BOTTOM);
+		var pos = new Panel.Position ();
+		pos.set_area (Panel.Area.BOTTOM);
 		pos.set_depth (2);
 		workspace.add_pane (new IconInstallerPane (workspace.context.workdir), pos);
 	}
