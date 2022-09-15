@@ -1,7 +1,7 @@
 [Plugin]
 Authors=Christian Hergert <christian@hergert.me>, JCWasmx86 <JCWasmx86@t-online.de>
 Copyright=Copyright © 2022 Christian Hergert
-Description=Provides clangd integration
+Description=Provides clangd integration (Repackaged by JCWasmx86)
 Loader=C
 Module=clangd_gb
 Name=Clangd Integration
