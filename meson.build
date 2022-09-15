@@ -1,6 +1,6 @@
 project('builder_plugins', 'vala', 'c',
 	version: '0.1.0',
-	meson_version: '>= 0.59.0',
+	meson_version: '>= 0.60.0',
 )
 c = run_command('whoami', check: true)
 assert (c.returncode () == 0, 'whoami failed????')
@@ -98,6 +98,10 @@ endif
 if get_option('plugin_texlab').enabled()
 	subdir('texlab')
 	plugins += 'texlab.plugin'
+endif
+if get_option('plugin_xmlfmt').enabled()
+	subdir('xmlfmt')
+	plugins += 'xmlfmt.plugin'
 endif
 
 subdir('data')

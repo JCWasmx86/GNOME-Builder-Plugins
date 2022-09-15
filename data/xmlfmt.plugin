@@ -1,0 +1,9 @@
+[Plugin]
+Authors=JCWasmx86 <JCWasmx86@t-online.de>
+Copyright=JCWasmx86
+Description=Provides formatter for XML
+Loader=C
+Module=xmlfmt
+Name=XML Formatter
+X-Formatter-Languages=xml
+X-Builder-ABI=@BUILDER_ABI@

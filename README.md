@@ -15,3 +15,4 @@ guaranteed.
 - shfmt: Shfmt integration
 - stack: Integration for the stack buildsystem
 - texlab: LaTeX integration
+- xmlfmt: Formatter for XML
