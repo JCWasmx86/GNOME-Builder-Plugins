@@ -22,11 +22,11 @@ public static extern Resource icon_installer_get_resource ();
 
 public class IconInstallerWorkspaceAddin : GLib.Object, Ide.WorkspaceAddin {
 	public void page_changed (Ide.Page? page) {
-
 	}
+
 	public void unload (Ide.Workspace workspace) {
-
 	}
+
 	public void load (Ide.Workspace workspace) {
 		var pos = new Panel.Position ();
 		pos.set_area (Panel.Area.BOTTOM);
@@ -73,7 +73,7 @@ public class IconInstallerImage : Gtk.Box {
 			Idle.add (() => {
 				var window = new Gtk.Dialog ();
 				window.title = "Install icon %s".printf (str);
-				window.transient_for = (Gtk.Window)this.root;
+				window.transient_for = (Gtk.Window) this.root;
 				var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
 				var image = new Gtk.Image.from_icon_name (str);
 				image.pixel_size = 96;
@@ -124,7 +124,7 @@ public class IconInstallerImage : Gtk.Box {
 				var cancel = new Gtk.Button.with_label ("Cancel");
 				cancel.hexpand = true;
 				btn_box.append (cancel);
-				cancel.clicked.connect (() =>  {
+				cancel.clicked.connect (() => {
 					window.destroy ();
 				});
 				box.append (btn_box);
@@ -158,7 +158,7 @@ public class IconInstallerImage : Gtk.Box {
 			// Ignore, as it could just be that it already exists
 		}
 		if (!svg.query_exists ()) {
-			FileUtils.set_contents (svg.get_path (), (string)GLib.resources_lookup_data ("/plugins/icon_installer/icons/scalable/actions/show-" + this.icon_name + ".svg", GLib.ResourceLookupFlags.NONE).get_data ());
+			FileUtils.set_contents (svg.get_path (), (string) GLib.resources_lookup_data ("/plugins/icon_installer/icons/scalable/actions/show-" + this.icon_name + ".svg", GLib.ResourceLookupFlags.NONE).get_data ());
 		}
 
 		if (gresource.query_exists ()) {
@@ -186,7 +186,7 @@ public class IconInstallerImage : Gtk.Box {
 		return path.get_parent ().get_child ("icons").get_child ("scalable").get_child ("actions").get_child (this.icon_name + ".svg");
 	}
 
-	File? find_path_to_gresource (File curr_dir) throws Error {
+	File ? find_path_to_gresource (File curr_dir) throws Error {
 		var children = curr_dir.enumerate_children ("standard::*", GLib.FileQueryInfoFlags.NONE);
 		FileInfo child;
 		while ((child = children.next_file ()) != null) {
@@ -220,11 +220,12 @@ public class IconInstallerView : Gtk.Box {
 		this.realize.connect (() => {
 			try {
 				this.load_data (file);
-			}catch (Error e) {
+			} catch (Error e) {
 				error ("%s", e.message);
 			}
 		});
 	}
+
 	public void load_data (File file) throws GLib.Error {
 		new Thread<void> ("loader", () => {
 			var bar = new Gtk.ProgressBar ();
@@ -247,7 +248,7 @@ public class IconInstallerView : Gtk.Box {
 			}
 			var p = new Json.Parser ();
 			try {
-				p.load_from_data ((string)json.get_data ());
+				p.load_from_data ((string) json.get_data ());
 			} catch (Error e) {
 				error ("OOPS: %s", e.message);
 			}
@@ -276,7 +277,7 @@ public class IconInstallerView : Gtk.Box {
 					var img = new IconInstallerImage (str, arr, file);
 					list.add (img);
 					box.append (img);
-					bar.fraction = ((double)i++) / strs.length;
+					bar.fraction = ((double) i++) / strs.length;
 					return Source.REMOVE;
 				});
 				Thread.usleep (50);

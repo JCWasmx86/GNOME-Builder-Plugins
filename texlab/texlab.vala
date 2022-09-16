@@ -23,14 +23,14 @@ extern void bind_client (Ide.Object self);
 public class TexlabService : Ide.LspService {
 	construct {
 		this.set_inherit_stderr (true);
-		this.search_path = new string[] {"/usr/local/bin", "/usr/bin", "/var/run/host/usr/bin", "/var/run/host/usr/local/bin"};
+		this.search_path = new string[] { "/usr/local/bin", "/usr/bin", "/var/run/host/usr/bin", "/var/run/host/usr/local/bin" };
 		this.set_program ("texlab");
 	}
 
 	public override void configure_launcher (Ide.Pipeline pipeline, Ide.SubprocessLauncher launcher) {
 		launcher.push_argv ("-vvvv");
-
 	}
+
 	public override void configure_client (Ide.LspClient client) {
 		client.add_language ("latex");
 		client.add_language ("bibtex");

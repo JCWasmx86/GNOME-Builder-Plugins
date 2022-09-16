@@ -27,7 +27,6 @@ public class XmlFormatter : Ide.Object, Ide.Formatter {
 	}
 
 	public void load () {
-
 	}
 
 	public async bool format_async (Ide.Buffer buffer, Ide.FormatterOptions options, GLib.Cancellable? cancellable) throws Error {

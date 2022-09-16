@@ -31,7 +31,7 @@ public class CabalRunCommandProvider : Ide.Object, Ide.RunCommandProvider {
 		var context = this.get_context ();
 		var store = new GLib.ListStore (typeof (Ide.RunCommand));
 		if (!(Ide.BuildSystem.from_context (context) is CabalBuildSystem)) {
-			warning ("Not a cabal build system");
+			info ("Not a cabal build system");
 			return store;
 		}
 		var command = new Ide.RunCommand ();
@@ -41,8 +41,8 @@ public class CabalRunCommandProvider : Ide.Object, Ide.RunCommandProvider {
 		command.can_default = true;
 		var cabal = Environment.get_home_dir () + "/.ghcup/bin/cabal";
 		command.set_cwd (Ide.BuildSystem.from_context (context).project_file.get_path ());
-		critical ("%s", Ide.BuildSystem.from_context (context).project_file.get_path ());
-		command.set_argv (new string[] {cabal, "run"});
+		info ("Setting cwd for `cabal run' to %s", command.cwd);
+		command.set_argv (new string[] { cabal, "run" });
 		store.append (command);
 		return store;
 	}

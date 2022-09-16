@@ -31,7 +31,7 @@ public class StackRunCommandProvider : Ide.Object, Ide.RunCommandProvider {
 		var context = this.get_context ();
 		var store = new GLib.ListStore (typeof (Ide.RunCommand));
 		if (!(Ide.BuildSystem.from_context (context) is StackBuildSystem)) {
-			warning ("Not a stack build system");
+			info ("Not a stack build system");
 			return store;
 		}
 		var command = new Ide.RunCommand ();
@@ -41,7 +41,8 @@ public class StackRunCommandProvider : Ide.Object, Ide.RunCommandProvider {
 		command.can_default = true;
 		var stack = Environment.get_home_dir () + "/.ghcup/bin/stack";
 		command.set_cwd (Ide.BuildSystem.from_context (context).project_file.get_path ());
-		command.set_argv (new string[] {stack, "run"});
+		info ("Setting cwd for `stack run' to %s", command.cwd);
+		command.set_argv (new string[] { stack, "run" });
 		store.append (command);
 		return store;
 	}
@@ -77,7 +78,7 @@ public class StackPipelineAddin : Ide.Object, Ide.PipelineAddin {
 	public void load (Ide.Pipeline pipeline) {
 		var context = this.get_context ();
 		var srcdir = pipeline.get_srcdir ();
-		if (! (Ide.BuildSystem.from_context (context) is StackBuildSystem)) {
+		if (!(Ide.BuildSystem.from_context (context) is StackBuildSystem)) {
 			info ("Not a stack buildsystem");
 			return;
 		}
@@ -95,12 +96,6 @@ public class StackPipelineAddin : Ide.Object, Ide.PipelineAddin {
 		});
 		var id = pipeline.attach (Ide.PipelinePhase.BUILD, 0, build_stage);
 		this.track (id);
-		var install_command = new Ide.RunCommand ();
-		install_command.set_argv (new string[] { stack, "install" });
-		install_command.set_cwd (srcdir);
-		var install_stage = (Ide.PipelineStageCommand) Object.new (typeof (Ide.PipelineStageCommand), "build-command", install_command, "name", "Installing project", null);
-		// id = pipeline.attach (Ide.PipelinePhase.INSTALL, 0, install_stage);
-		// this.track (id);
 	}
 }
 

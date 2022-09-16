@@ -56,20 +56,24 @@ public class PylintDiagnosticProvider : Ide.DiagnosticTool {
 		if (root == null || root.get_node_type () != Json.NodeType.ARRAY)
 			return;
 		var array = root.get_array ();
+		info ("Found %u diagnostics", array.get_length ());
 		for (var i = 0; i < array.get_length (); i++) {
-			var diag = (PylintDiagnostic)Json.gobject_deserialize (typeof (PylintDiagnostic), array.get_element (i));
+			var diag = (PylintDiagnostic) Json.gobject_deserialize (typeof (PylintDiagnostic), array.get_element (i));
 			diagnostics.add (diag.to_ide (file, array.get_element (i).get_object ().get_string_member ("type")));
 		}
 	}
+
 	public PylintDiagnosticProvider () {
 		this.program_name = "pylint";
 	}
+
 	public override void configure_launcher (Ide.SubprocessLauncher launcher, GLib.File file, GLib.Bytes contents, string language_id) {
 		launcher.push_argv ("-f");
 		launcher.push_argv ("json");
 		launcher.push_argv (file.get_path ());
 		launcher.setenv ("SHELL", "/bin/bash", false);
 	}
+
 	public override bool can_diagnose (GLib.File file, GLib.Bytes contents, string language_id) {
 		return language_id == "python3";
 	}

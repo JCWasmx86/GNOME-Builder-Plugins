@@ -25,6 +25,7 @@ public class ShellcheckDiagnosticProvider : Ide.DiagnosticTool {
 	public override void populate_diagnostics (Ide.Diagnostics diagnostics, GLib.File file, string stdout_buf, string stderr_buf) {
 		if (stdout_buf == null)
 			return;
+		var n_diags = 0;
 		var lines = stdout_buf.split ("\n");
 		foreach (var line in lines) {
 			if (line == null || line.strip () == "")
@@ -36,27 +37,32 @@ public class ShellcheckDiagnosticProvider : Ide.DiagnosticTool {
 			var start = new Ide.Location (file, int.parse (raw_loc[1]) - 1, int.parse (raw_loc[2]));
 			var severity = Ide.DiagnosticSeverity.IGNORED;
 			switch (parts[1].replace (":", "")) {
-				case "warning":
-					severity = Ide.DiagnosticSeverity.WARNING;
-					break;
-				case "error":
-					severity = Ide.DiagnosticSeverity.ERROR;
-					break;
-				case "note":
-					severity = Ide.DiagnosticSeverity.NOTE;
-					break;
+			case "warning":
+				severity = Ide.DiagnosticSeverity.WARNING;
+				break;
+			case "error":
+				severity = Ide.DiagnosticSeverity.ERROR;
+				break;
+			case "note":
+				severity = Ide.DiagnosticSeverity.NOTE;
+				break;
 			}
 			diagnostics.add (new Ide.Diagnostic (severity, parts[2], start));
+			n_diags++;
 		}
+		info ("Found %u diagnostics", n_diags);
 	}
+
 	public ShellcheckDiagnosticProvider () {
 		this.program_name = "shellcheck";
 	}
+
 	public override void configure_launcher (Ide.SubprocessLauncher launcher, GLib.File file, GLib.Bytes contents, string language_id) {
 		launcher.push_argv ("--format=gcc");
 		launcher.push_argv ("-");
 		launcher.setenv ("SHELL", "/bin/bash", false);
 	}
+
 	public override bool can_diagnose (GLib.File file, GLib.Bytes contents, string language_id) {
 		return language_id == "sh";
 	}

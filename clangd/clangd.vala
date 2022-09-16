@@ -35,6 +35,7 @@ class ClangdService : Ide.LspService {
 		launcher.push_argv ("--compile-commands-dir=" + pipeline.get_builddir ());
 		launcher.push_argv ("--pch-storage=memory");
 	}
+
 	public override void configure_client (Ide.LspClient client) {
 		client.add_language ("c");
 		client.add_language ("cpp");

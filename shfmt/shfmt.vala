@@ -25,14 +25,13 @@ public class ShfmtFormatter : Ide.Object, Ide.Formatter {
 	}
 
 	public void load () {
-
 	}
 
 	public async bool format_async (Ide.Buffer buffer, Ide.FormatterOptions options, GLib.Cancellable? cancellable) throws Error {
 		var l = new Ide.SubprocessLauncher (GLib.SubprocessFlags.STDIN_PIPE | GLib.SubprocessFlags.STDOUT_PIPE | GLib.SubprocessFlags.STDERR_PIPE);
 		l.set_cwd ("/");
 		l.set_run_on_host (true);
-		l.push_args (new string[] {"shfmt", "-i", "%u".printf (options.insert_spaces ? options.tab_width : 0), "-"});
+		l.push_args (new string[] { "shfmt", "-i", "%u".printf (options.insert_spaces ? options.tab_width : 0), "-" });
 		var proc = l.spawn ();
 		string stdout_buf;
 		string stderr_buf;
