@@ -26,6 +26,28 @@ public class CabalBuildSystemDiscovery : Ide.SimpleBuildSystemDiscovery {
 	}
 }
 
+public class CabalRunCommandProvider : Ide.Object, Ide.RunCommandProvider {
+	public async GLib.ListModel list_commands_async (GLib.Cancellable? cancellable) throws GLib.Error {
+		var context = this.get_context ();
+		var store = new GLib.ListStore (typeof (Ide.RunCommand));
+		if (!(Ide.BuildSystem.from_context (context) is CabalBuildSystem)) {
+			warning ("Not a cabal build system");
+			return store;
+		}
+		var command = new Ide.RunCommand ();
+		command.set_id ("cabal:run");
+		command.set_priority (-500);
+		command.set_display_name ("cabal run");
+		command.can_default = true;
+		var cabal = Environment.get_home_dir () + "/.ghcup/bin/cabal";
+		command.set_cwd (Ide.BuildSystem.from_context (context).project_file.get_path ());
+		critical ("%s", Ide.BuildSystem.from_context (context).project_file.get_path ());
+		command.set_argv (new string[] {cabal, "run"});
+		store.append (command);
+		return store;
+	}
+}
+
 public class CabalBuildSystem : Ide.Object, Ide.BuildSystem {
 	[NoAccessorMethod]
 	public override GLib.File project_file { owned get; construct; }
@@ -60,33 +82,20 @@ public class CabalPipelineAddin : Ide.Object, Ide.PipelineAddin {
 			info ("Not a cabal build system");
 			return;
 		}
-		try {
-			var build_launcher = pipeline.create_launcher ();
-			build_launcher.set_cwd (srcdir);
-			build_launcher.append_path (Environment.get_home_dir () + "/.ghcup/bin");
-			var cabal = Environment.get_home_dir () + "/.ghcup/bin/cabal";
-			build_launcher.push_args (new string[] { cabal, "build" });
-			var clean_launcher = pipeline.create_launcher ();
-			clean_launcher.set_cwd (srcdir);
-			clean_launcher.push_args (new string[] { cabal, "clean" });
-			var build_stage = new Ide.PipelineStageLauncher (context, build_launcher);
-			build_stage.set_name ("Building project");
-			build_stage.set_clean_launcher (clean_launcher);
-			build_stage.query.connect ((stage, targets, cancellable) => {
-				build_stage.set_completed (false);
-			});
-			var id = pipeline.attach (Ide.PipelinePhase.BUILD, 0, build_stage);
-			this.track (id);
-			var install_launcher = pipeline.create_launcher ();
-			install_launcher.set_cwd (srcdir);
-			install_launcher.push_args (new string[] { cabal, "install" });
-			var install_stage = new Ide.PipelineStageLauncher (context, install_launcher);
-			install_stage.set_name ("Installing project");
-			id = pipeline.attach (Ide.PipelinePhase.INSTALL, 0, install_stage);
-			this.track (id);
-		} catch (Error e) {
-			critical ("%s", e.message);
-		}
+		var cabal = Environment.get_home_dir () + "/.ghcup/bin/cabal";
+		var build_command = new Ide.RunCommand ();
+		build_command.set_argv (new string[] { cabal, "build" });
+		build_command.set_cwd (srcdir);
+		var clean_command = new Ide.RunCommand ();
+		clean_command.set_argv (new string[] { cabal, "clean" });
+		clean_command.set_cwd (srcdir);
+		var build_stage = new Ide.PipelineStageCommand (build_command, clean_command);
+		build_stage.set_name ("Building project");
+		build_stage.query.connect ((stage, targets, cancellable) => {
+			build_stage.set_completed (false);
+		});
+		var id = pipeline.attach (Ide.PipelinePhase.BUILD, 0, build_stage);
+		this.track (id);
 	}
 }
 
@@ -96,4 +105,5 @@ public void peas_register_types (TypeModule module) {
 	obj.register_extension_type (typeof (Ide.BuildSystemDiscovery), typeof (CabalBuildSystemDiscovery));
 	obj.register_extension_type (typeof (Ide.BuildSystem), typeof (CabalBuildSystem));
 	obj.register_extension_type (typeof (Ide.PipelineAddin), typeof (CabalPipelineAddin));
+	obj.register_extension_type (typeof (Ide.RunCommandProvider), typeof (CabalRunCommandProvider));
 }

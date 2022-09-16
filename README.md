@@ -27,6 +27,9 @@ guaranteed.
 	- `supports_toolchain`: virtual
 - Ide.WorkspaceAddin:
 	- `ref_action_group`: virtual
+- Ide.RunCommand:
+	- `set_argv`: string array as arguments
+	- `set_argv`: `[CCode (array_length = false, array_null_terminated = true)]` to the argument
 
 ## Updating libraries
 - Update vapis

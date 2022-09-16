@@ -2213,7 +2213,7 @@ namespace Ide {
 		public unowned string[] get_languages ();
 		public int get_priority ();
 		public virtual void prepare_to_run (Ide.RunContext run_context, Ide.Context context);
-		public void set_argv (string argv);
+		public void set_argv ([CCode (array_length = false, array_null_terminated = true)] string[] argv);
 		public void set_can_default (bool can_default);
 		public void set_cwd (string cwd);
 		public void set_display_name (string display_name);
