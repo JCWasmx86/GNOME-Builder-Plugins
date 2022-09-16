@@ -10,9 +10,12 @@
 - Create a file `/home/user/.ghcup/bin/haskell-language-server-wrapper1` with these contents:
 ```sh
 #!/usr/bin/env bash
-env 1>&2
 export PATH=$PATH:$HOME/.ghcup/bin:$HOME/.cabal/bin
-haskell-language-server-wrapper "$@"
+if (( $# != 0 )); then
+        haskell-language-server-wrapper $*
+else
+        haskell-language-server-wrapper --lsp --debug
+fi
 ```
 ## Meson
 - Install [MesonLSP](https://github.com/jcwasmx86/mesonlsp), it is work-in-progress!
