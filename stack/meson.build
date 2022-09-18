@@ -1,4 +1,11 @@
 stack_sources = [
 	'stack.vala'
 ]
-shared_module('stack', stack_sources, install: true, dependencies: dependencies, include_directories : inc, install_dir: install_dir)
+c_args = ['-DG_LOG_DOMAIN="stack"']
+shared_module('stack',
+              stack_sources,
+              c_args : c_args,
+              dependencies : dependencies,
+              include_directories : inc,
+              install: true,
+              install_dir: install_dir)

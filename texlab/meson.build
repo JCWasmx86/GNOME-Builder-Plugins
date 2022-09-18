@@ -2,4 +2,11 @@ texlab_sources = [
 	'texlab.vala',
 	'texlab_aux.c'
 ]
-shared_module('texlab', texlab_sources, install: true, dependencies: dependencies, include_directories : inc, install_dir: install_dir)
+c_args = ['-DG_LOG_DOMAIN="texlab"']
+shared_module('texlab',
+              texlab_sources,
+              c_args : c_args,
+              dependencies : dependencies,
+              include_directories : inc,
+              install: true,
+              install_dir: install_dir)

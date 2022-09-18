@@ -2,4 +2,11 @@ clangd_sources = [
 	'clangd.vala',
 	'clangd_aux.c'
 ]
-shared_module('clangd_gb', clangd_sources, install: true, dependencies: dependencies, include_directories : inc, install_dir: install_dir)
+c_args = ['-DG_LOG_DOMAIN="clangd"']
+shared_module('clangd_gb',
+              clangd_sources,
+              c_args : c_args,
+              dependencies : dependencies,
+              include_directories : inc,
+              install: true,
+              install_dir: install_dir)

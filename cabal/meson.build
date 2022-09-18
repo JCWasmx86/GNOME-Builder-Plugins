@@ -1,4 +1,11 @@
 cabal_sources = [
 	'cabal.vala',
 ]
-shared_module('cabal', cabal_sources, install: true, dependencies: dependencies, include_directories : inc, install_dir: install_dir)
+c_args = ['-DG_LOG_DOMAIN="cabal"']
+shared_module('cabal',
+              cabal_sources,
+              c_args : c_args,
+              dependencies : dependencies,
+              include_directories : inc,
+              install: true,
+              install_dir: install_dir)
