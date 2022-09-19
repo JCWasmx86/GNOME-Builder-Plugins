@@ -1,0 +1,14 @@
+[Plugin]
+Authors=JCWasmx86 <JCWasmx86@t-online.de>
+Copyright=JCWasmx86
+Description=Provides sqls integration
+Loader=C
+Module=sqls
+Name=sqls Integration
+X-Category=lsps
+X-Code-Action-Languages=sql
+X-Completion-Provider-Languages=sql
+X-Formatter-Languages=sql
+X-Hover-Provider-Languages=sql
+X-Rename-Provider-Languages=sql
+X-Builder-ABI=@BUILDER_ABI@

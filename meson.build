@@ -91,6 +91,10 @@ if get_option('plugin_shfmt').enabled()
 	subdir('shfmt')
 	plugins += 'shfmt.plugin'
 endif
+if get_option('plugin_sqls').enabled()
+	subdir('sqls')
+	plugins += 'sqls.plugin'
+endif
 if get_option('plugin_stack').enabled()
 	subdir('stack')
 	plugins += 'stack.plugin'
