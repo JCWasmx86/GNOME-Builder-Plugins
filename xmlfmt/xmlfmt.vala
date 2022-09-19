@@ -41,10 +41,15 @@ public class XmlFormatter : Ide.Object, Ide.Formatter {
 			return false;
 		}
 		xmlTreeIndentString = options.insert_spaces ? (string.nfill (options.tab_width, ' ')) : "\t";
-		string mem;
+		string? mem;
 		int len;
 		doc->dump_memory_enc_format (out mem, out len, "UTF-8", true);
+		if (mem == null) {
+			critical ("Oops");
+			return false;
+		}
 		buffer.set_text (mem, len);
+		delete doc;
 		return true;
 	}
 }
