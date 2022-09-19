@@ -28,6 +28,9 @@ fi
 ## Shfmt
 - Install shfmt using your distro's package manager
 - `/usr/bin/shfmt` must exist (Other paths may work, too)
+## Sqls
+- Install [sqls](https://github.com/lighttiger2505/sqls)
+- `sqls` must be on the path
 ## Stack
 - Install using [GHCup](https://www.haskell.org/ghcup/)
 - `/home/user/.ghcup/bin/stack` must exist
