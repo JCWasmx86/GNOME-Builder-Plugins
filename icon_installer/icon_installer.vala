@@ -36,10 +36,10 @@ public class IconInstallerWorkspaceAddin : GLib.Object, Ide.WorkspaceAddin {
 }
 public class IconInstallerPane : Ide.Pane {
 	public IconInstallerPane (File file) {
+		Gtk.IconTheme.get_for_display (Gdk.Display.get_default ()).add_resource_path ("/plugins/icon_installer/icons");
+		this.icon_name = "grid-symbolic";
+		this.name = "Icon Installer";
 		this.realize.connect (() => {
-			Gtk.IconTheme.get_for_display (Gdk.Display.get_default ()).add_resource_path ("/plugins/icon_installer/icons");
-			this.icon_name = "grid-symbolic";
-			this.name = "Icon Installer";
 			this.set_child (new IconInstallerView (file));
 		});
 	}

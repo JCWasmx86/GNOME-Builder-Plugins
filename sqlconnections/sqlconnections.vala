@@ -34,9 +34,9 @@ public class SqlConnectionsWorkspaceAddin : GLib.Object, Ide.WorkspaceAddin {
 }
 public class SqlConnectionsPane : Ide.Pane {
 	public SqlConnectionsPane () {
+		this.name = "SQL-Connections Manager";
+		this.icon_name = "text-sql-symbolic";
 		this.realize.connect (() => {
-			this.name = "Icon Installer";
-			this.icon_name = "text-sql-symbolic";
 			this.set_child (new SqlConnectionsView ());
 		});
 	}
