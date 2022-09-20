@@ -91,6 +91,10 @@ if get_option('plugin_shfmt').enabled()
 	subdir('shfmt')
 	plugins += 'shfmt.plugin'
 endif
+if get_option('plugin_sourcekit').enabled()
+	subdir('sourcekit')
+	plugins += 'sourcekit.plugin'
+endif
 if get_option('plugin_sqlconnections').enabled()
 	warning('sqlconnections plugin is WIP')
 	subdir('sqlconnections')
@@ -103,6 +107,10 @@ endif
 if get_option('plugin_stack').enabled()
 	subdir('stack')
 	plugins += 'stack.plugin'
+endif
+if get_option('plugin_swift').enabled()
+	subdir('swift')
+	plugins += 'swift.plugin'
 endif
 if get_option('plugin_texlab').enabled()
 	subdir('texlab')

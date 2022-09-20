@@ -1,0 +1,17 @@
+[Plugin]
+Authors=JCWasmx86 <JCWasmx86@t-online.de>
+Copyright=JCWasmx86
+Description=Provides sourcekit integration
+Loader=C
+Module=sourcekit
+Name=Sourcekit Integration
+X-Category=lsps
+X-Code-Action-Languages=swift
+X-Completion-Provider-Languages=swift
+X-Diagnostic-Provider-Languages=swift
+X-Diagnostic-Provider-Languages-Priority=200
+X-Highlighter-Languages=swift
+X-Hover-Provider-Languages=swift
+X-Symbol-Resolver-Languages=swift
+X-Symbol-Resolver-Languages-Priority=200
+X-Builder-ABI=@BUILDER_ABI@
