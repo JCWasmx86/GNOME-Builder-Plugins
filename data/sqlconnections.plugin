@@ -1,0 +1,9 @@
+[Plugin]
+Authors=JCWasmx86
+Copyright=JCWasmx86
+Description=Provides GUI to create SQL-Config file for sqls
+Loader=C
+Module=sqlconnections
+Name=SQLConnections
+X-Workspace-Kind=primary;
+X-Builder-ABI=@BUILDER_ABI@

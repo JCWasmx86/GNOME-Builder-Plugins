@@ -91,6 +91,11 @@ if get_option('plugin_shfmt').enabled()
 	subdir('shfmt')
 	plugins += 'shfmt.plugin'
 endif
+if get_option('plugin_sqlconnections').enabled()
+	warning('sqlconnections plugin is WIP')
+	subdir('sqlconnections')
+	plugins += 'sqlconnections.plugin'
+endif
 if get_option('plugin_sqls').enabled()
 	subdir('sqls')
 	plugins += 'sqls.plugin'
