@@ -55,12 +55,6 @@ class SourcekitDiagnosticProvider : Ide.LspDiagnosticProvider, Ide.DiagnosticPro
 	}
 }
 
-class SourcekitFormatter : Ide.LspFormatter, Ide.Formatter {
-	public void load () {
-		bind_client (this);
-	}
-}
-
 class SourcekitHighlighter : Ide.LspHighlighter, Ide.Highlighter {
 	public void load () {
 		bind_client (this);
@@ -71,12 +65,6 @@ public class SourcekitHoverProvider : Ide.LspHoverProvider, GtkSource.HoverProvi
 	public override void prepare () {
 		this.priority = 80000;
 		this.category = "Clang";
-		bind_client (this);
-	}
-}
-
-public class SourcekitRenameProvider : Ide.LspRenameProvider, Ide.RenameProvider {
-	public void load () {
 		bind_client (this);
 	}
 }
