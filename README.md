@@ -11,7 +11,7 @@ guaranteed.
 - jdtls: Integration for the Eclipse Java Language Server (TODO)
 - meson: Integration for my meson language server
 - pylint: Integration with Pylint
-- shellcheck: Shellcheck integration
+- shellcheck: Shellcheck integration (Seems to be somewhat broken)
 - shfmt: Shfmt integration
 - sourcekit: Integration for Sourcekit, the Swift language server
 - sqls: Integration for the SQL language server
