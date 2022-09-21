@@ -13,7 +13,11 @@ guaranteed.
 - pylint: Integration with Pylint
 - shellcheck: Shellcheck integration
 - shfmt: Shfmt integration
+- sourcekit: Integration for Sourcekit, the Swift language server
+- sqls: Integration for the SQL language server
+- sqlconnections: Allows you to create the config for sqls using a GUI (WIP)
 - stack: Integration for the stack buildsystem
+- swift: Integration for the swift buildsystem
 - texlab: LaTeX integration
 - xmlfmt: Formatter for XML
 
