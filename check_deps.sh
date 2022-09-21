@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+sh -l -c "which --help" 2>/dev/null >/dev/null || echo "Command 'which' is missing"
+sh -l -c "tput -V" 2>/dev/null >/dev/null || echo "Command 'tput' is missing"
 enabled_plugins=("icon_installer" "sqlconnections" "xmlfmt")
 disabled_plugins=()
 packages_to_install_dnf=()
@@ -48,7 +50,7 @@ check_plugin_ex() {
 		echo "$(tput bold)$(tput setaf 2)$3 can be enabled$(tput sgr0)"
 		enabled_plugins+=("$3")
 	else
-		echo "$(tput bold)$(tput setaf 1)$3 won\'t work$(tput sgr0)"
+		echo "$(tput bold)$(tput setaf 1)$3 won't work$(tput sgr0)"
 		disabled_plugins+=("$3")
 	fi
 }
@@ -94,7 +96,7 @@ if is_disabled "pylint"; then
 	packages_to_install_dnf+=("pylint")
 fi
 if is_disabled "shellcheck"; then
-	packages_to_install_dnf+=("shellcheck")
+	packages_to_install_dnf+=("ShellCheck")
 fi
 if is_disabled "shfmt"; then
 	packages_to_install_dnf+=("shfmt")
@@ -103,7 +105,7 @@ if is_disabled "sourcekit"; then
 	packages_to_install_dnf+=("swift-lang")
 fi
 if is_disabled "sqls"; then
-	if test -f ~/go/bin/stack; then
+	if test -f ~/go/bin/sqls; then
 		paths_to_add_to_profile=(~/go/bin)
 	else
 		go_to_install+=("github.com/lighttiger2505/sqls@latest")
