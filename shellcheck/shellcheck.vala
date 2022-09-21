@@ -60,6 +60,7 @@ public class ShellcheckDiagnosticProvider : Ide.DiagnosticTool {
 	public override void configure_launcher (Ide.SubprocessLauncher launcher, GLib.File file, GLib.Bytes contents, string language_id) {
 		launcher.push_argv ("--format=gcc");
 		launcher.push_argv ("-");
+		launcher.set_cwd ("/");
 		launcher.setenv ("SHELL", "/bin/bash", false);
 	}
 
