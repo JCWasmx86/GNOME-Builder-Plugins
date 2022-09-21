@@ -38,5 +38,4 @@ guaranteed.
 ## Updating libraries
 - Update vapis
 - Update headers
-- Add ide-application-tweaks.h to include/libide/gui
 - Test that it compiles and works
