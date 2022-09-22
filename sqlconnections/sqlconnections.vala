@@ -70,10 +70,77 @@ public class SqlConnectionsView : Gtk.Box {
 		this.append (expander);
 		var sc = new Gtk.ScrolledWindow ();
 		sc.child = data;
+		data.hexpand = true;
+		data.vexpand = true;
 		this.append (sc);
+		sc.vexpand = true;
+		sc.hexpand = true;
 	}
 
 	void load_data () {
+		var file = Environment.get_home_dir () + "/.config/sqls/config.yml";
+		var f = File.new_for_path (file);
+		try {
+			var fis = new DataInputStream (f.read ());
+			string? alias_ = null;
+			string? driver = null;
+			string? dsn = null;
+			string? host = null;
+			string? user = null;
+			string? port = null;
+			string? key = null;
+			string? phrase = null;
+			while (true) {
+				var line = fis.read_line ();
+				if (line == null)
+					break;
+				line = line.strip ();
+				if (line.has_prefix ("- alias")) {
+					if (alias_ != null) {
+						var sshconfig = host == null ? null : new SSHConfig (host, int.parse (port), user, key, phrase);
+						var dbcon = new DatabaseConnection (dsn, driver, alias_, sshconfig);
+						this.conns.add ((owned) dbcon);
+						alias_ = null;
+						driver = null;
+						dsn = null;
+						host = null;
+						user = null;
+						port = null;
+						key = null;
+						phrase = null;
+					}
+					alias_ = line.split (":", 2)[1].strip ();
+				} else if (line == "connections:" || line == "sshConfig") {
+					continue;
+				} else if (line.has_prefix ("driver:")) {
+					driver = line.split (":", 2)[1].strip ();
+				} else if (line.has_prefix ("dataSourceName:")) {
+					dsn = line.split (":", 2)[1].strip ();
+				} else if (line.has_prefix ("host:")) {
+					host = line.split (":", 2)[1].strip ();
+				} else if (line.has_prefix ("port:")) {
+					port = line.split (":", 2)[1].strip ();
+				} else if (line.has_prefix ("user:")) {
+					user = line.split (":", 2)[1].strip ();
+				} else if (line.has_prefix ("privateKey:")) {
+					key = line.split (":", 2)[1].strip ();
+				} else if (line.has_prefix ("passPhrase:")) {
+					phrase = line.split (":", 2)[1].strip ();
+				}
+			}
+			if (alias_ != null) {
+				var sshconfig = host == null ? null : new SSHConfig (host, int.parse (port), user, key, phrase);
+				var dbcon = new DatabaseConnection (dsn, driver, alias_, sshconfig);
+				this.conns.add ((owned) dbcon);
+			}
+			fis.close ();
+			Idle.add (() => {
+				this.reload_connections ();
+				return Source.REMOVE;
+			});
+		} catch (Error e) {
+			warning ("%s", e.message);
+		}
 	}
 
 	void reload_connections () {
