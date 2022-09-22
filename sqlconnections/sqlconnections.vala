@@ -228,6 +228,7 @@ public class SSHConnectionCreator : Gtk.Box {
 public abstract class SqlConnectionSubCreator : Gtk.Box {
 	public abstract void clear ();
 	public abstract string[] validate ();
+	public abstract string gen_dsn ();
 }
 
 public class SQLiteConnectionCreator : SqlConnectionSubCreator {
@@ -238,6 +239,10 @@ public class SQLiteConnectionCreator : SqlConnectionSubCreator {
 		this.file = new Adw.EntryRow ();
 		this.file.title = "Path to file";
 		this.append (this.file);
+	}
+
+	public override string gen_dsn () {
+		return "file:" + this.file.text;
 	}
 
 	public override void clear () {
@@ -306,6 +311,26 @@ public class MySQLConnectionCreator : SqlConnectionSubCreator {
 			ret += "Missing protocol";
 		return ret;
 	}
+	public override string gen_dsn () {
+		var sb = new StringBuilder ();
+		if (this.user.text.strip () != "") {
+			sb.append (this.user.text.strip ());
+			if (this.password.text.strip () != "") {
+				sb.append_c (':').append (this.password.text.strip ());
+			}
+			sb.append_c ('@');
+		}
+		if (this.protocol.active_id != "") {
+			sb.append (this.protocol.active_id);
+			if (this.address.text.strip () != "") {
+				sb.append_c ('(').append (this.password.text.strip ()).append_c (')');
+			}
+		}
+		sb.append ("/");
+		if (this.dbname.text.strip () != "")
+			sb.append (this.dbname.text.strip ());
+		return sb.str;
+	}
 }
 // https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING
 public class PostgresConnectionCreator : SqlConnectionSubCreator {
@@ -344,6 +369,23 @@ public class PostgresConnectionCreator : SqlConnectionSubCreator {
 		if (this.dbname.text.strip () == "")
 			ret += "Missing dbname";
 		return ret;
+	}
+	public override string gen_dsn () {
+		var sb = new StringBuilder ();
+		sb.append ("postgres://");
+		if (this.user.text.strip () != "") {
+			sb.append (this.user.text.strip ());
+			if (this.password.text.strip () != "") {
+				sb.append_c (':').append (this.password.text.strip ());
+			}
+			sb.append_c ('@');
+		}
+		if (this.host.text.strip () != "") {
+			sb.append (this.host.text.strip ());
+		}
+		if (this.dbname.text.strip () != "")
+			sb.append_c ('/').append (this.dbname.text.strip ());
+		return sb.str;
 	}
 }
 public class SqlConnectionEntry : Adw.ActionRow {
