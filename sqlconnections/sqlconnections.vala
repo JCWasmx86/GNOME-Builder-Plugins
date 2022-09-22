@@ -43,9 +43,6 @@ public class SqlConnectionsPane : Ide.Pane {
 }
 public class SqlConnectionsView : Gtk.Box {
 	private Gtk.Box data;
-	private Gtk.Box top;
-
-	private Gtk.Button add_button;
 	public SqlConnectionsView () {
 		this.orientation = Gtk.Orientation.HORIZONTAL;
 		this.spacing = 2;
@@ -55,18 +52,86 @@ public class SqlConnectionsView : Gtk.Box {
 		});
 	}
 	void build_gui () {
-		this.add_button = new Gtk.Button.from_icon_name ("list-add-symbolic");
-		this.add_button.tooltip_text = "Add Connection";
-		this.top = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 2);
-		this.top.append (this.add_button);
-		this.append (this.top);
+		var expander = new Gtk.Expander ("Create SQL-Connection");
 		this.data = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
+		expander.child = new SqlConnectionCreator (this.data);
+		this.append (expander);
 		var sc = new Gtk.ScrolledWindow ();
 		sc.child = data;
 		this.append (sc);
 	}
 	void load_data () {
 
+	}
+}
+public class SqlConnectionCreator : Gtk.Box {
+	private Gtk.Box append_here;
+	private Adw.EntryRow alias;
+	private Gtk.Expander expander;
+	private Gtk.Box buttons;
+	private SqlConnectionSubCreator pqsql;
+	private SqlConnectionSubCreator mysql;
+	private SqlConnectionSubCreator sqlite;
+	public SqlConnectionCreator (Gtk.Box append_here) {
+		this.append_here = append_here;
+		this.orientation = Gtk.Orientation.VERTICAL;
+		this.spacing = 2;
+		this.pqsql = new PostgresConnectionCreator ();
+		this.mysql = new MySQLConnectionCreator ();
+		this.sqlite = new SQLiteConnectionCreator ();
+		this.alias = new Adw.EntryRow ();
+		this.alias.title = "Alias";
+		this.append (this.alias);
+		var tabview = new Adw.TabView ();
+		var page = tabview.add_page (this.pqsql, null);
+		page.title = "PostgreSQL";
+		page = tabview.add_page (this.mysql, null);
+		page.title = "MySQL";
+		page = tabview.add_page (this.sqlite, null);
+		page.title = "SQLite";
+		var tabbar = new Adw.TabBar ();
+		tabbar.view = tabview;
+		tabview.close_page.connect (() => {
+			return true;
+		});
+		this.append (tabbar);
+		this.append (tabview);
+		this.expander = new Gtk.Expander ("SSH-Authentication");
+		this.append (this.expander);
+		this.buttons = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 2);
+		var clear_all = new Gtk.Button.with_label ("Clear");
+		clear_all.get_style_context ().add_class ("destructive-action");
+		this.buttons.append (clear_all);
+		var save = new Gtk.Button.with_label ("Save");
+		save.get_style_context ().add_class ("suggested-action");
+		this.buttons.append (save);
+		this.buttons.halign = Gtk.Align.END;
+		this.append (this.buttons);
+	}
+
+}
+public abstract class SqlConnectionSubCreator : Gtk.Box {
+
+}
+
+public class SQLiteConnectionCreator : SqlConnectionSubCreator {
+	public SQLiteConnectionCreator () {
+		this.spacing = 2;
+		this.orientation = Gtk.Orientation.VERTICAL;
+	}
+}
+
+public class MySQLConnectionCreator : SqlConnectionSubCreator {
+	public MySQLConnectionCreator () {
+		this.spacing = 2;
+		this.orientation = Gtk.Orientation.VERTICAL;
+	}
+}
+
+public class PostgresConnectionCreator : SqlConnectionSubCreator {
+	public PostgresConnectionCreator () {
+		this.spacing = 2;
+		this.orientation = Gtk.Orientation.VERTICAL;
 	}
 }
 public class SqlConnectionEntry : Adw.ActionRow {
@@ -79,43 +144,6 @@ public class SqlConnectionEntry : Adw.ActionRow {
 		this.title = alias;
 	}
 }
-public class SqliteConnectionEntry : SqlConnectionEntry {
-
-}
-
-public abstract class SSHSqlConnectionEntry : SqlConnectionEntry {
-	public string? host { get; set; default = ""; }
-	public int? port;
-	construct {
-		this.port = 22;
-	}
-	public string? user { get; set; }
-	public string? private_key_path { get; set; }
-	public string? passphrase { get; set; }
-
-	public abstract string build_connection_url ();
-
-	public override void finish (string alias) {
-		base.finish (alias);
-		if (this.host != null) {
-			this.subtitle = this.build_connection_url ();
-		}
-	}
-}
-
-public class MySqlConnectionEntry : SSHSqlConnectionEntry {
-	public override string build_connection_url () {
-		return "";
-	}
-}
-
-public class PostgresConnectionEntry : SSHSqlConnectionEntry {
-	public override string build_connection_url () {
-		return "";
-	}
-}
-
-// SqlConnectionCreator
 
 public void peas_register_types (TypeModule module) {
 	var obj = (Peas.ObjectModule) module;
