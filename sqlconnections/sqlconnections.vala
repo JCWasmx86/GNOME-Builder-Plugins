@@ -132,10 +132,38 @@ public class SqlConnectionCreator : Gtk.Box {
 		this.buttons.append (clear_all);
 		var save = new Gtk.Button.with_label ("Save");
 		save.get_style_context ().add_class ("suggested-action");
+		save.clicked.connect (() => {
+			this.save ((SqlConnectionSubCreator)tabview.selected_page.child);
+			this.clear ();
+		});
 		this.buttons.append (save);
 		this.buttons.halign = Gtk.Align.END;
 		this.append (this.buttons);
 	}
+
+	void save (SqlConnectionSubCreator c) {
+		var invalid_strings = new string[0];
+		if (this.alias.text.strip () == "")
+			invalid_strings += "Missing alias";
+		foreach (var s in this.ssh.validate ())
+			invalid_strings += s;
+		foreach (var s in c.validate ())
+			invalid_strings += s;
+		if (invalid_strings.length > 0) {
+			var dialog = new Adw.MessageDialog (null, "Error creating connection", "Couldn't create connection due to these errors");
+			var extra = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
+			foreach (var s in invalid_strings) {
+				var row = new Gtk.Label (s);
+				extra.append (row);
+			}
+			dialog.extra_child = extra;
+			dialog.add_response ("close", "Close");
+			dialog.set_close_response ("close");
+			dialog.present ();
+			return;
+		}
+	}
+
 	void clear () {
 		this.sqlite.clear ();
 		this.mysql.clear ();
@@ -178,10 +206,24 @@ public class SSHConnectionCreator : Gtk.Box {
 		this.key.text = "";
 		this.password.text = "";
 	}
+
+	public string[] validate () {
+		var ht = this.host.text.strip ();
+		var kt = this.key.text.strip ();
+		if (ht == "" && this.port.value == 22 && this.user.text.strip () == "" && kt == "" && this.password.text.strip () == "")
+			return new string[0];
+		var ret = new string[0];
+		if (ht == "")
+			ret += "Missing host";
+		if (kt == "")
+			ret += "Missing private key path";
+		return ret;
+	}
 }
 
 public abstract class SqlConnectionSubCreator : Gtk.Box {
 	public abstract void clear ();
+	public abstract string[] validate ();
 }
 
 public class SQLiteConnectionCreator : SqlConnectionSubCreator {
@@ -193,8 +235,15 @@ public class SQLiteConnectionCreator : SqlConnectionSubCreator {
 		this.file.title = "Path to file";
 		this.append (this.file);
 	}
+
 	public override void clear () {
 		this.file.text = "";
+	}
+	public override string[] validate () {
+		var ret = new string[0];
+		if (this.file.text.strip () == "")
+			ret += "Missing filepath";
+		return ret;
 	}
 }
 
@@ -226,6 +275,7 @@ public class MySQLConnectionCreator : SqlConnectionSubCreator {
 		this.protocol.append_text ("unix");
 		this.protocol.append_text ("unixgram");
 		this.protocol.append_text ("unixpacket");
+		this.protocol.append_text ("");
 		this.protocol.active = 0;
 		this.append (this.protocol);
 		this.address = new Adw.EntryRow ();
@@ -235,12 +285,22 @@ public class MySQLConnectionCreator : SqlConnectionSubCreator {
 		this.dbname.title = "Database name";
 		this.append (this.dbname);
 	}
+
 	public override void clear () {
 		this.user.text = "";
 		this.password.text = "";
 		this.protocol.active = 0;
 		this.address.text = "";
 		this.dbname.text = "";
+	}
+
+	public override string[] validate () {
+		var ret = new string[0];
+		if (this.user.text.strip () == "" && this.password.text.strip () != "")
+			ret += "Missing username";
+		if (this.protocol.active_id == "" && this.address.text.strip () != "")
+			ret += "Missing protocol";
+		return ret;
 	}
 }
 // https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING
@@ -266,11 +326,20 @@ public class PostgresConnectionCreator : SqlConnectionSubCreator {
 		this.dbname.title = "Database name";
 		this.append (this.dbname);
 	}
+
 	public override void clear () {
 		this.user.text = "";
 		this.password.text = "";
 		this.host.text = "";
 		this.dbname.text = "";
+	}
+	public override string[] validate () {
+		var ret = new string[0];
+		if (this.user.text.strip () == "" && this.password.text.strip () != "")
+			ret += "Missing username";
+		if (this.dbname.text.strip () == "")
+			ret += "Missing dbname";
+		return ret;
 	}
 }
 public class SqlConnectionEntry : Adw.ActionRow {
