@@ -44,10 +44,12 @@ public class SqlConnectionsPane : Ide.Pane {
 public class SqlConnectionsView : Gtk.Box {
 	private Gtk.Box data;
 	private GLib.GenericArray<DatabaseConnection> conns;
+	private GLib.GenericArray<Gtk.Widget> widgets;
 	public SqlConnectionsView () {
-		this.orientation = Gtk.Orientation.HORIZONTAL;
+		this.orientation = Gtk.Orientation.VERTICAL;
 		this.spacing = 2;
 		this.conns = new GLib.GenericArray<DatabaseConnection> ();
+		this.widgets = new GLib.GenericArray<Gtk.Widget> ();
 		this.realize.connect (() => {
 			this.build_gui ();
 			this.load_data ();
@@ -57,7 +59,14 @@ public class SqlConnectionsView : Gtk.Box {
 	void build_gui () {
 		var expander = new Gtk.Expander ("Create Database connection");
 		this.data = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
-		expander.child = new SqlConnectionCreator (this.data, this.conns);
+		var scc = new SqlConnectionCreator (this.data, this.conns);
+		expander.child = scc;
+		scc.changed.connect (() => {
+			Idle.add (() => {
+				this.reload_connections ();
+				return Source.REMOVE;
+			});
+		});
 		this.append (expander);
 		var sc = new Gtk.ScrolledWindow ();
 		sc.child = data;
@@ -65,6 +74,82 @@ public class SqlConnectionsView : Gtk.Box {
 	}
 
 	void load_data () {
+	}
+
+	void reload_connections () {
+		foreach (var w in this.widgets)
+			this.data.remove (w);
+		var i = 0;
+		foreach (var w in this.conns) {
+			var sce = new SqlConnectionEntry (w.alias, i);
+			sce.removed.connect (idx => {
+				conns.remove_index (idx);
+				Idle.add (() => {
+					this.reload_connections ();
+					return Source.REMOVE;
+				});
+			});
+			this.widgets.add (sce);
+			this.data.append (sce);
+			i++;
+		}
+		this.make_backup ();
+		this.write ();
+	}
+
+	void make_backup () {
+		var file = Environment.get_home_dir () + "/.config/sqls/config.yml";
+		var f = File.new_for_path (file);
+		if (f.query_exists ()) {
+			try {
+				f.get_parent ().make_directory_with_parents ();
+			} catch (Error e) {
+				info ("%s", e.message);
+			}
+			var backup = File.new_for_path (Environment.get_home_dir () + "/.config/sqls/config.yml.gbbak");
+			try {
+				if (backup.query_exists ())
+					backup.delete ();
+				f.copy (backup, GLib.FileCopyFlags.ALL_METADATA | GLib.FileCopyFlags.OVERWRITE, null, null);
+			} catch (Error e) {
+				critical ("%s", e.message);
+			}
+		}
+	}
+
+	void write () {
+		var file = Environment.get_home_dir () + "/.config/sqls/config.yml";
+		var f = File.new_for_path (file);
+		try {
+			f.get_parent ().make_directory_with_parents ();
+		} catch (Error e) {
+			info ("%s", e.message);
+		}
+		try {
+			if (f.query_exists ())
+				f.delete ();
+			var os = f.create (GLib.FileCreateFlags.REPLACE_DESTINATION);
+			os.write ("connections:\n".data);
+			foreach (var c in this.conns) {
+				os.write (("  - alias: " + c.alias + "\n").data);
+				os.write (("    driver: " + c.driver + "\n").data);
+				os.write (("    dataSourceName: " + c.dsn + "\n").data);
+				if (c.config != null) {
+					var con = c.config;
+					os.write ("    sshConfig:\n".data);
+					os.write (("     host: " + con.host + "\n").data);
+					os.write (("     port: " + "%d\n".printf (con.port)).data);
+					if (con.user != null)
+						os.write (("     user: " + con.user + "\n").data);
+					os.write (("     privateKey: " + con.key + "\n").data);
+					if (con.phrase != null)
+						os.write (("     passPhrase: " + con.phrase + "\n").data);
+				}
+			}
+			os.close ();
+		} catch (Error e) {
+			critical ("%s", e.message);
+		}
 	}
 }
 
@@ -74,6 +159,14 @@ public class SSHConfig : Object {
 	public string? user;
 	public string key;
 	public string? phrase;
+
+	public SSHConfig (string host, int port, string user, string key, string phrase) {
+		this.host = host;
+		this.port = port;
+		this.user = user == "" ? null : user;
+		this.key = key;
+		this.phrase = phrase == "" ? null : phrase;
+	}
 }
 
 public class DatabaseConnection : Object {
@@ -81,6 +174,13 @@ public class DatabaseConnection : Object {
 	public string dsn;
 	public string driver;
 	public SSHConfig? config;
+
+	public DatabaseConnection (string dsn, string driver, string alias, SSHConfig? config) {
+		this.alias = alias;
+		this.dsn = dsn;
+		this.driver = driver;
+		this.config = config;
+	}
 }
 
 public class SqlConnectionCreator : Gtk.Box {
@@ -133,7 +233,7 @@ public class SqlConnectionCreator : Gtk.Box {
 		var save = new Gtk.Button.with_label ("Save");
 		save.get_style_context ().add_class ("suggested-action");
 		save.clicked.connect (() => {
-			this.save ((SqlConnectionSubCreator)tabview.selected_page.child);
+			this.save ((SqlConnectionSubCreator) tabview.selected_page.child);
 			this.clear ();
 		});
 		this.buttons.append (save);
@@ -166,14 +266,24 @@ public class SqlConnectionCreator : Gtk.Box {
 			dialog.present ();
 			return;
 		}
+		var dsn = c.gen_dsn ();
+		var driver = c.driver;
+		var alias = this.alias.text.strip ();
+		var config = this.ssh.gen_config ();
+		var new_con = new DatabaseConnection (dsn, driver, alias, config);
+		this.conns.insert (0, (owned) new_con);
+		this.changed ();
 	}
 
 	void clear () {
+		this.alias.text = "";
 		this.sqlite.clear ();
 		this.mysql.clear ();
 		this.pqsql.clear ();
 		this.ssh.clear ();
 	}
+
+	public signal void changed ();
 }
 
 public class SSHConnectionCreator : Gtk.Box {
@@ -223,10 +333,20 @@ public class SSHConnectionCreator : Gtk.Box {
 			ret += "Missing private key path";
 		return ret;
 	}
+
+	public SSHConfig ? gen_config () {
+		var ht = this.host.text.strip ();
+		var kt = this.key.text.strip ();
+		if (ht == "" && this.port.value == 22 && this.user.text.strip () == "" && kt == "" && this.password.text.strip () == "")
+			return null;
+		return new SSHConfig (this.host.text.strip (), (int) this.port.value, this.user.text.strip (), this.key.text.strip (), this.password.text.strip ());
+	}
 }
 
 public abstract class SqlConnectionSubCreator : Gtk.Box {
+	public string driver;
 	public abstract void clear ();
+
 	public abstract string[] validate ();
 	public abstract string gen_dsn ();
 }
@@ -235,6 +355,7 @@ public class SQLiteConnectionCreator : SqlConnectionSubCreator {
 	private Adw.EntryRow file;
 	public SQLiteConnectionCreator () {
 		this.spacing = 2;
+		this.driver = "sqlite3";
 		this.orientation = Gtk.Orientation.VERTICAL;
 		this.file = new Adw.EntryRow ();
 		this.file.title = "Path to file";
@@ -248,6 +369,7 @@ public class SQLiteConnectionCreator : SqlConnectionSubCreator {
 	public override void clear () {
 		this.file.text = "";
 	}
+
 	public override string[] validate () {
 		var ret = new string[0];
 		if (this.file.text.strip () == "")
@@ -264,6 +386,7 @@ public class MySQLConnectionCreator : SqlConnectionSubCreator {
 	private Adw.EntryRow dbname;
 	public MySQLConnectionCreator () {
 		this.spacing = 2;
+		this.driver = "mysql";
 		this.orientation = Gtk.Orientation.VERTICAL;
 		this.user = new Adw.EntryRow ();
 		this.user.title = "Username";
@@ -307,10 +430,11 @@ public class MySQLConnectionCreator : SqlConnectionSubCreator {
 		var ret = new string[0];
 		if (this.user.text.strip () == "" && this.password.text.strip () != "")
 			ret += "Missing username";
-		if (this.protocol.active_id == "" && this.address.text.strip () != "")
+		if (this.protocol.get_active_text () == "" && this.address.text.strip () != "")
 			ret += "Missing protocol";
 		return ret;
 	}
+
 	public override string gen_dsn () {
 		var sb = new StringBuilder ();
 		if (this.user.text.strip () != "") {
@@ -320,10 +444,10 @@ public class MySQLConnectionCreator : SqlConnectionSubCreator {
 			}
 			sb.append_c ('@');
 		}
-		if (this.protocol.active_id != "") {
-			sb.append (this.protocol.active_id);
+		if (this.protocol.get_active_text () != "") {
+			sb.append (this.protocol.get_active_text ());
 			if (this.address.text.strip () != "") {
-				sb.append_c ('(').append (this.password.text.strip ()).append_c (')');
+				sb.append_c ('(').append (this.address.text.strip ()).append_c (')');
 			}
 		}
 		sb.append ("/");
@@ -340,7 +464,7 @@ public class PostgresConnectionCreator : SqlConnectionSubCreator {
 	private Adw.EntryRow dbname;
 	public PostgresConnectionCreator () {
 		this.spacing = 2;
-		this.orientation = Gtk.Orientation.VERTICAL;
+		this.driver = "postgresql";
 		this.orientation = Gtk.Orientation.VERTICAL;
 		this.user = new Adw.EntryRow ();
 		this.user.title = "Username";
@@ -362,6 +486,7 @@ public class PostgresConnectionCreator : SqlConnectionSubCreator {
 		this.host.text = "";
 		this.dbname.text = "";
 	}
+
 	public override string[] validate () {
 		var ret = new string[0];
 		if (this.user.text.strip () == "" && this.password.text.strip () != "")
@@ -370,6 +495,7 @@ public class PostgresConnectionCreator : SqlConnectionSubCreator {
 			ret += "Missing dbname";
 		return ret;
 	}
+
 	public override string gen_dsn () {
 		var sb = new StringBuilder ();
 		sb.append ("postgres://");
@@ -389,11 +515,17 @@ public class PostgresConnectionCreator : SqlConnectionSubCreator {
 	}
 }
 public class SqlConnectionEntry : Adw.ActionRow {
-	public SqlConnectionEntry (string alias) {
+	public SqlConnectionEntry (string alias, uint index) {
 		var btn = new Gtk.Button.from_icon_name ("small-x-symbolic");
+		btn.tooltip_text = "Remove";
+		btn.clicked.connect (() => {
+			this.removed (index);
+		});
 		this.add_prefix (btn);
 		this.title = alias;
 	}
+
+	public signal void removed (uint index);
 }
 
 public void peas_register_types (TypeModule module) {
