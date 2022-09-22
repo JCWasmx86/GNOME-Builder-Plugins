@@ -74,6 +74,7 @@ public class SqlConnectionCreator : Gtk.Box {
 	private SqlConnectionSubCreator mysql;
 	private SqlConnectionSubCreator sqlite;
 	private SSHConnectionCreator ssh;
+
 	public SqlConnectionCreator (Gtk.Box append_here) {
 		this.append_here = append_here;
 		this.orientation = Gtk.Orientation.VERTICAL;
@@ -146,9 +147,13 @@ public abstract class SqlConnectionSubCreator : Gtk.Box {
 }
 
 public class SQLiteConnectionCreator : SqlConnectionSubCreator {
+	private Adw.EntryRow file;
 	public SQLiteConnectionCreator () {
 		this.spacing = 2;
 		this.orientation = Gtk.Orientation.VERTICAL;
+		this.file = new Adw.EntryRow ();
+		this.file.title = "Path to file";
+		this.append (this.file);
 	}
 }
 
@@ -190,21 +195,34 @@ public class MySQLConnectionCreator : SqlConnectionSubCreator {
 		this.append (this.dbname);
 	}
 }
-
+// https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING
 public class PostgresConnectionCreator : SqlConnectionSubCreator {
+	private Adw.EntryRow user;
+	private Adw.PasswordEntryRow password;
+	private Adw.EntryRow host;
+	private Adw.EntryRow dbname;
 	public PostgresConnectionCreator () {
 		this.spacing = 2;
 		this.orientation = Gtk.Orientation.VERTICAL;
+		this.orientation = Gtk.Orientation.VERTICAL;
+		this.user = new Adw.EntryRow ();
+		this.user.title = "Username";
+		this.append (this.user);
+		this.password = new Adw.PasswordEntryRow ();
+		this.password.title = "Password";
+		this.append (this.password);
+		this.host = new Adw.EntryRow ();
+		this.host.title = "Hostname/IP-Address";
+		this.append (this.host);
+		this.dbname = new Adw.EntryRow ();
+		this.dbname.title = "Database name";
+		this.append (this.dbname);
 	}
 }
 public class SqlConnectionEntry : Adw.ActionRow {
-	public string alias { get; set; }
-	public SqlConnectionEntry () {
+	public SqlConnectionEntry (string alias) {
 		var btn = new Gtk.Button.from_icon_name ("small-x-symbolic");
 		this.add_prefix (btn);
-	}
-
-	public virtual void finish (string alias) {
 		this.title = alias;
 	}
 }
