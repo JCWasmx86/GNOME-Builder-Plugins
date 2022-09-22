@@ -51,6 +51,7 @@ public class SqlConnectionsView : Gtk.Box {
 			this.load_data ();
 		});
 	}
+
 	void build_gui () {
 		var expander = new Gtk.Expander ("Create SQL-Connection");
 		this.data = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
@@ -60,8 +61,8 @@ public class SqlConnectionsView : Gtk.Box {
 		sc.child = data;
 		this.append (sc);
 	}
-	void load_data () {
 
+	void load_data () {
 	}
 }
 public class SqlConnectionCreator : Gtk.Box {
@@ -111,7 +112,6 @@ public class SqlConnectionCreator : Gtk.Box {
 		this.buttons.halign = Gtk.Align.END;
 		this.append (this.buttons);
 	}
-
 }
 
 public class SSHConnectionCreator : Gtk.Box {
@@ -143,7 +143,6 @@ public class SSHConnectionCreator : Gtk.Box {
 }
 
 public abstract class SqlConnectionSubCreator : Gtk.Box {
-
 }
 
 public class SQLiteConnectionCreator : SqlConnectionSubCreator {
@@ -154,9 +153,41 @@ public class SQLiteConnectionCreator : SqlConnectionSubCreator {
 }
 
 public class MySQLConnectionCreator : SqlConnectionSubCreator {
+	private Adw.EntryRow user;
+	private Adw.PasswordEntryRow password;
+	private Gtk.ComboBoxText protocol;
+	private Adw.EntryRow address;
+	private Adw.EntryRow dbname;
 	public MySQLConnectionCreator () {
 		this.spacing = 2;
 		this.orientation = Gtk.Orientation.VERTICAL;
+		this.user = new Adw.EntryRow ();
+		this.user.title = "Username";
+		this.append (this.user);
+		this.password = new Adw.PasswordEntryRow ();
+		this.password.title = "Password";
+		this.append (this.password);
+		this.protocol = new Gtk.ComboBoxText ();
+		this.protocol.append_text ("tcp");
+		this.protocol.append_text ("tcp4");
+		this.protocol.append_text ("tcp6");
+		this.protocol.append_text ("udp");
+		this.protocol.append_text ("udp4");
+		this.protocol.append_text ("udp6");
+		this.protocol.append_text ("ip");
+		this.protocol.append_text ("ip4");
+		this.protocol.append_text ("ip6");
+		this.protocol.append_text ("unix");
+		this.protocol.append_text ("unixgram");
+		this.protocol.append_text ("unixpacket");
+		this.protocol.active = 0;
+		this.append (this.protocol);
+		this.address = new Adw.EntryRow ();
+		this.address.title = "Hostname/IP-Address";
+		this.append (this.address);
+		this.dbname = new Adw.EntryRow ();
+		this.dbname.title = "Database name";
+		this.append (this.dbname);
 	}
 }
 
@@ -168,10 +199,11 @@ public class PostgresConnectionCreator : SqlConnectionSubCreator {
 }
 public class SqlConnectionEntry : Adw.ActionRow {
 	public string alias { get; set; }
-	public SqlConnectionEntry() {
+	public SqlConnectionEntry () {
 		var btn = new Gtk.Button.from_icon_name ("small-x-symbolic");
 		this.add_prefix (btn);
 	}
+
 	public virtual void finish (string alias) {
 		this.title = alias;
 	}
