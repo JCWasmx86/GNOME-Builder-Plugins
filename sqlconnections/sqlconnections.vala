@@ -43,9 +43,11 @@ public class SqlConnectionsPane : Ide.Pane {
 }
 public class SqlConnectionsView : Gtk.Box {
 	private Gtk.Box data;
+	private GLib.GenericArray<DatabaseConnection> conns;
 	public SqlConnectionsView () {
 		this.orientation = Gtk.Orientation.HORIZONTAL;
 		this.spacing = 2;
+		this.conns = new GLib.GenericArray<DatabaseConnection> ();
 		this.realize.connect (() => {
 			this.build_gui ();
 			this.load_data ();
@@ -55,7 +57,7 @@ public class SqlConnectionsView : Gtk.Box {
 	void build_gui () {
 		var expander = new Gtk.Expander ("Create Database connection");
 		this.data = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
-		expander.child = new SqlConnectionCreator (this.data);
+		expander.child = new SqlConnectionCreator (this.data, this.conns);
 		this.append (expander);
 		var sc = new Gtk.ScrolledWindow ();
 		sc.child = data;
@@ -65,6 +67,22 @@ public class SqlConnectionsView : Gtk.Box {
 	void load_data () {
 	}
 }
+
+public class SSHConfig : Object {
+	public string host;
+	public int port;
+	public string? user;
+	public string key;
+	public string? phrase;
+}
+
+public class DatabaseConnection : Object {
+	public string alias;
+	public string dsn;
+	public string driver;
+	public SSHConfig? config;
+}
+
 public class SqlConnectionCreator : Gtk.Box {
 	private Gtk.Box append_here;
 	private Adw.EntryRow alias;
@@ -74,9 +92,11 @@ public class SqlConnectionCreator : Gtk.Box {
 	private SqlConnectionSubCreator mysql;
 	private SqlConnectionSubCreator sqlite;
 	private SSHConnectionCreator ssh;
+	private GLib.GenericArray<DatabaseConnection> conns;
 
-	public SqlConnectionCreator (Gtk.Box append_here) {
+	public SqlConnectionCreator (Gtk.Box append_here, GLib.GenericArray<DatabaseConnection> conns) {
 		this.append_here = append_here;
+		this.conns = conns;
 		this.orientation = Gtk.Orientation.VERTICAL;
 		this.spacing = 2;
 		this.pqsql = new PostgresConnectionCreator ();
@@ -106,12 +126,21 @@ public class SqlConnectionCreator : Gtk.Box {
 		this.buttons = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 2);
 		var clear_all = new Gtk.Button.with_label ("Clear");
 		clear_all.get_style_context ().add_class ("destructive-action");
+		clear_all.clicked.connect (() => {
+			this.clear ();
+		});
 		this.buttons.append (clear_all);
 		var save = new Gtk.Button.with_label ("Save");
 		save.get_style_context ().add_class ("suggested-action");
 		this.buttons.append (save);
 		this.buttons.halign = Gtk.Align.END;
 		this.append (this.buttons);
+	}
+	void clear () {
+		this.sqlite.clear ();
+		this.mysql.clear ();
+		this.pqsql.clear ();
+		this.ssh.clear ();
 	}
 }
 
@@ -141,9 +170,18 @@ public class SSHConnectionCreator : Gtk.Box {
 		this.append (this.key);
 		this.append (this.password);
 	}
+
+	public void clear () {
+		this.host.text = "";
+		this.port.value = 22;
+		this.user.text = "";
+		this.key.text = "";
+		this.password.text = "";
+	}
 }
 
 public abstract class SqlConnectionSubCreator : Gtk.Box {
+	public abstract void clear ();
 }
 
 public class SQLiteConnectionCreator : SqlConnectionSubCreator {
@@ -154,6 +192,9 @@ public class SQLiteConnectionCreator : SqlConnectionSubCreator {
 		this.file = new Adw.EntryRow ();
 		this.file.title = "Path to file";
 		this.append (this.file);
+	}
+	public override void clear () {
+		this.file.text = "";
 	}
 }
 
@@ -194,6 +235,13 @@ public class MySQLConnectionCreator : SqlConnectionSubCreator {
 		this.dbname.title = "Database name";
 		this.append (this.dbname);
 	}
+	public override void clear () {
+		this.user.text = "";
+		this.password.text = "";
+		this.protocol.active = 0;
+		this.address.text = "";
+		this.dbname.text = "";
+	}
 }
 // https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING
 public class PostgresConnectionCreator : SqlConnectionSubCreator {
@@ -217,6 +265,12 @@ public class PostgresConnectionCreator : SqlConnectionSubCreator {
 		this.dbname = new Adw.EntryRow ();
 		this.dbname.title = "Database name";
 		this.append (this.dbname);
+	}
+	public override void clear () {
+		this.user.text = "";
+		this.password.text = "";
+		this.host.text = "";
+		this.dbname.text = "";
 	}
 }
 public class SqlConnectionEntry : Adw.ActionRow {
