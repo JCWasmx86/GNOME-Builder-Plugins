@@ -72,6 +72,7 @@ public class SqlConnectionCreator : Gtk.Box {
 	private SqlConnectionSubCreator pqsql;
 	private SqlConnectionSubCreator mysql;
 	private SqlConnectionSubCreator sqlite;
+	private SSHConnectionCreator ssh;
 	public SqlConnectionCreator (Gtk.Box append_here) {
 		this.append_here = append_here;
 		this.orientation = Gtk.Orientation.VERTICAL;
@@ -97,6 +98,8 @@ public class SqlConnectionCreator : Gtk.Box {
 		this.append (tabbar);
 		this.append (tabview);
 		this.expander = new Gtk.Expander ("SSH-Authentication");
+		this.ssh = new SSHConnectionCreator ();
+		this.expander.child = this.ssh;
 		this.append (this.expander);
 		this.buttons = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 2);
 		var clear_all = new Gtk.Button.with_label ("Clear");
@@ -109,6 +112,13 @@ public class SqlConnectionCreator : Gtk.Box {
 		this.append (this.buttons);
 	}
 
+}
+
+public class SSHConnectionCreator : Gtk.Box {
+	public SSHConnectionCreator () {
+		this.spacing = 2;
+		this.orientation = Gtk.Orientation.VERTICAL;
+	}
 }
 public abstract class SqlConnectionSubCreator : Gtk.Box {
 
