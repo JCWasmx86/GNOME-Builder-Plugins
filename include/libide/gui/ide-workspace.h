@@ -34,6 +34,7 @@
 #include "ide-page.h"
 #include "ide-pane.h"
 #include "ide-panel-position.h"
+#include "ide-session.h"
 
 G_BEGIN_DECLS
 
@@ -92,6 +93,10 @@ struct _IdeWorkspaceClass
                                           int                  *width,
                                           int                  *height);
   gboolean      (*can_search)            (IdeWorkspace         *self);
+  void          (*save_session)          (IdeWorkspace         *self,
+                                          IdeSession           *session);
+  void          (*restore_session)       (IdeWorkspace         *self,
+                                          IdeSession           *session);
 };
 
 IDE_AVAILABLE_IN_ALL
@@ -110,6 +115,11 @@ IDE_AVAILABLE_IN_ALL
 void            ide_workspace_action_set_enabled            (IdeWorkspace          *self,
                                                              const char            *action_name,
                                                              gboolean               enabled);
+IDE_AVAILABLE_IN_ALL
+const char     *ide_workspace_get_id                        (IdeWorkspace          *self);
+IDE_AVAILABLE_IN_ALL
+void            ide_workspace_set_id                        (IdeWorkspace          *self,
+                                                             const char            *id);
 IDE_AVAILABLE_IN_ALL
 IdeHeaderBar   *ide_workspace_get_header_bar                (IdeWorkspace          *self);
 IDE_AVAILABLE_IN_ALL

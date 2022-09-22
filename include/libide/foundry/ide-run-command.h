@@ -77,10 +77,31 @@ IDE_AVAILABLE_IN_ALL
 void                ide_run_command_set_argv         (IdeRunCommand      *self,
                                                       const char * const *argv);
 IDE_AVAILABLE_IN_ALL
+void                ide_run_command_append_args      (IdeRunCommand      *self,
+                                                      const char * const *args);
+IDE_AVAILABLE_IN_ALL
+void                ide_run_command_append_argv      (IdeRunCommand      *self,
+                                                      const char         *arg);
+IDE_AVAILABLE_IN_ALL
+void                ide_run_command_append_formatted (IdeRunCommand      *self,
+                                                      const char         *format,
+                                                      ...) G_GNUC_PRINTF (2, 3);
+IDE_AVAILABLE_IN_ALL
+gboolean            ide_run_command_append_parsed    (IdeRunCommand      *self,
+                                                      const char         *args,
+                                                      GError            **error);
+IDE_AVAILABLE_IN_ALL
 const char * const *ide_run_command_get_environ      (IdeRunCommand      *self);
 IDE_AVAILABLE_IN_ALL
 void                ide_run_command_set_environ      (IdeRunCommand      *self,
                                                       const char * const *environ);
+IDE_AVAILABLE_IN_ALL
+const char         *ide_run_command_getenv           (IdeRunCommand      *self,
+                                                      const char         *key);
+IDE_AVAILABLE_IN_ALL
+void                ide_run_command_setenv           (IdeRunCommand      *self,
+                                                      const char         *key,
+                                                      const char         *value);
 IDE_AVAILABLE_IN_ALL
 int                 ide_run_command_get_priority     (IdeRunCommand      *self);
 IDE_AVAILABLE_IN_ALL

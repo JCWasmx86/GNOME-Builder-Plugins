@@ -20,6 +20,10 @@
 
 #pragma once
 
+#if !defined (IDE_WEBKIT_INSIDE) && !defined (IDE_WEBKIT_COMPILATION)
+# error "Only <libide-webkit.h> can be included directly."
+#endif
+
 #include <libide-gui.h>
 
 #include "ide-html-generator.h"
@@ -41,6 +45,8 @@ IdeWebkitPage *ide_webkit_page_new                   (void);
 IDE_AVAILABLE_IN_ALL
 IdeWebkitPage *ide_webkit_page_new_for_generator     (IdeHtmlGenerator     *generator);
 IDE_AVAILABLE_IN_ALL
+GtkWidget     *ide_webkit_page_get_view              (IdeWebkitPage        *self);
+IDE_AVAILABLE_IN_ALL
 void           ide_webkit_page_load_uri              (IdeWebkitPage        *self,
                                                       const char           *uri);
 IDE_AVAILABLE_IN_ALL
@@ -58,5 +64,7 @@ IDE_AVAILABLE_IN_ALL
 void           ide_webkit_page_reload                (IdeWebkitPage        *self);
 IDE_AVAILABLE_IN_ALL
 void           ide_webkit_page_reload_ignoring_cache (IdeWebkitPage        *self);
+IDE_AVAILABLE_IN_ALL
+gboolean       ide_webkit_page_has_generator         (IdeWebkitPage        *self);
 
 G_END_DECLS

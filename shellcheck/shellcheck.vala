@@ -57,11 +57,14 @@ public class ShellcheckDiagnosticProvider : Ide.DiagnosticTool {
 		this.program_name = "shellcheck";
 	}
 
-	public override void configure_launcher (Ide.SubprocessLauncher launcher, GLib.File file, GLib.Bytes contents, string language_id) {
-		launcher.push_argv ("--format=gcc");
-		launcher.push_argv ("-");
-		launcher.set_cwd ("/");
-		launcher.setenv ("SHELL", "/bin/bash", false);
+	public override bool prepare_run_context (Ide.RunContext run_context, GLib.File file, GLib.Bytes contents, string language_id) throws Error {
+		if (base.prepare_run_context (run_context, file, contents, language_id)) {
+			run_context.append_argv ("--format=gcc");
+			run_context.append_argv ("-");
+			run_context.set_cwd ("/");
+			return true;
+		}
+		return false;
 	}
 
 	public override bool can_diagnose (GLib.File file, GLib.Bytes contents, string language_id) {

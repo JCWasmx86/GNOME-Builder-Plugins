@@ -11,7 +11,7 @@ cargo_to_install=()
 manually_install=()
 
 check_file() {
-	if test -f "$1"; then
+	if test -f $1; then
 		echo "$1"... "$(tput bold)$(tput setaf 2)Exists$(tput sgr0)"
 		return 0
 	else
