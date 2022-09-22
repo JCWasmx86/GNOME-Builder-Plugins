@@ -115,11 +115,33 @@ public class SqlConnectionCreator : Gtk.Box {
 }
 
 public class SSHConnectionCreator : Gtk.Box {
+	private Adw.EntryRow host;
+	private Gtk.SpinButton port;
+	private Adw.EntryRow user;
+	private Adw.EntryRow key;
+	private Adw.PasswordEntryRow password;
+
 	public SSHConnectionCreator () {
 		this.spacing = 2;
 		this.orientation = Gtk.Orientation.VERTICAL;
+		this.host = new Adw.EntryRow ();
+		this.host.title = "Host";
+		this.port = new Gtk.SpinButton.with_range (1, 65536, 1);
+		this.port.value = 22;
+		this.user = new Adw.EntryRow ();
+		this.user.title = "User";
+		this.key = new Adw.EntryRow ();
+		this.key.title = "Private Key";
+		this.password = new Adw.PasswordEntryRow ();
+		this.password.title = "Passphrase";
+		this.append (this.host);
+		this.append (this.port);
+		this.append (this.user);
+		this.append (this.key);
+		this.append (this.password);
 	}
 }
+
 public abstract class SqlConnectionSubCreator : Gtk.Box {
 
 }
