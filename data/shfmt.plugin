@@ -7,4 +7,5 @@ Module=shfmt
 Name=Shfmt Integration
 X-Formatter-Languages=sh
 X-Formatter-Languages-Priority=200
+X-Category=editing
 X-Builder-ABI=@BUILDER_ABI@

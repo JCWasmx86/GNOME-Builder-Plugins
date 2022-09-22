@@ -7,4 +7,5 @@ Module=shellcheck
 Name=Shellcheck Integration
 X-Diagnostic-Provider-Languages=sh
 X-Diagnostic-Provider-Languages-Priority=100
+X-Category=diagnostics
 X-Builder-ABI=@BUILDER_ABI@

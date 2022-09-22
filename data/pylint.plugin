@@ -7,4 +7,5 @@ Module=pylint
 Name=Pylint Integration
 X-Diagnostic-Provider-Languages=python3
 X-Diagnostic-Provider-Languages-Priority=100
+X-Category=diagnostics
 X-Builder-ABI=@BUILDER_ABI@

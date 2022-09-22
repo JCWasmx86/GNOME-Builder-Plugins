@@ -6,4 +6,5 @@ Loader=C
 Module=icon_installer
 Name=Install icons easily
 X-Workspace-Kind=primary;
+X-Category=primary
 X-Builder-ABI=@BUILDER_ABI@

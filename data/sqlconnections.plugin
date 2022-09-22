@@ -6,4 +6,5 @@ Loader=C
 Module=sqlconnections
 Name=SQLConnections
 X-Workspace-Kind=primary;
+X-Category=primary
 X-Builder-ABI=@BUILDER_ABI@
