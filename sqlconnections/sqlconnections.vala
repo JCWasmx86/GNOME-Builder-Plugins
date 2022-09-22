@@ -53,7 +53,7 @@ public class SqlConnectionsView : Gtk.Box {
 	}
 
 	void build_gui () {
-		var expander = new Gtk.Expander ("Create SQL-Connection");
+		var expander = new Gtk.Expander ("Create Database connection");
 		this.data = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
 		expander.child = new SqlConnectionCreator (this.data);
 		this.append (expander);
