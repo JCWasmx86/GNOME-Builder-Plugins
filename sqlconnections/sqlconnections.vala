@@ -145,6 +145,10 @@ public class SqlConnectionCreator : Gtk.Box {
 		var invalid_strings = new string[0];
 		if (this.alias.text.strip () == "")
 			invalid_strings += "Missing alias";
+		foreach (var con in this.conns) {
+			if (this.alias.text.down () == con.alias.down ())
+				invalid_strings += "Duplicate alias: " + con.alias;
+		}
 		foreach (var s in this.ssh.validate ())
 			invalid_strings += s;
 		foreach (var s in c.validate ())
