@@ -96,7 +96,6 @@ if get_option('plugin_sourcekit').enabled()
 	plugins += 'sourcekit.plugin'
 endif
 if get_option('plugin_sqlconnections').enabled()
-	warning('sqlconnections plugin is WIP')
 	subdir('sqlconnections')
 	plugins += 'sqlconnections.plugin'
 endif
