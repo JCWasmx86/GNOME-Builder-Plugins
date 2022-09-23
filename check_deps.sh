@@ -93,7 +93,7 @@ fi
 if is_disabled "meson"; then
 	manually_install+=("mesonlsp")
 fi
-if is_disabled "meson"; then
+if is_disabled "swift-format"; then
 	manually_install+=("swift-format")
 fi
 if is_disabled "pylint"; then
