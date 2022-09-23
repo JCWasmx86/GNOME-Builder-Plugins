@@ -115,6 +115,10 @@ if get_option('plugin_swift_format').enabled()
 	subdir('swift-format')
 	plugins += 'swift-format.plugin'
 endif
+if get_option('plugin_swift_lint').enabled()
+	subdir('swift-lint')
+	plugins += 'swift-lint.plugin'
+endif
 if get_option('plugin_texlab').enabled()
 	subdir('texlab')
 	plugins += 'texlab.plugin'

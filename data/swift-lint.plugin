@@ -1,0 +1,11 @@
+[Plugin]
+Authors=JCWasmx86
+Copyright=JCWasmx86
+Description=Provides SwiftLint integration
+Loader=C
+Module=swift-lint
+Name=SwiftLint Integration
+X-Diagnostic-Provider-Languages=swift
+X-Diagnostic-Provider-Languages-Priority=100
+X-Category=diagnostics
+X-Builder-ABI=@BUILDER_ABI@
