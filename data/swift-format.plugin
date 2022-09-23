@@ -1,0 +1,11 @@
+[Plugin]
+Authors=JCWasmx86
+Copyright=JCWasmx86
+Description=Provides swift-format integration
+Loader=C
+Module=swift-format
+Name=swift-format Integration
+X-Formatter-Languages=swift
+X-Formatter-Languages-Priority=200
+X-Category=editing
+X-Builder-ABI=@BUILDER_ABI@
