@@ -22,8 +22,6 @@ public class PylintDiagnostic : GLib.Object {
 	public string message_id { get; set; }
 	public int line { get; set; }
 	public int column { get; set; }
-
-
 	public string message { get; set; }
 
 	public Ide.Diagnostic to_ide (GLib.File file, string type) {
