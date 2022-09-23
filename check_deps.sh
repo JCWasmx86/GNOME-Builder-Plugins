@@ -38,7 +38,7 @@ check_plugin() {
 	fi
 }
 is_disabled() {
-	if [[ " ${disabled_plugins[*]} " == *"$1"* ]]; then
+	if [[ " ${disabled_plugins[*]} " == *" $1 "* ]]; then
 		return 0
 	else
 		return 1
@@ -55,7 +55,7 @@ check_plugin_ex() {
 	fi
 }
 # icon_installer,sqlconnections,xmlfmt will always work
-export PATH=/usr/bin/:/bin
+export PATH=/usr/bin/:/bin:/usr/local/bin
 check_plugin_ex ~/.ghcup/bin/cabal cabal "cabal"
 check_plugin clangd "clangd"
 check_plugin_ex ~/.ghcup/bin/haskell-language-server-wrapper1 haskell-language-server-wrapper1 "hls"
