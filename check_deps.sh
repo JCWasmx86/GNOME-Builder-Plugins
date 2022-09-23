@@ -65,6 +65,7 @@ check_plugin shellcheck "shellcheck"
 check_plugin shfmt "shfmt"
 check_plugin sourcekit-lsp "sourcekit"
 check_plugin swift-format "swift-format"
+check_plugin swiftlint "swift-lint"
 check_plugin sqls "sqls"
 check_plugin_ex ~/.ghcup/bin/stack stack "stack"
 check_plugin texlab "texlab"
@@ -95,6 +96,9 @@ if is_disabled "meson"; then
 fi
 if is_disabled "swift-format"; then
 	manually_install+=("swift-format")
+fi
+if is_disabled "swift-lint"; then
+	manually_install+=("swiftlint")
 fi
 if is_disabled "pylint"; then
 	packages_to_install_dnf+=("pylint")

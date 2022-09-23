@@ -1,4 +1,5 @@
 swift_lint_sources = [
+	'swift-lint.vala'
 ]
 c_args = ['-DG_LOG_DOMAIN="swift-lint"']
 shared_module('swift-lint',
