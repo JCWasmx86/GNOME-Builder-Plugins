@@ -8,7 +8,6 @@ guaranteed.
 - clangd: (Copied from upstream, converted to Vala): Clangd integration
 - hls: Integration for the Haskell Language Server
 - icon_installer: Allow installing icons easily in your project
-- jdtls: Integration for the Eclipse Java Language Server (TODO)
 - meson: Integration for my meson language server
 - pylint: Integration with Pylint
 - shellcheck: Shellcheck integration (Seems to be somewhat broken because of seemingly upstream problems)
