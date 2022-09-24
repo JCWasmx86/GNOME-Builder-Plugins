@@ -1,10 +1,10 @@
 [Plugin]
 Authors=JCWasmx86 <JCWasmx86@t-online.de>
 Copyright=JCWasmx86
-Description=Provides HLS integration
+Description=Language server integration for Haskell
 Loader=C
 Module=hls
-Name=HLS Integration
+Name=Haskell Language Server
 X-Category=lsps
 X-Code-Action-Languages=haskell
 X-Completion-Provider-Languages=haskell

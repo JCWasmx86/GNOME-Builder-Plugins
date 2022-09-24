@@ -1,7 +1,7 @@
 [Plugin]
 Authors=JCWasmx86 <JCWasmx86@t-online.de>
 Copyright=JCWasmx86
-Description=Provides formatter for XML
+Description=Format code using libxml2
 Loader=C
 Module=xmlfmt
 Name=XML Formatter

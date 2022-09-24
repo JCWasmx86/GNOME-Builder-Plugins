@@ -1,10 +1,10 @@
 [Plugin]
 Authors=JCWasmx86
 Copyright=JCWasmx86
-Description=Provides swift build integration
+Description=Provides integration with the Swift build system
 Loader=C
 Module=swift
-Name=Stack Integration
+Name=Swift
 X-Category=buildsystems
 X-Project-File-Filter-Name=Swift (Package.swift)
 X-Project-File-Filter-Pattern=Package.swift

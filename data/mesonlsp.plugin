@@ -1,10 +1,10 @@
 [Plugin]
 Authors=JCWasmx86
 Copyright=JCWasmx86
-Description=Provides MesonLSP integration
+Description=Language server integration for meson
 Loader=C
 Module=mesonlsp
-Name=MesonLSP Integration
+Name=MesonLSP
 X-Category=lsps
 X-Hover-Provider-Languages=meson
 X-Symbol-Resolver-Languages=meson

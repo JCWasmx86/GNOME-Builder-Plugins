@@ -1,10 +1,10 @@
 [Plugin]
 Authors=JCWasmx86
 Copyright=JCWasmx86
-Description=Provides SwiftLint integration
+Description=Provides linting for Swift
 Loader=C
 Module=swift-lint
-Name=SwiftLint Integration
+Name=SwiftLint
 X-Diagnostic-Provider-Languages=swift
 X-Diagnostic-Provider-Languages-Priority=100
 X-Category=diagnostics

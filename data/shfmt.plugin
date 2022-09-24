@@ -1,10 +1,10 @@
 [Plugin]
 Authors=JCWasmx86
 Copyright=JCWasmx86
-Description=Provides shfmt integration
+Description=Format code using shfmt
 Loader=C
 Module=shfmt
-Name=Shfmt Integration
+Name=Shfmt
 X-Formatter-Languages=sh
 X-Formatter-Languages-Priority=200
 X-Category=editing

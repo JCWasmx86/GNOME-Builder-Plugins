@@ -1,10 +1,10 @@
 [Plugin]
 Authors=JCWasmx86 <JCWasmx86@t-online.de>
 Copyright=JCWasmx86
-Description=Provides sqls integration
+Description=Language server integration for SQL
 Loader=C
 Module=sqls
-Name=sqls Integration
+Name=SQLs
 X-Category=lsps
 X-Code-Action-Languages=sql
 X-Completion-Provider-Languages=sql

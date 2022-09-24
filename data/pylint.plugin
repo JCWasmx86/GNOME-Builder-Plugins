@@ -1,10 +1,10 @@
 [Plugin]
 Authors=JCWasmx86
 Copyright=JCWasmx86
-Description=Provides pylint integration
+Description=Provides linting for Python
 Loader=C
 Module=pylint
-Name=Pylint Integration
+Name=Pylint
 X-Diagnostic-Provider-Languages=python3
 X-Diagnostic-Provider-Languages-Priority=100
 X-Category=diagnostics
