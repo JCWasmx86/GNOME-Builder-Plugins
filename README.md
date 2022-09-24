@@ -23,6 +23,10 @@ meson build
 cd build
 ninja install
 ```
+### Docker/Podman
+```
+DOCKER_BUILDKIT=1 podman build --file Dockerfile --output out .
+``
 
 ## Plugins
 - cabal: Integration for the cabal buildsystem
