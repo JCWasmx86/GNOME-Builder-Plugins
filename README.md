@@ -3,6 +3,19 @@
 These are all plugins I use(d). They are only compatible with GNOME-Builder Nightly. Maybe they work with older versions, but this is not
 guaranteed.
 
+
+## Install
+
+### Fedora 36
+```
+sudo dnf install git vala meson gcc libgee-devel json-glib-devel gtk4-devel gtksourceview5-devel libadwaita-devel libpeas-devel g++
+git clone https://github.com/JCWasmx86/GNOME-Builder-Plugins
+cd GNOME-Builder-Plugins
+meson build
+cd build
+ninja install
+```
+
 ## Plugins
 - cabal: Integration for the cabal buildsystem
 - clangd: (Copied from upstream, converted to Vala): Clangd integration
