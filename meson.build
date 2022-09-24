@@ -6,11 +6,11 @@ c = run_command('whoami', check: true)
 assert (c.returncode () == 0, 'whoami failed????')
 user_name = c.stdout().strip()
 if user_name == 'root'
-	error('Don\'t run as root!')
+	warning('Don\'t run as root!')
+	install_dir='/root/.local/share/gnome-builder/plugins'
+else
+	install_dir='/home' / user_name / '.local/share/gnome-builder/plugins'
 endif
-
-install_dir='/home' / user_name / '.local/share/gnome-builder/plugins'
-
 vapi_dir = meson.current_source_dir() / 'vapi'
 add_project_arguments(['--vapidir', vapi_dir], language: 'vala')
 add_project_arguments(['-g3', '-gz=zlib'], language: 'c')
