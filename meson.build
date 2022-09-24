@@ -132,7 +132,7 @@ endif
 subdir('data')
 copied_tgts = []
 cp = find_program('cp')
-compress = find_program('eu-elfcompress')
+compress = find_program('eu-elfcompress', required: false)
 if compress.found()
 	foreach tgt : tgts
 		name = tgt.full_path().split('/')[-1]
