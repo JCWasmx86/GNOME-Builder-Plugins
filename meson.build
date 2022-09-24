@@ -49,7 +49,7 @@ dependencies = [
 	meson.get_compiler('vala').find_library('ide', dirs: vapi_dir),
 	dependency('gtk4'),
 	dependency('gtksourceview-5'),
-	dependency('libadwaita-1'),
+	dependency('libadwaita-1', version: '>=1.2.0'),
 	meson.get_compiler('vala').find_library('vte-3.91', dirs: vapi_dir),
 	dependency('libpeas-1.0'),
 	meson.get_compiler('vala').find_library('panel-1', dirs: vapi_dir),
