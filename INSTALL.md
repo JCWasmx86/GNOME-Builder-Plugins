@@ -17,6 +17,8 @@ else
         haskell-language-server-wrapper --lsp --debug
 fi
 ```
+## Hadolint
+- Install [Hadolint](https://github.com/hadolint/hadolint)
 ## Meson
 - Install [MesonLSP](https://github.com/jcwasmx86/mesonlsp), it is work-in-progress!
 ## Pylint

@@ -67,7 +67,10 @@ if get_option('plugin_clangd').enabled()
 	subdir('clangd')
 	plugins += 'clangd.plugin'
 endif
-
+if get_option('plugin_hadolint').enabled()
+	subdir('hadolint')
+	plugins += 'hadolint.plugin'
+endif
 if get_option('plugin_hls').enabled()
 	subdir('hls')
 	plugins += 'hls.plugin'

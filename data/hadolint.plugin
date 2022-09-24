@@ -1,0 +1,11 @@
+[Plugin]
+Authors=JCWasmx86
+Copyright=JCWasmx86
+Description=Provides linting for docker files
+Loader=C
+Module=hadolint
+Name=Hadolint
+X-Diagnostic-Provider-Languages=docker
+X-Diagnostic-Provider-Languages-Priority=100
+X-Category=diagnostics
+X-Builder-ABI=@BUILDER_ABI@

@@ -58,6 +58,7 @@ check_plugin_ex() {
 export PATH=/usr/bin/:/bin:/usr/local/bin
 check_plugin_ex ~/.ghcup/bin/cabal cabal "cabal"
 check_plugin clangd "clangd"
+check_plugin hadolint "hadolint"
 check_plugin_ex ~/.ghcup/bin/haskell-language-server-wrapper1 haskell-language-server-wrapper1 "hls"
 check_plugin meson_lsp "meson"
 check_plugin pylint "pylint"
@@ -90,6 +91,9 @@ if is_disabled "hls"; then
 	else
 		ghcup_to_install+=("haskell-language-server")
 	fi
+fi
+if is_disabled "hadolint"; then
+	packages_to_install_dnf+=("hadolint")
 fi
 if is_disabled "meson"; then
 	manually_install+=("mesonlsp")
