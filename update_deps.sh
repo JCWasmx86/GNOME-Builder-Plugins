@@ -1,23 +1,23 @@
 #!/usr/bin/env bash
 basedir=$(mktemp -d)
-cd $basedir
+cd "$basedir" || exit
 mkdir prefix
 git clone https://gitlab.gnome.org/GNOME/libpanel
-cd libpanel
-meson build -Dprefix=$basedir/prefix
-cd build
+cd libpanel || exit
+meson build -Dprefix="$basedir/prefix"
+cd build || exit
 ninja install
-cd ../..
+cd ../.. || exit
 git clone https://gitlab.gnome.org/GNOME/template-glib
-cd template-glib
-meson build -Dprefix=$basedir/prefix
-cd build
+cd template-glib || exit
+meson build -Dprefix="$basedir/prefix"
+cd build || exit
 ninja install
-cd ../..
+cd ../.. || exit
 git clone https://gitlab.gnome.org/GNOME/vte
-cd vte
-meson build -Dprefix=$basedir/prefix -Dgtk4=true
-cd build
+cd vte || exit
+meson build -Dprefix="$basedir/prefix" -Dgtk4=true
+cd build || exit
 ninja install
 cd ../..
 mkdir vapi
