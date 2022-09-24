@@ -3,7 +3,7 @@ sqls_sources = [
 	'sqls_aux.c',
 ]
 c_args = ['-DG_LOG_DOMAIN="sqls"']
-shared_module('sqls',
+tgts += shared_module('sqls',
               sqls_sources,
               c_args : c_args,
               dependencies : dependencies,

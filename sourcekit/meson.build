@@ -3,7 +3,7 @@ sourcekit_sources = [
 	'sourcekit_aux.c',
 ]
 c_args = ['-DG_LOG_DOMAIN="sourcekit"']
-shared_module('sourcekit',
+tgts += shared_module('sourcekit',
               sourcekit_sources,
               c_args : c_args,
               dependencies : dependencies,

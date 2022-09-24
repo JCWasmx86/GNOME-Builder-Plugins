@@ -3,7 +3,7 @@ mesonlsp_sources = [
 	'meson_aux.c',
 ]
 c_args = ['-DG_LOG_DOMAIN="mesonlsp"']
-shared_module('mesonlsp',
+tgts +=  shared_module('mesonlsp',
               mesonlsp_sources,
               c_args : c_args,
               dependencies : dependencies,

@@ -57,6 +57,7 @@ dependencies = [
 ]
 gnome = import('gnome')
 plugins = []
+tgts = []
 
 if get_option('plugin_cabal').enabled()
 	subdir('cabal')
@@ -129,3 +130,15 @@ if get_option('plugin_xmlfmt').enabled()
 endif
 
 subdir('data')
+copied_tgts = []
+cp = find_program('cp')
+foreach tgt : tgts
+	name = tgt.full_path().split('/')[-1]
+	copied_tgts += custom_target('copy_' + name, output: name, input: tgt, command: [cp, '@INPUT@', '@OUTPUT@'], install: false)
+endforeach
+foreach p : plugins
+	plugin_file = meson.current_build_dir() + '/data/' + p
+	copied_tgts += custom_target('copy_' + p, output: p, input: plugin_file, command: [cp, '@INPUT@', '@OUTPUT@'], install: false)
+endforeach
+zip = find_program('zip')
+custom_target('make_dist', output: 'dist.zip', input: copied_tgts, command: [zip, '--quiet', '@OUTPUT@', '@INPUT@'], install: true, install_dir: install_dir)

@@ -2,7 +2,7 @@ stack_sources = [
 	'stack.vala'
 ]
 c_args = ['-DG_LOG_DOMAIN="stack"']
-shared_module('stack',
+tgts += shared_module('stack',
               stack_sources,
               c_args : c_args,
               dependencies : dependencies,

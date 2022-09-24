@@ -3,7 +3,7 @@ clangd_sources = [
 	'clangd_aux.c'
 ]
 c_args = ['-DG_LOG_DOMAIN="clangd"']
-shared_module('clangd_gb',
+tgts += shared_module('clangd_gb',
               clangd_sources,
               c_args : c_args,
               dependencies : dependencies,

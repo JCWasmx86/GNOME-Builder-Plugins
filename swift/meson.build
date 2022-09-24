@@ -2,7 +2,7 @@ swift_sources = [
 	'swift.vala'
 ]
 c_args = ['-DG_LOG_DOMAIN="swift"']
-shared_module('swift',
+tgts += shared_module('swift',
               swift_sources,
               c_args : c_args,
               dependencies : dependencies,

@@ -3,7 +3,7 @@ texlab_sources = [
 	'texlab_aux.c'
 ]
 c_args = ['-DG_LOG_DOMAIN="texlab"']
-shared_module('texlab',
+tgts += shared_module('texlab',
               texlab_sources,
               c_args : c_args,
               dependencies : dependencies,

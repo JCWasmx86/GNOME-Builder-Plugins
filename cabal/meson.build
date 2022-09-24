@@ -2,7 +2,7 @@ cabal_sources = [
 	'cabal.vala',
 ]
 c_args = ['-DG_LOG_DOMAIN="cabal"']
-shared_module('cabal',
+tgts += shared_module('cabal',
               cabal_sources,
               c_args : c_args,
               dependencies : dependencies,
