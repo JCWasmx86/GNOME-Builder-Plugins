@@ -132,13 +132,24 @@ endif
 subdir('data')
 copied_tgts = []
 cp = find_program('cp')
-foreach tgt : tgts
-	name = tgt.full_path().split('/')[-1]
-	copied_tgts += custom_target('copy_' + name, output: name, input: tgt, command: [cp, '@INPUT@', '@OUTPUT@'], install: false)
-endforeach
+compress = find_program('eu-elfcompress')
+if compress.found()
+	foreach tgt : tgts
+		name = tgt.full_path().split('/')[-1]
+		copied_tgts += custom_target('compress_' + name, output: name, input: tgt, command: [compress, '@INPUT@', '-o', '@OUTPUT@', '-q'], install: false)
+	endforeach
+else
+	foreach tgt : tgts
+		name = tgt.full_path().split('/')[-1]
+		copied_tgts += custom_target('copy_' + name, output: name, input: tgt, command: [cp, '@INPUT@', '@OUTPUT@'], install: false)
+	endforeach
+endif
+
 foreach p : plugins
+	# TODO: Source item ... cannot be converted to File object, because it is a generated file
 	plugin_file = meson.current_build_dir() + '/data/' + p
 	copied_tgts += custom_target('copy_' + p, output: p, input: plugin_file, command: [cp, '@INPUT@', '@OUTPUT@'], install: false)
 endforeach
+
 zip = find_program('zip')
 custom_target('make_dist', output: 'dist.zip', input: copied_tgts, command: [zip, '--quiet', '@OUTPUT@', '@INPUT@'], install: true, install_dir: install_dir)
