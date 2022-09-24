@@ -1,9 +1,9 @@
 #include "libide-lsp.h"
 
-extern GType hls_service_get_type (void) G_GNUC_CONST;
+extern GType hls_service_get_type(void) G_GNUC_CONST;
 
-void bind_client (IdeObject *obj)
-{
-	g_autoptr (IdeLspServiceClass) clazz = g_type_class_ref (hls_service_get_type ());
-	ide_lsp_service_class_bind_client (clazz, obj);
+void bind_client(IdeObject *obj) {
+  g_autoptr(IdeLspServiceClass) clazz =
+      g_type_class_ref(hls_service_get_type());
+  ide_lsp_service_class_bind_client(clazz, obj);
 }
