@@ -35,21 +35,21 @@
  *
  * Template-GLibl minor version component (e.g. 2 if %TMPL_VERSION is 1.2.3)
  */
-#define TMPL_MINOR_VERSION              (35)
+#define TMPL_MINOR_VERSION              (36)
 
 /**
  * TMPL_MICRO_VERSION:
  *
  * Template-GLibl micro version component (e.g. 3 if %TMPL_VERSION is 1.2.3)
  */
-#define TMPL_MICRO_VERSION              (0)
+#define TMPL_MICRO_VERSION              (1)
 
 /**
  * TMPL_VERSION
  *
  * Template-GLibl version.
  */
-#define TMPL_VERSION                    (3.35.0)
+#define TMPL_VERSION                    (3.36.1)
 
 /**
  * TMPL_VERSION_S:
@@ -57,7 +57,7 @@
  * Template-GLib version, encoded as a string, useful for printing and
  * concatenation.
  */
-#define TMPL_VERSION_S                  "3.35.0"
+#define TMPL_VERSION_S                  "3.36.1"
 
 #define TMPL_ENCODE_VERSION(major,minor,micro) \
         ((major) << 24 | (minor) << 16 | (micro) << 8)

@@ -59,10 +59,13 @@ namespace Panel {
 		public unowned Panel.Widget? get_page (uint n);
 		public Gtk.SelectionModel get_pages ();
 		public unowned Gtk.Widget? get_placeholder ();
+		public Panel.Position get_position ();
+		public int get_requested_size ();
 		public unowned Panel.Widget? get_visible_child ();
 		public void remove (Panel.Widget panel);
 		public void set_header (Panel.FrameHeader? header);
 		public void set_placeholder (Gtk.Widget? placeholder);
+		public void set_requested_size (int requested_size);
 		public void set_visible_child (Panel.Widget widget);
 		public bool closeable { get; }
 		public bool empty { get; }
@@ -103,6 +106,7 @@ namespace Panel {
 		public Grid ();
 		public void add (Panel.Widget widget);
 		public async bool agree_to_close_async (GLib.Cancellable? cancellable) throws GLib.Error;
+		public void foreach_frame (Panel.FrameCallback callback);
 		public unowned Panel.GridColumn get_column (uint column);
 		public unowned Panel.GridColumn get_most_recent_column ();
 		public unowned Panel.Frame get_most_recent_frame ();
@@ -158,6 +162,7 @@ namespace Panel {
 	public sealed class Position : GLib.Object {
 		[CCode (has_construct_function = false)]
 		public Position ();
+		public bool equal (Panel.Position b);
 		[CCode (has_construct_function = false)]
 		public Position.from_variant (GLib.Variant variant);
 		public Panel.Area get_area ();
@@ -216,7 +221,7 @@ namespace Panel {
 		public virtual signal void discard ();
 		public virtual signal bool save (GLib.Task task);
 	}
-	/*[CCode (cheader_filename = "libpanel.h", type_id = "panel_save_dialog_get_type ()")]
+	[CCode (cheader_filename = "libpanel.h", type_id = "panel_save_dialog_get_type ()")]
 	public sealed class SaveDialog : Adw.MessageDialog, Gtk.Accessible, Gtk.Buildable, Gtk.ConstraintTarget, Gtk.Native, Gtk.Root, Gtk.ShortcutManager {
 		[CCode (has_construct_function = false, type = "GtkWidget*")]
 		public SaveDialog ();
@@ -225,7 +230,7 @@ namespace Panel {
 		public async bool run_async (GLib.Cancellable? cancellable) throws GLib.Error;
 		public void set_close_after_save (bool close_after_save);
 		public bool close_after_save { get; set; }
-	}*/
+	}
 	[CCode (cheader_filename = "libpanel.h", type_id = "panel_statusbar_get_type ()")]
 	public class Statusbar : Gtk.Widget, Gtk.Accessible, Gtk.Buildable, Gtk.ConstraintTarget {
 		[CCode (has_construct_function = false, type = "GtkWidget*")]
@@ -268,6 +273,7 @@ namespace Panel {
 		public unowned GLib.MenuModel? get_menu_model ();
 		public bool get_modified ();
 		public bool get_needs_attention ();
+		public Panel.Position? get_position ();
 		public bool get_reorderable ();
 		public unowned Panel.SaveDelegate? get_save_delegate ();
 		public unowned string? get_title ();
@@ -297,6 +303,7 @@ namespace Panel {
 		public Gtk.Widget child { get; set; }
 		public GLib.Icon icon { get; set; }
 		public string icon_name { get; set; }
+		public string id { get; set; }
 		public string kind { get; set; }
 		public GLib.MenuModel menu_model { get; set; }
 		public bool modified { get; set; }

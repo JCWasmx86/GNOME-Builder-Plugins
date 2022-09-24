@@ -48,6 +48,10 @@ PanelGridColumn *panel_grid_get_most_recent_column (PanelGrid            *self);
 PANEL_AVAILABLE_IN_ALL
 PanelFrame      *panel_grid_get_most_recent_frame  (PanelGrid            *self);
 PANEL_AVAILABLE_IN_ALL
+void             panel_grid_foreach_frame          (PanelGrid            *self,
+                                                    PanelFrameCallback    callback,
+                                                    gpointer              user_data);
+PANEL_AVAILABLE_IN_ALL
 void             panel_grid_add                    (PanelGrid            *self,
                                                     PanelWidget          *widget);
 PANEL_AVAILABLE_IN_ALL

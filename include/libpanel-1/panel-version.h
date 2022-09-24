@@ -52,14 +52,14 @@
  *
  * libpanel micro version component (e.g. 3 if %PANEL_VERSION is 1.2.3)
  */
-#define PANEL_MICRO_VERSION (0)
+#define PANEL_MICRO_VERSION (1)
 
 /**
  * PANEL_VERSION
  *
  * libpanel version.
  */
-#define PANEL_VERSION (1.0.alpha2)
+#define PANEL_VERSION (1.0.1)
 
 /**
  * PANEL_VERSION_S:
@@ -67,7 +67,7 @@
  * libpanel version, encoded as a string, useful for printing and
  * concatenation.
  */
-#define PANEL_VERSION_S "1.0.alpha2"
+#define PANEL_VERSION_S "1.0.1"
 
 #define PANEL_ENCODE_VERSION(major,minor,micro) \
         ((major) << 24 | (minor) << 16 | (micro) << 8)

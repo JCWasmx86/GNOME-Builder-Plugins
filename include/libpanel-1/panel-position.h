@@ -78,5 +78,8 @@ void           panel_position_set_row          (PanelPosition *self,
 PANEL_AVAILABLE_IN_ALL
 void           panel_position_set_row_set      (PanelPosition *self,
                                                 gboolean       row_set);
+PANEL_AVAILABLE_IN_ALL
+gboolean       panel_position_equal            (PanelPosition *a,
+                                                PanelPosition *b);
 
 G_END_DECLS

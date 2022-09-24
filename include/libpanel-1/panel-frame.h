@@ -40,42 +40,49 @@ struct _PanelFrameClass
 };
 
 PANEL_AVAILABLE_IN_ALL
-GtkWidget         *panel_frame_new               (void);
+GtkWidget         *panel_frame_new                (void);
 PANEL_AVAILABLE_IN_ALL
-gboolean           panel_frame_get_closeable     (PanelFrame       *self);
+gboolean           panel_frame_get_closeable      (PanelFrame       *self);
 PANEL_AVAILABLE_IN_ALL
-PanelFrameHeader  *panel_frame_get_header        (PanelFrame       *self);
+PanelFrameHeader  *panel_frame_get_header         (PanelFrame       *self);
 PANEL_AVAILABLE_IN_ALL
-void               panel_frame_set_header        (PanelFrame       *self,
-                                                  PanelFrameHeader *header);
+void               panel_frame_set_header         (PanelFrame       *self,
+                                                   PanelFrameHeader *header);
 PANEL_AVAILABLE_IN_ALL
-gboolean           panel_frame_get_empty         (PanelFrame       *self);
+gboolean           panel_frame_get_empty          (PanelFrame       *self);
 PANEL_AVAILABLE_IN_ALL
-void               panel_frame_add               (PanelFrame       *self,
-                                                  PanelWidget      *panel);
+void               panel_frame_add                (PanelFrame       *self,
+                                                   PanelWidget      *panel);
 PANEL_AVAILABLE_IN_ALL
-void               panel_frame_add_before        (PanelFrame       *self,
-                                                  PanelWidget      *panel,
-                                                  PanelWidget      *sibling);
+void               panel_frame_add_before         (PanelFrame       *self,
+                                                   PanelWidget      *panel,
+                                                   PanelWidget      *sibling);
 PANEL_AVAILABLE_IN_ALL
-void               panel_frame_remove            (PanelFrame       *self,
-                                                  PanelWidget      *panel);
+void               panel_frame_remove             (PanelFrame       *self,
+                                                   PanelWidget      *panel);
 PANEL_AVAILABLE_IN_ALL
-void               panel_frame_set_visible_child (PanelFrame       *self,
-                                                  PanelWidget      *widget);
+void               panel_frame_set_visible_child  (PanelFrame       *self,
+                                                   PanelWidget      *widget);
 PANEL_AVAILABLE_IN_ALL
-PanelWidget       *panel_frame_get_visible_child (PanelFrame       *self);
+PanelWidget       *panel_frame_get_visible_child  (PanelFrame       *self);
 PANEL_AVAILABLE_IN_ALL
-PanelWidget       *panel_frame_get_page          (PanelFrame       *self,
-                                                  guint             n);
+PanelWidget       *panel_frame_get_page           (PanelFrame       *self,
+                                                   guint             n);
 PANEL_AVAILABLE_IN_ALL
-GtkSelectionModel *panel_frame_get_pages         (PanelFrame       *self);
+GtkSelectionModel *panel_frame_get_pages          (PanelFrame       *self);
 PANEL_AVAILABLE_IN_ALL
-guint              panel_frame_get_n_pages       (PanelFrame       *self);
+guint              panel_frame_get_n_pages        (PanelFrame       *self);
 PANEL_AVAILABLE_IN_ALL
-GtkWidget         *panel_frame_get_placeholder   (PanelFrame       *self);
+GtkWidget         *panel_frame_get_placeholder    (PanelFrame       *self);
 PANEL_AVAILABLE_IN_ALL
-void               panel_frame_set_placeholder   (PanelFrame       *self,
-                                                  GtkWidget        *placeholder);
+void               panel_frame_set_placeholder    (PanelFrame       *self,
+                                                   GtkWidget        *placeholder);
+PANEL_AVAILABLE_IN_ALL
+PanelPosition     *panel_frame_get_position       (PanelFrame       *self);
+PANEL_AVAILABLE_IN_ALL
+int                panel_frame_get_requested_size (PanelFrame       *self);
+PANEL_AVAILABLE_IN_ALL
+void               panel_frame_set_requested_size (PanelFrame       *self,
+                                                   int               requested_size);
 
 G_END_DECLS

@@ -2121,7 +2121,7 @@ namespace Ide {
 		[CCode (has_construct_function = false)]
 		protected ProjectTemplate ();
 		public int compare (Ide.ProjectTemplate b);
-		public virtual async bool expand_async (Ide.TemplateInput input, Tmpl.Scope scope, GLib.Cancellable? cancellable) throws GLib.Error;
+		public virtual async bool expand_async (Ide.TemplateInput input, Template.Scope scope, GLib.Cancellable? cancellable) throws GLib.Error;
 		public unowned string get_description ();
 		public unowned string get_id ();
 		[CCode (array_length = false, array_null_terminated = true)]
@@ -2840,13 +2840,13 @@ namespace Ide {
 	public abstract class TemplateBase : GLib.Object {
 		[CCode (has_construct_function = false)]
 		protected TemplateBase ();
-		public void add_path (string path, GLib.File destination, Tmpl.Scope scope, int mode);
-		public void add_resource (string resource_path, GLib.File destination, Tmpl.Scope scope, int mode);
+		public void add_path (string path, GLib.File destination, Template.Scope scope, int mode);
+		public void add_resource (string resource_path, GLib.File destination, Template.Scope scope, int mode);
 		public async bool expand_all_async (GLib.Cancellable? cancellable) throws GLib.Error;
-		public unowned Tmpl.TemplateLocator? get_locator ();
+		public unowned Template.TemplateLocator? get_locator ();
 		public void reset ();
-		public void set_locator (Tmpl.TemplateLocator locator);
-		public Tmpl.TemplateLocator locator { get; set; }
+		public void set_locator (Template.TemplateLocator locator);
+		public Template.TemplateLocator locator { get; set; }
 	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_id = "ide_template_input_get_type ()")]
 	public sealed class TemplateInput : GLib.Object {
@@ -2892,7 +2892,7 @@ namespace Ide {
 		public bool use_version_control { get; set; }
 	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_id = "ide_template_locator_get_type ()")]
-	public class TemplateLocator : Tmpl.TemplateLocator {
+	public class TemplateLocator : Template.TemplateLocator {
 		[CCode (has_construct_function = false)]
 		public TemplateLocator ();
 		public unowned string get_license_text ();

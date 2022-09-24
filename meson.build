@@ -53,7 +53,7 @@ dependencies = [
 	meson.get_compiler('vala').find_library('vte-3.91', dirs: vapi_dir),
 	dependency('libpeas-1.0'),
 	meson.get_compiler('vala').find_library('panel-1', dirs: vapi_dir),
-	meson.get_compiler('vala').find_library('template-1.0', dirs: vapi_dir),
+	meson.get_compiler('vala').find_library('template-glib-1.0', dirs: vapi_dir),
 ]
 gnome = import('gnome')
 plugins = []
