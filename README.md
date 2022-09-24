@@ -15,7 +15,7 @@ git clone https://gitlab.gnome.org/GNOME/libadwaita
 cd libadwaita
 meson build -Dprefix=/usr
 cd build
-ninja install
+sudo ninja install
 cd ../..
 git clone https://github.com/JCWasmx86/GNOME-Builder-Plugins
 cd GNOME-Builder-Plugins
