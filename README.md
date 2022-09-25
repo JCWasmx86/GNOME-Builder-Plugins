@@ -25,7 +25,16 @@ ninja install
 ```
 ### Docker/Podman
 ```
-DOCKER_BUILDKIT=1 podman build --file Dockerfile --output out .
+DOCKER_BUILDKIT=1 podman build --file Dockerfile --output out --no-cache .
+```
+After that, a file called `dist.zip` will be in the `out` directory.
+You can copy it to `~/.local/share/gnome-builder/plugins/` (Create it if it
+does not exist) and unzip it there.
+```
+mkdir -p ~/.local/share/gnome-builder/plugins
+cp out/dist.zip ~/.local/share/gnome-builder/plugins
+cd ~/.local/share/gnome-builder/plugins
+unzip dist.zip
 ```
 
 ## Plugins
