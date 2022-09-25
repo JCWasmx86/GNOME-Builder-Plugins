@@ -20,7 +20,7 @@ jobs:
           sudo apt-get -y install podman
           podman --version
           DOCKER_BUILDKIT=1 docker build --file Dockerfile --output out .
-          cp out/dist.zip /dist.zip
+          sudo cp out/dist.zip /dist.zip
       - uses: actions/upload-artifact@v3
         with:
           name: plugins.zip
