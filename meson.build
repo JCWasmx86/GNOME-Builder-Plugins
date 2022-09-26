@@ -45,6 +45,7 @@ dependencies = [
 	dependency('gobject-2.0'),
 	dependency('glib-2.0'),
 	dependency('gee-0.8'),
+	dependency('gio-2.0'),
 	dependency('json-glib-1.0'),
 	meson.get_compiler('vala').find_library('ide', dirs: vapi_dir),
 	dependency('gtk4'),
@@ -122,6 +123,10 @@ endif
 if get_option('plugin_swift_lint').enabled()
 	subdir('swift-lint')
 	plugins += 'swift-lint.plugin'
+endif
+if get_option('plugin_swift_templates').enabled()
+	subdir('swift-templates')
+	plugins += 'swift-templates.plugin'
 endif
 if get_option('plugin_texlab').enabled()
 	subdir('texlab')

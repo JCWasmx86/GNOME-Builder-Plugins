@@ -1,0 +1,9 @@
+[Plugin]
+Authors=JCWasmx86
+Copyright=JCWasmx86
+Description=Provides templates for creating new Swift projects
+Loader=C
+Module=swift-templates
+Name=Swift Project Templates
+X-Category=templates
+X-Builder-ABI=@BUILDER_ABI@

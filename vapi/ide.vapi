@@ -2269,7 +2269,7 @@ namespace Ide {
 		public RunContext ();
 		public void add_environ (string environ);
 		public void add_minimal_environment ();
-		public void append_args (string args);
+		public void append_args ([CCode (array_length = false, array_null_terminated = true)] string[] args);
 		public bool append_args_parsed (string args) throws GLib.Error;
 		public void append_argv (string arg);
 		public GLib.IOStream create_stdio_stream () throws GLib.Error;

@@ -72,6 +72,9 @@ unzip dist.zip
 - Ide.RunCommand:
 	- `set_argv`: string array as arguments
 	- `set_argv`: `[CCode (array_length = false, array_null_terminated = true)]` to the argument
+- Ide.RunContext:
+	- `append_args`: string array as arguments
+	- `append_args`: `[CCode (array_length = false, array_null_terminated = true)]` to the argument
 
 ## Updating libraries
 - Update vapis
