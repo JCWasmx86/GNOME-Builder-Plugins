@@ -42,19 +42,19 @@ inc = include_directories (
 	'include/vte-2.91',
 )
 dependencies = [
-	dependency('gobject-2.0'),
-	dependency('glib-2.0'),
 	dependency('gee-0.8'),
 	dependency('gio-2.0'),
-	dependency('json-glib-1.0'),
-	meson.get_compiler('vala').find_library('ide', dirs: vapi_dir),
+	dependency('glib-2.0'),
+	dependency('gobject-2.0'),
 	dependency('gtk4'),
 	dependency('gtksourceview-5'),
+	dependency('json-glib-1.0'),
 	dependency('libadwaita-1', version: '>=1.2.0'),
-	meson.get_compiler('vala').find_library('vte-3.91', dirs: vapi_dir),
 	dependency('libpeas-1.0'),
+	meson.get_compiler('vala').find_library('ide', dirs: vapi_dir),
 	meson.get_compiler('vala').find_library('panel-1', dirs: vapi_dir),
 	meson.get_compiler('vala').find_library('template-glib-1.0', dirs: vapi_dir),
+	meson.get_compiler('vala').find_library('vte-3.91', dirs: vapi_dir),
 ]
 gnome = import('gnome')
 plugins = []
