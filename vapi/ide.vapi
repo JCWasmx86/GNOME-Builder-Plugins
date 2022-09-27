@@ -1930,7 +1930,7 @@ namespace Ide {
 		public virtual signal void reap (Ide.DirectoryReaper reaper);
 	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_id = "ide_pipeline_stage_command_get_type ()")]
-	public sealed class PipelineStageCommand : Ide.PipelineStage {
+	public class PipelineStageCommand : Ide.PipelineStage {
 		[CCode (has_construct_function = false, type = "IdePipelineStage*")]
 		public PipelineStageCommand (Ide.RunCommand build_command, Ide.RunCommand clean_command);
 		public void set_build_command (Ide.RunCommand build_command);
@@ -1939,6 +1939,8 @@ namespace Ide {
 		public Ide.RunCommand build_command { owned get; set; }
 		[NoAccessorMethod]
 		public Ide.RunCommand clean_command { owned get; set; }
+		[NoAccessorMethod]
+		public bool ignore_exit_status { get; set; }
 	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_id = "ide_pipeline_stage_launcher_get_type ()")]
 	public class PipelineStageLauncher : Ide.PipelineStage {
