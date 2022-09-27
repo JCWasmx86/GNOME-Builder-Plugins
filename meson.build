@@ -83,6 +83,10 @@ if get_option('plugin_meson').enabled()
 	subdir('meson')
 	plugins += 'mesonlsp.plugin'
 endif
+if get_option('plugin_muon').enabled()
+	subdir('muon')
+	plugins += 'muon.plugin'
+endif
 if get_option('plugin_pylint').enabled()
 	subdir('pylint')
 	plugins += 'pylint.plugin'

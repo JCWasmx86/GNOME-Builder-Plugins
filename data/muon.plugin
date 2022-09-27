@@ -1,0 +1,11 @@
+[Plugin]
+Authors=JCWasmx86
+Copyright=JCWasmx86
+Description=Format code using muon
+Loader=C
+Module=muon
+Name=Muon
+X-Formatter-Languages=meson
+X-Formatter-Languages-Priority=200
+X-Category=editing
+X-Builder-ABI=@BUILDER_ABI@

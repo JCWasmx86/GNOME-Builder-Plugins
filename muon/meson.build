@@ -1,8 +1,8 @@
-hadolint_sources = ['hadolint.vala']
-c_args = ['-DG_LOG_DOMAIN="hadolint"']
+muon_sources = ['muon.vala']
+c_args = ['-DG_LOG_DOMAIN="muon"']
 tgts += shared_module(
-    'hadolint',
-    hadolint_sources,
+    'muon',
+    muon_sources,
     c_args: c_args,
     dependencies: dependencies,
     include_directories: inc,
