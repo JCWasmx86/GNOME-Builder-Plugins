@@ -1,4 +1,5 @@
 option('builder_abi', type: 'string', value: '44', description: 'The ABI to use')
+option('compress', type: 'feature', value: 'enabled', description: 'Whether to compress the plugins using eu-elfcompress')
 option('plugin_cabal', type: 'feature', value: 'enabled')
 option('plugin_clangd', type: 'feature', value: 'enabled')
 option('plugin_hadolint', type: 'feature', value: 'enabled')

@@ -141,7 +141,7 @@ subdir('data')
 copied_tgts = []
 cp = find_program('cp')
 compress = find_program('eu-elfcompress', required: false)
-if compress.found()
+if compress.found() and get_option('compress').enabled()
 	foreach tgt : tgts
 		name = tgt.full_path().split('/')[-1]
 		copied_tgts += custom_target('compress_' + name, output: name, input: tgt, command: [compress, '@INPUT@', '-o', '@OUTPUT@', '-q'], install: false)
