@@ -61,6 +61,7 @@ check_plugin clangd "clangd"
 check_plugin hadolint "hadolint"
 check_plugin_ex ~/.ghcup/bin/haskell-language-server-wrapper1 haskell-language-server-wrapper1 "hls"
 check_plugin meson_lsp "meson"
+check_plugin muon "muon"
 check_plugin pylint "pylint"
 check_plugin shellcheck "shellcheck"
 check_plugin shfmt "shfmt"
@@ -97,6 +98,9 @@ if is_disabled "hadolint"; then
 fi
 if is_disabled "meson"; then
 	manually_install+=("mesonlsp")
+fi
+if is_disabled "muon"; then
+	manually_install+=("muon")
 fi
 if is_disabled "swift-format"; then
 	manually_install+=("swift-format")
