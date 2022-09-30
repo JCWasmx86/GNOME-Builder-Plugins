@@ -10,7 +10,7 @@ guaranteed.
 *It is advised to run this in e.g. a docker container or a VM, as this makes destructive changes
 by updating libadwaita without package manager.*
 ```
-sudo dnf install git vala meson gcc libgee-devel json-glib-devel gtk4-devel gtksourceview5-devel libadwaita-devel libpeas-devel g++
+sudo dnf install git vala meson gcc libgee-devel json-glib-devel gtk4-devel gtksourceview5-devel libadwaita-devel libpeas-devel template-glib-devel g++
 git clone https://gitlab.gnome.org/GNOME/libadwaita
 cd libadwaita
 meson build -Dprefix=/usr
