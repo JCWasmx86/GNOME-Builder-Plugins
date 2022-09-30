@@ -38,6 +38,9 @@ public class TexlabService : Ide.LspService {
 }
 
 class TexlabCompletionProvider : Ide.LspCompletionProvider, GtkSource.CompletionProvider {
+	public override int get_priority (GtkSource.CompletionContext cc) {
+		return -20000;
+	}
 	public override void load () {
 		bind_client (this);
 	}

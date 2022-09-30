@@ -7,6 +7,7 @@ Module=texlab
 Name=Texlab
 X-Category=lsps
 X-Completion-Provider-Languages=latex,bibtex
+X-Completion-Provider-Languages-Priority=-200000
 X-Diagnostic-Provider-Languages=latex,bibtex
 X-Diagnostic-Provider-Languages-Priority=200
 X-Formatter-Languages=latex,bibtex
