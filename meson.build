@@ -36,7 +36,6 @@ inc = include_directories (
 	'include/libide/terminal',
 	'include/libide/webkit',
 	'include/libide/tweaks',
-	'include/template-glib-1.0',
 	'include/libpanel-1',
 	'include/vte-2.91',
 )
@@ -50,11 +49,12 @@ dependencies = [
 	dependency('json-glib-1.0'),
 	dependency('libadwaita-1', version: '>=1.2.0'),
 	dependency('libpeas-1.0'),
+	dependency('template-glib-1.0'),
 	meson.get_compiler('vala').find_library('ide', dirs: vapi_dir),
 	meson.get_compiler('vala').find_library('panel-1', dirs: vapi_dir),
-	meson.get_compiler('vala').find_library('template-glib-1.0', dirs: vapi_dir),
 	meson.get_compiler('vala').find_library('vte-3.91', dirs: vapi_dir),
 ]
+
 gnome = import('gnome')
 plugins = []
 tgts = []
