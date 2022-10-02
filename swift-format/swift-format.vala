@@ -1,4 +1,4 @@
-/* shfmt.vala
+/* swift-format.vala
  *
  * Copyright 2022 JCWasmx86 <JCWasmx86@t-online.de>
  *

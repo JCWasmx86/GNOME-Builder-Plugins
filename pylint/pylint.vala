@@ -69,7 +69,7 @@ public class PylintDiagnosticProvider : Ide.DiagnosticTool {
 		if (base.prepare_run_context (run_context, file, contents, language_id)) {
 			run_context.append_argv ("-f");
 			run_context.append_argv ("json");
-            run_context.append_argv (file.get_path ());
+			run_context.append_argv (file.get_path ());
 			run_context.set_cwd ("/");
 			return true;
 		}
