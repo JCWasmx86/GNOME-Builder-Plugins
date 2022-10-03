@@ -1,0 +1,11 @@
+[Plugin]
+Authors=JCWasmx86 <JCWasmx86@t-online.de>
+Copyright=JCWasmx86
+Description=Indenting and symbol resolution for markdown
+Loader=C
+Module=markdown
+Name=XML Language Enablement
+X-Category=language
+X-Indenter-Languages=markdown
+X-Symbol-Resolver-Languages=markdown
+X-Builder-ABI=@BUILDER_ABI@
