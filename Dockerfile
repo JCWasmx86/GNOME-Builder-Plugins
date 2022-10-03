@@ -1,6 +1,6 @@
 FROM fedora:36 AS stage1
 WORKDIR /app
-RUN sudo dnf install git vala meson gcc libgee-devel json-glib-devel gtk4-devel gtksourceview5-devel libadwaita-devel libpeas-devel g++ zip template-glib-devel -y &&\
+RUN dnf install git vala meson gcc libgee-devel json-glib-devel gtk4-devel gtksourceview5-devel libadwaita-devel libpeas-devel g++ template-glib-devel zip -y &&\
     git clone https://gitlab.gnome.org/GNOME/libadwaita &&\
     cd libadwaita &&\
     meson build -Dprefix=/usr &&\
