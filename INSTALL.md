@@ -44,4 +44,4 @@ fi
 - Install [Swift-Format](https://github.com/apple/swift-format) manually
 ## Texlab
 - Install [texlab](https://github.com/latex-lsp/texlab)
-- Copy it to `/usr/bin/`, so you have the file `/usr/bin/texlab`
+- Copy it to `/usr/bin/`, so you have the file `/usr/bin/texlab` 

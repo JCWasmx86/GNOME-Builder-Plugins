@@ -19,7 +19,39 @@
  */
 
 public class MarkdownIndenter : Ide.Object, GtkSource.Indenter {
+	private int? extract_number (string str) {
+		for (var i = 0; i < str.length; i++) {
+			warning ("%d '%c'", i, str[i]);
+			if (str[i] >= '0' && str[i] <= '9') {
+				continue;
+			} else if (str[i] == '.' && i != 0) {
+				return int.parse (str.substring (0, i));
+			}
+			break;
+		}
+		return null;
+	}
 	public void indent (GtkSource.View view, ref Gtk.TextIter iter) {
+		/*
+		 * 1. Add "- " automatically for unordered lists
+		 * 2. Add "n. " automatically for ordered lists
+		 * 3.
+		 */
+		var buf = view.buffer;
+		var prev_line_no = iter.get_line ();
+		Gtk.TextIter prev_iter;
+		buf.get_iter_at_line (out prev_iter, prev_line_no - 1);
+		var prev_line = prev_iter.get_text (iter);
+		var prev_line_stripped = prev_line.chug ();
+		var indent = prev_line.substring (0, prev_line.length - prev_line_stripped.length);
+		if (prev_line_stripped.has_prefix ("- ")) {
+			buf.insert (ref iter, "%s- ".printf (indent), -1);
+			return;
+		}
+		var n = extract_number (prev_line_stripped);
+		if (n != null) {
+			buf.insert (ref iter, "%s%d. ".printf (indent, n + 1), -1);
+		}
 	}
 
 	public bool is_trigger (GtkSource.View view, Gtk.TextIter location, Gdk.ModifierType state, uint keyval) {
@@ -55,4 +87,5 @@ public class MarkdownSymbolResolver : Ide.Object, Ide.SymbolResolver {
 public void peas_register_types (TypeModule module) {
 	var obj = (Peas.ObjectModule) module;
 	obj.register_extension_type (typeof (Ide.SymbolResolver), typeof (MarkdownSymbolResolver));
+	obj.register_extension_type (typeof (GtkSource.Indenter), typeof (MarkdownIndenter));
 }
