@@ -47,13 +47,13 @@ unzip dist.zip
 - shellcheck: Shellcheck integration (Seems to be somewhat broken because of seemingly upstream problems)
 - shfmt: Shfmt integration
 - sourcekit: Integration for Sourcekit, the Swift language server
-- sqlconnections: Allows you to create the config for sqls using a GUI (WIP)
+- sqlconnections: Allows you to create the config for sqls using a GUI (Disabled by default, enable by using `-Dplugin_sqlconnections=enabled`)
 - sqls: Integration for the SQL language server
 - stack: Integration for the stack buildsystem
 - swift: Integration for the swift buildsystem
 - swift-format: Integration for swift-formatter
 - swift-lint: Integration for swift-lint
-- texlab: LaTeX integration
+- texlab: LaTeX integration (Disabled by default, enable by using `-Dplugin_texlab=enabled`)
 - xmlfmt: Formatter for XML
 
 ## Changes to ide.vapi
