@@ -2,8 +2,8 @@
 basedir=$(mktemp -d)
 cd "$basedir" || exit
 mkdir prefix
-git clone https://gitlab.gnome.org/GNOME/template-glib
-cd template-glib || exit
+git clone https://gitlab.gnome.org/GNOME/libpanel
+cd libpanel || exit
 meson build -Dprefix="$basedir/prefix"
 cd build || exit
 ninja install
