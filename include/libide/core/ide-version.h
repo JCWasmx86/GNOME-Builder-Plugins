@@ -66,7 +66,7 @@
  *
  * libide version.
  */
-#define IDE_VERSION 44.alpha0
+#define IDE_VERSION 44.alpha
 
 /**
  * IDE_VERSION_S:
@@ -74,7 +74,7 @@
  * libide version, encoded as a string, useful for printing and
  * concatenation.
  */
-#define IDE_VERSION_S "44.alpha0"
+#define IDE_VERSION_S "44.alpha"
 
 #define IDE_ENCODE_VERSION(major,minor,micro) \
         ((major) << 24 | (minor) << 16 | (micro) << 8)

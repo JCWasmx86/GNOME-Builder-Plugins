@@ -76,6 +76,7 @@ unzip dist.zip
 	- `append_args`: string array as arguments
 	- `append_args`: `[CCode (array_length = false, array_null_terminated = true)]` to the argument
 - All: `s/Tmpl/Template/g`
+- Copy `ide-shortcut-info.h` to `libide/gui`
 
 ## Updating libraries
 - Update vapis

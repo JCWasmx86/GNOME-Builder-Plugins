@@ -345,6 +345,7 @@ namespace Ide {
 		public void set_toolchain_id (string toolchain_id);
 		public void setenv (string key, string value);
 		public virtual bool supports_runtime (Ide.Runtime runtime);
+		public virtual GLib.File? translate_file (GLib.File file);
 		public string app_id { get; set; }
 		public string append_path { get; set; }
 		[CCode (array_length = false, array_null_terminated = true)]
@@ -1561,6 +1562,8 @@ namespace Ide {
 		public unowned string get_program ();
 		[CCode (array_length = false, array_null_terminated = true)]
 		public unowned string[] get_search_path ();
+		[NoWrapper]
+		public virtual void prepare_run_context (Ide.Pipeline pipeline, Ide.RunContext run_context);
 		public void restart ();
 		public void set_inherit_stderr (bool inherit_stderr);
 		public void set_program (string program);
@@ -1800,6 +1803,14 @@ namespace Ide {
 		public Panel.Position? get_position ();
 		public void observe (Ide.Pane location);
 		public void unobserve (Ide.Pane location);
+	}
+	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_id = "ide_path_cache_get_type ()")]
+	public sealed class PathCache : GLib.Object {
+		[CCode (has_construct_function = false)]
+		public PathCache ();
+		public bool contains (string program_name, out bool had_program_path);
+		public void insert (string program_name, string? program_path);
+		public bool lookup (string program_name, out string? program_path);
 	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", ref_function = "ide_pattern_spec_ref", type_id = "ide_pattern_spec_get_type ()", unref_function = "ide_pattern_spec_unref")]
 	[Compact]
@@ -2456,6 +2467,7 @@ namespace Ide {
 		public SearchResult ();
 		public virtual void activate (Gtk.Widget last_focus);
 		public static int compare (void* a, void* b);
+		public unowned string get_accelerator ();
 		public unowned GLib.Icon? get_gicon ();
 		public unowned Gdk.Paintable? get_paintable ();
 		public int get_priority ();
@@ -2466,6 +2478,7 @@ namespace Ide {
 		public bool get_use_underline ();
 		[NoWrapper]
 		public virtual bool matches (string query);
+		public void set_accelerator (string accelerator);
 		public void set_gicon (GLib.Icon gicon);
 		public void set_paintable (Gdk.Paintable paintable);
 		public void set_priority (int priority);
@@ -2474,6 +2487,7 @@ namespace Ide {
 		public void set_title (string title);
 		public void set_use_markup (bool use_markup);
 		public void set_use_underline (bool use_underline);
+		public string accelerator { get; set; }
 		public GLib.Icon gicon { get; set; }
 		public Gdk.Paintable paintable { get; set; }
 		public int priority { get; set; }
@@ -3563,6 +3577,7 @@ namespace Ide {
 		public int peek_stderr ();
 		public int peek_stdin ();
 		public int peek_stdout ();
+		public bool silence_fd (int dest_fd) throws GLib.Error;
 		public bool stderr_isatty ();
 		public bool stdin_isatty ();
 		public bool stdout_isatty ();
@@ -3696,6 +3711,7 @@ namespace Ide {
 		public void go_forward ();
 		public bool has_generator ();
 		public void load_uri (string uri);
+		public void print ();
 		public void reload ();
 		public void reload_ignoring_cache ();
 		public void set_show_toolbar (bool show_toolbar);
