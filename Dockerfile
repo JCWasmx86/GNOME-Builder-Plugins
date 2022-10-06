@@ -5,7 +5,7 @@ RUN dnf install git vala meson gcc libgee-devel json-glib-devel gtk4-devel gtkso
     cd libadwaita &&\
     meson build -Dprefix=/usr &&\
     cd build &&\
-    sudo ninja install &&\
+    ninja install &&\
     cd ../.. &&\
     git clone https://github.com/JCWasmx86/GNOME-Builder-Plugins &&\
     cd GNOME-Builder-Plugins &&\
