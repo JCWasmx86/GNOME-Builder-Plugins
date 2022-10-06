@@ -38,26 +38,32 @@ unzip dist.zip
 ```
 
 ## Plugins
-- cabal: Integration for the cabal buildsystem
-- clangd: (Copied from upstream, converted to Vala): Clangd integration
-- hadolint: Integration for Hadolint, the Dockerfile linter
-- hls: Integration for the Haskell Language Server
-- icon_installer: Allow installing icons easily in your project
-- markdown: Indenter/SymbolResolver for Markdown
-- meson: Integration for my meson language server
-- muon: Format `meson.build` files using muon
-- pylint: Integration with Pylint
-- shfmt: Shfmt integration
-- sourcekit: Integration for Sourcekit, the Swift language server
-- sqlconnections: Allows you to create the config for sqls using a GUI (Disabled by default, enable by using `-Dplugin_sqlconnections=enabled`)
-- sqls: Integration for the SQL language server
-- stack: Integration for the stack buildsystem
-- swift: Integration for the swift buildsystem
-- swift-format: Integration for swift-formatter
-- swift-tempaltes: Extends the CreateProject-Dialog to add Swift-Support
-- swift-lint: Integration for swift-lint
-- texlab: LaTeX integration (Disabled by default, enable by using `-Dplugin_texlab=enabled`)
-- xmlfmt: Formatter for XML
+| Name            | Description    | Will attempt to upstream? |
+|-----------------|:--------------:|:-----------------------------------------------------------------------------------------------------------------:|
+| cabal           | Integration for the cabal buildsystem                                                                                         | ✅ |
+| clangd          | (Copied from upstream, converted to Vala): Clangd integration                                                                 | ❌ |
+| hadolint        | Integration for Hadolint, the Dockerfile linter                                                                               | ✅ |
+| hls             | Integration for the Haskell Language Server                                                                                   | ✅ |
+| icon_installer  | Allow installing icons easily in your project                                                                                 |    |
+| markdown        | Indenter/SymbolResolver for Markdown                                                                                          |    |
+| meson           | Integration for my meson language server                                                                                      | ❌ |
+| muon            | Format `meson.build` files using muon                                                                                         | ✅ |
+| pylint          | Integration with Pylint                                                                                                       | ✅ |
+| shfmt           | Shfmt integration                                                                                                             | ✅ |
+| sourcekit       | Integration for Sourcekit, the Swift language server                                                                          | ✅ |
+| sqlconnections  | Allows you to create the config for sqls using a GUI (Disabled by default, enable by using `-Dplugin_sqlconnections=enabled`) |    |
+| sqls            | Integration for the SQL language server                                                                                       | ✅ |
+| stack           | Integration for the stack buildsystem                                                                                         | ✅ |
+| swift           | Integration for the swift buildsystem                                                                                         | ✅ |
+| swift-format    | Integration for swift-formatter                                                                                               | ✅ |
+| swift-templates | Extends the CreateProject-Dialog to add Swift-Support                                                                         | ✅ |
+| swift-lint      | Integration for swift-lint                                                                                                    | ✅ |
+| texlab          | LaTeX integration (Disabled by default, enable by using `-Dplugin_texlab=enabled`)                                            | ❌ |
+| xmlfmt          | Formatter for XML                                                                                                             | ✅ |
+
+- ✅: Yes
+- ❌: No
+- Empty: Time will tell
 
 ## Changes to ide.vapi
 - `HtmlGenerator.for_buffer`: Remove public
