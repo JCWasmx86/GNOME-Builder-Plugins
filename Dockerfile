@@ -12,7 +12,8 @@ RUN dnf install git vala meson gcc libgee-devel json-glib-devel gtk4-devel gtkso
     meson build &&\
     cd build &&\
     ninja install &&\
-    cp dist.zip /app
+    cp dist.zip /app &&\
+    dnf clean all
 
 FROM scratch AS export-stage
 COPY --from=stage1 /app/dist.zip .
