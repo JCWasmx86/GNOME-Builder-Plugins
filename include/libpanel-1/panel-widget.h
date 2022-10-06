@@ -103,6 +103,11 @@ const char        *panel_widget_get_kind                      (PanelWidget      
 PANEL_AVAILABLE_IN_ALL
 void               panel_widget_set_kind                      (PanelWidget                 *self,
                                                                const char                  *kind);
+PANEL_AVAILABLE_IN_1_2
+const char        *panel_widget_get_tooltip                   (PanelWidget                 *self);
+PANEL_AVAILABLE_IN_1_2
+void               panel_widget_set_tooltip                   (PanelWidget                 *self,
+                                                               const char                  *tooltip);
 PANEL_AVAILABLE_IN_ALL
 gboolean           panel_widget_get_busy                      (PanelWidget                 *self);
 PANEL_AVAILABLE_IN_ALL

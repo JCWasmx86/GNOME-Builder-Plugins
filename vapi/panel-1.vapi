@@ -277,6 +277,7 @@ namespace Panel {
 		public bool get_reorderable ();
 		public unowned Panel.SaveDelegate? get_save_delegate ();
 		public unowned string? get_title ();
+		public unowned string? get_tooltip ();
 		public void insert_action_group (string prefix, GLib.ActionGroup group);
 		[CCode (cname = "panel_widget_class_install_action")]
 		public class void install_action (string action_name, string? parameter_type, Gtk.WidgetActionActivateFunc activate);
@@ -296,6 +297,7 @@ namespace Panel {
 		public void set_reorderable (bool reorderable);
 		public void set_save_delegate (Panel.SaveDelegate? save_delegate);
 		public void set_title (string? title);
+		public void set_tooltip (string? tooltip);
 		public void unmark_busy ();
 		public void unmaximize ();
 		public bool busy { get; }
@@ -311,6 +313,8 @@ namespace Panel {
 		public bool reorderable { get; set; }
 		public Panel.SaveDelegate save_delegate { get; set; }
 		public string title { get; set; }
+		[Version (since = "1.2")]
+		public string tooltip { get; set; }
 		[HasEmitter]
 		public virtual signal unowned Gtk.Widget? get_default_focus ();
 		public virtual signal void presented ();
@@ -353,7 +357,15 @@ namespace Panel {
 	[CCode (cheader_filename = "libpanel.h", cname = "PANEL_WIDGET_KIND_UTILITY")]
 	public const string WIDGET_KIND_UTILITY;
 	[CCode (cheader_filename = "libpanel.h")]
+	public static bool check_version (uint major, uint minor, uint micro);
+	[CCode (cheader_filename = "libpanel.h")]
 	public static void finalize ();
+	[CCode (cheader_filename = "libpanel.h")]
+	public static uint get_major_version ();
+	[CCode (cheader_filename = "libpanel.h")]
+	public static uint get_micro_version ();
+	[CCode (cheader_filename = "libpanel.h")]
+	public static uint get_minor_version ();
 	[CCode (cheader_filename = "libpanel.h")]
 	public static GLib.Resource get_resource ();
 	[CCode (cheader_filename = "libpanel.h")]

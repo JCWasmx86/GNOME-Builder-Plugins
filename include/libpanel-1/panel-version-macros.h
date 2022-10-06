@@ -25,7 +25,7 @@
 #include "panel-version.h"
 
 #ifndef _PANEL_EXTERN
-#define _PANEL_EXTERN extern
+# define _PANEL_EXTERN extern
 #endif
 
 #ifdef PANEL_DISABLE_DEPRECATION_WARNINGS
@@ -39,6 +39,7 @@
 #endif
 
 #define PANEL_VERSION_1_0 (G_ENCODE_VERSION (1, 0))
+#define PANEL_VERSION_1_2 (G_ENCODE_VERSION (1, 2))
 
 #if (PANEL_MINOR_VERSION == 99)
 # define PANEL_VERSION_CUR_STABLE (G_ENCODE_VERSION (PANEL_MAJOR_VERSION + 1, 0))
@@ -82,7 +83,7 @@
  * the libpanel.h header.
 
  * The definition should be one of the predefined Drafting version
- * macros: %PANEL_VERSION_1_0, %PANEL_VERSION_4_2,...
+ * macros: %PANEL_VERSION_1_0, %PANEL_VERSION_1_2,...
  *
  * This macro defines the upper bound for the Drafting API to use.
  *
@@ -114,10 +115,32 @@
 # define PANEL_DEPRECATED_IN_1_0                _PANEL_EXTERN
 # define PANEL_DEPRECATED_IN_1_0_FOR(f)         _PANEL_EXTERN
 #endif
-
 #if PANEL_VERSION_MAX_ALLOWED < PANEL_VERSION_1_0
 # define PANEL_AVAILABLE_IN_1_0                 PANEL_UNAVAILABLE(1, 0)
 #else
 # define PANEL_AVAILABLE_IN_1_0                 _PANEL_EXTERN
 #endif
 
+#if PANEL_VERSION_MIN_REQUIRED >= PANEL_VERSION_1_2
+# define PANEL_DEPRECATED_IN_1_2                PANEL_DEPRECATED
+# define PANEL_DEPRECATED_IN_1_2_FOR(f)         PANEL_DEPRECATED_FOR(f)
+#else
+# define PANEL_DEPRECATED_IN_1_2                _PANEL_EXTERN
+# define PANEL_DEPRECATED_IN_1_2_FOR(f)         _PANEL_EXTERN
+#endif
+#if PANEL_VERSION_MAX_ALLOWED < PANEL_VERSION_1_2
+# define PANEL_AVAILABLE_IN_1_2                 PANEL_UNAVAILABLE(1, 2)
+#else
+# define PANEL_AVAILABLE_IN_1_2                 _PANEL_EXTERN
+#endif
+
+PANEL_AVAILABLE_IN_1_2
+guint    panel_get_major_version (void);
+PANEL_AVAILABLE_IN_1_2
+guint    panel_get_minor_version (void);
+PANEL_AVAILABLE_IN_1_2
+guint    panel_get_micro_version (void);
+PANEL_AVAILABLE_IN_1_2
+gboolean panel_check_version     (guint major,
+                                  guint minor,
+                                  guint micro);
