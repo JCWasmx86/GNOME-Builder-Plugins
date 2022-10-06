@@ -44,7 +44,6 @@ unzip dist.zip
 - icon_installer: Allow installing icons easily in your project
 - meson: Integration for my meson language server
 - pylint: Integration with Pylint
-- shellcheck: Shellcheck integration (Seems to be somewhat broken because of seemingly upstream problems)
 - shfmt: Shfmt integration
 - sourcekit: Integration for Sourcekit, the Swift language server
 - sqlconnections: Allows you to create the config for sqls using a GUI (Disabled by default, enable by using `-Dplugin_sqlconnections=enabled`)

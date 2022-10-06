@@ -95,10 +95,6 @@ if get_option('plugin_pylint').enabled()
 	subdir('pylint')
 	plugins += 'pylint.plugin'
 endif
-if get_option('plugin_shellcheck').enabled()
-	subdir('shellcheck')
-	plugins += 'shellcheck.plugin'
-endif
 if get_option('plugin_shfmt').enabled()
 	subdir('shfmt')
 	plugins += 'shfmt.plugin'

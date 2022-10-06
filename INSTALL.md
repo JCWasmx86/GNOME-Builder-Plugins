@@ -24,9 +24,6 @@ fi
 ## Pylint
 - Install pylint using your distro's package manager
 - `/usr/bin/pylint` must exist (Other paths may work, too)
-## Shellcheck
-- Install shellcheck using your distro's package manager
-- `/usr/bin/shellcheck` must exist (Other paths may work, too)
 ## Shfmt
 - Install shfmt using your distro's package manager
 - `/usr/bin/shfmt` must exist (Other paths may work, too)

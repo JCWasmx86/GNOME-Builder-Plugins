@@ -63,7 +63,6 @@ check_plugin_ex ~/.ghcup/bin/haskell-language-server-wrapper1 haskell-language-s
 check_plugin meson_lsp "meson"
 check_plugin muon "muon"
 check_plugin pylint "pylint"
-check_plugin shellcheck "shellcheck"
 check_plugin shfmt "shfmt"
 check_plugin sourcekit-lsp "sourcekit"
 check_plugin swift-format "swift-format"
@@ -110,9 +109,6 @@ if is_disabled "swift-lint"; then
 fi
 if is_disabled "pylint"; then
 	packages_to_install_dnf+=("pylint")
-fi
-if is_disabled "shellcheck"; then
-	packages_to_install_dnf+=("ShellCheck")
 fi
 if is_disabled "shfmt"; then
 	packages_to_install_dnf+=("shfmt")
