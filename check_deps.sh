@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 sh -l -c "which --help" 2>/dev/null >/dev/null || echo "Command 'which' is missing"
 sh -l -c "tput -V" 2>/dev/null >/dev/null || echo "Command 'tput' is missing"
-enabled_plugins=("icon_installer" "sqlconnections" "xmlfmt")
+enabled_plugins=("icon_installer" "xmlfmt")
 disabled_plugins=()
 packages_to_install_dnf=()
 paths_to_add_to_profile=()
