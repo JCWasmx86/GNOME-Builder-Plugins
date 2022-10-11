@@ -40,7 +40,9 @@ public class MuonFormatter : Ide.Object, Ide.Formatter {
 		if (!proc.get_successful ()) {
 			return false;
 		}
+		buffer.begin_user_action ();
 		buffer.set_text (stdout_buf, stdout_buf.length);
+		buffer.end_user_action ();
 		return true;
 	}
 }
