@@ -4,7 +4,7 @@ mesonlsp_sources = [
 ]
 c_args = ['-DG_LOG_DOMAIN="mesonlsp"']
 tgts += shared_module(
-    'mesonlsp',
+    'meson',
     mesonlsp_sources,
     c_args: c_args,
     dependencies: dependencies,
