@@ -70,58 +70,38 @@ if get_option('smart').enabled()
     if get_option('experimental')
         enabled_plugins += 'sqlconnections'
     endif
-    if run_command('cabal', '--version', check: false).returncode() == 0
-        enabled_plugins += 'cabal'
-    endif
-    if run_command('clangd', '--version', check: false).returncode() == 0
-        enabled_plugins += 'clangd'
-    endif
-    if run_command('hadolint', '--version', check: false).returncode() == 0
-        enabled_plugins += 'hadolint'
-    endif
-    if (
-        run_command(
-            'haskell-language-server-wrapper1',
-            '--version',
-            check: false,
-        ).returncode() == 0
-    )
-        enabled_plugins += 'hls'
-    endif
-    if run_command('meson_lsp', '--version', check: false).returncode() == 0
-        enabled_plugins += 'meson'
-    endif
-    if run_command('muon', 'version', check: false).returncode() == 0
-        enabled_plugins += 'muon'
-    endif
-    if run_command('pylint', '--version', check: false).returncode() == 0
-        enabled_plugins += 'pylint'
-    endif
-    if run_command('shfmt', '--version', check: false).returncode() == 0
-        enabled_plugins += 'shfmt'
-    endif
-    if run_command('sourcekit-lsp', '--help', check: false).returncode() == 0
-        enabled_plugins += 'sourcekit'
-    endif
-    if run_command('sqls', '--version', check: false).returncode() == 0
-        enabled_plugins += 'sqls'
-    endif
-    if run_command('stack', '--version', check: false).returncode() == 0
-        enabled_plugins += 'stack'
-    endif
-    if run_command('swift', '--version', check: false).returncode() == 0
-        enabled_plugins += 'swift'
-    endif
-    if run_command('swift-format', '--version', check: false).returncode() == 0
-        enabled_plugins += 'swift-format'
-        enabled_plugins += 'swift-templates'
-    endif
-    if run_command('swiftlint', '--version', check: false).returncode() == 0
-        enabled_plugins += 'swift-lint'
-    endif
-    if run_command('texlab', '--version', check: false).returncode() == 0
-        enabled_plugins += 'texlab'
-    endif
+    progs = [
+    	'cabal',
+    	'clangd',
+    	'hadolint',
+    	'muon',
+    	'pylint',
+    	'shfmt',
+    	'sqls',
+    	'stack',
+    	'swift',
+    	'texlab',
+    ]
+    foreach prog : progs
+	p = find_program(prog, required: false)
+	if p.found()
+		enabled_plugins += prog
+	endif
+    endforeach
+    spec_progs = {
+    	'haskell-language-server-wrapper1': 'hls',
+    	'meson_lsp': 'meson',
+    	'sourcekit-lsp': 'sourcekit',
+    	'swift-format': 'swift-format',
+    	'swift': 'swift-templates',
+    	'swiftlint': 'swift-lint',
+    }
+    foreach prog, plugin : spec_progs
+    	p = find_program(prog, required: false)
+    	if p.found()
+    		enabled_plugins += plugin
+    	endif
+    endforeach
     foreach x : enabled_plugins
         subdir(x)
         plugins += (x + '.plugin')
