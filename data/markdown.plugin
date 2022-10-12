@@ -8,5 +8,4 @@ Name=Markdown Language Enablement
 X-Category=language
 X-Indenter-Languages=markdown
 X-Indenter-Languages-Priority=1500
-X-Symbol-Resolver-Languages=markdown
 X-Builder-ABI=@BUILDER_ABI@

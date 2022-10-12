@@ -61,31 +61,8 @@ public class MarkdownIndenter : Ide.Object, GtkSource.Indenter {
 	}
 }
 
-public class MarkdownSymbolResolver : Ide.Object, Ide.SymbolResolver {
-	public async Ide.Symbol? find_nearest_scope_async (Ide.Location location, GLib.Cancellable? cancellable) throws GLib.Error {
-		return null;
-	}
-
-	public async GLib.GenericArray<Ide.Range> find_references_async (Ide.Location location, string? language_id, GLib.Cancellable? cancellable) throws GLib.Error {
-		return new GLib.GenericArray<Ide.Range> ();
-	}
-
-	public async Ide.SymbolTree? get_symbol_tree_async (GLib.File file, GLib.Bytes? contents, GLib.Cancellable? cancellable) throws GLib.Error {
-		return null;
-	}
-
-	public void load () {}
-
-	public async Ide.Symbol? lookup_symbol_async (Ide.Location location, GLib.Cancellable? cancellable) throws GLib.Error {
-		return null;
-	}
-
-	public void unload () {}
-}
-
 [ModuleInit]
 public void peas_register_types (TypeModule module) {
 	var obj = (Peas.ObjectModule) module;
-	obj.register_extension_type (typeof (Ide.SymbolResolver), typeof (MarkdownSymbolResolver));
 	obj.register_extension_type (typeof (GtkSource.Indenter), typeof (MarkdownIndenter));
 }

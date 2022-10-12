@@ -45,7 +45,7 @@ unzip dist.zip
 | hadolint        | Integration for Hadolint, the Dockerfile linter                                                                               | ✅ |
 | hls             | Integration for the Haskell Language Server                                                                                   | ✅ |
 | icon_installer  | Allow installing icons easily in your project                                                                                 |    |
-| markdown        | Indenter/SymbolResolver for Markdown                                                                                          |    |
+| markdown        | Indenter for Markdown                                                                                                         |    |
 | meson           | Integration for my meson language server                                                                                      | ❌ |
 | muon            | Format `meson.build` files using muon                                                                                         | ✅ |
 | pylint          | Integration with Pylint                                                                                                       | ✅ |
