@@ -64,60 +64,68 @@ tgts = []
 enabled_plugins = []
 
 if get_option('smart').enabled()
-	enabled_plugins += 'icon_installer'
-	enabled_plugins += 'xmlfmt'
-	enabled_plugins += 'markdown'
-	# TODO: Experimental (Sqlconnections))
-	if run_command('cabal', '--version', check: false).returncode() == 0
-		enabled_plugins += 'cabal'
-	endif
-	if run_command('clangd', '--version', check: false).returncode() == 0
-		enabled_plugins += 'clangd'
-	endif
-	if run_command('hadolint', '--version', check: false).returncode() == 0
-		enabled_plugins += 'hadolint'
-	endif
-	if run_command('haskell-language-server-wrapper1', '--version', check: false).returncode() == 0
-		enabled_plugins += 'hls'
-	endif
-	if run_command('meson_lsp', '--version', check: false).returncode() == 0
-		enabled_plugins += 'meson'
-	endif
-	if run_command('muon', 'version', check: false).returncode() == 0
-		enabled_plugins += 'muon'
-	endif
-	if run_command('pylint', '--version', check: false).returncode() == 0
-		enabled_plugins += 'pylint'
-	endif
-	if run_command('shfmt', '--version', check: false).returncode() == 0
-		enabled_plugins += 'shfmt'
-	endif
-	if run_command('sourcekit-lsp', '--help', check: false).returncode() == 0
-		enabled_plugins += 'sourcekit'
-	endif
-	if run_command('sqls', '--version', check: false).returncode() == 0
-		enabled_plugins += 'sqls'
-	endif
-	if run_command('stack', '--version', check: false).returncode() == 0
-		enabled_plugins += 'stack'
-	endif
-	if run_command('swift', '--version', check: false).returncode() == 0
-		enabled_plugins += 'swift'
-	endif
-	if run_command('swift-format', '--version', check: false).returncode() == 0
-		enabled_plugins += 'swift-format'
-		enabled_plugins += 'swift-templates'
-	endif
-	if run_command('swiftlint', '--version', check: false).returncode() == 0
-		enabled_plugins += 'swift-lint'
-	endif
-	if run_command('texlab', '--version', check: false).returncode() == 0
-		enabled_plugins += 'texlab'
-	endif
-	foreach x : enabled_plugins
-		subdir(x)
-		plugins += (x + '.plugin')
-	endforeach
+    enabled_plugins += 'icon_installer'
+    enabled_plugins += 'xmlfmt'
+    enabled_plugins += 'markdown'
+    if get_option('experimental')
+        enabled_plugins += 'sqlconnections'
+    endif
+    if run_command('cabal', '--version', check: false).returncode() == 0
+        enabled_plugins += 'cabal'
+    endif
+    if run_command('clangd', '--version', check: false).returncode() == 0
+        enabled_plugins += 'clangd'
+    endif
+    if run_command('hadolint', '--version', check: false).returncode() == 0
+        enabled_plugins += 'hadolint'
+    endif
+    if (
+        run_command(
+            'haskell-language-server-wrapper1',
+            '--version',
+            check: false,
+        ).returncode() == 0
+    )
+        enabled_plugins += 'hls'
+    endif
+    if run_command('meson_lsp', '--version', check: false).returncode() == 0
+        enabled_plugins += 'meson'
+    endif
+    if run_command('muon', 'version', check: false).returncode() == 0
+        enabled_plugins += 'muon'
+    endif
+    if run_command('pylint', '--version', check: false).returncode() == 0
+        enabled_plugins += 'pylint'
+    endif
+    if run_command('shfmt', '--version', check: false).returncode() == 0
+        enabled_plugins += 'shfmt'
+    endif
+    if run_command('sourcekit-lsp', '--help', check: false).returncode() == 0
+        enabled_plugins += 'sourcekit'
+    endif
+    if run_command('sqls', '--version', check: false).returncode() == 0
+        enabled_plugins += 'sqls'
+    endif
+    if run_command('stack', '--version', check: false).returncode() == 0
+        enabled_plugins += 'stack'
+    endif
+    if run_command('swift', '--version', check: false).returncode() == 0
+        enabled_plugins += 'swift'
+    endif
+    if run_command('swift-format', '--version', check: false).returncode() == 0
+        enabled_plugins += 'swift-format'
+        enabled_plugins += 'swift-templates'
+    endif
+    if run_command('swiftlint', '--version', check: false).returncode() == 0
+        enabled_plugins += 'swift-lint'
+    endif
+    if run_command('texlab', '--version', check: false).returncode() == 0
+        enabled_plugins += 'texlab'
+    endif
+    foreach x : enabled_plugins
+        subdir(x)
+        plugins += (x + '.plugin')
+    endforeach
 else
     if get_option('plugin_cabal').enabled()
         subdir('cabal')

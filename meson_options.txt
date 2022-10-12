@@ -1,6 +1,7 @@
 option('builder_abi', type: 'string', value: '44', description: 'The ABI to use')
 option('compress', type: 'feature', value: 'enabled', description: 'Whether to compress the plugins using eu-elfcompress')
 option('smart', type: 'feature', value: 'enabled', description: 'Autodetect which plugins can be enabled based on available tools')
+option('experimental', type: 'boolean', value: false)
 option('plugin_cabal', type: 'feature', value: 'enabled')
 option('plugin_clangd', type: 'feature', value: 'enabled')
 option('plugin_hadolint', type: 'feature', value: 'enabled')
