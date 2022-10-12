@@ -64,87 +64,87 @@ tgts = []
 
 if not get_option('smart').enabled()
 
-else
-    if get_option('plugin_cabal').enabled()
-        subdir('cabal')
-        plugins += 'cabal.plugin'
-    endif
-    if get_option('plugin_clangd').enabled()
-        subdir('clangd')
-        plugins += 'clangd.plugin'
-    endif
-    if get_option('plugin_hadolint').enabled()
-        subdir('hadolint')
-        plugins += 'hadolint.plugin'
-    endif
-    if get_option('plugin_hls').enabled()
-        subdir('hls')
-        plugins += 'hls.plugin'
-    endif
-    if get_option('plugin_icon_installer').enabled()
-        subdir('icon_installer')
-        plugins += 'icon_installer.plugin'
-    endif
-    if get_option('plugin_markdown').enabled()
-        subdir('markdown')
-        plugins += 'markdown.plugin'
-    endif
-    if get_option('plugin_meson').enabled()
-        subdir('meson')
-        plugins += 'mesonlsp.plugin'
-    endif
-    if get_option('plugin_muon').enabled()
-        subdir('muon')
-        plugins += 'muon.plugin'
-    endif
-    if get_option('plugin_pylint').enabled()
-        subdir('pylint')
-        plugins += 'pylint.plugin'
-    endif
-    if get_option('plugin_shfmt').enabled()
-        subdir('shfmt')
-        plugins += 'shfmt.plugin'
-    endif
-    if get_option('plugin_sourcekit').enabled()
-        subdir('sourcekit')
-        plugins += 'sourcekit.plugin'
-    endif
-    if get_option('plugin_sqlconnections').enabled()
-        subdir('sqlconnections')
-        plugins += 'sqlconnections.plugin'
-    endif
-    if get_option('plugin_sqls').enabled()
-        subdir('sqls')
-        plugins += 'sqls.plugin'
-    endif
-    if get_option('plugin_stack').enabled()
-        subdir('stack')
-        plugins += 'stack.plugin'
-    endif
-    if get_option('plugin_swift').enabled()
-        subdir('swift')
-        plugins += 'swift.plugin'
-    endif
-    if get_option('plugin_swift_format').enabled()
-        subdir('swift-format')
-        plugins += 'swift-format.plugin'
-    endif
-    if get_option('plugin_swift_lint').enabled()
-        subdir('swift-lint')
-        plugins += 'swift-lint.plugin'
-    endif
-    if get_option('plugin_swift_templates').enabled()
-        subdir('swift-templates')
-        plugins += 'swift-templates.plugin'
-    endif
-    if get_option('plugin_texlab').enabled()
-        subdir('texlab')
-        plugins += 'texlab.plugin'
-    endif
-    if get_option('plugin_xmlfmt').enabled()
-        subdir('xmlfmt')
-        plugins += 'xmlfmt.plugin'
-    endif
+endif
+
+if get_option('plugin_cabal').enabled()
+    subdir('cabal')
+    plugins += 'cabal.plugin'
+endif
+if get_option('plugin_clangd').enabled()
+    subdir('clangd')
+    plugins += 'clangd.plugin'
+endif
+if get_option('plugin_hadolint').enabled()
+    subdir('hadolint')
+    plugins += 'hadolint.plugin'
+endif
+if get_option('plugin_hls').enabled()
+    subdir('hls')
+    plugins += 'hls.plugin'
+endif
+if get_option('plugin_icon_installer').enabled()
+    subdir('icon_installer')
+    plugins += 'icon_installer.plugin'
+endif
+if get_option('plugin_markdown').enabled()
+    subdir('markdown')
+    plugins += 'markdown.plugin'
+endif
+if get_option('plugin_meson').enabled()
+    subdir('meson')
+    plugins += 'mesonlsp.plugin'
+endif
+if get_option('plugin_muon').enabled()
+    subdir('muon')
+    plugins += 'muon.plugin'
+endif
+if get_option('plugin_pylint').enabled()
+    subdir('pylint')
+    plugins += 'pylint.plugin'
+endif
+if get_option('plugin_shfmt').enabled()
+    subdir('shfmt')
+    plugins += 'shfmt.plugin'
+endif
+if get_option('plugin_sourcekit').enabled()
+    subdir('sourcekit')
+    plugins += 'sourcekit.plugin'
+endif
+if get_option('plugin_sqlconnections').enabled()
+    subdir('sqlconnections')
+    plugins += 'sqlconnections.plugin'
+endif
+if get_option('plugin_sqls').enabled()
+    subdir('sqls')
+    plugins += 'sqls.plugin'
+endif
+if get_option('plugin_stack').enabled()
+    subdir('stack')
+    plugins += 'stack.plugin'
+endif
+if get_option('plugin_swift').enabled()
+    subdir('swift')
+    plugins += 'swift.plugin'
+endif
+if get_option('plugin_swift_format').enabled()
+    subdir('swift-format')
+    plugins += 'swift-format.plugin'
+endif
+if get_option('plugin_swift_lint').enabled()
+    subdir('swift-lint')
+    plugins += 'swift-lint.plugin'
+endif
+if get_option('plugin_swift_templates').enabled()
+    subdir('swift-templates')
+    plugins += 'swift-templates.plugin'
+endif
+if get_option('plugin_texlab').enabled()
+    subdir('texlab')
+    plugins += 'texlab.plugin'
+endif
+if get_option('plugin_xmlfmt').enabled()
+    subdir('xmlfmt')
+    plugins += 'xmlfmt.plugin'
 endif
 
 subdir('data')
