@@ -9,7 +9,7 @@ RUN meson build -Dprefix=/usr &&\
 WORKDIR /app
 RUN git clone https://github.com/JCWasmx86/GNOME-Builder-Plugins
 WORKDIR /app/GNOME-Builder-Plugins
-RUN meson build -Dc_args="-O2" &&\
+RUN meson build -Dc_args="-O2" -Dsmart=disabled &&\
     ninja -C build -j4 &&\
     cp build/dist.zip /app
 
