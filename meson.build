@@ -71,36 +71,36 @@ if get_option('smart').enabled()
         enabled_plugins += 'sqlconnections'
     endif
     progs = [
-    	'cabal',
-    	'clangd',
-    	'hadolint',
-    	'muon',
-    	'pylint',
-    	'shfmt',
-    	'sqls',
-    	'stack',
-    	'swift',
-    	'texlab',
+        'cabal',
+        'clangd',
+        'hadolint',
+        'muon',
+        'pylint',
+        'shfmt',
+        'sqls',
+        'stack',
+        'swift',
+        'texlab',
     ]
     foreach prog : progs
-	p = find_program(prog, required: false)
-	if p.found()
-		enabled_plugins += prog
-	endif
+        p = find_program(prog, required: false)
+        if p.found()
+            enabled_plugins += prog
+        endif
     endforeach
     spec_progs = {
-    	'haskell-language-server-wrapper1': 'hls',
-    	'meson_lsp': 'meson',
-    	'sourcekit-lsp': 'sourcekit',
-    	'swift-format': 'swift-format',
-    	'swift': 'swift-templates',
-    	'swiftlint': 'swift-lint',
+        'haskell-language-server-wrapper1': 'hls',
+        'meson_lsp': 'meson',
+        'sourcekit-lsp': 'sourcekit',
+        'swift-format': 'swift-format',
+        'swift': 'swift-templates',
+        'swiftlint': 'swift-lint',
     }
     foreach prog, plugin : spec_progs
-    	p = find_program(prog, required: false)
-    	if p.found()
-    		enabled_plugins += plugin
-    	endif
+        p = find_program(prog, required: false)
+        if p.found()
+            enabled_plugins += plugin
+        endif
     endforeach
     foreach x : enabled_plugins
         subdir(x)
