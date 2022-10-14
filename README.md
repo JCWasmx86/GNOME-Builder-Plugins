@@ -6,17 +6,9 @@ guaranteed.
 
 ## Install
 
-### Fedora 36
-*It is advised to run this in e.g. a docker container or a VM, as this makes destructive changes
-by updating libadwaita without package manager.*
+### Fedora 37
 ```
 sudo dnf install git vala meson gcc libgee-devel json-glib-devel gtk4-devel gtksourceview5-devel libadwaita-devel libpeas-devel template-glib-devel g++
-git clone https://gitlab.gnome.org/GNOME/libadwaita
-cd libadwaita
-meson build -Dprefix=/usr
-cd build
-sudo ninja install
-cd ../..
 git clone https://github.com/JCWasmx86/GNOME-Builder-Plugins
 cd GNOME-Builder-Plugins
 meson build
