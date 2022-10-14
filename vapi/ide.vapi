@@ -140,6 +140,8 @@ namespace Ide {
 		[NoAccessorMethod]
 		public bool has_diagnostics { get; }
 		[NoAccessorMethod]
+		public bool has_encoding_error { get; }
+		[NoAccessorMethod]
 		public bool has_symbol_resolvers { get; }
 		public bool highlight_diagnostics { get; set; }
 		public bool is_temporary { get; construct; }
@@ -2602,6 +2604,18 @@ namespace Ide {
 		public string accelerator { owned get; set; }
 		public string shortcut_title { get; set; }
 	}
+	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", has_type_id = false)]
+	[Compact]
+	public class ShortcutInfo {
+		public unowned string get_accelerator ();
+		public unowned string get_action_name ();
+		public GLib.Variant get_action_target ();
+		public unowned string get_group ();
+		public unowned string get_icon_name ();
+		public unowned string get_page ();
+		public unowned string get_subtitle ();
+		public unowned string get_title ();
+	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_id = "ide_signal_group_get_type ()")]
 	public class SignalGroup : GLib.Object {
 		[CCode (has_construct_function = false)]
@@ -2656,6 +2670,8 @@ namespace Ide {
 		public void add_controller (int priority, owned Gtk.EventController controller);
 		public void append_menu (GLib.MenuModel menu_model);
 		public string dup_position_label ();
+		[Version (since = "44")]
+		public bool get_enable_search_bubbles ();
 		public unowned Pango.FontDescription get_font_desc ();
 		public bool get_highlight_current_line ();
 		public bool get_insert_matching_brace ();
@@ -2668,10 +2684,13 @@ namespace Ide {
 		public void remove_controller (Gtk.EventController controller);
 		public void remove_menu (GLib.MenuModel menu_model);
 		public void scroll_to_insert ();
+		[Version (since = "44")]
+		public void set_enable_search_bubbles (bool enable_search_bubbles);
 		public void set_font_desc (Pango.FontDescription font_desc);
 		public void set_highlight_current_line (bool highlight_current_line);
 		public void set_insert_matching_brace (bool insert_matching_brace);
 		public void set_overwrite_braces (bool overwrite_braces);
+		public bool enable_search_bubbles { get; set; }
 		public Pango.FontDescription font_desc { get; set; }
 		[NoAccessorMethod]
 		public int font_scale { get; set; }
@@ -4701,6 +4720,8 @@ namespace Ide {
 	public delegate bool RecursiveIgnoreFunc (GLib.File file);
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", instance_pos = 5.9)]
 	public delegate bool RunContextHandler (Ide.RunContext run_context, string argv, string env, string cwd, Ide.UnixFDMap unix_fd_map) throws GLib.Error;
+	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", instance_pos = 1.9)]
+	public delegate void ShortcutInfoFunc (Ide.ShortcutInfo info);
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", instance_pos = 3.9)]
 	public delegate void TaskCacheCallback (Ide.TaskCache self, void* key, GLib.Task task);
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", has_target = false)]
