@@ -235,6 +235,6 @@ custom_target(
     output: 'dist.zip',
     input: copied_tgts,
     command: [zip, '--quiet', '@OUTPUT@', '@INPUT@'],
-    install: true,
-    install_dir: install_dir,
+    install: false,
+    build_by_default: true
 )
