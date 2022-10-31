@@ -23,19 +23,16 @@ extern void bind_client (Ide.Object self);
 
 class HlsService : Ide.LspService {
 	construct {
-		this.set_program (Environment.get_home_dir () + "/.ghcup/bin/" + "haskell-language-server-wrapper1");
+		this.set_program (Environment.get_home_dir () + "/.ghcup/bin/" + "haskell-language-server-wrapper");
 		this.set_inherit_stderr (true);
 	}
-	public override void configure_launcher (Ide.Pipeline pipeline, Ide.SubprocessLauncher launcher) {
-		launcher.push_argv ("--lsp");
-		launcher.push_argv ("--debug");
-		launcher.push_argv ("--logfile");
-		launcher.push_argv (Environment.get_user_cache_dir () + "/hls.log");
-		launcher.prepend_path (Environment.get_home_dir () + "/.ghcup/bin");
-		launcher.prepend_path ("/usr/bin");
-		launcher.prepend_path ("/usr/local/bin");
-		launcher.set_run_on_host (false);
-		launcher.setenv ("PATH", Environment.get_home_dir () + "/.ghcup/bin:/app/bin/:/usr/bin/:" + Environment.get_variable ("PATH"), true);
+
+	public override void prepare_run_context (Ide.Pipeline pipeline, Ide.RunContext run_context) {
+		run_context.append_argv ("--lsp");
+        run_context.append_argv ("--debug");
+		run_context.append_argv ("--logfile");
+        run_context.append_argv (Environment.get_user_cache_dir () + "/hls.log");
+        run_context.setenv ("PATH", Environment.get_home_dir () + "/.ghcup/bin:/app/bin/:/usr/bin/:" + Environment.get_variable ("PATH"));
 	}
 
 	public override void configure_client (Ide.LspClient client) {
