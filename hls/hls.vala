@@ -29,10 +29,10 @@ class HlsService : Ide.LspService {
 
 	public override void prepare_run_context (Ide.Pipeline pipeline, Ide.RunContext run_context) {
 		run_context.append_argv ("--lsp");
-        run_context.append_argv ("--debug");
+		run_context.append_argv ("--debug");
 		run_context.append_argv ("--logfile");
-        run_context.append_argv (Environment.get_user_cache_dir () + "/hls.log");
-        run_context.setenv ("PATH", Environment.get_home_dir () + "/.ghcup/bin:/app/bin/:/usr/bin/:" + Environment.get_variable ("PATH"));
+		run_context.append_argv (Environment.get_user_cache_dir () + "/hls.log");
+		run_context.setenv ("PATH", Environment.get_home_dir () + "/.ghcup/bin:/app/bin/:/usr/bin/:" + Environment.get_variable ("PATH"));
 	}
 
 	public override void configure_client (Ide.LspClient client) {

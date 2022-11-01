@@ -27,13 +27,13 @@ class ClangdService : Ide.LspService {
 		this.set_program ("clangd");
 		this.set_inherit_stderr (true);
 	}
-	public override void configure_launcher (Ide.Pipeline pipeline, Ide.SubprocessLauncher launcher) {
-		launcher.push_argv ("--completion-style=detailed");
-		launcher.push_argv ("-j=4");
-		launcher.push_argv ("--malloc-trim");
-		launcher.push_argv ("--log=verbose");
-		launcher.push_argv ("--compile-commands-dir=" + pipeline.get_builddir ());
-		launcher.push_argv ("--pch-storage=memory");
+	public override void prepare_run_context (Ide.Pipeline pipeline, Ide.RunContext run_context) {
+		run_context.append_argv ("--completion-style=detailed");
+		run_context.append_argv ("-j=4");
+		run_context.append_argv ("--malloc-trim");
+		run_context.append_argv ("--log=verbose");
+		run_context.append_argv ("--compile-commands-dir=" + pipeline.get_builddir ());
+		run_context.append_argv ("--pch-storage=memory");
 	}
 
 	public override void configure_client (Ide.LspClient client) {

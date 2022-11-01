@@ -28,8 +28,8 @@ public class MesonService : Ide.LspService {
 		this.set_program ("meson_lsp");
 	}
 
-	public override void configure_launcher (Ide.Pipeline pipeline, Ide.SubprocessLauncher launcher) {
-		launcher.set_environ (new string[] { "G_MESSAGES_DEBUG=all", "G_DEBUG=fatal-criticals" });
+	public override void prepare_run_context (Ide.Pipeline pipeline, Ide.RunContext run_context) {
+		run_context.setenv ("G_MESSAGES_DEBUG", "all");
 	}
 
 	public override void configure_client (Ide.LspClient client) {

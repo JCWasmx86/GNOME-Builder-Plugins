@@ -25,7 +25,9 @@ class SqlsService : Ide.LspService {
 		this.set_program ("sqls");
 		this.set_inherit_stderr (true);
 	}
-	public override void configure_launcher (Ide.Pipeline pipeline, Ide.SubprocessLauncher launcher) {
+
+	public override void prepare_run_context (Ide.Pipeline pipeline, Ide.RunContext run_context) {
+
 	}
 
 	public override void configure_client (Ide.LspClient client) {

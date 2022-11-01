@@ -1,6 +1,6 @@
-/* ide-lsp-workspace-edit.h
+/* ide-lsp-plugin.h
  *
- * Copyright 2021 Georg Vienna <georg.vienna@himbarsoft.com>
+ * Copyright 2022 Christian Hergert <chergert@redhat.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,22 +20,13 @@
 
 #pragma once
 
-#if !defined (IDE_LSP_INSIDE) && !defined (IDE_LSP_COMPILATION)
-# error "Only <libide-lsp.h> can be included directly."
-#endif
+#include <libpeas/peas.h>
 
-#include <libide-code.h>
+#include <libide-core.h>
 
 G_BEGIN_DECLS
 
-#define IDE_TYPE_LSP_WORKSPACE_EDIT (ide_lsp_workspace_edit_get_type())
-
-IDE_AVAILABLE_IN_ALL
-G_DECLARE_FINAL_TYPE(IdeLspWorkspaceEdit, ide_lsp_workspace_edit, IDE, LSP_WORKSPACE_EDIT, GObject)
-
-IDE_AVAILABLE_IN_ALL
-IdeLspWorkspaceEdit *ide_lsp_workspace_edit_new        (GVariant            *variant);
-IDE_AVAILABLE_IN_ALL
-GPtrArray           *ide_lsp_workspace_edit_get_edits  (IdeLspWorkspaceEdit *self);
+IDE_AVAILABLE_IN_44
+void ide_lsp_plugin_register_types (PeasObjectModule *object_module);
 
 G_END_DECLS

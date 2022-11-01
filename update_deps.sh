@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 basedir=$(mktemp -d)
-cd "$basedir" || exit
+cd "$basedir"|| exit
 mkdir prefix
 git clone https://gitlab.gnome.org/GNOME/libpanel
 cd libpanel || exit

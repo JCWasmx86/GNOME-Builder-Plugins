@@ -27,9 +27,9 @@ class SourcekitService : Ide.LspService {
 		this.set_program ("sourcekit-lsp");
 		this.set_inherit_stderr (true);
 	}
-	public override void configure_launcher (Ide.Pipeline pipeline, Ide.SubprocessLauncher launcher) {
-		launcher.push_argv ("--log-level");
-		launcher.push_argv ("debug");
+	public override void prepare_run_context (Ide.Pipeline pipeline, Ide.RunContext run_context) {
+		run_context.append_argv ("--log-level");
+		run_context.append_argv ("debug");
 	}
 
 	public override void configure_client (Ide.LspClient client) {

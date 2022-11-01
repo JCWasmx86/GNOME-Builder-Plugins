@@ -27,8 +27,8 @@ public class TexlabService : Ide.LspService {
 		this.set_program ("texlab");
 	}
 
-	public override void configure_launcher (Ide.Pipeline pipeline, Ide.SubprocessLauncher launcher) {
-		launcher.push_argv ("-vvvv");
+	public override void prepare_run_context (Ide.Pipeline pipeline, Ide.RunContext run_context) {
+		run_context.append_argv ("-vvvv");
 	}
 
 	public override void configure_client (Ide.LspClient client) {
