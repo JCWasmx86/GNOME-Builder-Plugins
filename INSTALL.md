@@ -7,16 +7,6 @@
 ## HLS
 - Install [Haskell Language Server](https://haskell-language-server.readthedocs.io/en/latest/index.html) using [GHCup](https://www.haskell.org/ghcup/)
 - `/home/user/.ghcup/bin/haskell-language-server-wrapper` must exist
-- Create a file `/home/user/.ghcup/bin/haskell-language-server-wrapper1` with these contents:
-```sh
-#!/usr/bin/env bash
-export PATH=$PATH:$HOME/.ghcup/bin:$HOME/.cabal/bin
-if (( $# != 0 )); then
-        haskell-language-server-wrapper $*
-else
-        haskell-language-server-wrapper --lsp --debug
-fi
-```
 ## Hadolint
 - Install [Hadolint](https://github.com/hadolint/hadolint)
 ## Meson
