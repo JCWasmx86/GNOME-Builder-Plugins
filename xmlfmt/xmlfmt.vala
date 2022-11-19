@@ -38,6 +38,7 @@ public class XmlFormatter : Ide.Object, Ide.Formatter {
 			} else {
 				critical ("Unknown error while attempting to parse XML");
 			}
+			throw new Error (Quark.from_string ("Failed to parse XML"), 0, "Failed to parse XML");
 			return false;
 		}
 		xmlTreeIndentString = options.insert_spaces ? (string.nfill (options.tab_width, ' ')) : "\t";
