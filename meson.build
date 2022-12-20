@@ -56,6 +56,7 @@ dependencies = [
     meson.get_compiler('vala').find_library('ide', dirs: vapi_dir),
     meson.get_compiler('vala').find_library('panel-1', dirs: vapi_dir),
     meson.get_compiler('vala').find_library('vte-3.91', dirs: vapi_dir),
+    meson.get_compiler('vala').find_library('linux'),
 ]
 
 gnome = import('gnome')
@@ -67,6 +68,7 @@ if get_option('smart').enabled()
     enabled_plugins += 'icon_installer'
     enabled_plugins += 'xmlfmt'
     enabled_plugins += 'markdown'
+    enabled_plugins += 'gitgui'
     if get_option('experimental')
         enabled_plugins += 'sqlconnections'
     endif
@@ -114,6 +116,10 @@ else
     if get_option('plugin_clangd').enabled()
         subdir('clangd')
         plugins += 'clangd.plugin'
+    endif
+    if get_option('plugin_gitgui').enabled()
+        subdir('gitgui')
+        plugins += 'gitgui.plugin'
     endif
     if get_option('plugin_hadolint').enabled()
         subdir('hadolint')

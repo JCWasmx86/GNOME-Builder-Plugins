@@ -1,0 +1,10 @@
+[Plugin]
+Authors=JCWasmx86 <JCWasmx86@t-online.de>
+Copyright=Copyright © 2022 JCWasmx86
+Depends=project-tree;
+Description=Do basic git operations
+Loader=C
+Module=gitgui
+Name=Git GUI
+X-Workspace-Kind=primary;
+X-Builder-ABI=@BUILDER_ABI@
