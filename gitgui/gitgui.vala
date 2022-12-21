@@ -20,18 +20,18 @@
 public class GitGuiWorkspaceAddin : GLib.Object, Ide.WorkspaceAddin {
 
     public void page_changed (Ide.Page? page) {
-	}
+    }
 
-	public void unload (Ide.Workspace workspace) {
-	}
+    public void unload (Ide.Workspace workspace) {
+    }
 
-	public void load (Ide.Workspace workspace) {
-		var pos = new Panel.Position ();
-		pos.set_area (Panel.Area.START);
-		pos.set_row (0);
-		pos.set_depth (3);
-		workspace.add_pane (new GitGuiPanel (workspace.context.workdir.get_path ()), pos);
-	}
+    public void load (Ide.Workspace workspace) {
+        var pos = new Panel.Position ();
+        pos.set_area (Panel.Area.START);
+        pos.set_row (0);
+        pos.set_depth (3);
+        workspace.add_pane (new GitGuiPanel (workspace.context.workdir.get_path ()), pos);
+    }
 }
 
 public class GitGuiPanel : Ide.Pane {
@@ -61,7 +61,8 @@ public class GitGuiView : Adw.Bin {
         this.directory = dir;
         this.stack = new Gtk.Stack ();
         this.child = this.stack;
-        this.thread = new Thread<void>(".git/config watcher", () => {
+        this.action = new GitGuiAction (dir);
+        this.thread = new Thread<void> (".git/config watcher", () => {
             var ifd = Linux.inotify_init ();
             critical ("FD: %d", ifd);
             if (ifd == -1)
@@ -69,7 +70,7 @@ public class GitGuiView : Adw.Bin {
             // This is cursed
             while (true) {
                 var full_path = dir + "/.git/config";
- 				info ("Waiting for %s", full_path);
+                info ("Waiting for %s", full_path);
                 while (true) {
                     Posix.Stat buf;
                     if (Posix.stat (full_path, out buf) == 0)
@@ -84,10 +85,10 @@ public class GitGuiView : Adw.Bin {
                 var ino = buf.st_ino;
                 var fd = Linux.inotify_add_watch (ifd, dir + "/.git/", Linux.InotifyMaskFlags.DELETE_SELF | Linux.InotifyMaskFlags.CREATE | Linux.InotifyMaskFlags.MODIFY | Linux.InotifyMaskFlags.DELETE);
                 while (fd > 0) {
-                    Linux.InotifyEvent evt = {0};
+                    Linux.InotifyEvent evt = { 0 };
                     Posix.read (ifd, &evt, sizeof (Linux.InotifyEvent) + Posix.Limits.NAME_MAX + 1);
                     if (evt.len > 0) {
-                        info ("Event: %s", (string)evt.name);
+                        info ("Event: %s", (string) evt.name);
                         if ((evt.mask & Linux.InotifyMaskFlags.CREATE) != 0) {
                             if (Posix.stat (full_path, out buf) == 0 && buf.st_ino == ino && buf.st_mtime > mtime) {
                                 this.created_config ();
@@ -112,8 +113,6 @@ public class GitGuiView : Adw.Bin {
             }
             // Posix.close (fd);
         });
-
-        this.action = new GitGuiAction (dir);
         this.stack.add_named (this.action, "action");
         var create_repo = new Adw.StatusPage ();
         create_repo.title = "No git repository";
@@ -156,20 +155,212 @@ public class GitGuiView : Adw.Bin {
     }
 }
 
-public class GitGuiAction : Gtk.Box {
+public class GitGuiAction : Adw.Bin {
     private string directory;
+    private GitGuiListView<GitGuiRemote> remotes;
+    private GitGuiListView<GitGuiBranch> branches;
+    private GitGuiListView<GitGuiCommit> commits;
+
+    // TODO: No, better use models+listviews+e.g. search providers
 
     public GitGuiAction (string dir) {
         this.directory = dir;
-        this.orientation =  Gtk.Orientation.VERTICAL;
+        var b = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
+        var stack = new Adw.ViewStack ();
+        this.remotes = new GitGuiListView<GitGuiRemote> (dir, create_remote);
+        this.branches = new GitGuiListView<GitGuiBranch> (dir, create_branch);
+        this.commits = new GitGuiListView<GitGuiCommit> (dir, create_commit);
+        this.add (stack, this.remotes, "remote", "Remotes", "folder-remote-symbolic");
+        this.add (stack, this.branches, "branch", "Branches", "git-branch-symbolic");
+        this.add (stack, this.commits, "commits", "Commits", "gear-symbolic");
+        stack.hexpand = true;
+        stack.vexpand = true;
+        var bar = new Adw.ViewSwitcherBar ();
+        b.append (stack);
+        b.append (bar);
+        bar.stack = stack;
+        bar.reveal = true;
+        this.child = b;
+    }
+
+    private void add (Adw.ViewStack stack, Gtk.Widget w, string id, string title, string icon) {
+        var sc = new Gtk.ScrolledWindow ();
+        sc.child = w;
+        w.hexpand = true;
+        w.vexpand = true;
+        sc.hexpand = true;
+        sc.vexpand = true;
+        stack.add_titled (sc, id, title).icon_name = icon;
+    }
+
+    private static Gtk.Widget create_remote (Object obj) {
+        var row = new Adw.ActionRow ();
+        row.title = ((GitGuiRemote)obj).name;
+        row.subtitle = ((GitGuiRemote)obj).uri;
+        return row;
+    }
+
+    private static Gtk.Widget create_branch (Object obj) {
+        var row = new Adw.ActionRow ();
+        row.title = ((GitGuiBranch)obj).name;
+        var is_active = ((GitGuiBranch)obj).is_active;
+        if (is_active)
+            row.subtitle = "Current branch";
+        return row;
+    }
+
+    private static Gtk.Widget create_commit (Object obj) {
+        var row = new Adw.ActionRow ();
+        row.title = ((GitGuiCommit)obj).message_first_line;
+        row.subtitle = ((GitGuiCommit)obj).hash;
+        var more_button = new Gtk.Button ();
+        more_button.icon_name = "view-more-horizontal-symbolic";
+        more_button.hexpand = false;
+        more_button.vexpand = false;
+        more_button.height_request = 16;
+        more_button.width_request = 16;
+        more_button.margin_start = 0;
+        more_button.margin_end = 0;
+        more_button.margin_top = 0;
+        more_button.margin_bottom = 0;
+        more_button.tooltip_text = "Show more information";
+        more_button.get_style_context ().add_class ("flat");
+        row.add_suffix (more_button);
+        return row;
+    }
+
+    private static string get_stdout (string[] args, string dir) throws SpawnError {
+        string sout, serr;
+        int status;
+        Process.spawn_sync (dir, args, Environ.get (), SpawnFlags.SEARCH_PATH, null, out sout, out serr, out status);
+        if (status != 0)
+            critical ("%s:\n%s", string.join (" ", args), serr);
+        return sout;
     }
 
     public void reload () {
+        new Thread<void> ("git-update-things-thread", () => {
+            var branch_str = get_stdout (new string[] {"git", "branch"}, this.directory);
+            var branches = branch_str.split ("\n");
+            Idle.add_full (Priority.HIGH_IDLE, () => {
+                this.branches.model.remove_all ();
+                foreach (var b in branches) {
+                    if (b == null || b.length < 2)
+                        continue;
+                    var br = new GitGuiBranch ();
+                    br.is_active = b.has_prefix ("*");
+                    br.name = b.substring (2).strip ();
+                    if (br.name != "")
+                        this.branches.model.append (br);
+                }
+                return Source.REMOVE;
+            });
+            var remotes_str = get_stdout (new string[] {"git", "remote", "-v"}, this.directory);
+            Idle.add_full (Priority.HIGH_IDLE, () => {
+                var remotes = remotes_str.split ("\n");
+                this.remotes.model.remove_all ();
+                var vals = new Gee.HashSet<string> (a => str_hash (a), (a,b) => a == b);
+                foreach (var r in remotes) {
+                    if (r == null || r.length < 2)
+                        continue;
+                    var remote = new GitGuiRemote ();
+                    var parts = r.split ("\t");
+                    remote.name = parts[0];
+                    if (remote.name in vals)
+                        continue;
+                    vals.add (remote.name);
+                    remote.uri = parts[1].split (" ")[0];
+                    this.remotes.model.append (remote);
+                }
+                return Source.REMOVE;
+            });
+            var commits_str = get_stdout (new string[] {"git", "log", "--format=%h %an %ae %at %cn %ce %s"}, this.directory);
+            Idle.add_full (Priority.HIGH_IDLE, () => {
+                var commits = commits_str.split ("\n");
+                this.commits.model.remove_all ();
+                var n = 0;
+                foreach (var c in commits) {
+                    if (n == 300)
+                        break;
+                    if (c == null || c.length < 2)
+                        continue;
+                    var commit = new GitGuiCommit ();
+                    var parts = c.split(" ", 7);
+                    commit.hash = parts[0];
+                    commit.author = new GitGuiPerson (parts[1], parts[2]);
+                    commit.time = new GLib.DateTime.from_unix_local (int64.parse (parts[3]));
+                    commit.committer = new GitGuiPerson (parts[4], parts[5]);
+                    commit.message_first_line = parts[6];
+                    this.commits.model.append (commit);
+                    n++;
+                }
+                return Source.REMOVE;
+            });
+        });
+    }
+}
 
+public class GitGuiPerson : GLib.Object {
+    public string name { get; set; }
+    public string email { get; set; }
+
+    public GitGuiPerson (string n, string e) {
+        this.name = n;
+        this.email = e;
+    }
+}
+
+public class GitGuiItem : GLib.Object {
+    public string dir { get; set; }
+}
+
+public class GitGuiRemote : GitGuiItem {
+    public string name { get; set; }
+    public string uri { get; set; }
+}
+
+public class GitGuiBranch : GitGuiItem {
+    public string name { get; set; }
+    public bool is_active { get; set; }
+}
+
+public class GitGuiCommit : GitGuiItem {
+    public string hash { get; set; }
+    public string message_first_line { get; set; }
+    public GLib.DateTime time { get; set; }
+    public GitGuiPerson author { get; set; }
+    public GitGuiPerson committer { get; set; }
+}
+
+public class GitGuiListView<T> : Gtk.Box {
+    internal GLib.ListStore model;
+    private Gtk.ListBox view;
+
+    public GitGuiListView (string dir, Gtk.ListBoxCreateWidgetFunc func) {
+        this.orientation = Gtk.Orientation.VERTICAL;
+        this.model = new GLib.ListStore (typeof (T));
+        this.view = new Gtk.ListBox ();
+        this.view.bind_model (this.model, func);
+        this.append (this.view);
+    }
+}
+
+public class GitGuiRemoteView : Gtk.Box {
+    public GitGuiRemoteView (string dir) {
+    }
+}
+
+public class GitGuiBranchView : Gtk.Box {
+    public GitGuiBranchView (string dir) {
+    }
+}
+
+public class GitGuiCommitView : Gtk.Box {
+    public GitGuiCommitView (string dir) {
     }
 }
 
 public void peas_register_types (TypeModule module) {
-	var obj = (Peas.ObjectModule) module;
-	obj.register_extension_type (typeof (Ide.WorkspaceAddin), typeof (GitGuiWorkspaceAddin));
+    var obj = (Peas.ObjectModule) module;
+    obj.register_extension_type (typeof (Ide.WorkspaceAddin), typeof (GitGuiWorkspaceAddin));
 }
