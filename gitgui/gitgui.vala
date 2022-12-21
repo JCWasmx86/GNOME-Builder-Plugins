@@ -359,8 +359,8 @@ namespace GitGui {
             this.append (b);
             new Thread<void>("commit-status", () => {
                 while (true) {
+                    var o = get_stdout (new string[]{"git", "status", "-s"}, this.directory);
                     Idle.add_full (Priority.LOW, () => {
-                        var o = get_stdout (new string[]{"git", "status", "-s"}, this.directory);
                         this.commit.sensitive = o.strip ().length != 0;
                         return Source.REMOVE;
                     });
