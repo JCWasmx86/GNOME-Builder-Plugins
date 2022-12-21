@@ -251,17 +251,12 @@ namespace GitGui {
             more_button.margin_bottom = 0;
             more_button.tooltip_text = "Show more information";
             more_button.get_style_context ().add_class ("flat");
+            more_button.clicked.connect (() => {
+                var w = new CommitWindow ((Commit) obj);
+                w.present ();
+            });
             row.add_suffix (more_button);
             return row;
-        }
-
-        private static string get_stdout (string[] args, string dir) throws SpawnError {
-            string sout, serr;
-            int status;
-            Process.spawn_sync (dir, args, Environ.get (), SpawnFlags.SEARCH_PATH, null, out sout, out serr, out status);
-            if (status != 0)
-                critical ("%s:\n%s", string.join (" ", args), serr);
-            return sout;
         }
 
         public void reload () {
@@ -274,6 +269,7 @@ namespace GitGui {
                         if (b == null || b.length < 2)
                             continue;
                         var br = new Branch ();
+                        br.dir = this.directory;
                         br.is_active = b.has_prefix ("*");
                         br.name = b.substring (2).strip ();
                         if (br.name != "")
@@ -296,6 +292,7 @@ namespace GitGui {
                             continue;
                         vals.add (remote.name);
                         remote.uri = parts[1].split (" ")[0];
+                        remote.dir = this.directory;
                         this.remotes.model.append (remote);
                     }
                     return Source.REMOVE;
@@ -317,6 +314,7 @@ namespace GitGui {
                         commit.time = new GLib.DateTime.from_unix_local (int64.parse (parts[3]));
                         commit.committer = new Person (parts[4], parts[5]);
                         commit.message_first_line = parts[6];
+                        commit.dir = this.directory;
                         this.commits.model.append (commit);
                         n++;
                     }
@@ -324,6 +322,124 @@ namespace GitGui {
                 });
             });
         }
+    }
+
+    public class CommitWindow : Adw.Window {
+        private GtkSource.View view;
+        private CommitExploreView explore;
+        public CommitWindow (Commit c) {
+            var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
+            var header = new Adw.HeaderBar ();
+            header.show_end_title_buttons = true;
+            var title = new Adw.ViewSwitcherTitle ();
+            header.title_widget = title;
+            box.append (header);
+            var buf = new GtkSource.Buffer (null);
+            buf.language = GtkSource.LanguageManager.get_default ().get_language ("diff");
+            buf.style_scheme = GtkSource.StyleSchemeManager.get_default ().get_scheme ("Adwaita-dark");
+            this.view = new GtkSource.View.with_buffer (buf);
+            this.view.editable = false;
+            this.view.vexpand = true;
+            this.view.hexpand = true;
+            var provider = new Gtk.CssProvider ();
+            provider.load_from_data ("textview{font-family: Monospace;}".data);
+            this.view.get_style_context ().add_provider (provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+            var sc = new Gtk.ScrolledWindow ();
+            sc.child = this.view;
+            var stack = new Adw.ViewStack ();
+            this.explore = new CommitExploreView (c);
+            stack.add_titled (sc, "diff", "Diff");
+            stack.add_titled (this.explore, "browse", "Browse tree at %s".printf (c.hash));
+            title.stack = stack;
+            box.append (stack);
+            box.vexpand = true;
+            box.hexpand = true;
+            this.content = box;
+            this.maximized = true;
+            this.explore.vexpand = true;
+            this.explore.hexpand = true;
+            new Thread<void> ("commit-info-thread", () => {
+                var diff = get_stdout (new string[] { "git", "diff", "%s^!".printf (c.hash) }, c.dir);
+                Idle.add_full (Priority.HIGH_IDLE, () => {
+                    this.view.buffer.text = diff;
+                    return Source.REMOVE;
+                });
+                Idle.add_full (Priority.HIGH_IDLE, () => {
+                    var file_list = get_stdout (new string[] { "git", "ls-tree", c.hash, "-r" }, c.dir);
+                    var files = file_list.split ("\n");
+                    foreach (var f in files) {
+                        if (f == null || f == "")
+                            continue;
+                        var name = f.split ("\t", 2)[1];
+                        if (name != null)
+                            this.explore.register_file (name);
+                    }
+                    return Source.REMOVE;
+                });
+            });
+        }
+    }
+
+    public class CommitExploreView : Gtk.Box {
+        private Gtk.Box left_side;
+        private GtkSource.View view;
+        private Commit commit;
+
+        public CommitExploreView (Commit c) {
+            this.commit = c;
+            this.orientation = Gtk.Orientation.HORIZONTAL;
+            this.left_side = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
+            this.left_side.hexpand = false;
+            this.left_side.width_request = 200;
+            this.left_side.vexpand = true;
+            var buf = new GtkSource.Buffer (null);
+            buf.style_scheme = GtkSource.StyleSchemeManager.get_default ().get_scheme ("adwaita-dark");
+            this.view = new GtkSource.View.with_buffer (buf);
+            this.view.editable = false;
+            this.view.vexpand = true;
+            this.view.hexpand = true;
+            var sc = new Gtk.ScrolledWindow ();
+            sc.child = this.left_side;
+            sc.hscrollbar_policy = Gtk.PolicyType.NEVER;
+            this.append (sc);
+            sc = new Gtk.ScrolledWindow ();
+            var provider = new Gtk.CssProvider ();
+            provider.load_from_data ("textview{font-family: Monospace;}".data);
+            this.view.get_style_context ().add_provider (provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+            sc.child = this.view;
+            this.append (sc);
+        }
+
+        public void register_file (string n) {
+            var l = new Gtk.Label (n);
+            l.xalign = 0;
+            l.tooltip_text = n;
+            l.ellipsize = Pango.EllipsizeMode.MIDDLE;
+            l.max_width_chars = 64;
+            var gc = new Gtk.GestureClick ();
+            gc.pressed.connect ((n, x, y) => {
+                var s = l.label;
+                var parts = s.split ("/");
+                var b = (parts != null && parts.length > 0) ? parts[parts.length - 1] : s;
+                var content = get_stdout (new string[] { "git", "show", "%s:%s".printf (this.commit.hash, s) }, this.commit.dir);
+                critical ("Getting %s (%s)", s, b);
+                var lang = GtkSource.LanguageManager.get_default ().guess_language (b, null);
+                critical ("%s", lang.id);
+                ((GtkSource.Buffer) this.view.buffer).language = lang;
+                this.view.buffer.text = content;
+            });
+            l.add_controller (gc);
+            this.left_side.append (l);
+        }
+    }
+
+    static string get_stdout (string[] args, string dir) throws SpawnError {
+        string sout, serr;
+        int status;
+        Process.spawn_sync (dir, args, Environ.get (), SpawnFlags.SEARCH_PATH, null, out sout, out serr, out status);
+        if (status != 0)
+            critical ("%s:\n%s", string.join (" ", args), serr);
+        return sout;
     }
 
     public class Person : GLib.Object {
