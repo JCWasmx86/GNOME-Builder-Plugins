@@ -341,6 +341,7 @@ namespace GitGui {
             this.view.editable = false;
             this.view.vexpand = true;
             this.view.hexpand = true;
+            this.view.set_show_line_numbers (true);
             var provider = new Gtk.CssProvider ();
             provider.load_from_data ("textview{font-family: Monospace;}".data);
             this.view.get_style_context ().add_provider (provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
@@ -407,6 +408,7 @@ namespace GitGui {
             provider.load_from_data ("textview{font-family: Monospace;}".data);
             this.view.get_style_context ().add_provider (provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
             sc.child = this.view;
+            this.view.set_show_line_numbers (true);
             this.append (sc);
         }
 
