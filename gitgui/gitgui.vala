@@ -393,7 +393,7 @@ namespace GitGui {
             this.left_side.width_request = 200;
             this.left_side.vexpand = true;
             var buf = new GtkSource.Buffer (null);
-            buf.style_scheme = GtkSource.StyleSchemeManager.get_default ().get_scheme ("adwaita-dark");
+            buf.style_scheme = GtkSource.StyleSchemeManager.get_default ().get_scheme ("Adwaita-dark");
             this.view = new GtkSource.View.with_buffer (buf);
             this.view.editable = false;
             this.view.vexpand = true;
@@ -423,10 +423,18 @@ namespace GitGui {
                 var b = (parts != null && parts.length > 0) ? parts[parts.length - 1] : s;
                 var content = get_stdout (new string[] { "git", "show", "%s:%s".printf (this.commit.hash, s) }, this.commit.dir);
                 critical ("Getting %s (%s)", s, b);
+                GtkSource.Buffer buf;
                 var lang = GtkSource.LanguageManager.get_default ().guess_language (b, null);
-                critical ("%s", lang.id);
-                ((GtkSource.Buffer) this.view.buffer).language = lang;
-                this.view.buffer.text = content;
+                if (lang != null) {
+                    buf = new GtkSource.Buffer.with_language (lang);
+                    critical ("%s", lang.id);
+                    buf.highlight_syntax = true;
+                } else {
+                    buf = new GtkSource.Buffer (null);
+                }
+                buf.style_scheme = GtkSource.StyleSchemeManager.get_default ().get_scheme ("Adwaita-dark");
+                buf.text = content;
+                this.view.buffer = buf;
             });
             l.add_controller (gc);
             this.left_side.append (l);
