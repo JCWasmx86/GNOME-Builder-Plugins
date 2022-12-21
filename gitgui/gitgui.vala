@@ -349,8 +349,11 @@ namespace GitGui {
             var sc = new Gtk.ScrolledWindow ();
             this.overview = new CommitOverview (c);
             sc.child = this.overview;
+            var clamp = new Adw.Clamp ();
+            clamp.maximum_size = 540;
+            clamp.child = sc;
             var stack = new Adw.ViewStack ();
-            stack.add_titled (sc, "overview", "Overview");
+            stack.add_titled (clamp, "overview", "Overview");
             sc = new Gtk.ScrolledWindow ();
             sc.child = this.view;
             this.explore = new CommitExploreView (c);
@@ -418,19 +421,15 @@ namespace GitGui {
         }
     }
 
-    public abstract class FileWidget : Gtk.Box {
+    public abstract class FileWidget : Adw.ActionRow {
         protected Gtk.Image image;
         protected FileWidget (string name) {
-            this.orientation = Gtk.Orientation.VERTICAL;
-            var b1 = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 2);
+            this.title = name;
             this.image = new Gtk.Image.from_icon_name ("foo");
-            b1.append (this.image);
-            b1.append (new Gtk.Label (name));
-            this.append (b1);
+            this.add_prefix (this.image);
         }
 
         protected void fill (string s) {
-            critical ("%s", s);
             var parts = s.split (" ");
             var added = parts[4];
             var removed = parts[6] ?? "0";
@@ -438,17 +437,14 @@ namespace GitGui {
                 removed = added;
                 added = "0";
             }
-            var b = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 2);
             var l = new Gtk.Label ("<span foreground='green'>+%s</span>".printf (added));
             l.use_markup = true;
             l.label = "<span foreground='green'>+%s</span>".printf (added);
-            b.append (l);
-            b.append (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
+            this.add_suffix (l);
             l = new Gtk.Label ("<span foreground='red'>-%s</span>".printf (removed));
             l.use_markup = true;
             l.label = "<span foreground='red'>-%s</span>".printf (removed);
-            b.append (l);
-            this.append (b);
+            this.add_suffix (l);
         }
     }
 
@@ -490,7 +486,7 @@ namespace GitGui {
             this.commit_message = new Gtk.TextView ();
             this.commit_message.editable = false;
             this.append (this.commit_message);
-            var tmp_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 2);
+            var tmp_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
             this.author = new Gtk.Label ("");
             this.committer = new Gtk.Label ("");
             this.date = new Gtk.Label ("");
@@ -499,6 +495,9 @@ namespace GitGui {
             tmp_box.append (this.committer);
             tmp_box.append (new Gtk.Separator (Gtk.Orientation.VERTICAL));
             tmp_box.append (this.date);
+            tmp_box.append (new Gtk.Separator (Gtk.Orientation.VERTICAL));
+            tmp_box.append (new Gtk.Label (c.hash));
+            tmp_box.append (new Gtk.Separator (Gtk.Orientation.VERTICAL));
             this.append (tmp_box);
             this.added_files = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
             this.removed_files = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
