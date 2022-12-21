@@ -89,7 +89,6 @@ public class GitGuiView : Adw.Bin {
                 Posix.Stat idx_buf;
                 Posix.stat (dir + "/.git/index", out idx_buf);
                 var mtime_idx = idx_buf.st_mtime;
-                var ino_idx = idx_buf.st_ino;
                 Posix.Stat heads_buf;
                 Posix.stat (dir + "/.git/logs/refs/heads/", out heads_buf);
                 var mtime_heads = heads_buf.st_mtime;
