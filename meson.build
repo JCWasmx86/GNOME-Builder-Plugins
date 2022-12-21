@@ -242,5 +242,5 @@ custom_target(
     input: copied_tgts,
     command: [zip, '--quiet', '@OUTPUT@', '@INPUT@'],
     install: false,
-    build_by_default: true
+    build_by_default: true,
 )
