@@ -346,7 +346,7 @@ namespace GitGui {
             this.branch = new Adw.ActionRow ();
             this.branch.title = "Branch: ||";
             this.commit = new Gtk.Button.with_label ("Commit");
-            this.commit.get_style_context ().add_class (".suggested-action");
+            this.commit.get_style_context ().add_class ("suggested-action");
             this.append (this.branch);
             this.append (this.commit);
             this.stash = this.gen_button ("Stash changes", "git stash", "Do you really want to stash the changes?" , new string[]{"git", "stash"});
@@ -367,23 +367,163 @@ namespace GitGui {
                     Posix.sleep (5);
                 }
             });
+            this.commit.clicked.connect (() => {
+                var o = get_stdout (new string[]{"git", "status", "-s"}, this.directory).strip ();
+                var v = new CommitDialog (dir, o);
+                v.present ();
+            });
         }
 
         private Gtk.Button gen_button (string s, string title, string msg, string[] cmd) {
             var ret = new Gtk.Button.with_label (s);
             ret.clicked.connect (() => {
+                var a = cmd;
                 var m = new Adw.MessageDialog (null, title, msg);
                 m.add_response ("yes", "Yes");
                 m.add_response ("no", "No");
                 m.set_response_appearance ("yes", Adw.ResponseAppearance.DESTRUCTIVE);
                 m.default_response = "no";
                 m.response.connect (s => {
-                    get_stdout (cmd, this.directory);
+                    get_stdout (a, this.directory);
                 });
                 m.present ();
             });
             ret.hexpand = true;
             return ret;
+        }
+    }
+
+    public class CommitSelectComponent : Gtk.Box {
+        private Gtk.CheckButton[] check_marks;
+        private string[] paths;
+        public CommitSelectComponent (string o) {
+            this.orientation = Gtk.Orientation.VERTICAL;
+            this.spacing = 4;
+            var b1 = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 4);
+            var add_all = new Gtk.Button.with_label ("Select all");
+            add_all.clicked.connect (() => {
+                // For n files, that is n^2 iterations
+                foreach (var a in this.check_marks)
+                    a.active = true;
+            });
+            var unadd_all = new Gtk.Button.with_label ("Unselect all");
+            unadd_all.clicked.connect (() => {
+                // For n files, that is n^2 iterations
+                foreach (var a in this.check_marks)
+                    a.active = false;
+            });
+            b1.append (add_all);
+            b1.append (unadd_all);
+            this.append (b1);
+            foreach (var l in o.split ("\n")) {
+                if (l == null|| l.length < 2)
+                    continue;
+                // TODO: Add icon based on type
+                // var type = l.substring (0, 3).strip ();
+                var path = l.strip ().split (" ", 2)[1];
+                var row = new Adw.ActionRow ();
+                row.title = path;
+                var c = new Gtk.CheckButton ();
+                c.get_style_context ().add_class ("round");
+                this.check_marks += c;
+                this.paths += path;
+                c.active = true;
+                c.toggled.connect (() => {
+                    var yes = false;
+                    foreach (var c1 in this.check_marks) {
+                        yes |= c1.active;
+                    }
+                    this.can_continue (yes);
+                });
+                row.add_prefix (c);
+                this.append (row);
+            }
+        }
+        internal signal void can_continue (bool b);
+
+        internal string[] paths_to_add () {
+            var ret = new string[0];
+            for (var i = 0; i < this.paths.length; i++)
+                if (this.check_marks[i].active)
+                    ret += this.paths[i];
+            return ret;
+        }
+    }
+
+    public class CommitDialog : Adw.Window {
+        public CommitDialog (string dir, string o) {
+            var stack = new Gtk.Stack ();
+            var select_component = new CommitSelectComponent (o);
+            select_component.vexpand = true;
+            var sc = new Gtk.ScrolledWindow ();
+            sc.child = select_component;
+            sc.vexpand = true;
+            var clamp = new Adw.Clamp ();
+            clamp.maximum_size = 600;
+            clamp.child = sc;
+            clamp.vexpand = true;
+            {
+                var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
+                var header = new Adw.HeaderBar ();
+                header.show_end_title_buttons = false;
+                var title = new Adw.WindowTitle ("Commit", "Select files");
+                header.title_widget = title;
+                var cancel = new Gtk.Button.with_label ("Cancel");
+                cancel.clicked.connect (() => {
+                    this.close ();
+                });
+                header.pack_start (cancel);
+                var cont = new Gtk.Button.with_label ("Continue");
+                select_component.can_continue.connect (a => cont.sensitive = a);
+                cont.clicked.connect (() => {
+                    stack.visible_child_name = "write";
+                });
+                cont.get_style_context ().add_class ("suggested-action");
+                header.pack_end (cont);
+                box.append (header);
+                box.append (clamp);
+                stack.add_named (box, "list");
+            }
+            {
+                var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
+                var header = new Adw.HeaderBar ();
+                header.show_end_title_buttons = false;
+                var title = new Adw.WindowTitle ("Commit", "Write commit message");
+                header.title_widget = title;
+                var cancel = new Gtk.Button.from_icon_name ("left-symbolic");
+                cancel.clicked.connect (() => {
+                    stack.visible_child_name = "list";
+                });
+                header.pack_start (cancel);
+                var child = new Gtk.TextView ();
+                var cont = new Gtk.Button.with_label ("Commit");
+                cont.clicked.connect (() => {
+                    var paths = select_component.paths_to_add ();
+                    foreach (var p in paths)
+                        get_stdout (new string[]{"git", "add", p}, dir);
+                    get_stdout (new string[]{"git", "commit", "-m", child.buffer.text.strip ()}, dir);
+                    this.close ();
+                });
+                child.buffer.changed.connect (() => {
+                    cont.sensitive = child.buffer.text.strip () != "";
+                });
+                cont.get_style_context ().add_class ("suggested-action");
+                header.pack_end (cont);
+                box.append (header);
+                child.hexpand = true;
+                child.vexpand = true;
+                var provider = new Gtk.CssProvider ();
+                provider.load_from_data ("textview{font-family: Monospace;}".data);
+                child.get_style_context ().add_provider (provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+                sc = new Gtk.ScrolledWindow ();
+                sc.child = child;
+                box.append (sc);
+                stack.add_named (box, "write");
+            }
+            stack.visible_child_name = "list";
+            this.content = stack;
+            this.resizable = false;
+            this.set_size_request (640, 480);
         }
     }
 
