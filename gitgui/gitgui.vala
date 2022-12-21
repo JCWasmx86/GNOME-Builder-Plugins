@@ -104,7 +104,7 @@ public class GitGuiView : Adw.Bin {
                     var r = Posix.stat (full_path, out buf);
                     var updated_config = r == 0 && buf.st_ino == ino && buf.st_mtime > mtime;
                     r = Posix.stat (dir + "/.git/index", out idx_buf);
-                    var updated_index = r == 0 && idx_buf.st_ino == ino_idx && idx_buf.st_mtime > mtime_idx;
+                    var updated_index = r == 0 && idx_buf.st_mtime > mtime_idx;
                     r = Posix.stat (dir + "/.git/logs/refs/heads/", out heads_buf);
                     var updated_heads = r == 0 && heads_buf.st_ino == ino_heads && heads_buf.st_mtime > mtime_heads;
                     if (evt.len > 0) {
