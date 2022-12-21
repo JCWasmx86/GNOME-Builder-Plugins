@@ -327,6 +327,7 @@ namespace GitGui {
     public class CommitWindow : Adw.Window {
         private GtkSource.View view;
         private CommitExploreView explore;
+        private CommitOverview overview;
         public CommitWindow (Commit c) {
             var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
             var header = new Adw.HeaderBar ();
@@ -346,8 +347,12 @@ namespace GitGui {
             provider.load_from_data ("textview{font-family: Monospace;}".data);
             this.view.get_style_context ().add_provider (provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
             var sc = new Gtk.ScrolledWindow ();
-            sc.child = this.view;
+            this.overview = new CommitOverview (c);
+            sc.child = this.overview;
             var stack = new Adw.ViewStack ();
+            stack.add_titled (sc, "overview", "Overview");
+            sc = new Gtk.ScrolledWindow ();
+            sc.child = this.view;
             this.explore = new CommitExploreView (c);
             stack.add_titled (sc, "diff", "Diff");
             stack.add_titled (this.explore, "browse", "Browse tree at %s".printf (c.hash));
@@ -365,8 +370,8 @@ namespace GitGui {
                     this.view.buffer.text = diff;
                     return Source.REMOVE;
                 });
+                var file_list = get_stdout (new string[] { "git", "ls-tree", c.hash, "-r" }, c.dir);
                 Idle.add_full (Priority.HIGH_IDLE, () => {
-                    var file_list = get_stdout (new string[] { "git", "ls-tree", c.hash, "-r" }, c.dir);
                     var files = file_list.split ("\n");
                     foreach (var f in files) {
                         if (f == null || f == "")
@@ -377,7 +382,130 @@ namespace GitGui {
                     }
                     return Source.REMOVE;
                 });
+                var commit_message = get_stdout (new string[] { "git", "show", c.hash, "--pretty=format:%B", "--no-patch" }, c.dir);
+                Idle.add_full (Priority.HIGH_IDLE, () => {
+                    this.overview.commit_message.buffer.text = commit_message;
+                    this.overview.author.label = "Author: %s <%s>".printf (c.author.name, c.author.email);
+                    this.overview.committer.label = "Committed by: %s <%s>".printf (c.committer.name, c.committer.email);
+                    this.overview.date.label = c.time.format ("%c");
+                    return Source.REMOVE;
+                });
+                var added_files = get_stdout (new string[] { "git", "diff", "--name-only", "--diff-filter=A", c.hash + "^!" }, c.dir);
+                var removed_files = get_stdout (new string[] { "git", "diff", "--name-only", "--diff-filter=D", c.hash + "^!" }, c.dir);
+                var modified_files = get_stdout (new string[] { "git", "diff", "--name-only", "--diff-filter=M", c.hash + "^!" }, c.dir);
+                Idle.add_full (Priority.HIGH_IDLE, () => {
+                    var af = added_files.split ("\n");
+                    foreach (var a in af) {
+                        if (a == null || a.length < 2)
+                            continue;
+                        this.overview.added_files.append (new AddedFileWidget (a, get_stdout (new string[] { "git", "diff", c.hash + "^!", "--shortstat", "--", a }, c.dir)));
+                    }
+                    af = removed_files.split ("\n");
+                    foreach (var a in af) {
+                        if (a == null || a.length < 2)
+                            continue;
+                        this.overview.removed_files.append (new RemovedFileWidget (a, get_stdout (new string[] { "git", "diff", c.hash + "^!", "--shortstat", "--", a }, c.dir)));
+                    }
+                    af = modified_files.split ("\n");
+                    foreach (var a in af) {
+                        if (a == null || a.length < 2)
+                            continue;
+                        this.overview.changed_files.append (new ChangedFileWidget (a, get_stdout (new string[] { "git", "diff", c.hash + "^!", "--shortstat", "--", a }, c.dir)));
+                    }
+                    return Source.REMOVE;
+                });
             });
+        }
+    }
+
+    public abstract class FileWidget : Gtk.Box {
+        protected Gtk.Image image;
+        protected FileWidget (string name) {
+            this.orientation = Gtk.Orientation.VERTICAL;
+            var b1 = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 2);
+            this.image = new Gtk.Image.from_icon_name ("foo");
+            b1.append (this.image);
+            b1.append (new Gtk.Label (name));
+            this.append (b1);
+        }
+
+        protected void fill (string s) {
+            critical ("%s", s);
+            var parts = s.split (" ");
+            var added = parts[4];
+            var removed = parts[6] ?? "0";
+            if (!s.contains ("insertion")) {
+                removed = added;
+                added = "0";
+            }
+            var b = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 2);
+            var l = new Gtk.Label ("<span foreground='green'>+%s</span>".printf (added));
+            l.use_markup = true;
+            l.label = "<span foreground='green'>+%s</span>".printf (added);
+            b.append (l);
+            b.append (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
+            l = new Gtk.Label ("<span foreground='red'>-%s</span>".printf (removed));
+            l.use_markup = true;
+            l.label = "<span foreground='red'>-%s</span>".printf (removed);
+            b.append (l);
+            this.append (b);
+        }
+    }
+
+    public class AddedFileWidget : FileWidget {
+        public AddedFileWidget (string name, string change) {
+            base (name);
+            this.image.icon_name = "plus-symbolic";
+            this.fill (change);
+        }
+    }
+
+    public class RemovedFileWidget : FileWidget {
+        public RemovedFileWidget (string name, string change) {
+            base (name);
+            this.image.icon_name = "cross-filled-symbolic";
+            this.fill (change);
+        }
+    }
+
+    public class ChangedFileWidget : FileWidget {
+        public ChangedFileWidget (string name, string change) {
+            base (name);
+            this.image.icon_name = "edit-symbolic";
+            this.fill (change);
+        }
+    }
+
+    public class CommitOverview : Gtk.Box {
+        internal Gtk.TextView commit_message;
+        internal Gtk.Label author;
+        internal Gtk.Label committer;
+        internal Gtk.Label date;
+        internal Gtk.Box added_files;
+        internal Gtk.Box removed_files;
+        internal Gtk.Box changed_files;
+
+        public CommitOverview (Commit c) {
+            this.orientation = Gtk.Orientation.VERTICAL;
+            this.commit_message = new Gtk.TextView ();
+            this.commit_message.editable = false;
+            this.append (this.commit_message);
+            var tmp_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 2);
+            this.author = new Gtk.Label ("");
+            this.committer = new Gtk.Label ("");
+            this.date = new Gtk.Label ("");
+            tmp_box.append (this.author);
+            tmp_box.append (new Gtk.Separator (Gtk.Orientation.VERTICAL));
+            tmp_box.append (this.committer);
+            tmp_box.append (new Gtk.Separator (Gtk.Orientation.VERTICAL));
+            tmp_box.append (this.date);
+            this.append (tmp_box);
+            this.added_files = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
+            this.removed_files = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
+            this.changed_files = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
+            this.append (this.added_files);
+            this.append (this.removed_files);
+            this.append (this.changed_files);
         }
     }
 

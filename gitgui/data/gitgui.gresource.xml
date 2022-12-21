@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/plugins/gitgui/">
-    <file>icons/scalable/actions/branch-symbolic.svg</file>
-    <file>icons/scalable/actions/git-branch-symbolic.svg</file>
-    <file>icons/scalable/actions/gear-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/branch-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/edit-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/cross-filled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/plus-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/git-branch-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/gear-symbolic.svg</file>
   </gresource>
 </gresources>
