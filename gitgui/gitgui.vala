@@ -188,14 +188,17 @@ namespace GitGui {
         private ListView<Remote> remotes;
         private ListView<Branch> branches;
         private ListView<Commit> commits;
+        private GeneralActions actions;
 
         public Action (string dir) {
             this.directory = dir;
             var b = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
             var stack = new Adw.ViewStack ();
+            this.actions = new GeneralActions (dir);
             this.remotes = new ListView<Remote> (dir, create_remote);
             this.branches = new ListView<Branch> (dir, create_branch);
             this.commits = new ListView<Commit> (dir, create_commit);
+            this.add (stack, this.actions, "general", "General", "general-properties-symbolic");
             this.add (stack, this.remotes, "remote", "Remotes", "folder-remote-symbolic");
             this.add (stack, this.branches, "branch", "Branches", "git-branch-symbolic");
             this.add (stack, this.commits, "commits", "Commits", "gear-symbolic");
@@ -216,6 +219,7 @@ namespace GitGui {
             w.vexpand = true;
             sc.hexpand = true;
             sc.vexpand = true;
+            sc.hscrollbar_policy = Gtk.PolicyType.NEVER;
             stack.add_titled (sc, id, title).icon_name = icon;
         }
 
@@ -272,6 +276,9 @@ namespace GitGui {
                         br.dir = this.directory;
                         br.is_active = b.has_prefix ("*");
                         br.name = b.substring (2).strip ();
+                        if (br.is_active) {
+                            this.actions.branch.title = "Branch: " + br.name;
+                        }
                         if (br.name != "")
                             this.branches.model.append (br);
                     }
@@ -321,6 +328,62 @@ namespace GitGui {
                     return Source.REMOVE;
                 });
             });
+        }
+    }
+
+    public class GeneralActions : Gtk.Box {
+        private string directory;
+        internal Adw.ActionRow branch;
+        internal Gtk.Button stash;
+        internal Gtk.Button clean_all;
+        internal Gtk.Button clean_ignored;
+        internal Gtk.Button commit;
+
+        public GeneralActions (string dir) {
+            this.directory = dir;
+            this.orientation = Gtk.Orientation.VERTICAL;
+            this.spacing = 2;
+            this.branch = new Adw.ActionRow ();
+            this.branch.title = "Branch: ||";
+            this.commit = new Gtk.Button.with_label ("Commit");
+            this.commit.get_style_context ().add_class (".suggested-action");
+            this.append (this.branch);
+            this.append (this.commit);
+            this.stash = this.gen_button ("Stash changes", "git stash", "Do you really want to stash the changes?" , new string[]{"git", "stash"});
+            this.clean_all = this.gen_button ("Clean all", "git clean -dfx", "Do you really want to clean the working dir?" , new string[]{"git", "clean", "-dfx"});
+            this.clean_ignored = this.gen_button ("Clean all ignored files", "git clean -df", "Do you really want to remove all ignored files?" , new string[]{"git", "clean", "-df"});
+            var b = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 2);
+            b.append (this.stash);
+            b.append (this.clean_all);
+            b.append (this.clean_ignored);
+            this.append (b);
+            new Thread<void>("commit-status", () => {
+                while (true) {
+                    Idle.add_full (Priority.LOW, () => {
+                        var o = get_stdout (new string[]{"git", "status", "-s"}, this.directory);
+                        this.commit.sensitive = o.strip ().length != 0;
+                        return Source.REMOVE;
+                    });
+                    Posix.sleep (5);
+                }
+            });
+        }
+
+        private Gtk.Button gen_button (string s, string title, string msg, string[] cmd) {
+            var ret = new Gtk.Button.with_label (s);
+            ret.clicked.connect (() => {
+                var m = new Adw.MessageDialog (null, title, msg);
+                m.add_response ("yes", "Yes");
+                m.add_response ("no", "No");
+                m.set_response_appearance ("yes", Adw.ResponseAppearance.DESTRUCTIVE);
+                m.default_response = "no";
+                m.response.connect (s => {
+                    get_stdout (cmd, this.directory);
+                });
+                m.present ();
+            });
+            ret.hexpand = true;
+            return ret;
         }
     }
 
