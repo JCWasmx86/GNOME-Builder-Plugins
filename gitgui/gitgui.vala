@@ -70,29 +70,51 @@ public class GitGuiView : Adw.Bin {
             // This is cursed
             while (true) {
                 var full_path = dir + "/.git/config";
-                info ("Waiting for %s", full_path);
+                critical ("Waiting for %s", full_path);
                 while (true) {
                     Posix.Stat buf;
                     if (Posix.stat (full_path, out buf) == 0)
                         break;
                     Posix.sleep (1);
                 }
-                info ("%s exists now", full_path);
+                critical ("%s exists now", full_path);
                 this.created_config ();
                 Posix.Stat buf;
                 Posix.stat (full_path, out buf);
                 var mtime = buf.st_mtime;
                 var ino = buf.st_ino;
-                var fd = Linux.inotify_add_watch (ifd, dir + "/.git/", Linux.InotifyMaskFlags.DELETE_SELF | Linux.InotifyMaskFlags.CREATE | Linux.InotifyMaskFlags.MODIFY | Linux.InotifyMaskFlags.DELETE);
-                while (fd > 0) {
+                Posix.Stat idx_buf;
+                Posix.stat (dir + "/.git/index", out idx_buf);
+                var mtime_idx = idx_buf.st_mtime;
+                var ino_idx = idx_buf.st_ino;
+                Posix.Stat heads_buf;
+                Posix.stat (dir + "/.git/logs/refs/heads/", out heads_buf);
+                var mtime_heads = heads_buf.st_mtime;
+                var ino_heads = heads_buf.st_ino;
+                var fd = Linux.inotify_add_watch (ifd, dir + "/.git/",
+                                                  Linux.InotifyMaskFlags.ACCESS | Linux.InotifyMaskFlags.MODIFY | Linux.InotifyMaskFlags.ATTRIB
+                                                  | Linux.InotifyMaskFlags.CLOSE_WRITE | Linux.InotifyMaskFlags.CLOSE_NOWRITE
+                                                  | Linux.InotifyMaskFlags.OPEN | Linux.InotifyMaskFlags.MOVED_FROM
+                                                  | Linux.InotifyMaskFlags.MOVED_TO | Linux.InotifyMaskFlags.CREATE
+                                                  | Linux.InotifyMaskFlags.DELETE | Linux.InotifyMaskFlags.DELETE_SELF
+                                                  | Linux.InotifyMaskFlags.MOVE_SELF);
+                while (true) {
                     Linux.InotifyEvent evt = { 0 };
                     Posix.read (ifd, &evt, sizeof (Linux.InotifyEvent) + Posix.Limits.NAME_MAX + 1);
+                    var r = Posix.stat (full_path, out buf);
+                    var updated_config = r == 0 && buf.st_ino == ino && buf.st_mtime > mtime;
+                    r = Posix.stat (dir + "/.git/index", out idx_buf);
+                    var updated_index = r == 0 && idx_buf.st_ino == ino_idx && idx_buf.st_mtime > mtime_idx;
+                    r = Posix.stat (dir + "/.git/logs/refs/heads/", out heads_buf);
+                    var updated_heads = r == 0 && heads_buf.st_ino == ino_heads && heads_buf.st_mtime > mtime_heads;
                     if (evt.len > 0) {
-                        info ("Event: %s", (string) evt.name);
-                        if ((evt.mask & Linux.InotifyMaskFlags.CREATE) != 0) {
-                            if (Posix.stat (full_path, out buf) == 0 && buf.st_ino == ino && buf.st_mtime > mtime) {
+                        info ("Event: %s (0x%x)", (string) evt.name, evt.mask);
+                        if ((evt.mask & Linux.InotifyMaskFlags.CREATE) != 0 || (evt.mask & Linux.InotifyMaskFlags.OPEN) != 0) {
+                            if (updated_config || updated_index || updated_heads) {
                                 this.created_config ();
                                 mtime = buf.st_mtime;
+                                mtime_idx = idx_buf.st_mtime;
+                                mtime_heads = heads_buf.st_mtime;
                             }
                         } else if ((evt.mask & Linux.InotifyMaskFlags.DELETE) != 0) {
                             if (Posix.stat (full_path, out buf) != 0) {
@@ -100,9 +122,11 @@ public class GitGuiView : Adw.Bin {
                                 break;
                             }
                         } else if ((evt.mask & Linux.InotifyMaskFlags.MODIFY) != 0) {
-                            if (Posix.stat (full_path, out buf) == 0 && buf.st_ino == ino && buf.st_mtime > mtime) {
+                            if (updated_config || updated_index || updated_heads) {
                                 this.edited_config ();
                                 mtime = buf.st_mtime;
+                                mtime_idx = idx_buf.st_mtime;
+                                mtime_heads = heads_buf.st_mtime;
                             }
                         } else {
                             info ("Unhandled event: %u", evt.mask);
