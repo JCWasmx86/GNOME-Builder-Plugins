@@ -1,4 +1,5 @@
-gitgui_sources = ['gitgui.vala']
+subdir('data')
+gitgui_sources = ['gitgui.vala', gitgui_resources]
 c_args = ['-DG_LOG_DOMAIN="gitgui"']
 tgts += shared_module(
     'gitgui',

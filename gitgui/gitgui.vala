@@ -17,6 +17,8 @@
  *
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
+[CCode (cname = "gitgui_get_resource")]
+public static extern Resource gitgui_get_resource ();
 public class GitGuiWorkspaceAddin : GLib.Object, Ide.WorkspaceAddin {
 
     public void page_changed (Ide.Page? page) {
@@ -43,6 +45,7 @@ public class GitGuiPanel : Ide.Pane {
     }
 
     public GitGuiPanel (string dir) {
+        Gtk.IconTheme.get_for_display (Gdk.Display.get_default ()).add_resource_path ("/plugins/gitgui/icons");
         this.directory = dir;
         this.view = new GitGuiView (dir);
         this.realize.connect (() => {
@@ -385,6 +388,8 @@ public class GitGuiCommitView : Gtk.Box {
 }
 
 public void peas_register_types (TypeModule module) {
+    var r = gitgui_get_resource ();
+	GLib.resources_register (r);
     var obj = (Peas.ObjectModule) module;
     obj.register_extension_type (typeof (Ide.WorkspaceAddin), typeof (GitGuiWorkspaceAddin));
 }
