@@ -67,20 +67,20 @@ public class GitGuiView : Adw.Bin {
         this.action = new GitGuiAction (dir);
         this.thread = new Thread<void> (".git/config watcher", () => {
             var ifd = Linux.inotify_init ();
-            critical ("FD: %d", ifd);
+            info ("FD: %d", ifd);
             if (ifd == -1)
                 return;
             // This is cursed
             while (true) {
                 var full_path = dir + "/.git/config";
-                critical ("Waiting for %s", full_path);
+                info ("Waiting for %s", full_path);
                 while (true) {
                     Posix.Stat buf;
                     if (Posix.stat (full_path, out buf) == 0)
                         break;
                     Posix.sleep (1);
                 }
-                critical ("%s exists now", full_path);
+                info ("%s exists now", full_path);
                 this.created_config ();
                 Posix.Stat buf;
                 Posix.stat (full_path, out buf);
@@ -157,7 +157,7 @@ public class GitGuiView : Adw.Bin {
     }
 
     internal void created_config () {
-        critical ("Created config");
+        info ("Created config");
         if (this.stack.visible_child_name == "create") {
             this.stack.visible_child = this.action;
         }
@@ -165,7 +165,7 @@ public class GitGuiView : Adw.Bin {
     }
 
     internal void deleted_config () {
-        critical ("Deleted config");
+        info ("Deleted config");
         if (this.stack.visible_child_name == "action") {
             this.stack.visible_child_name = "create";
         }
@@ -173,7 +173,7 @@ public class GitGuiView : Adw.Bin {
     }
 
     internal void edited_config () {
-        critical ("Edited config");
+        info ("Edited config");
         if (this.stack.visible_child_name == "create") {
             this.stack.visible_child = this.action;
         }
@@ -221,14 +221,14 @@ public class GitGuiAction : Adw.Bin {
 
     private static Gtk.Widget create_remote (Object obj) {
         var row = new Adw.ActionRow ();
-        row.title = ((GitGuiRemote)obj).name;
-        row.subtitle = ((GitGuiRemote)obj).uri;
+        row.title = Markup.escape_text (((GitGuiRemote)obj).name);
+        row.subtitle = Markup.escape_text (((GitGuiRemote)obj).uri);
         return row;
     }
 
     private static Gtk.Widget create_branch (Object obj) {
         var row = new Adw.ActionRow ();
-        row.title = ((GitGuiBranch)obj).name;
+        row.title = Markup.escape_text (((GitGuiBranch)obj).name);
         var is_active = ((GitGuiBranch)obj).is_active;
         if (is_active)
             row.subtitle = "Current branch";
@@ -237,8 +237,8 @@ public class GitGuiAction : Adw.Bin {
 
     private static Gtk.Widget create_commit (Object obj) {
         var row = new Adw.ActionRow ();
-        row.title = ((GitGuiCommit)obj).message_first_line;
-        row.subtitle = ((GitGuiCommit)obj).hash;
+        row.title = Markup.escape_text (((GitGuiCommit)obj).message_first_line);
+        row.subtitle = Markup.escape_text (((GitGuiCommit)obj).hash);
         var more_button = new Gtk.Button ();
         more_button.icon_name = "view-more-horizontal-symbolic";
         more_button.hexpand = false;
@@ -300,7 +300,7 @@ public class GitGuiAction : Adw.Bin {
                 }
                 return Source.REMOVE;
             });
-            var commits_str = get_stdout (new string[] {"git", "log", "--format=%h %an %ae %at %cn %ce %s"}, this.directory);
+            var commits_str = get_stdout (new string[] {"git", "log", "--format=%h||%an||%ae||%at||%cn||%ce||%s"}, this.directory);
             Idle.add_full (Priority.HIGH_IDLE, () => {
                 var commits = commits_str.split ("\n");
                 this.commits.model.remove_all ();
@@ -311,7 +311,7 @@ public class GitGuiAction : Adw.Bin {
                     if (c == null || c.length < 2)
                         continue;
                     var commit = new GitGuiCommit ();
-                    var parts = c.split(" ", 7);
+                    var parts = c.split("||", 7);
                     commit.hash = parts[0];
                     commit.author = new GitGuiPerson (parts[1], parts[2]);
                     commit.time = new GLib.DateTime.from_unix_local (int64.parse (parts[3]));
