@@ -349,9 +349,9 @@ namespace GitGui {
             this.commit.get_style_context ().add_class ("suggested-action");
             this.append (this.branch);
             this.append (this.commit);
-            this.stash = this.gen_button ("Stash changes", "git stash", "Do you really want to stash the changes?" , new string[]{"git", "stash"});
-            this.clean_all = this.gen_button ("Clean all", "git clean -dfx", "Do you really want to clean the working dir?" , new string[]{"git", "clean", "-dfx"});
-            this.clean_ignored = this.gen_button ("Clean all ignored files", "git clean -df", "Do you really want to remove all ignored files?" , new string[]{"git", "clean", "-df"});
+            this.stash = this.gen_button ("Stash changes", "git stash", "Do you really want to stash the changes?" , "git||stash");
+            this.clean_all = this.gen_button ("Clean all", "git clean -dfx", "Do you really want to clean the working dir?" , "git||clean||-dfx");
+            this.clean_ignored = this.gen_button ("Clean all ignored files", "git clean -df", "Do you really want to remove all ignored files?" , "git||clean||-df");
             var b = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 2);
             b.append (this.stash);
             b.append (this.clean_all);
@@ -374,17 +374,19 @@ namespace GitGui {
             });
         }
 
-        private Gtk.Button gen_button (string s, string title, string msg, string[] cmd) {
+        private Gtk.Button gen_button (string s, string title, string msg, string cmd) {
             var ret = new Gtk.Button.with_label (s);
             ret.clicked.connect (() => {
-                var a = cmd;
+                var a = cmd.split("||");
+                var d = this.directory;
                 var m = new Adw.MessageDialog (null, title, msg);
                 m.add_response ("yes", "Yes");
                 m.add_response ("no", "No");
                 m.set_response_appearance ("yes", Adw.ResponseAppearance.DESTRUCTIVE);
                 m.default_response = "no";
                 m.response.connect (s => {
-                    get_stdout (a, this.directory);
+                    if (s == "yes")
+                        get_stdout (a, d);
                 });
                 m.present ();
             });
