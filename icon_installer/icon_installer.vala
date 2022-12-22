@@ -205,7 +205,7 @@ public class IconInstallerImage : Gtk.Box {
 
 	public bool match (string[] terms) {
 		foreach (var term in terms) {
-			if (term == this.icon_name || (this.icon_name.has_prefix (term) && term.length > 3))
+			if (term == this.icon_name || (this.icon_name.has_prefix (term) && term.length >= 3))
 				return true;
 			foreach (var alias in this.strings) {
 				if (alias == term || alias.contains (term)) {

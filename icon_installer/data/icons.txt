@@ -34,6 +34,7 @@ show-auth-otp-symbolic
 show-axes-four-quadrants-symbolic
 show-axes-one-quadrant-symbolic
 show-bank-symbolic
+show-banner-symbolic
 show-barbecue-symbolic
 show-baseball-symbolic
 show-battery-symbolic
@@ -108,6 +109,7 @@ show-camera-static-symbolic
 show-camera-symbolic
 show-camera-toggle-symbolic
 show-carousel-symbolic
+show-cat-symbolic
 show-cd-symbolic
 show-chain-link-loose-symbolic
 show-chain-link-symbolic
@@ -119,6 +121,10 @@ show-checkerboard-symbolic
 show-checkmark-large-symbolic
 show-checkmark-small-symbolic
 show-checkmark-symbolic
+show-check-plain-symbolic
+show-check-round-outline2-symbolic
+show-check-round-outline-symbolic
+show-check-round-outline-whole-symbolic
 show-christmas-symbolic
 show-cigarette-none-symbolic
 show-cigarette-symbolic
@@ -160,6 +166,8 @@ show-cross-filled-large-symbolic
 show-cross-filled-symbolic
 show-cross-large-symbolic
 show-cross-symbolic
+show-crossword-clue-across-symbolic
+show-crossword-clue-down-symbolic
 show-C-symbolic
 show-cut-symbolic
 show-cycling-symbolic
@@ -179,6 +187,7 @@ show-dice3-symbolic
 show-dice-symbolic
 show-dictionary-symbolic
 show-discover-symbolic
+show-display-projector-symbolic
 show-display-symbolic
 show-display-with-window-symbolic
 show-dock-bottom-symbolic
@@ -208,9 +217,13 @@ show-egg-symbolic
 show-eject-large-symbolic
 show-eject-symbolic
 show-electric-car-symbolic
+show-encoder-knob-symbolic
 show-encode-symbolic
 show-entry-clear-symbolic
 show-eraser2-symbolic
+show-eraser3-symbolic
+show-eraser4-symbolic
+show-eraser5-symbolic
 show-eraser-symbolic
 show-error-symbolic
 show-execute-from-symbolic
@@ -226,6 +239,7 @@ show-eye-not-looking-symbolic
 show-eye-open-negative-filled-symbolic
 show-eye-open-negative-symbolic
 show-eye-open-symbolic
+show-face-unlock-symbolic
 show-fast-food-symbolic
 show-fax-symbolic
 show-feet-symbolic
@@ -251,9 +265,12 @@ show-flap-symbolic
 show-flashlight-none-symbolic
 show-flashlight-symbolic
 show-flash-memory-symbolic
+show-flatpak-symbolic
 show-floppy-symbolic
+show-flying2-symbolic
 show-flying-symbolic
 show-fog-symbolic
+show-folder-remote-symbolic
 show-font-x-generic-symbolic
 show-football-american-symbolic
 show-fuel-symbolic
@@ -332,6 +349,7 @@ show-invert-colors-symbolic
 show-iphone-symbolic
 show-ipod-symbolic
 show-issue-symbolic
+show-item-missing-symbolic
 show-joined-displays-symbolic
 show-junk-alt-symbolic
 show-junk-symbolic
@@ -375,6 +393,8 @@ show-lock-small-open-symbolic
 show-lock-small-symbolic
 show-loupe-large-symbolic
 show-loupe-symbolic
+show-loupe-with-arrow-symbolic
+show-loupe-with-heart-symbolic
 show-low-vision-symbolic
 show-magic-wand-symbolic
 show-mail-archive-symbolic
@@ -400,6 +420,7 @@ show-minus-large-symbolic
 show-minus-symbolic
 show-mobile-network-symbolic
 show-modem-symbolic
+show-money-clip-symbolic
 show-money-none-symbolic
 show-money-symbolic
 show-monitor-pick-symbolic
@@ -434,6 +455,9 @@ show-network-cellular-no-data-signal-none-symbolic
 show-network-cellular-no-data-signal-ok-symbolic
 show-network-cellular-no-data-signal-weak-symbolic
 show-network-printer-symbolic
+show-network-raid-symbolic
+show-network-server-symbolic
+show-network-workgroup-symbolic
 show-newspaper-rounded-symbolic
 show-newspaper-symbolic
 show-nintendo-controller-symbolic
@@ -458,7 +482,9 @@ show-online-symbolic
 show-opacity-symbolic
 show-open-book-symbolic
 show-outbox-symbolic
+show-overlapping-windows-symbolic
 show-package-symbolic
+show-package-x-generic-symbolic
 show-padlock2-open-symbolic
 show-padlock2-symbolic
 show-padlock-open-symbolic
@@ -507,6 +533,7 @@ show-pipette-symbolic
 show-pip-in-symbolic
 show-pip-out-symbolic
 show-playback-error-symbolic
+show-playback-options-symbolic
 show-playback-speed-symbolic
 show-playback-symbolic
 show-play-large-diabled-symbolic
@@ -521,6 +548,7 @@ show-portal-symbolic
 show-positive-feedback-symbolic
 show-post-box-symbolic
 show-power-symbolic
+show-printer-network-symbolic
 show-printer-round-symbolic
 show-printer-symbolic
 show-profit-symbolic
@@ -568,14 +596,18 @@ show-screen-privacy3-symbolic
 show-screen-privacy4-symbolic
 show-screen-privacy5-symbolic
 show-screen-privacy6-symbolic
+show-screen-privacy7-disabled-symbolic
 show-screen-privacy7-symbolic
 show-screen-privacy-disabled7-symbolic
 show-screen-privacy-disabled-symbolic
 show-screen-privacy-symbolic
+show-screenshooter-symbolic
 show-screenshot-recorded-symbolic
 show-screenshot-symbolic
 show-scroll-on-a-roll-symbolic
 show-scroll-symbolic
+show-selection-opaque-2-symbolic
+show-selection-opaque-3-symbolic
 show-selection-opaque-symbolic
 show-selection-symbolic
 show-select-mode-symbolic
@@ -593,6 +625,7 @@ show-shapes-symbolic
 show-share-alt-symbolic
 show-share-symbolic
 show-shear-symbolic
+show-shell-overview-symbolic
 show-shell-symbolic
 show-shield-danger-symbolic
 show-shield-safe-symbolic
@@ -624,6 +657,7 @@ show-smile-symbolic
 show-smudge-finger-symbolic
 show-snapshots-alt-symbolic
 show-snapshots-symbolic
+show-snap-symbolic
 show-snow-outline-symbolic
 show-snow-symbolic
 show-social-network-none-symbolic
@@ -691,6 +725,8 @@ show-tennis-symbolic
 show-terminal-symbolic
 show-test-pass-symbolic
 show-test-symbolic
+show-text2-symbolic
+show-text3-symbolic
 show-text-bold-symbolic
 show-text-direction-ltr-symbolic
 show-text-direction-rtl-symbolic
@@ -721,6 +757,7 @@ show-toolbars-symbolic
 show-top-large-symbolic
 show-top-symbolic
 show-tornado-symbolic
+show-touchpad-disabled-symbolic
 show-touchpad-symbolic
 show-town-symbolic
 show-transparent-background-symbolic
@@ -754,6 +791,9 @@ show-vpn-caps-disabled-symbolic
 show-vpn-caps-symbolic
 show-wacom-symbolic
 show-walking-symbolic
+show-wallet2-symbolic
+show-wallet3-symbolic
+show-wallet-symbolic
 show-warning-symbolic
 show-weather-alert-symbolic
 show-week-symbolic
@@ -767,10 +807,13 @@ show-window-flat-symbolic
 show-window-grow-symbolic
 show-window-scrolling-symbolic
 show-window-shrink-symbolic
+show-window-sound-source-symbolic
 show-window-symbolic
 show-windy-symbolic
 show-wine-glass-symbolic
 show-work-week-symbolic
+show-wrench-symbolic
+show-wrench-wide-symbolic
 show-xbox-controller-symbolic
 show-x-circular-symbolic
 show-year-alt-symbolic
