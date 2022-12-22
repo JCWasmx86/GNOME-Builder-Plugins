@@ -114,8 +114,12 @@ namespace Vte {
 		[Version (deprecated = true, deprecated_since = "0.56")]
 		public string get_text_include_trailing_spaces ([CCode (delegate_target_pos = 1.5)] Vte.SelectionFunc? is_selected, out GLib.Array<Vte.CharAttributes?> attributes);
 		public string? get_text_range (long start_row, long start_col, long end_row, long end_col, [CCode (delegate_target_pos = 5.5)] Vte.SelectionFunc? is_selected, out GLib.Array<Vte.CharAttributes?>? attributes);
+		[Version (since = "0.72")]
+		public string? get_text_range_format (Vte.Format format, long start_row, long start_col, long end_row, long end_col, size_t length);
 		[Version (since = "0.70")]
 		public string? get_text_selected (Vte.Format format);
+		[Version (since = "0.72")]
+		public string? get_text_selected_full (Vte.Format format, out size_t length);
 		public unowned string? get_window_title ();
 		[Version (since = "0.40")]
 		public unowned string? get_word_char_exceptions ();
