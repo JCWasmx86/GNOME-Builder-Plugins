@@ -149,7 +149,7 @@ namespace GitGui {
             create_repo_button.get_style_context ().add_class ("suggested-action");
             create_repo.child = create_repo_button;
             create_repo_button.clicked.connect (() => {
-                get_stdout (new string[]{"git", "init"}, this.directory);
+                get_stdout (new string[] { "git", "init" }, this.directory);
             });
             this.stack.add_named (create_repo, "create");
             Posix.Stat buf;
@@ -230,46 +230,6 @@ namespace GitGui {
             stack.add_titled (sc, id, title).icon_name = icon;
         }
 
-        private static Gtk.Widget create_remote (Object obj) {
-            var row = new Adw.ActionRow ();
-            row.title = Markup.escape_text (((Remote) obj).name);
-            row.subtitle = Markup.escape_text (((Remote) obj).uri);
-            return row;
-        }
-
-        private static Gtk.Widget create_branch (Object obj) {
-            var row = new Adw.ActionRow ();
-            row.title = Markup.escape_text (((Branch) obj).name);
-            var is_active = ((Branch) obj).is_active;
-            if (is_active)
-                row.subtitle = "Current branch";
-            return row;
-        }
-
-        private static Gtk.Widget create_commit (Object obj) {
-            var row = new Adw.ActionRow ();
-            row.title = Markup.escape_text (((Commit) obj).message_first_line);
-            row.subtitle = Markup.escape_text (((Commit) obj).hash);
-            var more_button = new Gtk.Button ();
-            more_button.icon_name = "view-more-horizontal-symbolic";
-            more_button.hexpand = false;
-            more_button.vexpand = false;
-            more_button.height_request = 16;
-            more_button.width_request = 16;
-            more_button.margin_start = 0;
-            more_button.margin_end = 0;
-            more_button.margin_top = 0;
-            more_button.margin_bottom = 0;
-            more_button.tooltip_text = "Show more information";
-            more_button.get_style_context ().add_class ("flat");
-            more_button.clicked.connect (() => {
-                var w = new CommitWindow ((Commit) obj);
-                w.present ();
-            });
-            row.add_suffix (more_button);
-            return row;
-        }
-
         public void reload () {
             new Thread<void> ("git-update-things-thread", () => {
                 var branch_str = get_stdout (new string[] { "git", "branch" }, this.directory);
@@ -336,6 +296,45 @@ namespace GitGui {
                 });
             });
         }
+    }
+    private static Gtk.Widget create_remote (Object obj) {
+        var row = new Adw.ActionRow ();
+        row.title = Markup.escape_text (((Remote) obj).name);
+        row.subtitle = Markup.escape_text (((Remote) obj).uri);
+        return row;
+    }
+
+    private static Gtk.Widget create_branch (Object obj) {
+        var row = new Adw.ActionRow ();
+        row.title = Markup.escape_text (((Branch) obj).name);
+        var is_active = ((Branch) obj).is_active;
+        if (is_active)
+            row.subtitle = "Current branch";
+        return row;
+    }
+
+    private static Gtk.Widget create_commit (Object obj) {
+        var row = new Adw.ActionRow ();
+        row.title = Markup.escape_text (((Commit) obj).message_first_line);
+        row.subtitle = Markup.escape_text (((Commit) obj).hash);
+        var more_button = new Gtk.Button ();
+        more_button.icon_name = "view-more-horizontal-symbolic";
+        more_button.hexpand = false;
+        more_button.vexpand = false;
+        more_button.height_request = 16;
+        more_button.width_request = 16;
+        more_button.margin_start = 0;
+        more_button.margin_end = 0;
+        more_button.margin_top = 0;
+        more_button.margin_bottom = 0;
+        more_button.tooltip_text = "Show more information";
+        more_button.get_style_context ().add_class ("flat");
+        more_button.clicked.connect (() => {
+            var w = new CommitWindow ((Commit) obj);
+            w.present ();
+        });
+        row.add_suffix (more_button);
+        return row;
     }
 
     public class GeneralActions : Gtk.Box {
@@ -774,12 +773,10 @@ namespace GitGui {
                 var parts = s.split ("/");
                 var b = (parts != null && parts.length > 0) ? parts[parts.length - 1] : s;
                 var content = get_stdout (new string[] { "git", "show", "%s:%s".printf (this.commit.hash, s) }, this.commit.dir);
-                critical ("Getting %s (%s)", s, b);
                 GtkSource.Buffer buf;
                 var lang = GtkSource.LanguageManager.get_default ().guess_language (b, null);
                 if (lang != null) {
                     buf = new GtkSource.Buffer.with_language (lang);
-                    critical ("%s", lang.id);
                     buf.highlight_syntax = true;
                 } else {
                     buf = new GtkSource.Buffer (null);
