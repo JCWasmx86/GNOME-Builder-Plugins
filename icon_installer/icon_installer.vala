@@ -214,6 +214,8 @@ public class IconInstallerImage : Gtk.Box {
         var ctrl = new Gtk.GestureClick ();
         ctrl.pressed.connect ((n, x, y) => {
             var d = new IconInstallerDialog (this.icon_name, workdir);
+            d.modal = true;
+            d.set_transient_for ((Gtk.Window) this.root);
             d.present ();
         });
         img.add_controller (ctrl);

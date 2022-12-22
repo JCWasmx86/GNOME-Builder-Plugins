@@ -376,6 +376,8 @@ namespace GitGui {
             this.commit.clicked.connect (() => {
                 var o = get_stdout (new string[] { "git", "status", "-s" }, this.directory).strip ();
                 var v = new CommitDialog (dir, o);
+                v.modal = true;
+                v.set_transient_for ((Gtk.Window) this.root);
                 v.committed.connect (() => {
                     this.trigger_reload ();
                 });
