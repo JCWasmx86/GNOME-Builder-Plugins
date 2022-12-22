@@ -872,6 +872,7 @@ namespace GitGui {
                 }
                 foreach (var i in lines)
                     critical ("Blaming %llu", i);
+                // TODO: Now render it.
             });
             this.map.add_action (blame);
         }
