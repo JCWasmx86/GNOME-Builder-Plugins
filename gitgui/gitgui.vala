@@ -19,7 +19,7 @@
  */
 [CCode (cname = "gitgui_get_resource")]
 public static extern Resource gitgui_get_resource ();
-
+// TODO: Several files
 namespace GitGui {
     public class WorkspaceAddin : GLib.Object, Ide.WorkspaceAddin {
 
