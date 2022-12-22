@@ -148,6 +148,9 @@ namespace GitGui {
             var create_repo_button = new Gtk.Button.with_label ("Create Repository");
             create_repo_button.get_style_context ().add_class ("suggested-action");
             create_repo.child = create_repo_button;
+            create_repo_button.clicked.connect (() => {
+                get_stdout (new string[]{"git", "init"}, this.directory);
+            });
             this.stack.add_named (create_repo, "create");
             Posix.Stat buf;
             var full_path = dir + "/.git/config";
@@ -796,7 +799,7 @@ namespace GitGui {
         try {
             Process.spawn_sync (dir, args, Environ.get (), SpawnFlags.SEARCH_PATH, null, out sout, out serr, out status);
             if (status != 0) {
-                critical ("%s:\n%s", string.join (" ", args), serr);
+                critical ("Command failed:\n%s", serr);
                 return "";
             }
         } catch (SpawnError e) {
