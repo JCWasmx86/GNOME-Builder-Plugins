@@ -15,4 +15,5 @@
 	echo "</gresource>"
 	echo "</gresources>"
 } | xmllint -format - > icon_installer.gresource.xml
+rm -f icons.json
 wget https://gitlab.gnome.org/Teams/Design/icon-development-kit/-/raw/main/icons.json
