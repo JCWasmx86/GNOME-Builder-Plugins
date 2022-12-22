@@ -19,6 +19,7 @@
  */
 [CCode (cname = "gitgui_get_resource")]
 public static extern Resource gitgui_get_resource ();
+
 // TODO: Several files
 namespace GitGui {
     public class WorkspaceAddin : GLib.Object, Ide.WorkspaceAddin {
@@ -352,17 +353,17 @@ namespace GitGui {
             this.commit.get_style_context ().add_class ("suggested-action");
             this.append (this.branch);
             this.append (this.commit);
-            this.stash = this.gen_button ("Stash changes", "git stash", "Do you really want to stash the changes?" , "git||stash");
-            this.clean_all = this.gen_button ("Clean all", "git clean -dfx", "Do you really want to clean the working dir?" , "git||clean||-dfx");
-            this.clean_ignored = this.gen_button ("Clean all ignored files", "git clean -df", "Do you really want to remove all ignored files?" , "git||clean||-df");
+            this.stash = this.gen_button ("Stash changes", "git stash", "Do you really want to stash the changes?", "git||stash");
+            this.clean_all = this.gen_button ("Clean all", "git clean -dfx", "Do you really want to clean the working dir?", "git||clean||-dfx");
+            this.clean_ignored = this.gen_button ("Clean all ignored files", "git clean -df", "Do you really want to remove all ignored files?", "git||clean||-df");
             var b = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 2);
             b.append (this.stash);
             b.append (this.clean_all);
             b.append (this.clean_ignored);
             this.append (b);
-            new Thread<void>("commit-status", () => {
+            new Thread<void> ("commit-status", () => {
                 while (true) {
-                    var o = get_stdout (new string[]{"git", "status", "-s"}, this.directory);
+                    var o = get_stdout (new string[] { "git", "status", "-s" }, this.directory);
                     Idle.add_full (Priority.LOW, () => {
                         this.commit.sensitive = o.strip ().length != 0;
                         return Source.REMOVE;
@@ -371,7 +372,7 @@ namespace GitGui {
                 }
             });
             this.commit.clicked.connect (() => {
-                var o = get_stdout (new string[]{"git", "status", "-s"}, this.directory).strip ();
+                var o = get_stdout (new string[] { "git", "status", "-s" }, this.directory).strip ();
                 var v = new CommitDialog (dir, o);
                 v.committed.connect (() => {
                     this.trigger_reload ();
@@ -383,7 +384,7 @@ namespace GitGui {
         private Gtk.Button gen_button (string s, string title, string msg, string cmd) {
             var ret = new Gtk.Button.with_label (s);
             ret.clicked.connect (() => {
-                var a = cmd.split("||");
+                var a = cmd.split ("||");
                 var d = this.directory;
                 var m = new Adw.MessageDialog (null, title, msg);
                 m.add_response ("yes", "Yes");
@@ -426,7 +427,7 @@ namespace GitGui {
             b1.append (unadd_all);
             this.append (b1);
             foreach (var l in o.split ("\n")) {
-                if (l == null|| l.length < 2)
+                if (l == null || l.length < 2)
                     continue;
                 // TODO: Add icon based on type
                 // var type = l.substring (0, 3).strip ();
@@ -449,6 +450,7 @@ namespace GitGui {
                 this.append (row);
             }
         }
+
         internal signal void can_continue (bool b);
 
         internal string[] paths_to_add () {
@@ -510,8 +512,8 @@ namespace GitGui {
                 cont.clicked.connect (() => {
                     var paths = select_component.paths_to_add ();
                     foreach (var p in paths)
-                        get_stdout (new string[]{"git", "add", p}, dir);
-                    get_stdout (new string[]{"git", "commit", "-m", child.buffer.text.strip ()}, dir);
+                        get_stdout (new string[] { "git", "add", p }, dir);
+                    get_stdout (new string[] { "git", "commit", "-m", child.buffer.text.strip () }, dir);
                     this.committed ();
                     this.close ();
                 });
@@ -848,6 +850,54 @@ namespace GitGui {
             this.append (this.view);
         }
     }
+
+    public class GitEditorPageAddin : Ide.Object, Ide.EditorPageAddin {
+        private SimpleActionGroup map;
+        private Ide.SourceView view;
+        construct {
+            this.map = new GLib.SimpleActionGroup ();
+            var blame = new SimpleAction ("blame", null);
+            blame.activate.connect (() => {
+                Gtk.TextIter start, end;
+                var non_zero = this.view.buffer.get_selection_bounds (out start, out end);
+                var lines = new uint64[0];
+                if (!non_zero) {
+                    lines += start.get_line () + 1;
+                } else {
+                    for (var i = start.get_line (); i <= end.get_line (); i++)
+                        lines += (i + 1);
+                }
+                foreach (var i in lines)
+                    critical ("Blaming %llu", i);
+            });
+            this.map.add_action (blame);
+        }
+        public GLib.ActionGroup? ref_action_group () {
+            return this.map;
+        }
+
+        public void unload (Ide.EditorPage page) {
+            this.view = null;
+        }
+
+        public void load (Ide.EditorPage page) {
+            this.view = page.view;
+            var model = new GLib.Menu ();
+            var mi = new GLib.MenuItem ("Blame line(s)", "page.gitgui.blame");
+            model.append_item (mi);
+            view.append_menu (model);
+            view.populate_menu.connect (() => {
+                var s = this.map.lookup_action ("blame");
+                ((SimpleAction) s).set_enabled (true);
+            });
+        }
+
+        public void frame_set (Ide.Frame frame) {
+        }
+
+        public void language_changed (string language_id) {
+        }
+    }
 }
 
 public void peas_register_types (TypeModule module) {
@@ -855,4 +905,5 @@ public void peas_register_types (TypeModule module) {
     GLib.resources_register (r);
     var obj = (Peas.ObjectModule) module;
     obj.register_extension_type (typeof (Ide.WorkspaceAddin), typeof (GitGui.WorkspaceAddin));
+    obj.register_extension_type (typeof (Ide.EditorPageAddin), typeof (GitGui.GitEditorPageAddin));
 }
