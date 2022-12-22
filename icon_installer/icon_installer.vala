@@ -101,7 +101,7 @@ public class IconInstallerImage : Gtk.Box {
 						if (a == Gtk.ResponseType.OK) {
 							lbl.label = "Adding reference to %s".printf (workdir.get_relative_path (dialog.get_file ()));
 							path = dialog.get_file ();
-							save_file_lbl = new Gtk.Label ("Saving SVG to %s".printf (workdir.get_relative_path (resolve_icon_path (path))));
+							save_file_lbl.label = "Saving SVG to %s".printf (workdir.get_relative_path (resolve_icon_path (path)));
 						}
 						dialog.destroy ();
 					});
