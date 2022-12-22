@@ -2,6 +2,8 @@
 <gresources>
   <gresource prefix="/plugins/gitgui/">
     <file preprocess="xml-stripblanks">icons/scalable/actions/branch-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/heal-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/navigate-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/actions/left-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/actions/general-properties-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/actions/edit-symbolic.svg</file>

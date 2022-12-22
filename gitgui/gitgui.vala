@@ -558,12 +558,14 @@ namespace GitGui {
             clamp.maximum_size = 540;
             clamp.child = sc;
             var stack = new Adw.ViewStack ();
-            stack.add_titled (clamp, "overview", "Overview");
+            // It seems like icon names are a must :(
+            stack.add_titled (clamp, "overview", "Overview").icon_name = "general-properties-symbolic";
             sc = new Gtk.ScrolledWindow ();
             sc.child = this.view;
             this.explore = new CommitExploreView (c);
-            stack.add_titled (sc, "diff", "Diff");
-            stack.add_titled (this.explore, "browse", "Browse tree at %s".printf (c.hash));
+            // TODO: This icon makes no sense
+            stack.add_titled (sc, "diff", "Diff").icon_name = "heal-symbolic";
+            stack.add_titled (this.explore, "browse", "Browse tree at %s".printf (c.hash)).icon_name = "navigate-symbolic";
             title.stack = stack;
             box.append (stack);
             box.vexpand = true;
