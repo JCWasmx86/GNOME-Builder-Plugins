@@ -166,8 +166,10 @@ public class IconInstallerImage : Gtk.Box {
 			FileUtils.get_contents (gresource.get_path (), out data);
 			var new_str = new StringBuilder ();
 			var set_it = false;
-			foreach (var s in data.split ("\n")) {
-				new_str.append (s).append ("\n");
+            var split = data.split ("\n");
+			for (var i = 0; i < split.length; i++) {
+                var s = split[i];
+				new_str.append (s).append (i == split.length -1 ? "" : "\n");
 				if (s.strip ().has_prefix ("<file") && !set_it) {
 					var indent = s.substring (0, s.length - s.chug ().length);
 					var append_it = indent + "<file preprocess=\"xml-stripblanks\">" + gresource.get_parent ().get_relative_path (svg) + "</file>\n";
