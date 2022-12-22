@@ -37,6 +37,7 @@ public class MarkdownIndenter : Ide.Object, GtkSource.Indenter {
 		 * 2. Add "n. " automatically for ordered lists
 		 * 3. Add "* " automatically for unordered lists
 		 * 4. Add "+ " automatically for unordered lists
+		 * 5. Add "- [ ]" automatically for checklists
 		 */
 		var buf = view.buffer;
 		var prev_line_no = iter.get_line ();
@@ -45,7 +46,10 @@ public class MarkdownIndenter : Ide.Object, GtkSource.Indenter {
 		var prev_line = prev_iter.get_text (iter);
 		var prev_line_stripped = prev_line.chug ();
 		var indent = prev_line.substring (0, prev_line.length - prev_line_stripped.length);
-		if (prev_line_stripped.has_prefix ("- ")) {
+		if (prev_line_stripped.has_prefix ("- [ ] ") || prev_line_stripped.has_prefix ("- [x] ")) {
+			buf.insert (ref iter, "%s- [ ] ".printf (indent), -1);
+			return;
+		} else if (prev_line_stripped.has_prefix ("- ")) {
 			buf.insert (ref iter, "%s- ".printf (indent), -1);
 			return;
 		} else if (prev_line_stripped.has_prefix ("* ")) {
