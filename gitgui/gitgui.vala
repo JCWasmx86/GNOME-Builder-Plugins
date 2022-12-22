@@ -195,6 +195,9 @@ namespace GitGui {
             var b = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
             var stack = new Adw.ViewStack ();
             this.actions = new GeneralActions (dir);
+            this.actions.trigger_reload.connect (() => {
+                this.reload ();
+            });
             this.remotes = new ListView<Remote> (dir, create_remote);
             this.branches = new ListView<Branch> (dir, create_branch);
             this.commits = new ListView<Commit> (dir, create_commit);
@@ -370,6 +373,9 @@ namespace GitGui {
             this.commit.clicked.connect (() => {
                 var o = get_stdout (new string[]{"git", "status", "-s"}, this.directory).strip ();
                 var v = new CommitDialog (dir, o);
+                v.committed.connect (() => {
+                    this.trigger_reload ();
+                });
                 v.present ();
             });
         }
@@ -393,6 +399,8 @@ namespace GitGui {
             ret.hexpand = true;
             return ret;
         }
+
+        internal signal void trigger_reload ();
     }
 
     public class CommitSelectComponent : Gtk.Box {
@@ -504,6 +512,7 @@ namespace GitGui {
                     foreach (var p in paths)
                         get_stdout (new string[]{"git", "add", p}, dir);
                     get_stdout (new string[]{"git", "commit", "-m", child.buffer.text.strip ()}, dir);
+                    this.committed ();
                     this.close ();
                 });
                 child.buffer.changed.connect (() => {
@@ -527,6 +536,8 @@ namespace GitGui {
             this.resizable = false;
             this.set_size_request (640, 480);
         }
+
+        internal signal void committed ();
     }
 
     public class CommitWindow : Adw.Window {
