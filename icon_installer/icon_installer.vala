@@ -21,299 +21,320 @@
 public static extern Resource icon_installer_get_resource ();
 
 public class IconInstallerWorkspaceAddin : GLib.Object, Ide.WorkspaceAddin {
-	public void page_changed (Ide.Page? page) {
-	}
+    public void page_changed (Ide.Page? page) {
+    }
 
-	public void unload (Ide.Workspace workspace) {
-	}
+    public void unload (Ide.Workspace workspace) {
+    }
 
-	public void load (Ide.Workspace workspace) {
-		var pos = new Panel.Position ();
-		pos.set_area (Panel.Area.BOTTOM);
-		pos.set_depth (2);
-		workspace.add_pane (new IconInstallerPane (workspace.context.workdir), pos);
-	}
+    public void load (Ide.Workspace workspace) {
+        var pos = new Panel.Position ();
+        pos.set_area (Panel.Area.BOTTOM);
+        pos.set_depth (2);
+        workspace.add_pane (new IconInstallerPane (workspace.context.workdir), pos);
+    }
 }
 public class IconInstallerPane : Ide.Pane {
-	public IconInstallerPane (File file) {
-		Gtk.IconTheme.get_for_display (Gdk.Display.get_default ()).add_resource_path ("/plugins/icon_installer/icons");
-		this.icon_name = "grid-symbolic";
-		this.name = "Icon Installer";
-		this.realize.connect (() => {
-			this.set_child (new IconInstallerView (file));
-		});
-	}
+    public IconInstallerPane (File file) {
+        Gtk.IconTheme.get_for_display (Gdk.Display.get_default ()).add_resource_path ("/plugins/icon_installer/icons");
+        this.icon_name = "grid-symbolic";
+        this.name = "Icon Installer";
+        this.realize.connect (() => {
+            this.set_child (new IconInstallerView (file));
+        });
+    }
+}
+
+public class IconInstallerDialogSelectComponent : Gtk.Box {
+    private Gtk.CheckButton[] check_marks;
+    private string[] paths;
+    public IconInstallerDialogSelectComponent (File workdir) {
+        this.orientation = Gtk.Orientation.VERTICAL;
+        try {
+            var resources = this.find_path_to_gresource (workdir);
+            foreach (var p in resources) {
+                var path = workdir.get_relative_path (p);
+                var row = new Adw.ActionRow ();
+                row.title = path;
+                var c = new Gtk.CheckButton ();
+                c.get_style_context ().add_class ("round");
+                if (this.check_marks.length > 0)
+                    c.group = this.check_marks[0];
+                else
+                    c.active = true;
+                this.check_marks += c;
+                this.paths += path;
+                row.add_prefix (c);
+                this.append (row);
+            }
+            if (this.check_marks.length == 0) {
+                var path = "data/resources.gresource.xml";
+                var row = new Adw.ActionRow ();
+                row.title = path;
+                var c = new Gtk.CheckButton ();
+                c.get_style_context ().add_class ("round");
+                c.active = true;
+                this.check_marks += c;
+                this.paths += path;
+                row.add_prefix (c);
+                this.append (row);
+            }
+        } catch (Error e) {
+            error ("OOPS: %s", e.message);
+        }
+    }
+
+    File[] find_path_to_gresource (File curr_dir) throws Error {
+        var children = curr_dir.enumerate_children ("standard::*", GLib.FileQueryInfoFlags.NONE);
+        FileInfo child;
+        var ret = new File[0];
+        while ((child = children.next_file ()) != null) {
+            if (child.get_file_type () == FileType.REGULAR && child.get_name ().has_suffix (".gresource.xml")) {
+                ret += curr_dir.get_child (child.get_name ());
+            } else if (child.get_file_type () == FileType.DIRECTORY) {
+                try {
+                    var f = find_path_to_gresource (curr_dir.get_child (child.get_name ()));
+                    foreach (var f1 in f)
+                        ret += f1;
+                } catch (Error e) {
+                    critical ("%s", e.message);
+                }
+            }
+        }
+        return ret;
+    }
+
+    internal string get_path () {
+        for (var i = 0; i < this.paths.length; i++)
+            if (this.check_marks[i].active)
+                return this.paths[i];
+        assert_not_reached ();
+    }
+}
+
+public class IconInstallerDialog : Adw.Window {
+    public IconInstallerDialog (string icon, File workdir) {
+        var select_component = new IconInstallerDialogSelectComponent (workdir);
+        select_component.vexpand = true;
+        var sc = new Gtk.ScrolledWindow ();
+        sc.child = select_component;
+        sc.vexpand = true;
+        var clamp = new Adw.Clamp ();
+        clamp.maximum_size = 600;
+        clamp.child = sc;
+        clamp.vexpand = true;
+        var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
+        var header = new Adw.HeaderBar ();
+        header.show_end_title_buttons = false;
+        var title = new Adw.WindowTitle ("Install Icon", "Select resource file");
+        header.title_widget = title;
+        var cancel = new Gtk.Button.with_label ("Cancel");
+        cancel.clicked.connect (() => {
+            this.close ();
+        });
+        header.pack_start (cancel);
+        var cont = new Gtk.Button.with_label ("Install");
+        cont.clicked.connect (() => {
+            var path = GLib.File.new_build_filename (workdir.get_path (), select_component.get_path ());
+            try {
+                apply_changes (path, resolve_icon_path (path, icon), icon);
+            } catch (Error e) {
+                critical ("%s", e.message);
+            }
+            this.close ();
+        });
+        cont.get_style_context ().add_class ("suggested-action");
+        header.pack_end (cont);
+        box.append (header);
+        box.append (clamp);
+
+        this.content = box;
+        this.resizable = false;
+        this.set_size_request (640, 480);
+    }
+
+    File resolve_icon_path (File path, string icon_name) {
+        return path.get_parent ().get_child ("icons").get_child ("scalable").get_child ("actions").get_child (icon_name + ".svg");
+    }
+
+    void apply_changes (File gresource, File svg, string icon) throws Error {
+        var g_parent = gresource.get_parent ();
+        try {
+            g_parent.make_directory_with_parents ();
+        } catch (Error e) {
+            // Ignore, as it could just be that it already exists
+        }
+        var svg_parent = svg.get_parent ();
+        try {
+            svg_parent.make_directory_with_parents ();
+        } catch (Error e) {
+            // Ignore, as it could just be that it already exists
+        }
+        if (!svg.query_exists ()) {
+            FileUtils.set_contents (svg.get_path (), (string) GLib.resources_lookup_data ("/plugins/icon_installer/icons/scalable/actions/show-" + icon + ".svg", GLib.ResourceLookupFlags.NONE).get_data ());
+        }
+
+        if (gresource.query_exists ()) {
+            string data = "";
+            FileUtils.get_contents (gresource.get_path (), out data);
+            var new_str = new StringBuilder ();
+            var set_it = false;
+            var split = data.split ("\n");
+            for (var i = 0; i < split.length; i++) {
+                var s = split[i];
+                new_str.append (s).append (i == split.length - 1 ? "" : "\n");
+                if (s.strip ().has_prefix ("<file") && !set_it) {
+                    var indent = s.substring (0, s.length - s.chug ().length);
+                    var append_it = indent + "<file preprocess=\"xml-stripblanks\">" + gresource.get_parent ().get_relative_path (svg) + "</file>\n";
+                    set_it = true;
+                    new_str.append (append_it);
+                }
+            }
+            FileUtils.set_contents (gresource.get_path (), new_str.str);
+        } else {
+            var example_xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<gresources>\n  <gresource prefix=\"/org/gtk/Example\">\n    <file preprocess=\"xml-stripblanks\">%s</file>\n  </gresource>\n<gresource>\n";
+            FileUtils.set_contents (gresource.get_path (), example_xml.printf (gresource.get_parent ().get_relative_path (svg)));
+        }
+    }
 }
 
 public class IconInstallerImage : Gtk.Box {
-	public Gtk.Image image;
-	private string[] strings;
-	private string icon_name;
+    public Gtk.Image image;
+    private string[] strings;
+    private string icon_name;
 
-	public IconInstallerImage (string str, Json.Array arr, File workdir) {
-		this.icon_name = str.substring (5);
-		this.orientation = Gtk.Orientation.VERTICAL;
-		this.spacing = 2;
-		var img = new Gtk.Image.from_icon_name (str);
-		img.pixel_size = 32;
-		img.tooltip_text = str.substring (5);
-		this.append (img);
-		var ctrl = new Gtk.GestureClick ();
-		ctrl.pressed.connect ((n, x, y) => {
-			ctrl.propagation_phase = Gtk.PropagationPhase.BUBBLE;
-			File? path;
-			try {
-				path = this.find_path_to_gresource (workdir);
-			} catch (Error e) {
-				error ("OOPS: %s", e.message);
-			}
-			if (path == null) {
-				path = workdir.get_child ("data").get_child ("resources.gresource.xml");
-			}
-			Idle.add (() => {
-				var window = new Gtk.Dialog ();
-				window.title = "Install icon %s".printf (str);
-				window.transient_for = (Gtk.Window) this.root;
-				var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
-				var image = new Gtk.Image.from_icon_name (str);
-				image.pixel_size = 96;
-				box.append (image);
-				var resource_file_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 2);
-				var lbl = new Gtk.Label ("Adding reference to %s".printf (workdir.get_relative_path (path)));
-				var save_file_lbl = new Gtk.Label ("Saving SVG to %s".printf (workdir.get_relative_path (resolve_icon_path (path))));
-				save_file_lbl.ellipsize = Pango.EllipsizeMode.MIDDLE;
-				var change_me = new Gtk.Button.with_label ("Change it");
-				resource_file_box.append (lbl);
-				resource_file_box.append (change_me);
-				change_me.clicked.connect (() => {
-					var dialog = new Gtk.FileChooserDialog ("Select resource file", window, Gtk.FileChooserAction.OPEN, "Cancel", Gtk.ResponseType.CANCEL, "Select", Gtk.ResponseType.OK, null);
-					var ff = new Gtk.FileFilter ();
-					ff.name = "*.gresource.xml";
-					ff.add_pattern ("*.gresource.xml");
-					try {
-						dialog.set_current_folder (workdir);
-					} catch (Error e) {
-						critical ("%s", e.message);
-					}
-					dialog.add_filter (ff);
-					dialog.present ();
-					dialog.response.connect (a => {
-						if (a == Gtk.ResponseType.OK) {
-							lbl.label = "Adding reference to %s".printf (workdir.get_relative_path (dialog.get_file ()));
-							path = dialog.get_file ();
-							save_file_lbl.label = "Saving SVG to %s".printf (workdir.get_relative_path (resolve_icon_path (path)));
-						}
-						dialog.destroy ();
-					});
-				});
-				box.append (resource_file_box);
-				box.append (save_file_lbl);
-				var btn_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 2);
-				var ok = new Gtk.Button.with_label ("Save");
-				ok.hexpand = true;
-				ok.get_style_context ().add_class ("suggested-action");
-				ok.clicked.connect (() => {
-					try {
-						apply_changes (path, resolve_icon_path (path));
-					} catch (Error e) {
-						critical ("%s", e.message);
-					}
-					window.destroy ();
-				});
-				btn_box.append (ok);
-				var cancel = new Gtk.Button.with_label ("Cancel");
-				cancel.hexpand = true;
-				btn_box.append (cancel);
-				cancel.clicked.connect (() => {
-					window.destroy ();
-				});
-				box.append (btn_box);
-				btn_box.set_hexpand (true);
-				window.child = box;
-				window.modal = true;
-				window.present ();
-				window.resizable = false;
-				return Source.REMOVE;
-			});
-		});
-		img.add_controller (ctrl);
-		this.image = img;
-		var strs = new string[0];
-		for (var i = 0; i < arr.get_length (); i++)
-			strs += arr.get_string_element (i);
-		this.strings = strs;
-	}
+    public IconInstallerImage (string str, Json.Array arr, File workdir) {
+        this.icon_name = str.substring (5);
+        this.orientation = Gtk.Orientation.VERTICAL;
+        this.spacing = 2;
+        var img = new Gtk.Image.from_icon_name (str);
+        img.pixel_size = 32;
+        img.tooltip_text = str.substring (5);
+        this.append (img);
+        var ctrl = new Gtk.GestureClick ();
+        ctrl.pressed.connect ((n, x, y) => {
+            var d = new IconInstallerDialog (this.icon_name, workdir);
+            d.present ();
+        });
+        img.add_controller (ctrl);
+        this.image = img;
+        var strs = new string[0];
+        for (var i = 0; i < arr.get_length (); i++)
+            strs += arr.get_string_element (i);
+        this.strings = strs;
+    }
 
-	void apply_changes (File gresource, File svg) throws Error {
-		var g_parent = gresource.get_parent ();
-		try {
-			g_parent.make_directory_with_parents ();
-		} catch (Error e) {
-			// Ignore, as it could just be that it already exists
-		}
-		var svg_parent = svg.get_parent ();
-		try {
-			svg_parent.make_directory_with_parents ();
-		} catch (Error e) {
-			// Ignore, as it could just be that it already exists
-		}
-		if (!svg.query_exists ()) {
-			FileUtils.set_contents (svg.get_path (), (string) GLib.resources_lookup_data ("/plugins/icon_installer/icons/scalable/actions/show-" + this.icon_name + ".svg", GLib.ResourceLookupFlags.NONE).get_data ());
-		}
-
-		if (gresource.query_exists ()) {
-			string data = "";
-			FileUtils.get_contents (gresource.get_path (), out data);
-			var new_str = new StringBuilder ();
-			var set_it = false;
-            var split = data.split ("\n");
-			for (var i = 0; i < split.length; i++) {
-                var s = split[i];
-				new_str.append (s).append (i == split.length -1 ? "" : "\n");
-				if (s.strip ().has_prefix ("<file") && !set_it) {
-					var indent = s.substring (0, s.length - s.chug ().length);
-					var append_it = indent + "<file preprocess=\"xml-stripblanks\">" + gresource.get_parent ().get_relative_path (svg) + "</file>\n";
-					set_it = true;
-					new_str.append (append_it);
-				}
-			}
-			FileUtils.set_contents (gresource.get_path (), new_str.str);
-		} else {
-			var example_xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<gresources>\n  <gresource prefix=\"/org/gtk/Example\">\n    <file preprocess=\"xml-stripblanks\">%s</file>\n  </gresource>\n<gresource>\n";
-			FileUtils.set_contents (gresource.get_path (), example_xml.printf (gresource.get_parent ().get_relative_path (svg)));
-		}
-	}
-
-	File resolve_icon_path (File path) {
-		return path.get_parent ().get_child ("icons").get_child ("scalable").get_child ("actions").get_child (this.icon_name + ".svg");
-	}
-
-	File ? find_path_to_gresource (File curr_dir) throws Error {
-		var children = curr_dir.enumerate_children ("standard::*", GLib.FileQueryInfoFlags.NONE);
-		FileInfo child;
-		while ((child = children.next_file ()) != null) {
-			if (child.get_file_type () == FileType.REGULAR && child.get_name ().has_suffix (".gresource.xml")) {
-				return curr_dir.get_child (child.get_name ());
-			} else if (child.get_file_type () == FileType.DIRECTORY) {
-				var f = find_path_to_gresource (curr_dir.get_child (child.get_name ()));
-				if (f != null)
-					return f;
-			}
-		}
-		return null;
-	}
-
-	public bool match (string[] terms) {
-		foreach (var term in terms) {
-			if (term == this.icon_name || (this.icon_name.has_prefix (term) && term.length >= 3))
-				return true;
-			foreach (var alias in this.strings) {
-				if (alias == term || alias.contains (term)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+    public bool match (string[] terms) {
+        foreach (var term in terms) {
+            if (term == this.icon_name || (this.icon_name.has_prefix (term) && term.length >= 3))
+                return true;
+            foreach (var alias in this.strings) {
+                if (alias == term || alias.contains (term)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
 
 public class IconInstallerView : Gtk.Box {
-	public IconInstallerView (File file) {
-		this.realize.connect (() => {
-			try {
-				this.load_data (file);
-			} catch (Error e) {
-				error ("%s", e.message);
-			}
-		});
-	}
+    public IconInstallerView (File file) {
+        this.realize.connect (() => {
+            try {
+                this.load_data (file);
+            } catch (Error e) {
+                error ("%s", e.message);
+            }
+        });
+    }
 
-	public void load_data (File file) throws GLib.Error {
-		new Thread<void> ("loader", () => {
-			var bar = new Gtk.ProgressBar ();
-			bar.text = "Loading icons…";
-			bar.show_text = true;
-			Idle.add (() => {
-				this.append (bar);
-				this.orientation = Gtk.Orientation.VERTICAL;
-				this.spacing = 2;
-				this.vexpand = true;
-				return Source.REMOVE;
-			});
-			Bytes strings;
-			Bytes json;
-			try {
-				strings = icon_installer_get_resource ().ref ().lookup_data ("/plugins/icon_installer/icons.txt", ResourceLookupFlags.NONE);
-				json = icon_installer_get_resource ().ref ().lookup_data ("/plugins/icon_installer/icons.json", ResourceLookupFlags.NONE);
-			} catch (Error e) {
-				error ("OOPS: %s", e.message);
-			}
-			var p = new Json.Parser ();
-			try {
-				p.load_from_data ((string) json.get_data ());
-			} catch (Error e) {
-				error ("OOPS: %s", e.message);
-			}
-			var root = p.get_root ().get_object ();
-			var s = (string) (strings.get_data ());
-			var strs = s.split ("\n");
-			var box = new Gtk.FlowBox ();
-			Idle.add (() => {
-				var sc = new Gtk.ScrolledWindow ();
-				sc.child = box;
-				sc.vexpand = true;
-				this.append (sc);
-				return Source.REMOVE;
-			});
-			var list = new Gee.ArrayList<IconInstallerImage> ();
-			var i = 0;
-			foreach (var str in strs) {
-				if (str.strip () == "")
-					break;
-				Idle.add (() => {
-					var member = str.substring (5).replace ("-symbolic", "");
-					Json.Array arr = new Json.Array ();
-					if (root.has_member (member)) {
-						arr = root.get_array_member (member);
-					}
-					var img = new IconInstallerImage (str, arr, file);
-					list.add (img);
-					box.append (img);
-					bar.fraction = ((double) i++) / strs.length;
-					return Source.REMOVE;
-				});
-				Thread.usleep (50);
-			}
-			Idle.add (() => {
-				var search_box = new Gtk.Entry ();
-				search_box.tooltip_text = "Search for icon";
-				search_box.changed.connect (() => {
-					var text = search_box.text;
-					if (text.strip () == "") {
-						foreach (var item in list) {
-							item.visible = true;
-							item.parent.visible = true;
-						}
-					} else {
-						var terms = text.split (" ");
-						foreach (var item in list) {
-							item.visible = item.match (terms);
-							item.parent.visible = item.visible;
-						}
-					}
-				});
-				this.prepend (search_box);
-				this.remove (bar);
-				return Source.REMOVE;
-			});
-		});
-	}
+    public void load_data (File file) throws GLib.Error {
+        new Thread<void> ("loader", () => {
+            var bar = new Gtk.ProgressBar ();
+            bar.text = "Loading icons…";
+            bar.show_text = true;
+            Idle.add (() => {
+                this.append (bar);
+                this.orientation = Gtk.Orientation.VERTICAL;
+                this.spacing = 2;
+                this.vexpand = true;
+                return Source.REMOVE;
+            });
+            Bytes strings;
+            Bytes json;
+            try {
+                strings = icon_installer_get_resource ().ref ().lookup_data ("/plugins/icon_installer/icons.txt", ResourceLookupFlags.NONE);
+                json = icon_installer_get_resource ().ref ().lookup_data ("/plugins/icon_installer/icons.json", ResourceLookupFlags.NONE);
+            } catch (Error e) {
+                error ("OOPS: %s", e.message);
+            }
+            var p = new Json.Parser ();
+            try {
+                p.load_from_data ((string) json.get_data ());
+            } catch (Error e) {
+                error ("OOPS: %s", e.message);
+            }
+            var root = p.get_root ().get_object ();
+            var s = (string) (strings.get_data ());
+            var strs = s.split ("\n");
+            var box = new Gtk.FlowBox ();
+            Idle.add (() => {
+                var sc = new Gtk.ScrolledWindow ();
+                sc.child = box;
+                sc.vexpand = true;
+                this.append (sc);
+                return Source.REMOVE;
+            });
+            var list = new Gee.ArrayList<IconInstallerImage> ();
+            var i = 0;
+            foreach (var str in strs) {
+                if (str.strip () == "")
+                    break;
+                Idle.add (() => {
+                    var member = str.substring (5).replace ("-symbolic", "");
+                    Json.Array arr = new Json.Array ();
+                    if (root.has_member (member)) {
+                        arr = root.get_array_member (member);
+                    }
+                    var img = new IconInstallerImage (str, arr, file);
+                    list.add (img);
+                    box.append (img);
+                    bar.fraction = ((double) i++) / strs.length;
+                    return Source.REMOVE;
+                });
+                Thread.usleep (50);
+            }
+            Idle.add (() => {
+                var search_box = new Gtk.Entry ();
+                search_box.tooltip_text = "Search for icon";
+                search_box.changed.connect (() => {
+                    var text = search_box.text;
+                    if (text.strip () == "") {
+                        foreach (var item in list) {
+                            item.visible = true;
+                            item.parent.visible = true;
+                        }
+                    } else {
+                        var terms = text.split (" ");
+                        foreach (var item in list) {
+                            item.visible = item.match (terms);
+                            item.parent.visible = item.visible;
+                        }
+                    }
+                });
+                this.prepend (search_box);
+                this.remove (bar);
+                return Source.REMOVE;
+            });
+        });
+    }
 }
 
 
 public void peas_register_types (TypeModule module) {
-	var r = icon_installer_get_resource ();
-	GLib.resources_register (r);
-	var obj = (Peas.ObjectModule) module;
-	obj.register_extension_type (typeof (Ide.WorkspaceAddin), typeof (IconInstallerWorkspaceAddin));
+    var r = icon_installer_get_resource ();
+    GLib.resources_register (r);
+    var obj = (Peas.ObjectModule) module;
+    obj.register_extension_type (typeof (Ide.WorkspaceAddin), typeof (IconInstallerWorkspaceAddin));
 }
