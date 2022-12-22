@@ -1,828 +1,828 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/plugins/icon_installer/">
-    <file>icons/scalable/actions/show-about-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-about-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/actions/grid-symbolic.svg</file>
-    <file>icons/scalable/actions/show-address-book-alt-symbolic.svg</file>
-    <file>icons/scalable/actions/show-address-book-symbolic.svg</file>
-    <file>icons/scalable/actions/show-airbrush-tool-symbolic.svg</file>
-    <file>icons/scalable/actions/show-alarm-symbolic.svg</file>
-    <file>icons/scalable/actions/show-align-tool-symbolic.svg</file>
-    <file>icons/scalable/actions/show-anniversary-symbolic.svg</file>
-    <file>icons/scalable/actions/show-annotation-sidebar-symbolic.svg</file>
-    <file>icons/scalable/actions/show-application-x-firmware-symbolic.svg</file>
-    <file>icons/scalable/actions/show-archive-symbolic.svg</file>
-    <file>icons/scalable/actions/show-arrow1-down-symbolic.svg</file>
-    <file>icons/scalable/actions/show-arrow1-left-symbolic.svg</file>
-    <file>icons/scalable/actions/show-arrow1-right-symbolic.svg</file>
-    <file>icons/scalable/actions/show-arrow1-up-symbolic.svg</file>
-    <file>icons/scalable/actions/show-arrow2-bottom-left-symbolic.svg</file>
-    <file>icons/scalable/actions/show-arrow2-bottom-right-symbolic.svg</file>
-    <file>icons/scalable/actions/show-arrow2-down-symbolic.svg</file>
-    <file>icons/scalable/actions/show-arrow2-left-symbolic.svg</file>
-    <file>icons/scalable/actions/show-arrow2-right-symbolic.svg</file>
-    <file>icons/scalable/actions/show-arrow2-top-left-symbolic.svg</file>
-    <file>icons/scalable/actions/show-arrow2-top-right-symbolic.svg</file>
-    <file>icons/scalable/actions/show-arrow2-up-symbolic.svg</file>
-    <file>icons/scalable/actions/show-arrow3-down-symbolic.svg</file>
-    <file>icons/scalable/actions/show-arrow3-left-symbolic.svg</file>
-    <file>icons/scalable/actions/show-arrow3-right-symbolic.svg</file>
-    <file>icons/scalable/actions/show-arrow3-up-symbolic.svg</file>
-    <file>icons/scalable/actions/show-arrow-into-box-symbolic.svg</file>
-    <file>icons/scalable/actions/show-arrows-questionmark-symbolic.svg</file>
-    <file>icons/scalable/actions/show-assistive-listening-symbolic.svg</file>
-    <file>icons/scalable/actions/show-attach-audio-symbolic.svg</file>
-    <file>icons/scalable/actions/show-audio-only-symbolic.svg</file>
-    <file>icons/scalable/actions/show-audio-x-generic-symbolic.svg</file>
-    <file>icons/scalable/actions/show-auth-otp-symbolic.svg</file>
-    <file>icons/scalable/actions/show-axes-four-quadrants-symbolic.svg</file>
-    <file>icons/scalable/actions/show-axes-one-quadrant-symbolic.svg</file>
-    <file>icons/scalable/actions/show-bank-symbolic.svg</file>
-    <file>icons/scalable/actions/show-banner-symbolic.svg</file>
-    <file>icons/scalable/actions/show-barbecue-symbolic.svg</file>
-    <file>icons/scalable/actions/show-baseball-symbolic.svg</file>
-    <file>icons/scalable/actions/show-battery-symbolic.svg</file>
-    <file>icons/scalable/actions/show-bed-symbolic.svg</file>
-    <file>icons/scalable/actions/show-bell-large-none-symbolic.svg</file>
-    <file>icons/scalable/actions/show-bell-large-symbolic.svg</file>
-    <file>icons/scalable/actions/show-bell-none-symbolic.svg</file>
-    <file>icons/scalable/actions/show-bell-outline-none-symbolic.svg</file>
-    <file>icons/scalable/actions/show-bell-outline-symbolic.svg</file>
-    <file>icons/scalable/actions/show-bell-symbolic.svg</file>
-    <file>icons/scalable/actions/show-bench-symbolic.svg</file>
-    <file>icons/scalable/actions/show-big-dot-symbolic.svg</file>
-    <file>icons/scalable/actions/show-big-x-symbolic.svg</file>
-    <file>icons/scalable/actions/show-birthday-symbolic.svg</file>
-    <file>icons/scalable/actions/show-blend-tool-symbolic.svg</file>
-    <file>icons/scalable/actions/show-blind-symbolic.svg</file>
-    <file>icons/scalable/actions/show-bluetooth-none-symbolic.svg</file>
-    <file>icons/scalable/actions/show-bluetooth-symbolic.svg</file>
-    <file>icons/scalable/actions/show-blur-alt-symbolic.svg</file>
-    <file>icons/scalable/actions/show-blur-symbolic.svg</file>
-    <file>icons/scalable/actions/show-body-symbolic.svg</file>
-    <file>icons/scalable/actions/show-bottom-large-symbolic.svg</file>
-    <file>icons/scalable/actions/show-bottom-symbolic.svg</file>
-    <file>icons/scalable/actions/show-box-down-symbolic.svg</file>
-    <file>icons/scalable/actions/show-box-left-symbolic.svg</file>
-    <file>icons/scalable/actions/show-box-right-symbolic.svg</file>
-    <file>icons/scalable/actions/show-box-up-symbolic.svg</file>
-    <file>icons/scalable/actions/show-branch-symbolic.svg</file>
-    <file>icons/scalable/actions/show-bread-symbolic.svg</file>
-    <file>icons/scalable/actions/show-break-point-symbolic.svg</file>
-    <file>icons/scalable/actions/show-briefcase-symbolic.svg</file>
-    <file>icons/scalable/actions/show-broken-camera-inverse-symbolic.svg</file>
-    <file>icons/scalable/actions/show-broken-playback-symbolic.svg</file>
-    <file>icons/scalable/actions/show-broken-video-symbolic.svg</file>
-    <file>icons/scalable/actions/show-brush-monitor-symbolic.svg</file>
-    <file>icons/scalable/actions/show-brush-symbolic.svg</file>
-    <file>icons/scalable/actions/show-bug-symbolic.svg</file>
-    <file>icons/scalable/actions/show-build-alt-symbolic.svg</file>
-    <file>icons/scalable/actions/show-build-configure-symbolic.svg</file>
-    <file>icons/scalable/actions/show-building-symbolic.svg</file>
-    <file>icons/scalable/actions/show-build-symbolic.svg</file>
-    <file>icons/scalable/actions/show-bus-symbolic.svg</file>
-    <file>icons/scalable/actions/show-cafe-symbolic.svg</file>
-    <file>icons/scalable/actions/show-cage-symbolic.svg</file>
-    <file>icons/scalable/actions/show-call-add-symbolic.svg</file>
-    <file>icons/scalable/actions/show-call-incoming-symbolic.svg</file>
-    <file>icons/scalable/actions/show-call-made-symbolic.svg</file>
-    <file>icons/scalable/actions/show-call-merge-symbolic.svg</file>
-    <file>icons/scalable/actions/show-call-missed-incoming-symbolic.svg</file>
-    <file>icons/scalable/actions/show-call-missed-outgoing-symbolic.svg</file>
-    <file>icons/scalable/actions/show-call-missed-symbolic.svg</file>
-    <file>icons/scalable/actions/show-call-outgoing-symbolic.svg</file>
-    <file>icons/scalable/actions/show-call-outgoing-unsuccessful-symbolic.svg</file>
-    <file>icons/scalable/actions/show-call-received-symbolic.svg</file>
-    <file>icons/scalable/actions/show-call-ringer-silenced-symbolic.svg</file>
-    <file>icons/scalable/actions/show-call-ring-symbolic.svg</file>
-    <file>icons/scalable/actions/show-call-split-symbolic.svg</file>
-    <file>icons/scalable/actions/show-camera-broken-symbolic.svg</file>
-    <file>icons/scalable/actions/show-camera-dead-symbolic.svg</file>
-    <file>icons/scalable/actions/show-camera-flash-auto-symbolic.svg</file>
-    <file>icons/scalable/actions/show-camera-flash-disabled-symbolic.svg</file>
-    <file>icons/scalable/actions/show-camera-flash-symbolic.svg</file>
-    <file>icons/scalable/actions/show-camera-focus-symbolic.svg</file>
-    <file>icons/scalable/actions/show-camera-grid-symbolic.svg</file>
-    <file>icons/scalable/actions/show-camera-iso-alt-symbolic.svg</file>
-    <file>icons/scalable/actions/show-camera-iso-symbolic.svg</file>
-    <file>icons/scalable/actions/show-camera-large-symbolic.svg</file>
-    <file>icons/scalable/actions/show-camera-shutter-symbolic.svg</file>
-    <file>icons/scalable/actions/show-cameras-symbolic.svg</file>
-    <file>icons/scalable/actions/show-camera-static-inverse-symbolic.svg</file>
-    <file>icons/scalable/actions/show-camera-static-symbolic.svg</file>
-    <file>icons/scalable/actions/show-camera-symbolic.svg</file>
-    <file>icons/scalable/actions/show-camera-toggle-symbolic.svg</file>
-    <file>icons/scalable/actions/show-carousel-symbolic.svg</file>
-    <file>icons/scalable/actions/show-cat-symbolic.svg</file>
-    <file>icons/scalable/actions/show-cd-symbolic.svg</file>
-    <file>icons/scalable/actions/show-chain-link-loose-symbolic.svg</file>
-    <file>icons/scalable/actions/show-chain-link-symbolic.svg</file>
-    <file>icons/scalable/actions/show-charge-symbolic.svg</file>
-    <file>icons/scalable/actions/show-chat-none-symbolic.svg</file>
-    <file>icons/scalable/actions/show-chat-symbolic.svg</file>
-    <file>icons/scalable/actions/show-checkerboard-big-symbolic.svg</file>
-    <file>icons/scalable/actions/show-checkerboard-symbolic.svg</file>
-    <file>icons/scalable/actions/show-checkmark-large-symbolic.svg</file>
-    <file>icons/scalable/actions/show-checkmark-small-symbolic.svg</file>
-    <file>icons/scalable/actions/show-checkmark-symbolic.svg</file>
-    <file>icons/scalable/actions/show-check-plain-symbolic.svg</file>
-    <file>icons/scalable/actions/show-check-round-outline2-symbolic.svg</file>
-    <file>icons/scalable/actions/show-check-round-outline-symbolic.svg</file>
-    <file>icons/scalable/actions/show-check-round-outline-whole-symbolic.svg</file>
-    <file>icons/scalable/actions/show-christmas-symbolic.svg</file>
-    <file>icons/scalable/actions/show-cigarette-none-symbolic.svg</file>
-    <file>icons/scalable/actions/show-cigarette-symbolic.svg</file>
-    <file>icons/scalable/actions/show-circle-filled-symbolic.svg</file>
-    <file>icons/scalable/actions/show-circle-outline-thick-symbolic.svg</file>
-    <file>icons/scalable/actions/show-circle-outline-thin-symbolic.svg</file>
-    <file>icons/scalable/actions/show-city-symbolic.svg</file>
-    <file>icons/scalable/actions/show-clipboard-symbolic.svg</file>
-    <file>icons/scalable/actions/show-clock-alt-symbolic.svg</file>
-    <file>icons/scalable/actions/show-clock-symbolic.svg</file>
-    <file>icons/scalable/actions/show-closed-captioning-symbolic.svg</file>
-    <file>icons/scalable/actions/show-cloud-disabled-symbolic.svg</file>
-    <file>icons/scalable/actions/show-cloud-filled-symbolic.svg</file>
-    <file>icons/scalable/actions/show-cloud-outline-thick-symbolic.svg</file>
-    <file>icons/scalable/actions/show-cloud-outline-thin-symbolic.svg</file>
-    <file>icons/scalable/actions/show-clouds-outline-symbolic.svg</file>
-    <file>icons/scalable/actions/show-clouds-symbolic.svg</file>
-    <file>icons/scalable/actions/show-cocktail-symbolic.svg</file>
-    <file>icons/scalable/actions/show-code-symbolic.svg</file>
-    <file>icons/scalable/actions/show-coin-symbolic.svg</file>
-    <file>icons/scalable/actions/show-colorimeter-colorhug-symbolic.svg</file>
-    <file>icons/scalable/actions/show-color-picker-symbolic.svg</file>
-    <file>icons/scalable/actions/show-color-symbolic.svg</file>
-    <file>icons/scalable/actions/show-columns-symbolic.svg</file>
-    <file>icons/scalable/actions/show-compass-alt-symbolic.svg</file>
-    <file>icons/scalable/actions/show-compass-symbolic.svg</file>
-    <file>icons/scalable/actions/show-compass-wind-symbolic.svg</file>
-    <file>icons/scalable/actions/show-computer-chip-symbolic.svg</file>
-    <file>icons/scalable/actions/show-computer-symbolic.svg</file>
-    <file>icons/scalable/actions/show-configure-symbolic.svg</file>
-    <file>icons/scalable/actions/show-container-terminal-symbolic.svg</file>
-    <file>icons/scalable/actions/show-controls-big-symbolic.svg</file>
-    <file>icons/scalable/actions/show-controls-symbolic.svg</file>
-    <file>icons/scalable/actions/show-copy-symbolic.svg</file>
-    <file>icons/scalable/actions/show-cow-symbolic.svg</file>
-    <file>icons/scalable/actions/show-credit-card-symbolic.svg</file>
-    <file>icons/scalable/actions/show-crop-symbolic.svg</file>
-    <file>icons/scalable/actions/show-cross-filled-large-symbolic.svg</file>
-    <file>icons/scalable/actions/show-cross-filled-symbolic.svg</file>
-    <file>icons/scalable/actions/show-cross-large-symbolic.svg</file>
-    <file>icons/scalable/actions/show-cross-symbolic.svg</file>
-    <file>icons/scalable/actions/show-crossword-clue-across-symbolic.svg</file>
-    <file>icons/scalable/actions/show-crossword-clue-down-symbolic.svg</file>
-    <file>icons/scalable/actions/show-C-symbolic.svg</file>
-    <file>icons/scalable/actions/show-cut-symbolic.svg</file>
-    <file>icons/scalable/actions/show-cycling-symbolic.svg</file>
-    <file>icons/scalable/actions/show-dark-mode-symbolic.svg</file>
-    <file>icons/scalable/actions/show-deaf-symbolic.svg</file>
-    <file>icons/scalable/actions/show-deck-symbolic.svg</file>
-    <file>icons/scalable/actions/show-decode-symbolic.svg</file>
-    <file>icons/scalable/actions/show-detach-audio-symbolic.svg</file>
-    <file>icons/scalable/actions/show-diagnostics-symbolic.svg</file>
-    <file>icons/scalable/actions/show-dialog-symbolic.svg</file>
-    <file>icons/scalable/actions/show-dialpad-symbolic.svg</file>
-    <file>icons/scalable/actions/show-diamond-filled-symbolic.svg</file>
-    <file>icons/scalable/actions/show-diamond-outline-thick-symbolic.svg</file>
-    <file>icons/scalable/actions/show-diamond-outline-thin-symbolic.svg</file>
-    <file>icons/scalable/actions/show-dice2-symbolic.svg</file>
-    <file>icons/scalable/actions/show-dice3-symbolic.svg</file>
-    <file>icons/scalable/actions/show-dice-symbolic.svg</file>
-    <file>icons/scalable/actions/show-dictionary-symbolic.svg</file>
-    <file>icons/scalable/actions/show-discover-symbolic.svg</file>
-    <file>icons/scalable/actions/show-display-projector-symbolic.svg</file>
-    <file>icons/scalable/actions/show-display-symbolic.svg</file>
-    <file>icons/scalable/actions/show-display-with-window-symbolic.svg</file>
-    <file>icons/scalable/actions/show-dock-bottom-symbolic.svg</file>
-    <file>icons/scalable/actions/show-dock-left-symbolic.svg</file>
-    <file>icons/scalable/actions/show-dock-right-symbolic.svg</file>
-    <file>icons/scalable/actions/show-dock-symbolic.svg</file>
-    <file>icons/scalable/actions/show-dock-top-symbolic.svg</file>
-    <file>icons/scalable/actions/show-dock-usb-symbolic.svg</file>
-    <file>icons/scalable/actions/show-dog-symbolic.svg</file>
-    <file>icons/scalable/actions/show-do-not-distrub-symbolic.svg</file>
-    <file>icons/scalable/actions/show-dot-symbolic.svg</file>
-    <file>icons/scalable/actions/show-dotted-box-symbolic.svg</file>
-    <file>icons/scalable/actions/show-down-large-symbolic.svg</file>
-    <file>icons/scalable/actions/show-down-symbolic.svg</file>
-    <file>icons/scalable/actions/show-drag-n-drop-symbolic.svg</file>
-    <file>icons/scalable/actions/show-drawer-symbolic.svg</file>
-    <file>icons/scalable/actions/show-drinks-symbolic.svg</file>
-    <file>icons/scalable/actions/show-driving-symbolic.svg</file>
-    <file>icons/scalable/actions/show-drone-symbolic.svg</file>
-    <file>icons/scalable/actions/show-drop-hollow-symbolic.svg</file>
-    <file>icons/scalable/actions/show-earth-symbolic.svg</file>
-    <file>icons/scalable/actions/show-editor-symbolic.svg</file>
-    <file>icons/scalable/actions/show-edit-select-all-symbolic.svg</file>
-    <file>icons/scalable/actions/show-edit-select-none-symbolic.svg</file>
-    <file>icons/scalable/actions/show-edit-symbolic.svg</file>
-    <file>icons/scalable/actions/show-egg-symbolic.svg</file>
-    <file>icons/scalable/actions/show-eject-large-symbolic.svg</file>
-    <file>icons/scalable/actions/show-eject-symbolic.svg</file>
-    <file>icons/scalable/actions/show-electric-car-symbolic.svg</file>
-    <file>icons/scalable/actions/show-encoder-knob-symbolic.svg</file>
-    <file>icons/scalable/actions/show-encode-symbolic.svg</file>
-    <file>icons/scalable/actions/show-entry-clear-symbolic.svg</file>
-    <file>icons/scalable/actions/show-eraser2-symbolic.svg</file>
-    <file>icons/scalable/actions/show-eraser3-symbolic.svg</file>
-    <file>icons/scalable/actions/show-eraser4-symbolic.svg</file>
-    <file>icons/scalable/actions/show-eraser5-symbolic.svg</file>
-    <file>icons/scalable/actions/show-eraser-symbolic.svg</file>
-    <file>icons/scalable/actions/show-error-symbolic.svg</file>
-    <file>icons/scalable/actions/show-execute-from-symbolic.svg</file>
-    <file>icons/scalable/actions/show-execute-to-symbolic.svg</file>
-    <file>icons/scalable/actions/show-explore2-large-symbolic.svg</file>
-    <file>icons/scalable/actions/show-explore2-symbolic.svg</file>
-    <file>icons/scalable/actions/show-explore-symbolic.svg</file>
-    <file>icons/scalable/actions/show-external-devices-symbolic.svg</file>
-    <file>icons/scalable/actions/show-external-link-symbolic.svg</file>
-    <file>icons/scalable/actions/show-eye-closed-negative-symbolic.svg</file>
-    <file>icons/scalable/actions/show-eye-closed-symbolic.svg</file>
-    <file>icons/scalable/actions/show-eye-not-looking-symbolic.svg</file>
-    <file>icons/scalable/actions/show-eye-open-negative-filled-symbolic.svg</file>
-    <file>icons/scalable/actions/show-eye-open-negative-symbolic.svg</file>
-    <file>icons/scalable/actions/show-eye-open-symbolic.svg</file>
-    <file>icons/scalable/actions/show-face-unlock-symbolic.svg</file>
-    <file>icons/scalable/actions/show-fast-food-symbolic.svg</file>
-    <file>icons/scalable/actions/show-fax-symbolic.svg</file>
-    <file>icons/scalable/actions/show-feet-symbolic.svg</file>
-    <file>icons/scalable/actions/show-few-clouds-night-symbolic.svg</file>
-    <file>icons/scalable/actions/show-few-clouds-outline-symbolic.svg</file>
-    <file>icons/scalable/actions/show-few-clouds-symbolic.svg</file>
-    <file>icons/scalable/actions/show-file-cabinet-symbolic.svg</file>
-    <file>icons/scalable/actions/show-file-manager-symbolic.svg</file>
-    <file>icons/scalable/actions/show-fill-tool-symbolic.svg</file>
-    <file>icons/scalable/actions/show-fingerprint2-symbolic.svg</file>
-    <file>icons/scalable/actions/show-fingerprint-authentication-symbolic.svg</file>
-    <file>icons/scalable/actions/show-fingerprint-symbolic.svg</file>
-    <file>icons/scalable/actions/show-fire2-symbolic.svg</file>
-    <file>icons/scalable/actions/show-fire-symbolic.svg</file>
-    <file>icons/scalable/actions/show-firmware-update-symbolic.svg</file>
-    <file>icons/scalable/actions/show-first-large-symbolic.svg</file>
-    <file>icons/scalable/actions/show-first-symbolic.svg</file>
-    <file>icons/scalable/actions/show-fish-symbolic.svg</file>
-    <file>icons/scalable/actions/show-flag-filled-symbolic.svg</file>
-    <file>icons/scalable/actions/show-flag-outline-thick-symbolic.svg</file>
-    <file>icons/scalable/actions/show-flag-outline-thin-symbolic.svg</file>
-    <file>icons/scalable/actions/show-flap-symbolic.svg</file>
-    <file>icons/scalable/actions/show-flashlight-none-symbolic.svg</file>
-    <file>icons/scalable/actions/show-flashlight-symbolic.svg</file>
-    <file>icons/scalable/actions/show-flash-memory-symbolic.svg</file>
-    <file>icons/scalable/actions/show-flatpak-symbolic.svg</file>
-    <file>icons/scalable/actions/show-floppy-symbolic.svg</file>
-    <file>icons/scalable/actions/show-flying2-symbolic.svg</file>
-    <file>icons/scalable/actions/show-flying-symbolic.svg</file>
-    <file>icons/scalable/actions/show-fog-symbolic.svg</file>
-    <file>icons/scalable/actions/show-folder-remote-symbolic.svg</file>
-    <file>icons/scalable/actions/show-font-x-generic-symbolic.svg</file>
-    <file>icons/scalable/actions/show-football-american-symbolic.svg</file>
-    <file>icons/scalable/actions/show-fuel-symbolic.svg</file>
-    <file>icons/scalable/actions/show-function-exponential-symbolic.svg</file>
-    <file>icons/scalable/actions/show-function-linear-symbolic.svg</file>
-    <file>icons/scalable/actions/show-function-parable-horizontal-symbolic.svg</file>
-    <file>icons/scalable/actions/show-function-parable-symbolic.svg</file>
-    <file>icons/scalable/actions/show-function-third-order-horizontal-symbolic.svg</file>
-    <file>icons/scalable/actions/show-function-third-order-symbolic.svg</file>
-    <file>icons/scalable/actions/show-funnel-outline-symbolic.svg</file>
-    <file>icons/scalable/actions/show-funnel-symbolic.svg</file>
-    <file>icons/scalable/actions/show-gamepad2-symbolic.svg</file>
-    <file>icons/scalable/actions/show-gamepad-symbolic.svg</file>
-    <file>icons/scalable/actions/show-garlic-symbolic.svg</file>
-    <file>icons/scalable/actions/show-gear-symbolic.svg</file>
-    <file>icons/scalable/actions/show-general-properties-symbolic.svg</file>
-    <file>icons/scalable/actions/show-git-branch-symbolic.svg</file>
-    <file>icons/scalable/actions/show-git-merge-symbolic.svg</file>
-    <file>icons/scalable/actions/show-git-symbolic.svg</file>
-    <file>icons/scalable/actions/show-globe-alt2-symbolic.svg</file>
-    <file>icons/scalable/actions/show-globe-alt-symbolic.svg</file>
-    <file>icons/scalable/actions/show-globe-symbolic.svg</file>
-    <file>icons/scalable/actions/show-golf-symbolic.svg</file>
-    <file>icons/scalable/actions/show-graveyard-symbolic.svg</file>
-    <file>icons/scalable/actions/show-grid-filled-symbolic.svg</file>
-    <file>icons/scalable/actions/show-grid-large-symbolic.svg</file>
-    <file>icons/scalable/actions/show-grid-symbolic.svg</file>
-    <file>icons/scalable/actions/show-group-symbolic.svg</file>
-    <file>icons/scalable/actions/show-hand-fist-none-symbolic.svg</file>
-    <file>icons/scalable/actions/show-hand-fist-symbolic.svg</file>
-    <file>icons/scalable/actions/show-hand-middle-finger-symbolic.svg</file>
-    <file>icons/scalable/actions/show-hand-open-symbolic.svg</file>
-    <file>icons/scalable/actions/show-hand-point-horizontal-symbolic.svg</file>
-    <file>icons/scalable/actions/show-hand-point-left-symbolic.svg</file>
-    <file>icons/scalable/actions/show-hand-point-right-symbolic.svg</file>
-    <file>icons/scalable/actions/show-hand-point-symbolic.svg</file>
-    <file>icons/scalable/actions/show-handshake-symbolic.svg</file>
-    <file>icons/scalable/actions/show-hand-touch-symbolic.svg</file>
-    <file>icons/scalable/actions/show-harddisk-inverted-symbolic.svg</file>
-    <file>icons/scalable/actions/show-harddisk-symbolic.svg</file>
-    <file>icons/scalable/actions/show-headphones-symbolic.svg</file>
-    <file>icons/scalable/actions/show-headset-symbolic.svg</file>
-    <file>icons/scalable/actions/show-heal-symbolic.svg</file>
-    <file>icons/scalable/actions/show-heart-broken-symbolic.svg</file>
-    <file>icons/scalable/actions/show-heart-filled-symbolic.svg</file>
-    <file>icons/scalable/actions/show-heart-outline-thick-symbolic.svg</file>
-    <file>icons/scalable/actions/show-heart-outline-thin-symbolic.svg</file>
-    <file>icons/scalable/actions/show-hig-symbolic.svg</file>
-    <file>icons/scalable/actions/show-history-undo-symbolic.svg</file>
-    <file>icons/scalable/actions/show-hockey-symbolic.svg</file>
-    <file>icons/scalable/actions/show-horizontal-arrows-disabled-symbolic.svg</file>
-    <file>icons/scalable/actions/show-horizontal-arrows-left-symbolic.svg</file>
-    <file>icons/scalable/actions/show-horizontal-arrows-none-symbolic.svg</file>
-    <file>icons/scalable/actions/show-horizontal-arrows-one-way-symbolic.svg</file>
-    <file>icons/scalable/actions/show-horizontal-arrows-right-symbolic.svg</file>
-    <file>icons/scalable/actions/show-horizontal-arrows-symbolic.svg</file>
-    <file>icons/scalable/actions/show-hospital-sign-symbolic.svg</file>
-    <file>icons/scalable/actions/show-hospital-symbolic.svg</file>
-    <file>icons/scalable/actions/show-hourglass-symbolic.svg</file>
-    <file>icons/scalable/actions/show-h-symbolic.svg</file>
-    <file>icons/scalable/actions/show-image-adjust-brightness-symbolic.svg</file>
-    <file>icons/scalable/actions/show-image-adjust-contrast-symbolic.svg</file>
-    <file>icons/scalable/actions/show-image-adjust-exposure-symbolic.svg</file>
-    <file>icons/scalable/actions/show-image-adjust-highlights-symbolic.svg</file>
-    <file>icons/scalable/actions/show-image-adjust-shadows-symbolic.svg</file>
-    <file>icons/scalable/actions/show-image-alt-symbolic.svg</file>
-    <file>icons/scalable/actions/show-image-missing-round-symbolic.svg</file>
-    <file>icons/scalable/actions/show-image-missing-symbolic.svg</file>
-    <file>icons/scalable/actions/show-image-print-symbolic.svg</file>
-    <file>icons/scalable/actions/show-image-round-symbolic.svg</file>
-    <file>icons/scalable/actions/show-image-symbolic.svg</file>
-    <file>icons/scalable/actions/show-inbox-symbolic.svg</file>
-    <file>icons/scalable/actions/show-info-symbolic.svg</file>
-    <file>icons/scalable/actions/show-ink-tool-symbolic.svg</file>
-    <file>icons/scalable/actions/show-invert-colors-symbolic.svg</file>
-    <file>icons/scalable/actions/show-iphone-symbolic.svg</file>
-    <file>icons/scalable/actions/show-ipod-symbolic.svg</file>
-    <file>icons/scalable/actions/show-issue-symbolic.svg</file>
-    <file>icons/scalable/actions/show-item-missing-symbolic.svg</file>
-    <file>icons/scalable/actions/show-joined-displays-symbolic.svg</file>
-    <file>icons/scalable/actions/show-junk-alt-symbolic.svg</file>
-    <file>icons/scalable/actions/show-junk-symbolic.svg</file>
-    <file>icons/scalable/actions/show-key2-symbolic.svg</file>
-    <file>icons/scalable/actions/show-keyboard2-symbolic.svg</file>
-    <file>icons/scalable/actions/show-keyboard3-symbolic.svg</file>
-    <file>icons/scalable/actions/show-keyboard-caps-lock-filled-symbolic.svg</file>
-    <file>icons/scalable/actions/show-keyboard-caps-lock-symbolic.svg</file>
-    <file>icons/scalable/actions/show-keyboard-caps-lock-wide-filled-symbolic.svg</file>
-    <file>icons/scalable/actions/show-keyboard-caps-lock-wide-symbolic.svg</file>
-    <file>icons/scalable/actions/show-keyboard-enter-symbolic.svg</file>
-    <file>icons/scalable/actions/show-keyboard-extend-symbolic.svg</file>
-    <file>icons/scalable/actions/show-keyboard-hide-symbolic.svg</file>
-    <file>icons/scalable/actions/show-keyboard-layout-filled-symbolic.svg</file>
-    <file>icons/scalable/actions/show-keyboard-layout-symbolic.svg</file>
-    <file>icons/scalable/actions/show-keyboard-option-symbolic.svg</file>
-    <file>icons/scalable/actions/show-keyboard-retract-symbolic.svg</file>
-    <file>icons/scalable/actions/show-keyboard-shift-filled-symbolic.svg</file>
-    <file>icons/scalable/actions/show-keyboard-shift-symbolic.svg</file>
-    <file>icons/scalable/actions/show-keyboard-shortcuts-symbolic.svg</file>
-    <file>icons/scalable/actions/show-keyboard-symbolic.svg</file>
-    <file>icons/scalable/actions/show-key-symbolic.svg</file>
-    <file>icons/scalable/actions/show-language-symbolic.svg</file>
-    <file>icons/scalable/actions/show-lan-symbolic.svg</file>
-    <file>icons/scalable/actions/show-large-brush-symbolic.svg</file>
-    <file>icons/scalable/actions/show-larger-brush-symbolic.svg</file>
-    <file>icons/scalable/actions/show-last-large-symbolic.svg</file>
-    <file>icons/scalable/actions/show-last-symbolic.svg</file>
-    <file>icons/scalable/actions/show-leaflet-symbolic.svg</file>
-    <file>icons/scalable/actions/show-left-large-symbolic.svg</file>
-    <file>icons/scalable/actions/show-left-symbolic.svg</file>
-    <file>icons/scalable/actions/show-library-artists-symbolic.svg</file>
-    <file>icons/scalable/actions/show-library-music-symbolic.svg</file>
-    <file>icons/scalable/actions/show-library-symbolic.svg</file>
-    <file>icons/scalable/actions/show-lightbulb-symbolic.svg</file>
-    <file>icons/scalable/actions/show-list-compact-symbolic.svg</file>
-    <file>icons/scalable/actions/show-list-large-symbolic.svg</file>
-    <file>icons/scalable/actions/show-list-symbolic.svg</file>
-    <file>icons/scalable/actions/show-loaf-symbolic.svg</file>
-    <file>icons/scalable/actions/show-lock-small-open-symbolic.svg</file>
-    <file>icons/scalable/actions/show-lock-small-symbolic.svg</file>
-    <file>icons/scalable/actions/show-loupe-large-symbolic.svg</file>
-    <file>icons/scalable/actions/show-loupe-symbolic.svg</file>
-    <file>icons/scalable/actions/show-loupe-with-arrow-symbolic.svg</file>
-    <file>icons/scalable/actions/show-loupe-with-heart-symbolic.svg</file>
-    <file>icons/scalable/actions/show-low-vision-symbolic.svg</file>
-    <file>icons/scalable/actions/show-magic-wand-symbolic.svg</file>
-    <file>icons/scalable/actions/show-mail-archive-symbolic.svg</file>
-    <file>icons/scalable/actions/show-mailbox-symbolic.svg</file>
-    <file>icons/scalable/actions/show-mail-read-symbolic.svg</file>
-    <file>icons/scalable/actions/show-mail-secure-symbolic.svg</file>
-    <file>icons/scalable/actions/show-mail-symbolic.svg</file>
-    <file>icons/scalable/actions/show-map-marker-2-symbolic.svg</file>
-    <file>icons/scalable/actions/show-map-marker-symbolic.svg</file>
-    <file>icons/scalable/actions/show-map-symbolic.svg</file>
-    <file>icons/scalable/actions/show-mark2-symbolic.svg</file>
-    <file>icons/scalable/actions/show-markdown-symbolic.svg</file>
-    <file>icons/scalable/actions/show-marker-symbolic.svg</file>
-    <file>icons/scalable/actions/show-mark-symbolic.svg</file>
-    <file>icons/scalable/actions/show-meat-symbolic.svg</file>
-    <file>icons/scalable/actions/show-meeting-symbolic.svg</file>
-    <file>icons/scalable/actions/show-menu-large-symbolic.svg</file>
-    <file>icons/scalable/actions/show-menu-symbolic.svg</file>
-    <file>icons/scalable/actions/show-merge-symbolic.svg</file>
-    <file>icons/scalable/actions/show-microphone2-symbolic.svg</file>
-    <file>icons/scalable/actions/show-microphone-symbolic.svg</file>
-    <file>icons/scalable/actions/show-minus-large-symbolic.svg</file>
-    <file>icons/scalable/actions/show-minus-symbolic.svg</file>
-    <file>icons/scalable/actions/show-mobile-network-symbolic.svg</file>
-    <file>icons/scalable/actions/show-modem-symbolic.svg</file>
-    <file>icons/scalable/actions/show-money-clip-symbolic.svg</file>
-    <file>icons/scalable/actions/show-money-none-symbolic.svg</file>
-    <file>icons/scalable/actions/show-money-symbolic.svg</file>
-    <file>icons/scalable/actions/show-monitor-pick-symbolic.svg</file>
-    <file>icons/scalable/actions/show-month-symbolic.svg</file>
-    <file>icons/scalable/actions/show-moon-alt2-symbolic.svg</file>
-    <file>icons/scalable/actions/show-moon-alt-symbolic.svg</file>
-    <file>icons/scalable/actions/show-moon-clouds-outline-symbolic.svg</file>
-    <file>icons/scalable/actions/show-moon-filled-symbolic.svg</file>
-    <file>icons/scalable/actions/show-moon-outline-symbolic.svg</file>
-    <file>icons/scalable/actions/show-moon-symbolic.svg</file>
-    <file>icons/scalable/actions/show-mountain-symbolic.svg</file>
-    <file>icons/scalable/actions/show-mouse-symbolic.svg</file>
-    <file>icons/scalable/actions/show-mouse-wireless-disabled-filled-symbolic.svg</file>
-    <file>icons/scalable/actions/show-mouse-wireless-disabled-symbolic.svg</file>
-    <file>icons/scalable/actions/show-mouse-wireless-filled-symbolic.svg</file>
-    <file>icons/scalable/actions/show-mouse-wireless-symbolic.svg</file>
-    <file>icons/scalable/actions/show-mouse-with-smaller-scrollwheel-symbolic.svg</file>
-    <file>icons/scalable/actions/show-move-tool-symbolic.svg</file>
-    <file>icons/scalable/actions/show-move-to-window-symbolic.svg</file>
-    <file>icons/scalable/actions/show-multitasking-symbolic.svg</file>
-    <file>icons/scalable/actions/show-multitasking-windows-symbolic.svg</file>
-    <file>icons/scalable/actions/show-museum-symbolic.svg</file>
-    <file>icons/scalable/actions/show-music-artist2-symbolic.svg</file>
-    <file>icons/scalable/actions/show-music-artist-symbolic.svg</file>
-    <file>icons/scalable/actions/show-music-note-single-symbolic.svg</file>
-    <file>icons/scalable/actions/show-music-note-symbolic.svg</file>
-    <file>icons/scalable/actions/show-music-queue-symbolic.svg</file>
-    <file>icons/scalable/actions/show-navigate-symbolic.svg</file>
-    <file>icons/scalable/actions/show-network-cellular-no-data-signal-excellent-symbolic.svg</file>
-    <file>icons/scalable/actions/show-network-cellular-no-data-signal-good-symbolic.svg</file>
-    <file>icons/scalable/actions/show-network-cellular-no-data-signal-none-symbolic.svg</file>
-    <file>icons/scalable/actions/show-network-cellular-no-data-signal-ok-symbolic.svg</file>
-    <file>icons/scalable/actions/show-network-cellular-no-data-signal-weak-symbolic.svg</file>
-    <file>icons/scalable/actions/show-network-printer-symbolic.svg</file>
-    <file>icons/scalable/actions/show-network-raid-symbolic.svg</file>
-    <file>icons/scalable/actions/show-network-server-symbolic.svg</file>
-    <file>icons/scalable/actions/show-network-workgroup-symbolic.svg</file>
-    <file>icons/scalable/actions/show-newspaper-rounded-symbolic.svg</file>
-    <file>icons/scalable/actions/show-newspaper-symbolic.svg</file>
-    <file>icons/scalable/actions/show-nintendo-controller-symbolic.svg</file>
-    <file>icons/scalable/actions/show-no-bed-symbolic.svg</file>
-    <file>icons/scalable/actions/show-no-bluetooth-symbolic.svg</file>
-    <file>icons/scalable/actions/show-no-flying-symbolic.svg</file>
-    <file>icons/scalable/actions/show-noodles-symbolic.svg</file>
-    <file>icons/scalable/actions/show-note2-symbolic.svg</file>
-    <file>icons/scalable/actions/show-notepad-symbolic.svg</file>
-    <file>icons/scalable/actions/show-note-symbolic.svg</file>
-    <file>icons/scalable/actions/show-not-junk-alt-symbolic.svg</file>
-    <file>icons/scalable/actions/show-not-junk-symbolic.svg</file>
-    <file>icons/scalable/actions/show-no-toilets-symbolic.svg</file>
-    <file>icons/scalable/actions/show-no-wheelchair-symbolic.svg</file>
-    <file>icons/scalable/actions/show-nudity-none-symbolic.svg</file>
-    <file>icons/scalable/actions/show-nudity-symbolic.svg</file>
-    <file>icons/scalable/actions/show-nut-symbolic.svg</file>
-    <file>icons/scalable/actions/show-object-layout-symbolic.svg</file>
-    <file>icons/scalable/actions/show-object-packing-symbolic.svg</file>
-    <file>icons/scalable/actions/show-offline-globe-symbolic.svg</file>
-    <file>icons/scalable/actions/show-online-symbolic.svg</file>
-    <file>icons/scalable/actions/show-opacity-symbolic.svg</file>
-    <file>icons/scalable/actions/show-open-book-symbolic.svg</file>
-    <file>icons/scalable/actions/show-outbox-symbolic.svg</file>
-    <file>icons/scalable/actions/show-overlapping-windows-symbolic.svg</file>
-    <file>icons/scalable/actions/show-package-symbolic.svg</file>
-    <file>icons/scalable/actions/show-package-x-generic-symbolic.svg</file>
-    <file>icons/scalable/actions/show-padlock2-open-symbolic.svg</file>
-    <file>icons/scalable/actions/show-padlock2-symbolic.svg</file>
-    <file>icons/scalable/actions/show-padlock-open-symbolic.svg</file>
-    <file>icons/scalable/actions/show-padlock-symbolic.svg</file>
-    <file>icons/scalable/actions/show-paintbrush-symbolic.svg</file>
-    <file>icons/scalable/actions/show-panorama-360-symbolic.svg</file>
-    <file>icons/scalable/actions/show-panorama-horizontal-symbolic.svg</file>
-    <file>icons/scalable/actions/show-panorama-vertical-symbolic.svg</file>
-    <file>icons/scalable/actions/show-paper-filled-symbolic.svg</file>
-    <file>icons/scalable/actions/show-paper-plane-symbolic.svg</file>
-    <file>icons/scalable/actions/show-paper-symbolic.svg</file>
-    <file>icons/scalable/actions/show-papyrus-symbolic.svg</file>
-    <file>icons/scalable/actions/show-papyrus-vertical-symbolic.svg</file>
-    <file>icons/scalable/actions/show-parent-symbolic.svg</file>
-    <file>icons/scalable/actions/show-parking-sign-symbolic.svg</file>
-    <file>icons/scalable/actions/show-path-tool-symbolic.svg</file>
-    <file>icons/scalable/actions/show-pause-large-symbolic.svg</file>
-    <file>icons/scalable/actions/show-pause-symbolic.svg</file>
-    <file>icons/scalable/actions/show-pci-card-symbolic.svg</file>
-    <file>icons/scalable/actions/show-pda-symbolic.svg</file>
-    <file>icons/scalable/actions/show-pencil-and-paper-symbolic.svg</file>
-    <file>icons/scalable/actions/show-pencil-symbolic.svg</file>
-    <file>icons/scalable/actions/show-penguin-alt-symbolic.svg</file>
-    <file>icons/scalable/actions/show-penguin-symbolic.svg</file>
-    <file>icons/scalable/actions/show-people-symbolic.svg</file>
-    <file>icons/scalable/actions/show-pepper-symbolic.svg</file>
-    <file>icons/scalable/actions/show-person2-symbolic.svg</file>
-    <file>icons/scalable/actions/show-person-symbolic.svg</file>
-    <file>icons/scalable/actions/show-phone-disabled-symbolic.svg</file>
-    <file>icons/scalable/actions/show-phonelink2-off-symbolic.svg</file>
-    <file>icons/scalable/actions/show-phonelink2-symbolic.svg</file>
-    <file>icons/scalable/actions/show-phonelink-delete-symbolic.svg</file>
-    <file>icons/scalable/actions/show-phonelink-lock-symbolic.svg</file>
-    <file>icons/scalable/actions/show-phonelink-off-symbolic.svg</file>
-    <file>icons/scalable/actions/show-phonelink-ring-symbolic.svg</file>
-    <file>icons/scalable/actions/show-phonelink-setup-symbolic.svg</file>
-    <file>icons/scalable/actions/show-phonelink-symbolic.svg</file>
-    <file>icons/scalable/actions/show-phone-oldschool-symbolic.svg</file>
-    <file>icons/scalable/actions/show-phone-symbolic.svg</file>
-    <file>icons/scalable/actions/show-phone-vibrate-symbolic.svg</file>
-    <file>icons/scalable/actions/show-phosh-symbolic.svg</file>
-    <file>icons/scalable/actions/show-photo-camera-symbolic.svg</file>
-    <file>icons/scalable/actions/show-pin-location-symbolic.svg</file>
-    <file>icons/scalable/actions/show-pin-symbolic.svg</file>
-    <file>icons/scalable/actions/show-pipette-symbolic.svg</file>
-    <file>icons/scalable/actions/show-pip-in-symbolic.svg</file>
-    <file>icons/scalable/actions/show-pip-out-symbolic.svg</file>
-    <file>icons/scalable/actions/show-playback-error-symbolic.svg</file>
-    <file>icons/scalable/actions/show-playback-options-symbolic.svg</file>
-    <file>icons/scalable/actions/show-playback-speed-symbolic.svg</file>
-    <file>icons/scalable/actions/show-playback-symbolic.svg</file>
-    <file>icons/scalable/actions/show-play-large-diabled-symbolic.svg</file>
-    <file>icons/scalable/actions/show-play-large-symbolic.svg</file>
-    <file>icons/scalable/actions/show-playlist2-symbolic.svg</file>
-    <file>icons/scalable/actions/show-playlist-symbolic.svg</file>
-    <file>icons/scalable/actions/show-play-symbolic.svg</file>
-    <file>icons/scalable/actions/show-plus-large-symbolic.svg</file>
-    <file>icons/scalable/actions/show-plus-symbolic.svg</file>
-    <file>icons/scalable/actions/show-podcast-symbolic.svg</file>
-    <file>icons/scalable/actions/show-portal-symbolic.svg</file>
-    <file>icons/scalable/actions/show-positive-feedback-symbolic.svg</file>
-    <file>icons/scalable/actions/show-post-box-symbolic.svg</file>
-    <file>icons/scalable/actions/show-power-symbolic.svg</file>
-    <file>icons/scalable/actions/show-printer-network-symbolic.svg</file>
-    <file>icons/scalable/actions/show-printer-round-symbolic.svg</file>
-    <file>icons/scalable/actions/show-printer-symbolic.svg</file>
-    <file>icons/scalable/actions/show-profit-symbolic.svg</file>
-    <file>icons/scalable/actions/show-projector-symbolic.svg</file>
-    <file>icons/scalable/actions/show-pub-symbolic.svg</file>
-    <file>icons/scalable/actions/show-puzzle-piece-symbolic.svg</file>
-    <file>icons/scalable/actions/show-qr-code-scanner-symbolic.svg</file>
-    <file>icons/scalable/actions/show-qr-code-symbolic.svg</file>
-    <file>icons/scalable/actions/show-question-round-symbolic.svg</file>
-    <file>icons/scalable/actions/show-question-symbolic.svg</file>
-    <file>icons/scalable/actions/show-quotation-symbolic.svg</file>
-    <file>icons/scalable/actions/show-raid-symbolic.svg</file>
-    <file>icons/scalable/actions/show-rain-alt-symbolic.svg</file>
-    <file>icons/scalable/actions/show-rain-outline-symbolic.svg</file>
-    <file>icons/scalable/actions/show-rain-scattered-outline-symbolic.svg</file>
-    <file>icons/scalable/actions/show-rain-symbolic.svg</file>
-    <file>icons/scalable/actions/show-record-screen-symbolic.svg</file>
-    <file>icons/scalable/actions/show-refresh-large-symbolic.svg</file>
-    <file>icons/scalable/actions/show-refresh-symbolic.svg</file>
-    <file>icons/scalable/actions/show-regex-symbolic.svg</file>
-    <file>icons/scalable/actions/show-remote-terminal-symbolic.svg</file>
-    <file>icons/scalable/actions/show-resize-mode-symbolic.svg</file>
-    <file>icons/scalable/actions/show-resources-symbolic.svg</file>
-    <file>icons/scalable/actions/show-restaurant-symbolic.svg</file>
-    <file>icons/scalable/actions/show-rich-text-symbolic.svg</file>
-    <file>icons/scalable/actions/show-right-large-symbolic.svg</file>
-    <file>icons/scalable/actions/show-right-symbolic.svg</file>
-    <file>icons/scalable/actions/show-roll-symbolic.svg</file>
-    <file>icons/scalable/actions/show-roll-vertical-symbolic.svg</file>
-    <file>icons/scalable/actions/show-rotate-symbolic.svg</file>
-    <file>icons/scalable/actions/show-rotation-lock-disabled-symbolic.svg</file>
-    <file>icons/scalable/actions/show-rotation-lock-symbolic.svg</file>
-    <file>icons/scalable/actions/show-routing-symbolic.svg</file>
-    <file>icons/scalable/actions/show-salami-symbolic.svg</file>
-    <file>icons/scalable/actions/show-scales-detail-symbolic.svg</file>
-    <file>icons/scalable/actions/show-scales-symbolic.svg</file>
-    <file>icons/scalable/actions/show-scale-symbolic.svg</file>
-    <file>icons/scalable/actions/show-scanner-symbolic.svg</file>
-    <file>icons/scalable/actions/show-scattered-clouds-symbolic.svg</file>
-    <file>icons/scalable/actions/show-school-symbolic.svg</file>
-    <file>icons/scalable/actions/show-scissors-symbolic.svg</file>
-    <file>icons/scalable/actions/show-screencast-recorded-symbolic.svg</file>
-    <file>icons/scalable/actions/show-screen-privacy2-symbolic.svg</file>
-    <file>icons/scalable/actions/show-screen-privacy3-symbolic.svg</file>
-    <file>icons/scalable/actions/show-screen-privacy4-symbolic.svg</file>
-    <file>icons/scalable/actions/show-screen-privacy5-symbolic.svg</file>
-    <file>icons/scalable/actions/show-screen-privacy6-symbolic.svg</file>
-    <file>icons/scalable/actions/show-screen-privacy7-disabled-symbolic.svg</file>
-    <file>icons/scalable/actions/show-screen-privacy7-symbolic.svg</file>
-    <file>icons/scalable/actions/show-screen-privacy-disabled7-symbolic.svg</file>
-    <file>icons/scalable/actions/show-screen-privacy-disabled-symbolic.svg</file>
-    <file>icons/scalable/actions/show-screen-privacy-symbolic.svg</file>
-    <file>icons/scalable/actions/show-screenshooter-symbolic.svg</file>
-    <file>icons/scalable/actions/show-screenshot-recorded-symbolic.svg</file>
-    <file>icons/scalable/actions/show-screenshot-symbolic.svg</file>
-    <file>icons/scalable/actions/show-scroll-on-a-roll-symbolic.svg</file>
-    <file>icons/scalable/actions/show-scroll-symbolic.svg</file>
-    <file>icons/scalable/actions/show-selection-opaque-2-symbolic.svg</file>
-    <file>icons/scalable/actions/show-selection-opaque-3-symbolic.svg</file>
-    <file>icons/scalable/actions/show-selection-opaque-symbolic.svg</file>
-    <file>icons/scalable/actions/show-selection-symbolic.svg</file>
-    <file>icons/scalable/actions/show-select-mode-symbolic.svg</file>
-    <file>icons/scalable/actions/show-select-symbolic.svg</file>
-    <file>icons/scalable/actions/show-send-alt-symbolic.svg</file>
-    <file>icons/scalable/actions/show-send-symbolic.svg</file>
-    <file>icons/scalable/actions/show-sentiment-dissatisfied-symbolic.svg</file>
-    <file>icons/scalable/actions/show-sentiment-neutral-symbolic.svg</file>
-    <file>icons/scalable/actions/show-sentiment-satisfied-symbolic.svg</file>
-    <file>icons/scalable/actions/show-sentiment-very-dissatisfied-symbolic.svg</file>
-    <file>icons/scalable/actions/show-sentiment-very-satisfied-symbolic.svg</file>
-    <file>icons/scalable/actions/show-server-pick-symbolic.svg</file>
-    <file>icons/scalable/actions/show-settings-symbolic.svg</file>
-    <file>icons/scalable/actions/show-shapes-symbolic.svg</file>
-    <file>icons/scalable/actions/show-share-alt-symbolic.svg</file>
-    <file>icons/scalable/actions/show-share-symbolic.svg</file>
-    <file>icons/scalable/actions/show-shear-symbolic.svg</file>
-    <file>icons/scalable/actions/show-shell-overview-symbolic.svg</file>
-    <file>icons/scalable/actions/show-shell-symbolic.svg</file>
-    <file>icons/scalable/actions/show-shield-danger-symbolic.svg</file>
-    <file>icons/scalable/actions/show-shield-safe-symbolic.svg</file>
-    <file>icons/scalable/actions/show-shield-warning-symbolic.svg</file>
-    <file>icons/scalable/actions/show-shoe-box-symbolic.svg</file>
-    <file>icons/scalable/actions/show-shopping-cart-symbolic.svg</file>
-    <file>icons/scalable/actions/show-showers-symbolic.svg</file>
-    <file>icons/scalable/actions/show-sidebar-toggle-left-symbolic.svg</file>
-    <file>icons/scalable/actions/show-sidebar-toggle-right-symbolic.svg</file>
-    <file>icons/scalable/actions/show-signature-bad-symbolic.svg</file>
-    <file>icons/scalable/actions/show-signature-symbolic.svg</file>
-    <file>icons/scalable/actions/show-sign-language-symbolic.svg</file>
-    <file>icons/scalable/actions/show-sim-symbolic.svg</file>
-    <file>icons/scalable/actions/show-single-display-symbolic.svg</file>
-    <file>icons/scalable/actions/show-size-horizontally-symbolic.svg</file>
-    <file>icons/scalable/actions/show-size-left-symbolic.svg</file>
-    <file>icons/scalable/actions/show-size-right-symbolic.svg</file>
-    <file>icons/scalable/actions/show-size-vertically-symbolic.svg</file>
-    <file>icons/scalable/actions/show-skip-backwards-10-symbolic.svg</file>
-    <file>icons/scalable/actions/show-skip-backwards-30-symbolic.svg</file>
-    <file>icons/scalable/actions/show-skip-forward-10-symbolic.svg</file>
-    <file>icons/scalable/actions/show-skip-forward-30-symbolic.svg</file>
-    <file>icons/scalable/actions/show-skull-small-symbolic.svg</file>
-    <file>icons/scalable/actions/show-skull-symbolic.svg</file>
-    <file>icons/scalable/actions/show-small-x-symbolic.svg</file>
-    <file>icons/scalable/actions/show-smartcard-symbolic.svg</file>
-    <file>icons/scalable/actions/show-smartphone-symbolic.svg</file>
-    <file>icons/scalable/actions/show-smile-symbolic.svg</file>
-    <file>icons/scalable/actions/show-smudge-finger-symbolic.svg</file>
-    <file>icons/scalable/actions/show-snapshots-alt-symbolic.svg</file>
-    <file>icons/scalable/actions/show-snapshots-symbolic.svg</file>
-    <file>icons/scalable/actions/show-snap-symbolic.svg</file>
-    <file>icons/scalable/actions/show-snow-outline-symbolic.svg</file>
-    <file>icons/scalable/actions/show-snow-symbolic.svg</file>
-    <file>icons/scalable/actions/show-social-network-none-symbolic.svg</file>
-    <file>icons/scalable/actions/show-social-network-symbolic.svg</file>
-    <file>icons/scalable/actions/show-sonar-symbolic.svg</file>
-    <file>icons/scalable/actions/show-soundcard-symbolic.svg</file>
-    <file>icons/scalable/actions/show-sound-wave-alt-symbolic.svg</file>
-    <file>icons/scalable/actions/show-sound-wave-symbolic.svg</file>
-    <file>icons/scalable/actions/show-soup-symbolic.svg</file>
-    <file>icons/scalable/actions/show-source-pick-symbolic.svg</file>
-    <file>icons/scalable/actions/show-speakers-symbolic.svg</file>
-    <file>icons/scalable/actions/show-speedometer2-symbolic.svg</file>
-    <file>icons/scalable/actions/show-speedometer3-symbolic.svg</file>
-    <file>icons/scalable/actions/show-speedometer4-symbolic.svg</file>
-    <file>icons/scalable/actions/show-speedometer-symbolic.svg</file>
-    <file>icons/scalable/actions/show-spinner-symbolic.svg</file>
-    <file>icons/scalable/actions/show-spring-symbolic.svg</file>
-    <file>icons/scalable/actions/show-square-filled-symbolic.svg</file>
-    <file>icons/scalable/actions/show-square-outline-thick-symbolic.svg</file>
-    <file>icons/scalable/actions/show-square-outline-thin-symbolic.svg</file>
-    <file>icons/scalable/actions/show-ssd-symbolic.svg</file>
-    <file>icons/scalable/actions/show-stacked-plates-symbolic.svg</file>
-    <file>icons/scalable/actions/show-stamp-symbolic.svg</file>
-    <file>icons/scalable/actions/show-star-filled-rounded-symbolic.svg</file>
-    <file>icons/scalable/actions/show-star-filled-symbolic.svg</file>
-    <file>icons/scalable/actions/show-star-large-symbolic.svg</file>
-    <file>icons/scalable/actions/show-star-outline-half-left-symbolic.svg</file>
-    <file>icons/scalable/actions/show-star-outline-half-right-symbolic.svg</file>
-    <file>icons/scalable/actions/show-star-outline-rounded-symbolic.svg</file>
-    <file>icons/scalable/actions/show-star-outline-thick-symbolic.svg</file>
-    <file>icons/scalable/actions/show-star-outline-thin-symbolic.svg</file>
-    <file>icons/scalable/actions/show-step-back-symbolic.svg</file>
-    <file>icons/scalable/actions/show-step-in-symbolic.svg</file>
-    <file>icons/scalable/actions/show-step-out-symbolic.svg</file>
-    <file>icons/scalable/actions/show-step-over-symbolic.svg</file>
-    <file>icons/scalable/actions/show-steps-symbolic.svg</file>
-    <file>icons/scalable/actions/show-stop-large-symbolic.svg</file>
-    <file>icons/scalable/actions/show-stop-sign-large-symbolic.svg</file>
-    <file>icons/scalable/actions/show-stop-sign-symbolic.svg</file>
-    <file>icons/scalable/actions/show-stop-symbolic.svg</file>
-    <file>icons/scalable/actions/show-stopwatch-symbolic.svg</file>
-    <file>icons/scalable/actions/show-storm-outline-symbolic.svg</file>
-    <file>icons/scalable/actions/show-storm-symbolic.svg</file>
-    <file>icons/scalable/actions/show-strong-language-none-symbolic.svg</file>
-    <file>icons/scalable/actions/show-strong-language-symbolic.svg</file>
-    <file>icons/scalable/actions/show-subtitles-symbolic.svg</file>
-    <file>icons/scalable/actions/show-success-symbolic.svg</file>
-    <file>icons/scalable/actions/show-sun-alt-symbolic.svg</file>
-    <file>icons/scalable/actions/show-sun-outline-symbolic.svg</file>
-    <file>icons/scalable/actions/show-sun-symbolic.svg</file>
-    <file>icons/scalable/actions/show-table-symbolic.svg</file>
-    <file>icons/scalable/actions/show-tablet-symbolic.svg</file>
-    <file>icons/scalable/actions/show-tab-new-filled-symbolic.svg</file>
-    <file>icons/scalable/actions/show-tab-new-large-symbolic.svg</file>
-    <file>icons/scalable/actions/show-tab-new-symbolic.svg</file>
-    <file>icons/scalable/actions/show-tab-symbolic.svg</file>
-    <file>icons/scalable/actions/show-tag-symbolic.svg</file>
-    <file>icons/scalable/actions/show-tape-symbolic.svg</file>
-    <file>icons/scalable/actions/show-task-assigned-symbolic.svg</file>
-    <file>icons/scalable/actions/show-task-assigned-to-symbolic.svg</file>
-    <file>icons/scalable/actions/show-task-recurring-symbolic.svg</file>
-    <file>icons/scalable/actions/show-task-symbolic.svg</file>
-    <file>icons/scalable/actions/show-tea-symbolic.svg</file>
-    <file>icons/scalable/actions/show-tennis-symbolic.svg</file>
-    <file>icons/scalable/actions/show-terminal-symbolic.svg</file>
-    <file>icons/scalable/actions/show-test-pass-symbolic.svg</file>
-    <file>icons/scalable/actions/show-test-symbolic.svg</file>
-    <file>icons/scalable/actions/show-text2-symbolic.svg</file>
-    <file>icons/scalable/actions/show-text3-symbolic.svg</file>
-    <file>icons/scalable/actions/show-text-bold-symbolic.svg</file>
-    <file>icons/scalable/actions/show-text-direction-ltr-symbolic.svg</file>
-    <file>icons/scalable/actions/show-text-direction-rtl-symbolic.svg</file>
-    <file>icons/scalable/actions/show-text-direction-symbolic-rtl.svg</file>
-    <file>icons/scalable/actions/show-text-indent-less-symbolic.svg</file>
-    <file>icons/scalable/actions/show-text-indent-more-symbolic.svg</file>
-    <file>icons/scalable/actions/show-text-italic-symbolic.svg</file>
-    <file>icons/scalable/actions/show-text-justify-center-symbolic.svg</file>
-    <file>icons/scalable/actions/show-text-justify-fill-symbolic.svg</file>
-    <file>icons/scalable/actions/show-text-justify-left-symbolic.svg</file>
-    <file>icons/scalable/actions/show-text-justify-right-symbolic.svg</file>
-    <file>icons/scalable/actions/show-text-squiggly-symbolic.svg</file>
-    <file>icons/scalable/actions/show-text-strikethrough-symbolic.svg</file>
-    <file>icons/scalable/actions/show-text-symbolic.svg</file>
-    <file>icons/scalable/actions/show-text-underline-symbolic.svg</file>
-    <file>icons/scalable/actions/show-theater-symbolic.svg</file>
-    <file>icons/scalable/actions/show-thumbs-down-symbolic.svg</file>
-    <file>icons/scalable/actions/show-thumbs-up-symbolic.svg</file>
-    <file>icons/scalable/actions/show-thunderbolt-symbolic.svg</file>
-    <file>icons/scalable/actions/show-ticket-special-symbolic.svg</file>
-    <file>icons/scalable/actions/show-ticket-symbolic.svg</file>
-    <file>icons/scalable/actions/show-timer-sand-symbolic.svg</file>
-    <file>icons/scalable/actions/show-timer-symbolic.svg</file>
-    <file>icons/scalable/actions/show-today-alt-symbolic.svg</file>
-    <file>icons/scalable/actions/show-today-symbolic.svg</file>
-    <file>icons/scalable/actions/show-toilets-symbolic.svg</file>
-    <file>icons/scalable/actions/show-toolbars-symbolic.svg</file>
-    <file>icons/scalable/actions/show-top-large-symbolic.svg</file>
-    <file>icons/scalable/actions/show-top-symbolic.svg</file>
-    <file>icons/scalable/actions/show-tornado-symbolic.svg</file>
-    <file>icons/scalable/actions/show-touchpad-disabled-symbolic.svg</file>
-    <file>icons/scalable/actions/show-touchpad-symbolic.svg</file>
-    <file>icons/scalable/actions/show-town-symbolic.svg</file>
-    <file>icons/scalable/actions/show-transparent-background-symbolic.svg</file>
-    <file>icons/scalable/actions/show-tree2-symbolic.svg</file>
-    <file>icons/scalable/actions/show-tree-symbolic.svg</file>
-    <file>icons/scalable/actions/show-trophy-symbolic.svg</file>
-    <file>icons/scalable/actions/show-tty-symbolic.svg</file>
-    <file>icons/scalable/actions/show-tv-symbolic.svg</file>
-    <file>icons/scalable/actions/show-ungroup-symbolic.svg</file>
-    <file>icons/scalable/actions/show-update-symbolic.svg</file>
-    <file>icons/scalable/actions/show-up-large-symbolic.svg</file>
-    <file>icons/scalable/actions/show-uppercase-symbolic.svg</file>
-    <file>icons/scalable/actions/show-ups-symbolic.svg</file>
-    <file>icons/scalable/actions/show-up-symbolic.svg</file>
-    <file>icons/scalable/actions/show-usb-stick-round-symbolic.svg</file>
-    <file>icons/scalable/actions/show-usb-stick-symbolic.svg</file>
-    <file>icons/scalable/actions/show-user-trash-full-symbolic.svg</file>
-    <file>icons/scalable/actions/show-user-trash-symbolic.svg</file>
-    <file>icons/scalable/actions/show-video-camera-symbolic.svg</file>
-    <file>icons/scalable/actions/show-video-decode-symbolic.svg</file>
-    <file>icons/scalable/actions/show-video-encoder-symbolic.svg</file>
-    <file>icons/scalable/actions/show-view-columns-symbolic.svg</file>
-    <file>icons/scalable/actions/show-view-switcher-symbolic.svg</file>
-    <file>icons/scalable/actions/show-violence2-none-symbolic.svg</file>
-    <file>icons/scalable/actions/show-violence2-symbolic.svg</file>
-    <file>icons/scalable/actions/show-violence3-none-symbolic.svg</file>
-    <file>icons/scalable/actions/show-violence3-symbolic.svg</file>
-    <file>icons/scalable/actions/show-violence-none-symbolic.svg</file>
-    <file>icons/scalable/actions/show-violence-symbolic.svg</file>
-    <file>icons/scalable/actions/show-vpn-caps-disabled-symbolic.svg</file>
-    <file>icons/scalable/actions/show-vpn-caps-symbolic.svg</file>
-    <file>icons/scalable/actions/show-wacom-symbolic.svg</file>
-    <file>icons/scalable/actions/show-walking-symbolic.svg</file>
-    <file>icons/scalable/actions/show-wallet2-symbolic.svg</file>
-    <file>icons/scalable/actions/show-wallet3-symbolic.svg</file>
-    <file>icons/scalable/actions/show-wallet-symbolic.svg</file>
-    <file>icons/scalable/actions/show-warning-symbolic.svg</file>
-    <file>icons/scalable/actions/show-weather-alert-symbolic.svg</file>
-    <file>icons/scalable/actions/show-week-symbolic.svg</file>
-    <file>icons/scalable/actions/show-weight2-symbolic.svg</file>
-    <file>icons/scalable/actions/show-weight-symbolic.svg</file>
-    <file>icons/scalable/actions/show-wheat-symbolic.svg</file>
-    <file>icons/scalable/actions/show-wheelchair-alt-symbolic.svg</file>
-    <file>icons/scalable/actions/show-wheelchair-limited-symbolic.svg</file>
-    <file>icons/scalable/actions/show-wheelchair-symbolic.svg</file>
-    <file>icons/scalable/actions/show-window-flat-symbolic.svg</file>
-    <file>icons/scalable/actions/show-window-grow-symbolic.svg</file>
-    <file>icons/scalable/actions/show-window-scrolling-symbolic.svg</file>
-    <file>icons/scalable/actions/show-window-shrink-symbolic.svg</file>
-    <file>icons/scalable/actions/show-window-sound-source-symbolic.svg</file>
-    <file>icons/scalable/actions/show-window-symbolic.svg</file>
-    <file>icons/scalable/actions/show-windy-symbolic.svg</file>
-    <file>icons/scalable/actions/show-wine-glass-symbolic.svg</file>
-    <file>icons/scalable/actions/show-work-week-symbolic.svg</file>
-    <file>icons/scalable/actions/show-wrench-symbolic.svg</file>
-    <file>icons/scalable/actions/show-wrench-wide-symbolic.svg</file>
-    <file>icons/scalable/actions/show-xbox-controller-symbolic.svg</file>
-    <file>icons/scalable/actions/show-x-circular-symbolic.svg</file>
-    <file>icons/scalable/actions/show-year-alt-symbolic.svg</file>
-    <file>icons/scalable/actions/show-year-symbolic.svg</file>
-    <file>icons.txt</file>
-    <file>icons.json</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-address-book-alt-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-address-book-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-airbrush-tool-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-alarm-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-align-tool-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-anniversary-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-annotation-sidebar-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-application-x-firmware-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-archive-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-arrow1-down-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-arrow1-left-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-arrow1-right-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-arrow1-up-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-arrow2-bottom-left-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-arrow2-bottom-right-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-arrow2-down-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-arrow2-left-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-arrow2-right-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-arrow2-top-left-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-arrow2-top-right-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-arrow2-up-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-arrow3-down-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-arrow3-left-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-arrow3-right-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-arrow3-up-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-arrow-into-box-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-arrows-questionmark-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-assistive-listening-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-attach-audio-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-audio-only-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-audio-x-generic-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-auth-otp-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-axes-four-quadrants-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-axes-one-quadrant-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-bank-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-banner-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-barbecue-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-baseball-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-battery-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-bed-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-bell-large-none-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-bell-large-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-bell-none-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-bell-outline-none-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-bell-outline-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-bell-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-bench-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-big-dot-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-big-x-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-birthday-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-blend-tool-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-blind-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-bluetooth-none-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-bluetooth-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-blur-alt-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-blur-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-body-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-bottom-large-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-bottom-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-box-down-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-box-left-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-box-right-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-box-up-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-branch-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-bread-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-break-point-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-briefcase-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-broken-camera-inverse-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-broken-playback-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-broken-video-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-brush-monitor-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-brush-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-bug-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-build-alt-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-build-configure-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-building-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-build-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-bus-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-cafe-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-cage-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-call-add-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-call-incoming-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-call-made-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-call-merge-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-call-missed-incoming-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-call-missed-outgoing-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-call-missed-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-call-outgoing-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-call-outgoing-unsuccessful-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-call-received-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-call-ringer-silenced-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-call-ring-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-call-split-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-camera-broken-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-camera-dead-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-camera-flash-auto-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-camera-flash-disabled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-camera-flash-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-camera-focus-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-camera-grid-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-camera-iso-alt-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-camera-iso-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-camera-large-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-camera-shutter-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-cameras-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-camera-static-inverse-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-camera-static-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-camera-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-camera-toggle-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-carousel-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-cat-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-cd-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-chain-link-loose-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-chain-link-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-charge-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-chat-none-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-chat-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-checkerboard-big-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-checkerboard-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-checkmark-large-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-checkmark-small-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-checkmark-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-check-plain-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-check-round-outline2-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-check-round-outline-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-check-round-outline-whole-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-christmas-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-cigarette-none-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-cigarette-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-circle-filled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-circle-outline-thick-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-circle-outline-thin-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-city-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-clipboard-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-clock-alt-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-clock-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-closed-captioning-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-cloud-disabled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-cloud-filled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-cloud-outline-thick-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-cloud-outline-thin-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-clouds-outline-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-clouds-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-cocktail-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-code-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-coin-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-colorimeter-colorhug-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-color-picker-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-color-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-columns-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-compass-alt-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-compass-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-compass-wind-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-computer-chip-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-computer-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-configure-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-container-terminal-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-controls-big-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-controls-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-copy-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-cow-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-credit-card-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-crop-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-cross-filled-large-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-cross-filled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-cross-large-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-cross-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-crossword-clue-across-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-crossword-clue-down-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-C-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-cut-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-cycling-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-dark-mode-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-deaf-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-deck-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-decode-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-detach-audio-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-diagnostics-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-dialog-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-dialpad-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-diamond-filled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-diamond-outline-thick-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-diamond-outline-thin-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-dice2-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-dice3-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-dice-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-dictionary-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-discover-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-display-projector-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-display-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-display-with-window-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-dock-bottom-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-dock-left-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-dock-right-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-dock-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-dock-top-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-dock-usb-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-dog-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-do-not-distrub-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-dot-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-dotted-box-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-down-large-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-down-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-drag-n-drop-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-drawer-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-drinks-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-driving-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-drone-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-drop-hollow-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-earth-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-editor-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-edit-select-all-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-edit-select-none-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-edit-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-egg-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-eject-large-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-eject-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-electric-car-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-encoder-knob-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-encode-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-entry-clear-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-eraser2-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-eraser3-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-eraser4-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-eraser5-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-eraser-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-error-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-execute-from-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-execute-to-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-explore2-large-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-explore2-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-explore-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-external-devices-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-external-link-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-eye-closed-negative-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-eye-closed-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-eye-not-looking-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-eye-open-negative-filled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-eye-open-negative-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-eye-open-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-face-unlock-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-fast-food-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-fax-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-feet-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-few-clouds-night-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-few-clouds-outline-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-few-clouds-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-file-cabinet-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-file-manager-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-fill-tool-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-fingerprint2-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-fingerprint-authentication-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-fingerprint-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-fire2-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-fire-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-firmware-update-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-first-large-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-first-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-fish-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-flag-filled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-flag-outline-thick-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-flag-outline-thin-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-flap-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-flashlight-none-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-flashlight-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-flash-memory-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-flatpak-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-floppy-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-flying2-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-flying-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-fog-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-folder-remote-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-font-x-generic-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-football-american-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-fuel-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-function-exponential-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-function-linear-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-function-parable-horizontal-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-function-parable-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-function-third-order-horizontal-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-function-third-order-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-funnel-outline-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-funnel-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-gamepad2-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-gamepad-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-garlic-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-gear-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-general-properties-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-git-branch-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-git-merge-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-git-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-globe-alt2-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-globe-alt-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-globe-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-golf-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-graveyard-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-grid-filled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-grid-large-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-grid-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-group-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-hand-fist-none-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-hand-fist-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-hand-middle-finger-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-hand-open-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-hand-point-horizontal-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-hand-point-left-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-hand-point-right-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-hand-point-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-handshake-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-hand-touch-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-harddisk-inverted-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-harddisk-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-headphones-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-headset-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-heal-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-heart-broken-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-heart-filled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-heart-outline-thick-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-heart-outline-thin-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-hig-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-history-undo-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-hockey-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-horizontal-arrows-disabled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-horizontal-arrows-left-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-horizontal-arrows-none-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-horizontal-arrows-one-way-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-horizontal-arrows-right-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-horizontal-arrows-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-hospital-sign-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-hospital-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-hourglass-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-h-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-image-adjust-brightness-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-image-adjust-contrast-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-image-adjust-exposure-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-image-adjust-highlights-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-image-adjust-shadows-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-image-alt-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-image-missing-round-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-image-missing-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-image-print-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-image-round-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-image-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-inbox-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-info-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-ink-tool-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-invert-colors-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-iphone-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-ipod-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-issue-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-item-missing-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-joined-displays-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-junk-alt-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-junk-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-key2-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-keyboard2-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-keyboard3-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-keyboard-caps-lock-filled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-keyboard-caps-lock-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-keyboard-caps-lock-wide-filled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-keyboard-caps-lock-wide-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-keyboard-enter-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-keyboard-extend-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-keyboard-hide-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-keyboard-layout-filled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-keyboard-layout-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-keyboard-option-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-keyboard-retract-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-keyboard-shift-filled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-keyboard-shift-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-keyboard-shortcuts-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-keyboard-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-key-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-language-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-lan-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-large-brush-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-larger-brush-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-last-large-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-last-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-leaflet-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-left-large-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-left-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-library-artists-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-library-music-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-library-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-lightbulb-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-list-compact-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-list-large-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-list-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-loaf-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-lock-small-open-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-lock-small-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-loupe-large-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-loupe-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-loupe-with-arrow-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-loupe-with-heart-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-low-vision-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-magic-wand-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-mail-archive-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-mailbox-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-mail-read-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-mail-secure-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-mail-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-map-marker-2-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-map-marker-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-map-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-mark2-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-markdown-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-marker-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-mark-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-meat-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-meeting-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-menu-large-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-menu-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-merge-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-microphone2-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-microphone-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-minus-large-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-minus-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-mobile-network-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-modem-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-money-clip-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-money-none-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-money-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-monitor-pick-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-month-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-moon-alt2-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-moon-alt-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-moon-clouds-outline-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-moon-filled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-moon-outline-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-moon-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-mountain-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-mouse-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-mouse-wireless-disabled-filled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-mouse-wireless-disabled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-mouse-wireless-filled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-mouse-wireless-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-mouse-with-smaller-scrollwheel-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-move-tool-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-move-to-window-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-multitasking-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-multitasking-windows-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-museum-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-music-artist2-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-music-artist-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-music-note-single-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-music-note-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-music-queue-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-navigate-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-network-cellular-no-data-signal-excellent-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-network-cellular-no-data-signal-good-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-network-cellular-no-data-signal-none-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-network-cellular-no-data-signal-ok-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-network-cellular-no-data-signal-weak-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-network-printer-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-network-raid-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-network-server-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-network-workgroup-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-newspaper-rounded-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-newspaper-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-nintendo-controller-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-no-bed-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-no-bluetooth-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-no-flying-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-noodles-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-note2-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-notepad-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-note-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-not-junk-alt-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-not-junk-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-no-toilets-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-no-wheelchair-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-nudity-none-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-nudity-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-nut-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-object-layout-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-object-packing-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-offline-globe-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-online-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-opacity-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-open-book-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-outbox-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-overlapping-windows-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-package-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-package-x-generic-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-padlock2-open-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-padlock2-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-padlock-open-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-padlock-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-paintbrush-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-panorama-360-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-panorama-horizontal-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-panorama-vertical-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-paper-filled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-paper-plane-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-paper-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-papyrus-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-papyrus-vertical-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-parent-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-parking-sign-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-path-tool-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-pause-large-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-pause-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-pci-card-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-pda-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-pencil-and-paper-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-pencil-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-penguin-alt-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-penguin-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-people-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-pepper-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-person2-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-person-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-phone-disabled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-phonelink2-off-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-phonelink2-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-phonelink-delete-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-phonelink-lock-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-phonelink-off-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-phonelink-ring-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-phonelink-setup-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-phonelink-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-phone-oldschool-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-phone-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-phone-vibrate-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-phosh-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-photo-camera-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-pin-location-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-pin-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-pipette-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-pip-in-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-pip-out-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-playback-error-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-playback-options-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-playback-speed-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-playback-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-play-large-diabled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-play-large-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-playlist2-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-playlist-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-play-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-plus-large-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-plus-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-podcast-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-portal-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-positive-feedback-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-post-box-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-power-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-printer-network-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-printer-round-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-printer-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-profit-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-projector-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-pub-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-puzzle-piece-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-qr-code-scanner-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-qr-code-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-question-round-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-question-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-quotation-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-raid-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-rain-alt-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-rain-outline-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-rain-scattered-outline-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-rain-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-record-screen-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-refresh-large-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-refresh-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-regex-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-remote-terminal-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-resize-mode-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-resources-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-restaurant-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-rich-text-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-right-large-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-right-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-roll-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-roll-vertical-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-rotate-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-rotation-lock-disabled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-rotation-lock-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-routing-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-salami-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-scales-detail-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-scales-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-scale-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-scanner-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-scattered-clouds-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-school-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-scissors-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-screencast-recorded-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-screen-privacy2-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-screen-privacy3-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-screen-privacy4-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-screen-privacy5-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-screen-privacy6-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-screen-privacy7-disabled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-screen-privacy7-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-screen-privacy-disabled7-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-screen-privacy-disabled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-screen-privacy-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-screenshooter-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-screenshot-recorded-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-screenshot-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-scroll-on-a-roll-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-scroll-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-selection-opaque-2-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-selection-opaque-3-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-selection-opaque-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-selection-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-select-mode-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-select-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-send-alt-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-send-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-sentiment-dissatisfied-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-sentiment-neutral-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-sentiment-satisfied-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-sentiment-very-dissatisfied-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-sentiment-very-satisfied-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-server-pick-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-settings-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-shapes-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-share-alt-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-share-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-shear-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-shell-overview-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-shell-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-shield-danger-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-shield-safe-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-shield-warning-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-shoe-box-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-shopping-cart-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-showers-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-sidebar-toggle-left-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-sidebar-toggle-right-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-signature-bad-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-signature-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-sign-language-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-sim-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-single-display-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-size-horizontally-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-size-left-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-size-right-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-size-vertically-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-skip-backwards-10-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-skip-backwards-30-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-skip-forward-10-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-skip-forward-30-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-skull-small-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-skull-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-small-x-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-smartcard-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-smartphone-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-smile-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-smudge-finger-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-snapshots-alt-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-snapshots-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-snap-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-snow-outline-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-snow-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-social-network-none-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-social-network-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-sonar-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-soundcard-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-sound-wave-alt-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-sound-wave-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-soup-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-source-pick-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-speakers-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-speedometer2-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-speedometer3-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-speedometer4-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-speedometer-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-spinner-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-spring-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-square-filled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-square-outline-thick-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-square-outline-thin-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-ssd-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-stacked-plates-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-stamp-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-star-filled-rounded-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-star-filled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-star-large-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-star-outline-half-left-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-star-outline-half-right-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-star-outline-rounded-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-star-outline-thick-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-star-outline-thin-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-step-back-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-step-in-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-step-out-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-step-over-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-steps-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-stop-large-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-stop-sign-large-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-stop-sign-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-stop-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-stopwatch-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-storm-outline-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-storm-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-strong-language-none-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-strong-language-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-subtitles-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-success-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-sun-alt-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-sun-outline-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-sun-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-table-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-tablet-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-tab-new-filled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-tab-new-large-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-tab-new-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-tab-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-tag-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-tape-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-task-assigned-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-task-assigned-to-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-task-recurring-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-task-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-tea-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-tennis-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-terminal-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-test-pass-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-test-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-text2-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-text3-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-text-bold-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-text-direction-ltr-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-text-direction-rtl-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-text-direction-symbolic-rtl.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-text-indent-less-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-text-indent-more-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-text-italic-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-text-justify-center-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-text-justify-fill-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-text-justify-left-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-text-justify-right-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-text-squiggly-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-text-strikethrough-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-text-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-text-underline-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-theater-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-thumbs-down-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-thumbs-up-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-thunderbolt-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-ticket-special-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-ticket-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-timer-sand-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-timer-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-today-alt-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-today-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-toilets-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-toolbars-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-top-large-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-top-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-tornado-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-touchpad-disabled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-touchpad-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-town-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-transparent-background-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-tree2-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-tree-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-trophy-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-tty-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-tv-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-ungroup-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-update-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-up-large-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-uppercase-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-ups-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-up-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-usb-stick-round-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-usb-stick-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-user-trash-full-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-user-trash-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-video-camera-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-video-decode-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-video-encoder-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-view-columns-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-view-switcher-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-violence2-none-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-violence2-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-violence3-none-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-violence3-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-violence-none-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-violence-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-vpn-caps-disabled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-vpn-caps-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-wacom-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-walking-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-wallet2-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-wallet3-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-wallet-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-warning-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-weather-alert-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-week-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-weight2-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-weight-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-wheat-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-wheelchair-alt-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-wheelchair-limited-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-wheelchair-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-window-flat-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-window-grow-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-window-scrolling-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-window-shrink-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-window-sound-source-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-window-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-windy-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-wine-glass-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-work-week-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-wrench-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-wrench-wide-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-xbox-controller-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-x-circular-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-year-alt-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-year-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons.txt</file>
+    <file preprocess="xml-stripblanks">icons.json</file>
   </gresource>
 </gresources>
