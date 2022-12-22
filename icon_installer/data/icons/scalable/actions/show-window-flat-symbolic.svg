@@ -1,7 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg height="16px" viewBox="0 0 16 16" width="16px" xmlns="http://www.w3.org/2000/svg">
-    <g fill="#222222">
-        <path d="m 2 0 c -1.214844 0 -2 0.828125 -2 2 v 12 c 0 1 1 2 2 2 h 12 c 1 0 2 -1 2 -2 v -12 c 0 -1.238281 -0.828125 -2 -2 -2 z m 0 2 h 12 v 12 h -12 z m 0 0"/>
-        <path d="m 4 6 h 3 v 1 h -3 z m 0 -2 h 3 v 1 h -3 z m 0 0"/>
-    </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><g fill="#222"><path d="M2 0C.785 0 0 .828 0 2v12c0 1 1 2 2 2h12c1 0 2-1 2-2V2c0-1.238-.828-2-2-2zm0 2h12v12H2zm0 0"/><path d="M4 6h3v1H4zm0-2h3v1H4zm0 0"/></g></svg>

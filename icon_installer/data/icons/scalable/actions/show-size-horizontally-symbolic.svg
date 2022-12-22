@@ -1,8 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg height="16px" viewBox="0 0 16 16" width="16px" xmlns="http://www.w3.org/2000/svg">
-    <g fill="#222222">
-        <path d="m 0.996094 8.21875 l 3 3.03125 v -2.25 h 2 v -2 h -2 v -2.25 l -3 3.03125 z m 0 0"/>
-        <path d="m 6.996094 15 v -14 h 2 v 14 z m 0 0"/>
-        <path d="m 14.996094 8.21875 l -3 3.03125 v -2.25 h -2 v -2 h 2 v -2.25 l 3 3.03125 z m 0 0"/>
-    </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path fill="#222" d="m.996 8.219 3 3.031V9h2V7h-2V4.75l-3 3.031zm6 6.781V1h2v14zm8-6.781-3 3.031V9h-2V7h2V4.75l3 3.031zm0 0"/></svg>
