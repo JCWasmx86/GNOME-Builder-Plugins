@@ -91,7 +91,7 @@ if get_option('smart').enabled()
         endif
     endforeach
     spec_progs = {
-        'haskell-language-server-wrapper1': 'hls',
+        'haskell-language-server-wrapper': 'hls',
         'meson_lsp': 'meson',
         'sourcekit-lsp': 'sourcekit',
         'swift-format': 'swift-format',

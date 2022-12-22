@@ -775,12 +775,19 @@ namespace GitGui {
         }
     }
 
-    static string get_stdout (string[] args, string dir) throws SpawnError {
+    static string get_stdout (string[] args, string dir) {
         string sout, serr;
         int status;
-        Process.spawn_sync (dir, args, Environ.get (), SpawnFlags.SEARCH_PATH, null, out sout, out serr, out status);
-        if (status != 0)
-            critical ("%s:\n%s", string.join (" ", args), serr);
+        try {
+            Process.spawn_sync (dir, args, Environ.get (), SpawnFlags.SEARCH_PATH, null, out sout, out serr, out status);
+            if (status != 0) {
+                critical ("%s:\n%s", string.join (" ", args), serr);
+                return "";
+            }
+        } catch (SpawnError e) {
+            critical ("%s: %s", string.join (" ", args), e.message);
+            return "";
+        }
         return sout;
     }
 
