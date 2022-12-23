@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/plugins/icon_installer/">
-    <file preprocess="xml-stripblanks">icons/scalable/actions/show-about-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/actions/grid-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/show-about-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/actions/show-address-book-alt-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/actions/show-address-book-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/actions/show-airbrush-tool-symbolic.svg</file>
