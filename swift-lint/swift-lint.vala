@@ -72,7 +72,7 @@ public class SwiftLintDiagnosticProvider : Ide.DiagnosticTool {
 			// TODO: Should save before
 			run_context.append_argv (file.get_path ());
 			// TODO: Should not be hardcoded
-			run_context.setenv ("LINUX_SOURCEKIT_LIB_PATH", "/usr/libexec/swift/5.7/lib/");
+			run_context.setenv ("LINUX_SOURCEKIT_LIB_PATH", "/usr/libexec/swift/5.7.1/lib/");
 			return true;
 		}
 		return false;
