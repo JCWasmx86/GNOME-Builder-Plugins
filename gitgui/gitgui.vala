@@ -532,6 +532,12 @@ namespace GitGui {
                 child.buffer.changed.connect (() => {
                     cont.sensitive = child.buffer.text.strip () != "";
                 });
+                ekc = new Gtk.EventControllerKey ();
+                ekc.key_released.connect ((v, c, s) => {
+                    if (v == Gdk.Key.decimalpoint && (s & Gdk.ModifierType.CONTROL_MASK) != 0)
+                        child.insert_emoji ();
+                });
+                child.add_controller (ekc);
                 cont.get_style_context ().add_class ("suggested-action");
                 header.pack_end (cont);
                 box.append (header);
@@ -539,6 +545,7 @@ namespace GitGui {
                 child.vexpand = true;
                 var provider = new Gtk.CssProvider ();
                 provider.load_from_data ("textview{font-family: Monospace;}".data);
+                child.input_hints = Gtk.InputHints.EMOJI | Gtk.InputHints.SPELLCHECK | Gtk.InputHints.WORD_COMPLETION | Gtk.InputHints.UPPERCASE_SENTENCES;
                 child.get_style_context ().add_provider (provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
                 sc = new Gtk.ScrolledWindow ();
                 sc.child = child;
