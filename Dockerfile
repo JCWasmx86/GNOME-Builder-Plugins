@@ -5,7 +5,7 @@ RUN dnf install git vala meson gcc libgee-devel json-glib-devel gtk4-devel gtkso
     git clone https://github.com/JCWasmx86/GNOME-Builder-Plugins
 WORKDIR /app/GNOME-Builder-Plugins
 RUN meson build -Dc_args="-O2" -Dsmart=disabled &&\
-    ninja -C build -j4 &&\
+    ninja -C build &&\
     cp build/dist.zip /app
 
 FROM scratch AS export-stage
