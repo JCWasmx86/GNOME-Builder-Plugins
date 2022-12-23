@@ -37,7 +37,7 @@
  *
  * The build type of the installed build.
  */
-#define IDE_BUILD_TYPE "debugoptimized"
+#define IDE_BUILD_TYPE "debug"
 
 /**
  * IDE_BUILD_CHANNEL:
@@ -45,7 +45,7 @@
  * The release channel of Builder. This should be a string such as
  * "other", "flatpak-stable", or "flatpak-nightly".
  */
-#define IDE_BUILD_CHANNEL "flatpak-nightly"
+#define IDE_BUILD_CHANNEL "other"
 
 /**
  * IDE_MAJOR_VERSION:

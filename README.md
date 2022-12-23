@@ -8,7 +8,7 @@ guaranteed.
 
 ### Fedora 37
 ```
-sudo dnf install git vala meson gcc libgee-devel json-glib-devel gtk4-devel gtksourceview5-devel libadwaita-devel libpeas-devel template-glib-devel g++
+sudo dnf install git vala meson gcc libgee-devel json-glib-devel gtk4-devel gtksourceview5-devel libadwaita-devel libpeas-devel template-glib-devel g++ libsoup3-devel
 git clone https://github.com/JCWasmx86/GNOME-Builder-Plugins
 cd GNOME-Builder-Plugins
 meson build

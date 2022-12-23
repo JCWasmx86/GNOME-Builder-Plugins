@@ -88,7 +88,7 @@ G_BEGIN_DECLS
  */
 
 #ifndef IDE_ENABLE_TRACE
-# define IDE_ENABLE_TRACE 1
+# define IDE_ENABLE_TRACE 0
 #endif
 #if IDE_ENABLE_TRACE != 1
 # undef IDE_ENABLE_TRACE

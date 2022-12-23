@@ -19,6 +19,7 @@ add_project_arguments(['--vapidir', vapi_dir], language: 'vala')
 add_project_arguments(['-g3'], language: 'c')
 
 inc = include_directories(
+    'include/libide',
     'include/libide/code',
     'include/libide/core',
     'include/libide/io',
@@ -41,6 +42,7 @@ inc = include_directories(
     'include/libide/tweaks',
     'include/libpanel-1',
     'include/vte-2.91',
+    'include/webkitgtk-6.0',
 )
 dependencies = [
     dependency('gee-0.8'),
@@ -53,6 +55,7 @@ dependencies = [
     dependency('libadwaita-1', version: '>=1.2.0'),
     dependency('libpeas-1.0'),
     dependency('template-glib-1.0'),
+    dependency('libsoup-3.0'),
     meson.get_compiler('vala').find_library('ide', dirs: vapi_dir),
     meson.get_compiler('vala').find_library('panel-1', dirs: vapi_dir),
     meson.get_compiler('vala').find_library('vte-3.91', dirs: vapi_dir),
