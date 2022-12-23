@@ -21,41 +21,40 @@
 public static extern unowned string xmlTreeIndentString;
 
 public class XmlFormatter : Ide.Object, Ide.Formatter {
+    public async bool format_range_async (Ide.Buffer buffer, Ide.FormatterOptions options, Gtk.TextIter begin, Gtk.TextIter end, GLib.Cancellable? cancellable) {
+        return false;
+    }
 
-	public async bool format_range_async (Ide.Buffer buffer, Ide.FormatterOptions options, Gtk.TextIter begin, Gtk.TextIter end, GLib.Cancellable? cancellable) {
-		return false;
-	}
+    public void load () {
+    }
 
-	public void load () {
-	}
-
-	public async bool format_async (Ide.Buffer buffer, Ide.FormatterOptions options, GLib.Cancellable? cancellable) throws Error {
-		var doc = Xml.Parser.parse_doc (buffer.text);
-		if (doc == null) {
-			var err = Xml.get_last_error ();
-			if (err != null) {
-				critical ("Error while attempting to parse XML: %s", err->message);
-			} else {
-				critical ("Unknown error while attempting to parse XML");
-			}
-			throw new Error (Quark.from_string ("Failed to parse XML"), 0, "Failed to parse XML");
-			return false;
-		}
-		xmlTreeIndentString = options.insert_spaces ? (string.nfill (options.tab_width, ' ')) : "\t";
-		string? mem;
-		int len;
-		doc->dump_memory_enc_format (out mem, out len, "UTF-8", true);
-		if (mem == null) {
-			critical ("Oops");
-			return false;
-		}
-		buffer.set_text (mem, len);
-		delete doc;
-		return true;
-	}
+    public async bool format_async (Ide.Buffer buffer, Ide.FormatterOptions options, GLib.Cancellable? cancellable) throws Error {
+        var doc = Xml.Parser.parse_doc (buffer.text);
+        if (doc == null) {
+            var err = Xml.get_last_error ();
+            if (err != null) {
+                critical ("Error while attempting to parse XML: %s", err->message);
+            } else {
+                critical ("Unknown error while attempting to parse XML");
+            }
+            throw new Error (Quark.from_string ("Failed to parse XML"), 0, "Failed to parse XML");
+            return false;
+        }
+        xmlTreeIndentString = options.insert_spaces ? (string.nfill (options.tab_width, ' ')) : "\t";
+        string? mem;
+        int len;
+        doc->dump_memory_enc_format (out mem, out len, "UTF-8", true);
+        if (mem == null) {
+            critical ("Oops");
+            return false;
+        }
+        buffer.set_text (mem, len);
+        delete doc;
+        return true;
+    }
 }
-[ModuleInit]
+
 public void peas_register_types (TypeModule module) {
-	var obj = (Peas.ObjectModule) module;
-	obj.register_extension_type (typeof (Ide.Formatter), typeof (XmlFormatter));
+    var obj = (Peas.ObjectModule) module;
+    obj.register_extension_type (typeof (Ide.Formatter), typeof (XmlFormatter));
 }

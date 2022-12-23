@@ -17,86 +17,85 @@
  *
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
-
 [CCode (cname = "bind_client")]
 extern void bind_client (Ide.Object self);
 
 class HlsService : Ide.LspService {
-	construct {
-		this.set_program (Environment.get_home_dir () + "/.ghcup/bin/" + "haskell-language-server-wrapper");
-		this.set_inherit_stderr (true);
-	}
+    construct {
+        this.set_program (Environment.get_home_dir () + "/.ghcup/bin/" + "haskell-language-server-wrapper");
+        this.set_inherit_stderr (true);
+    }
 
-	public override void prepare_run_context (Ide.Pipeline pipeline, Ide.RunContext run_context) {
-		run_context.append_argv ("--lsp");
-		run_context.append_argv ("--debug");
-		run_context.append_argv ("--logfile");
-		run_context.append_argv (Environment.get_user_cache_dir () + "/hls.log");
-		run_context.setenv ("PATH", Environment.get_home_dir () + "/.ghcup/bin:/app/bin/:/usr/bin/:" + Environment.get_variable ("PATH"));
-	}
+    public override void prepare_run_context (Ide.Pipeline pipeline, Ide.RunContext run_context) {
+        run_context.append_argv ("--lsp");
+        run_context.append_argv ("--debug");
+        run_context.append_argv ("--logfile");
+        run_context.append_argv (Environment.get_user_cache_dir () + "/hls.log");
+        run_context.setenv ("PATH", Environment.get_home_dir () + "/.ghcup/bin:/app/bin/:/usr/bin/:" + Environment.get_variable ("PATH"));
+    }
 
-	public override void configure_client (Ide.LspClient client) {
-		client.add_language ("haskell");
-	}
+    public override void configure_client (Ide.LspClient client) {
+        client.add_language ("haskell");
+    }
 }
 
 class HlsCodeActionProvider : Ide.LspCodeActionProvider, Ide.CodeActionProvider {
-	public void load () {
-		bind_client (this);
-	}
+    public void load () {
+        bind_client (this);
+    }
 }
 
 class HlsCompletionProvider : Ide.LspCompletionProvider, GtkSource.CompletionProvider {
-	public override void load () {
-		bind_client (this);
-	}
+    public override void load () {
+        bind_client (this);
+    }
 }
 
 class HlsDiagnosticProvider : Ide.LspDiagnosticProvider, Ide.DiagnosticProvider {
-	public void load () {
-		bind_client (this);
-	}
+    public void load () {
+        bind_client (this);
+    }
 }
 
 class HlsFormatter : Ide.LspFormatter, Ide.Formatter {
-	public void load () {
-		bind_client (this);
-	}
+    public void load () {
+        bind_client (this);
+    }
 }
 
 class HlsHighlighter : Ide.LspHighlighter, Ide.Highlighter {
-	public void load () {
-		bind_client (this);
-	}
+    public void load () {
+        bind_client (this);
+    }
 }
 
 public class HlsHoverProvider : Ide.LspHoverProvider, GtkSource.HoverProvider {
-	public override void prepare () {
-		this.priority = 800;
-		bind_client (this);
-	}
+    public override void prepare () {
+        this.priority = 800;
+        bind_client (this);
+    }
 }
 
 public class HlsRenameProvider : Ide.LspRenameProvider, Ide.RenameProvider {
-	public void load () {
-		bind_client (this);
-	}
+    public void load () {
+        bind_client (this);
+    }
 }
 
 public class HlsSymbolResolver : Ide.LspSymbolResolver, Ide.SymbolResolver {
-	public void load () {
-		bind_client (this);
-	}
+    public void load () {
+        bind_client (this);
+    }
 }
 
 public void peas_register_types (TypeModule module) {
-	var obj = (Peas.ObjectModule) module;
-	obj.register_extension_type (typeof (Ide.CodeActionProvider), typeof (HlsCodeActionProvider));
-	obj.register_extension_type (typeof (GtkSource.CompletionProvider), typeof (HlsCompletionProvider));
-	obj.register_extension_type (typeof (Ide.DiagnosticProvider), typeof (HlsDiagnosticProvider));
-	obj.register_extension_type (typeof (Ide.Formatter), typeof (HlsFormatter));
-	obj.register_extension_type (typeof (Ide.Highlighter), typeof (HlsHighlighter));
-	obj.register_extension_type (typeof (GtkSource.HoverProvider), typeof (HlsHoverProvider));
-	obj.register_extension_type (typeof (Ide.RenameProvider), typeof (HlsRenameProvider));
-	obj.register_extension_type (typeof (Ide.SymbolResolver), typeof (HlsSymbolResolver));
+    var obj = (Peas.ObjectModule) module;
+    obj.register_extension_type (typeof (Ide.CodeActionProvider), typeof (HlsCodeActionProvider));
+    obj.register_extension_type (typeof (GtkSource.CompletionProvider), typeof (HlsCompletionProvider));
+    obj.register_extension_type (typeof (Ide.DiagnosticProvider), typeof (HlsDiagnosticProvider));
+    obj.register_extension_type (typeof (Ide.Formatter), typeof (HlsFormatter));
+    obj.register_extension_type (typeof (Ide.Highlighter), typeof (HlsHighlighter));
+    obj.register_extension_type (typeof (GtkSource.HoverProvider), typeof (HlsHoverProvider));
+    obj.register_extension_type (typeof (Ide.RenameProvider), typeof (HlsRenameProvider));
+    obj.register_extension_type (typeof (Ide.SymbolResolver), typeof (HlsSymbolResolver));
 }

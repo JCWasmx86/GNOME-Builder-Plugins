@@ -17,71 +17,72 @@
  *
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
-
 public class PylintDiagnostic : GLib.Object {
-	public string message_id { get; set; }
-	public int line { get; set; }
-	public int column { get; set; }
-	public string message { get; set; }
+    public string message_id { get; set; }
+    public int line { get; set; }
+    public int column { get; set; }
+    public string message { get; set; }
 
-	public Ide.Diagnostic to_ide (GLib.File file, string type) {
-		var location = new Ide.Location (file, this.line - 1, this.column);
-		var severity = Ide.DiagnosticSeverity.ERROR;
-		if (type == "refactor" || type == "convention" || type == "informational")
-			severity = Ide.DiagnosticSeverity.NOTE;
-		else if (type == "warning")
-			severity = Ide.DiagnosticSeverity.WARNING;
-		else if (type == "fatal")
-			severity = Ide.DiagnosticSeverity.FATAL;
-		return new Ide.Diagnostic (severity, "[%s] %s".printf (this.message_id, this.message), location);
-	}
+    public Ide.Diagnostic to_ide (GLib.File file, string type) {
+        var location = new Ide.Location (file, this.line - 1, this.column);
+        var severity = Ide.DiagnosticSeverity.ERROR;
+        if (type == "refactor" || type == "convention" || type == "informational")
+            severity = Ide.DiagnosticSeverity.NOTE;
+        else if (type == "warning")
+            severity = Ide.DiagnosticSeverity.WARNING;
+        else if (type == "fatal")
+            severity = Ide.DiagnosticSeverity.FATAL;
+        return new Ide.Diagnostic (severity, "[%s] %s".printf (this.message_id, this.message), location);
+    }
 }
+
 public class PylintDiagnosticProvider : Ide.DiagnosticTool {
-	construct {
-		this.program_name = "pylint";
-	}
-	public override void populate_diagnostics (Ide.Diagnostics diagnostics, GLib.File file, string stdout_buf, string stderr_buf) {
-		if (stdout_buf == null)
-			return;
-		var parser = new Json.Parser ();
-		try {
-			parser.load_from_data (stdout_buf);
-		} catch (Error e) {
-			critical ("%s", e.message);
-			return;
-		}
-		var root = parser.get_root ();
-		if (root == null || root.get_node_type () != Json.NodeType.ARRAY)
-			return;
-		var array = root.get_array ();
-		info ("Found %u diagnostics", array.get_length ());
-		for (var i = 0; i < array.get_length (); i++) {
-			var diag = (PylintDiagnostic) Json.gobject_deserialize (typeof (PylintDiagnostic), array.get_element (i));
-			diagnostics.add (diag.to_ide (file, array.get_element (i).get_object ().get_string_member ("type")));
-		}
-	}
+    construct {
+        this.program_name = "pylint";
+    }
 
-	public PylintDiagnosticProvider () {
-		this.program_name = "pylint";
-	}
+    public override void populate_diagnostics (Ide.Diagnostics diagnostics, GLib.File file, string stdout_buf, string stderr_buf) {
+        if (stdout_buf == null)
+            return;
+        var parser = new Json.Parser ();
+        try {
+            parser.load_from_data (stdout_buf);
+        } catch (Error e) {
+            critical ("%s", e.message);
+            return;
+        }
+        var root = parser.get_root ();
+        if (root == null || root.get_node_type () != Json.NodeType.ARRAY)
+            return;
+        var array = root.get_array ();
+        info ("Found %u diagnostics", array.get_length ());
+        for (var i = 0; i < array.get_length (); i++) {
+            var diag = (PylintDiagnostic) Json.gobject_deserialize (typeof (PylintDiagnostic), array.get_element (i));
+            diagnostics.add (diag.to_ide (file, array.get_element (i).get_object ().get_string_member ("type")));
+        }
+    }
 
-	public override bool prepare_run_context (Ide.RunContext run_context, GLib.File file, GLib.Bytes contents, string language_id) throws Error {
-		if (base.prepare_run_context (run_context, file, contents, language_id)) {
-			run_context.append_argv ("-f");
-			run_context.append_argv ("json");
-			run_context.append_argv (file.get_path ());
-			run_context.set_cwd ("/");
-			return true;
-		}
-		return false;
-	}
+    public PylintDiagnosticProvider () {
+        this.program_name = "pylint";
+    }
 
-	public override bool can_diagnose (GLib.File file, GLib.Bytes contents, string language_id) {
-		return language_id == "python3";
-	}
+    public override bool prepare_run_context (Ide.RunContext run_context, GLib.File file, GLib.Bytes contents, string language_id) throws Error {
+        if (base.prepare_run_context (run_context, file, contents, language_id)) {
+            run_context.append_argv ("-f");
+            run_context.append_argv ("json");
+            run_context.append_argv (file.get_path ());
+            run_context.set_cwd ("/");
+            return true;
+        }
+        return false;
+    }
+
+    public override bool can_diagnose (GLib.File file, GLib.Bytes contents, string language_id) {
+        return language_id == "python3";
+    }
 }
-[ModuleInit]
+
 public void peas_register_types (TypeModule module) {
-	var obj = (Peas.ObjectModule) module;
-	obj.register_extension_type (typeof (Ide.DiagnosticProvider), typeof (PylintDiagnosticProvider));
+    var obj = (Peas.ObjectModule) module;
+    obj.register_extension_type (typeof (Ide.DiagnosticProvider), typeof (PylintDiagnosticProvider));
 }

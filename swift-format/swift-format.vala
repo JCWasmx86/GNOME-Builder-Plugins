@@ -17,35 +17,33 @@
  *
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
-
 public class SwiftFormatter : Ide.Object, Ide.Formatter {
+    public async bool format_range_async (Ide.Buffer buffer, Ide.FormatterOptions options, Gtk.TextIter begin, Gtk.TextIter end, GLib.Cancellable? cancellable) {
+        return false;
+    }
 
-	public async bool format_range_async (Ide.Buffer buffer, Ide.FormatterOptions options, Gtk.TextIter begin, Gtk.TextIter end, GLib.Cancellable? cancellable) {
-		return false;
-	}
+    public void load () {
+    }
 
-	public void load () {
-	}
-
-	public async bool format_async (Ide.Buffer buffer, Ide.FormatterOptions options, GLib.Cancellable? cancellable) throws Error {
-		var l = new Ide.SubprocessLauncher (GLib.SubprocessFlags.STDIN_PIPE | GLib.SubprocessFlags.STDOUT_PIPE | GLib.SubprocessFlags.STDERR_PIPE);
-		l.set_cwd (buffer.file.get_parent ().get_path ());
-		l.set_run_on_host (true);
-		l.push_args (new string[] { "swift-format", "format" });
-		var proc = l.spawn ();
-		string stdout_buf;
-		string stderr_buf;
-		proc.communicate_utf8 (buffer.text, null, out stdout_buf, out stderr_buf);
-		proc.wait ();
-		if (!proc.get_successful ()) {
-			return false;
-		}
-		buffer.set_text (stdout_buf, stdout_buf.length);
-		return true;
-	}
+    public async bool format_async (Ide.Buffer buffer, Ide.FormatterOptions options, GLib.Cancellable? cancellable) throws Error {
+        var l = new Ide.SubprocessLauncher (GLib.SubprocessFlags.STDIN_PIPE | GLib.SubprocessFlags.STDOUT_PIPE | GLib.SubprocessFlags.STDERR_PIPE);
+        l.set_cwd (buffer.file.get_parent ().get_path ());
+        l.set_run_on_host (true);
+        l.push_args (new string[] { "swift-format", "format" });
+        var proc = l.spawn ();
+        string stdout_buf;
+        string stderr_buf;
+        proc.communicate_utf8 (buffer.text, null, out stdout_buf, out stderr_buf);
+        proc.wait ();
+        if (!proc.get_successful ()) {
+            return false;
+        }
+        buffer.set_text (stdout_buf, stdout_buf.length);
+        return true;
+    }
 }
-[ModuleInit]
+
 public void peas_register_types (TypeModule module) {
-	var obj = (Peas.ObjectModule) module;
-	obj.register_extension_type (typeof (Ide.Formatter), typeof (SwiftFormatter));
+    var obj = (Peas.ObjectModule) module;
+    obj.register_extension_type (typeof (Ide.Formatter), typeof (SwiftFormatter));
 }

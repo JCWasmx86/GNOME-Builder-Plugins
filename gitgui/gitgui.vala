@@ -23,7 +23,6 @@ public static extern Resource gitgui_get_resource ();
 // TODO: Several files
 namespace GitGui {
     public class WorkspaceAddin : GLib.Object, Ide.WorkspaceAddin {
-
         public void page_changed (Ide.Page? page) {
         }
 
@@ -42,6 +41,7 @@ namespace GitGui {
     public class GPanel : Ide.Pane {
         private string directory;
         private View view;
+
         construct {
             this.title = "Git";
             this.icon_name = "branch-symbolic";
@@ -297,6 +297,7 @@ namespace GitGui {
             });
         }
     }
+
     private static Gtk.Widget create_remote (Object obj) {
         var row = new Adw.ActionRow ();
         row.title = Markup.escape_text (((Remote) obj).name);
@@ -411,6 +412,7 @@ namespace GitGui {
     public class CommitSelectComponent : Gtk.Box {
         private Gtk.CheckButton[] check_marks;
         private string[] paths;
+
         public CommitSelectComponent (string o) {
             this.orientation = Gtk.Orientation.VERTICAL;
             this.spacing = 4;
@@ -455,8 +457,6 @@ namespace GitGui {
             }
         }
 
-        internal signal void can_continue (bool b);
-
         internal string[] paths_to_add () {
             var ret = new string[0];
             for (var i = 0; i < this.paths.length; i++)
@@ -464,16 +464,18 @@ namespace GitGui {
                     ret += this.paths[i];
             return ret;
         }
+
+        internal signal void can_continue (bool b);
     }
 
     public class CommitDialog : Adw.Window {
         public CommitDialog (string dir, string o) {
             var ekc = new Gtk.EventControllerKey ();
-            ekc.key_released.connect ((v,c,s) => {
+            ekc.key_released.connect ((v, c, s) => {
                 if (v == Gdk.Key.Escape)
                     this.close ();
             });
-            ((Gtk.Widget)this).add_controller (ekc);
+            ((Gtk.Widget) this).add_controller (ekc);
             var stack = new Gtk.Stack ();
             var select_component = new CommitSelectComponent (o);
             select_component.vexpand = true;
@@ -556,6 +558,7 @@ namespace GitGui {
         private GtkSource.View view;
         private CommitExploreView explore;
         private CommitOverview overview;
+
         public CommitWindow (Commit c) {
             var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
             var header = new Adw.HeaderBar ();
@@ -653,6 +656,7 @@ namespace GitGui {
 
     public abstract class FileWidget : Adw.ActionRow {
         protected Gtk.Image image;
+
         protected FileWidget (string name) {
             this.title = name;
             this.image = new Gtk.Image.from_icon_name ("foo");
@@ -799,19 +803,19 @@ namespace GitGui {
     }
 
     static string get_stdout (string[] args, string dir) {
-        string sout, serr;
-        int status;
         try {
+            string sout, serr;
+            int status;
             Process.spawn_sync (dir, args, Environ.get (), SpawnFlags.SEARCH_PATH, null, out sout, out serr, out status);
             if (status != 0) {
                 critical ("Command failed:\n%s", serr);
                 return "";
             }
+            return sout;
         } catch (SpawnError e) {
             critical ("%s: %s", string.join (" ", args), e.message);
             return "";
         }
-        return sout;
     }
 
     public class Person : GLib.Object {
@@ -862,6 +866,7 @@ namespace GitGui {
     public class GitEditorPageAddin : Ide.Object, Ide.EditorPageAddin {
         private SimpleActionGroup map;
         private Ide.SourceView view;
+
         construct {
             this.map = new GLib.SimpleActionGroup ();
             var blame = new SimpleAction ("blame", null);
@@ -881,6 +886,7 @@ namespace GitGui {
             });
             this.map.add_action (blame);
         }
+
         public GLib.ActionGroup? ref_action_group () {
             return this.map;
         }

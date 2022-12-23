@@ -17,9 +17,7 @@
  *
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
-
 public class ShfmtFormatter : Ide.Object, Ide.Formatter {
-
 	public async bool format_range_async (Ide.Buffer buffer, Ide.FormatterOptions options, Gtk.TextIter begin, Gtk.TextIter end, GLib.Cancellable? cancellable) {
 		return false;
 	}
@@ -44,7 +42,7 @@ public class ShfmtFormatter : Ide.Object, Ide.Formatter {
 		return true;
 	}
 }
-[ModuleInit]
+
 public void peas_register_types (TypeModule module) {
 	var obj = (Peas.ObjectModule) module;
 	obj.register_extension_type (typeof (Ide.Formatter), typeof (ShfmtFormatter));

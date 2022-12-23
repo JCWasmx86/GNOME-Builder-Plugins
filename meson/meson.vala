@@ -17,55 +17,54 @@
  *
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
-
 [CCode (cname = "bind_client")]
 extern void bind_client (Ide.Object self);
 
 public class MesonService : Ide.LspService {
-	construct {
-		this.set_inherit_stderr (true);
-		this.search_path = new string[] { "/usr/local/bin", "/usr/bin", "/var/run/host/usr/bin", "/var/run/host/usr/local/bin" };
-		this.set_program ("meson_lsp");
-	}
+    construct {
+        this.set_inherit_stderr (true);
+        this.search_path = new string[] { "/usr/local/bin", "/usr/bin", "/var/run/host/usr/bin", "/var/run/host/usr/local/bin" };
+        this.set_program ("meson_lsp");
+    }
 
-	public override void prepare_run_context (Ide.Pipeline pipeline, Ide.RunContext run_context) {
-		run_context.setenv ("G_MESSAGES_DEBUG", "all");
-	}
+    public override void prepare_run_context (Ide.Pipeline pipeline, Ide.RunContext run_context) {
+        run_context.setenv ("G_MESSAGES_DEBUG", "all");
+    }
 
-	public override void configure_client (Ide.LspClient client) {
-		client.add_language ("meson");
-	}
+    public override void configure_client (Ide.LspClient client) {
+        client.add_language ("meson");
+    }
 }
 
 public sealed class MesonDiagnosticProvider : Ide.LspDiagnosticProvider, Ide.DiagnosticProvider {
-	public void load () {
-		bind_client (this);
-	}
+    public void load () {
+        bind_client (this);
+    }
 }
 
 public class MesonSymbolResolver : Ide.LspSymbolResolver, Ide.SymbolResolver {
-	public void load () {
-		bind_client (this);
-	}
+    public void load () {
+        bind_client (this);
+    }
 }
 
 public class MesonHoverProvider : Ide.LspHoverProvider, GtkSource.HoverProvider {
-	public override void prepare () {
-		this.priority = 800;
-		bind_client (this);
-	}
+    public override void prepare () {
+        this.priority = 800;
+        bind_client (this);
+    }
 }
 
 public class MesonHighlighter : Ide.LspHighlighter {
-	public new void load () {
-		bind_client (this);
-	}
+    public new void load () {
+        bind_client (this);
+    }
 }
 
 public void peas_register_types (TypeModule module) {
-	var obj = (Peas.ObjectModule) module;
-	obj.register_extension_type (typeof (Ide.DiagnosticProvider), typeof (MesonDiagnosticProvider));
-	obj.register_extension_type (typeof (Ide.SymbolResolver), typeof (MesonSymbolResolver));
-	obj.register_extension_type (typeof (GtkSource.HoverProvider), typeof (MesonHoverProvider));
-	obj.register_extension_type (typeof (Ide.Highlighter), typeof (MesonHighlighter));
+    var obj = (Peas.ObjectModule) module;
+    obj.register_extension_type (typeof (Ide.DiagnosticProvider), typeof (MesonDiagnosticProvider));
+    obj.register_extension_type (typeof (Ide.SymbolResolver), typeof (MesonSymbolResolver));
+    obj.register_extension_type (typeof (GtkSource.HoverProvider), typeof (MesonHoverProvider));
+    obj.register_extension_type (typeof (Ide.Highlighter), typeof (MesonHighlighter));
 }

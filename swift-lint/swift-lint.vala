@@ -17,7 +17,6 @@
  *
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
-
 public class SwiftLintDiagnostic : GLib.Object {
 	public string rule_id { get; set; }
 	public int line { get; set; }
@@ -39,6 +38,7 @@ public class SwiftLintDiagnosticProvider : Ide.DiagnosticTool {
 	construct {
 		this.program_name = "swiftlint";
 	}
+
 	public override void populate_diagnostics (Ide.Diagnostics diagnostics, GLib.File file, string stdout_buf, string stderr_buf) {
 		if (stdout_buf == null)
 			return;
@@ -82,7 +82,7 @@ public class SwiftLintDiagnosticProvider : Ide.DiagnosticTool {
 		return language_id == "swift";
 	}
 }
-[ModuleInit]
+
 public void peas_register_types (TypeModule module) {
 	var obj = (Peas.ObjectModule) module;
 	obj.register_extension_type (typeof (Ide.DiagnosticProvider), typeof (SwiftLintDiagnosticProvider));

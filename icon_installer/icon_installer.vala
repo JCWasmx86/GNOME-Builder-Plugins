@@ -34,6 +34,7 @@ public class IconInstallerWorkspaceAddin : GLib.Object, Ide.WorkspaceAddin {
         workspace.add_pane (new IconInstallerPane (workspace.context.workdir), pos);
     }
 }
+
 public class IconInstallerPane : Ide.Pane {
     public IconInstallerPane (File file) {
         Gtk.IconTheme.get_for_display (Gdk.Display.get_default ()).add_resource_path ("/plugins/icon_installer/icons");
