@@ -114,6 +114,12 @@ public class IconInstallerDialogSelectComponent : Gtk.Box {
 
 public class IconInstallerDialog : Adw.Window {
     public IconInstallerDialog (string icon, File workdir) {
+        var ekc = new Gtk.EventControllerKey ();
+        ekc.key_released.connect ((v,c,s) => {
+            if (v == Gdk.Key.Escape)
+                this.close ();
+        });
+        ((Gtk.Widget)this).add_controller (ekc);
         var select_component = new IconInstallerDialogSelectComponent (workdir);
         select_component.vexpand = true;
         var sc = new Gtk.ScrolledWindow ();

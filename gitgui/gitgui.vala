@@ -468,6 +468,12 @@ namespace GitGui {
 
     public class CommitDialog : Adw.Window {
         public CommitDialog (string dir, string o) {
+            var ekc = new Gtk.EventControllerKey ();
+            ekc.key_released.connect ((v,c,s) => {
+                if (v == Gdk.Key.Escape)
+                    this.close ();
+            });
+            ((Gtk.Widget)this).add_controller (ekc);
             var stack = new Gtk.Stack ();
             var select_component = new CommitSelectComponent (o);
             select_component.vexpand = true;
