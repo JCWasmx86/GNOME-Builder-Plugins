@@ -40,6 +40,8 @@ namespace Ide {
 		public void add_workbench (Ide.Workbench workbench);
 		public string create_cancel_action (GLib.Cancellable? cancellable = null);
 		public unowned Ide.ApplicationAddin? find_addin_by_module_name (string module_name);
+		[Version (since = "44")]
+		public unowned Ide.Workbench? find_project_workbench (Ide.ProjectInfo project_info);
 		public unowned Ide.Workbench? find_workbench_for_file (GLib.File file);
 		public void foreach_workbench (GLib.Func callback);
 		[CCode (array_length = false, array_null_terminated = true)]
@@ -88,6 +90,8 @@ namespace Ide {
 		public unowned Ide.BufferChangeMonitor? get_change_monitor ();
 		public bool get_changed_on_volume ();
 		public unowned string get_charset ();
+		[Version (since = "44")]
+		public unowned Ide.CodeActionProvider? get_code_action_provider ();
 		public unowned Ide.Diagnostics? get_diagnostics ();
 		public bool get_failed ();
 		public unowned GLib.Error get_failure ();
@@ -772,13 +776,12 @@ namespace Ide {
 		protected DiagnosticTool ();
 		[NoWrapper]
 		public virtual bool can_diagnose (GLib.File file, GLib.Bytes contents, string language_id);
-		[NoWrapper]
-		public virtual void configure_launcher (Ide.SubprocessLauncher launcher, GLib.File file, GLib.Bytes contents, string language_id);
 		public unowned string get_bundled_program_path ();
 		public unowned string get_local_program_path ();
 		public unowned string get_program_name ();
 		[NoWrapper]
 		public virtual GLib.Bytes get_stdin_bytes (GLib.File file, GLib.Bytes contents, string language_id);
+		public GLib.SubprocessFlags get_subprocess_flags ();
 		[NoWrapper]
 		public virtual void populate_diagnostics (Ide.Diagnostics diagnostics, GLib.File file, string stdout_buf, string stderr_buf);
 		[NoWrapper]
@@ -786,9 +789,11 @@ namespace Ide {
 		public void set_bundled_program_path (string path);
 		public void set_local_program_path (string path);
 		public void set_program_name (string program_name);
+		public void set_subprocess_flags (GLib.SubprocessFlags subprocess_flags);
 		public string bundled_program_path { get; set; }
 		public string local_program_path { get; set; }
 		public string program_name { get; set; }
+		public GLib.SubprocessFlags subprocess_flags { get; set; }
 	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_id = "ide_diagnostics_get_type ()")]
 	public class Diagnostics : Ide.Object, GLib.ListModel {
@@ -895,7 +900,7 @@ namespace Ide {
 		public unowned Ide.Gutter? get_gutter ();
 		public unowned Ide.SourceView get_view ();
 		public async bool save_async (GLib.Cancellable? cancellable) throws GLib.Error;
-		public void scroll_to_insert ();
+		public void scroll_to_insert (Gtk.DirectionType dir);
 		public void scroll_to_visual_position (uint line, uint column);
 		public void set_gutter (Ide.Gutter gutter);
 		public Ide.Buffer buffer { get; construct; }
@@ -1337,7 +1342,7 @@ namespace Ide {
 		[CCode (has_construct_function = false)]
 		protected HtmlGenerator ();
 		[CCode (has_construct_function = false)]
-		HtmlGenerator.for_buffer (Gtk.TextBuffer buffer);
+		protected HtmlGenerator.for_buffer (Gtk.TextBuffer buffer);
 		public virtual async GLib.Bytes generate_async (GLib.Cancellable? cancellable) throws GLib.Error;
 		public unowned string get_base_uri ();
 		public void set_base_uri (string base_uri);
@@ -1434,14 +1439,12 @@ namespace Ide {
 		public virtual signal bool supports_language (string language_id);
 	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_id = "ide_lsp_code_action_get_type ()")]
-	public class LspCodeAction : Ide.Object, Ide.CodeAction {
+	public class LspCodeAction : GLib.Object, Ide.CodeAction {
 		[CCode (has_construct_function = false)]
 		public LspCodeAction (Ide.LspClient client, string title, string command, GLib.Variant arguments, Ide.LspWorkspaceEdit workspace_edit);
 		public unowned Ide.LspClient get_client ();
 		public void set_client (Ide.LspClient client);
 		public Ide.LspClient client { get; set; }
-		[NoAccessorMethod]
-		public string title { owned get; construct; }
 	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_id = "ide_lsp_code_action_provider_get_type ()")]
 	public class LspCodeActionProvider : Ide.Object, Ide.CodeActionProvider {
@@ -1557,8 +1560,6 @@ namespace Ide {
 		[NoWrapper]
 		public virtual void configure_client (Ide.LspClient client);
 		[NoWrapper]
-		public virtual void configure_launcher (Ide.Pipeline pipeline, Ide.SubprocessLauncher launcher);
-		[NoWrapper]
 		public virtual void configure_supervisor (Ide.SubprocessSupervisor supervisor);
 		public bool get_inherit_stderr ();
 		public unowned string get_program ();
@@ -1578,7 +1579,6 @@ namespace Ide {
 		public string[] search_path { get; set; }
 		[NoAccessorMethod]
 		public Ide.LspClient supervisor { owned get; }
-		public signal Ide.SubprocessLauncher? create_launcher (Ide.Pipeline pipeline, GLib.SubprocessFlags flags);
 	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_id = "ide_lsp_symbol_node_get_type ()")]
 	public sealed class LspSymbolNode : Ide.SymbolNode {
@@ -2678,12 +2678,14 @@ namespace Ide {
 		public void get_iter_at_visual_position (Gtk.TextIter iter, uint line, uint line_offset);
 		public bool get_overwrite_braces ();
 		public void get_visual_position (uint line, uint line_column);
+		public void get_visual_position_range (uint line, uint line_column, uint range);
 		public double get_zoom_level ();
+		public void jump_to_insert ();
 		public static void jump_to_iter (Gtk.TextView text_view, Gtk.TextIter iter, double within_margin, bool use_align, double xalign, double yalign);
 		public void prepend_menu (GLib.MenuModel menu_model);
 		public void remove_controller (Gtk.EventController controller);
 		public void remove_menu (GLib.MenuModel menu_model);
-		public void scroll_to_insert ();
+		public void scroll_to_insert (Gtk.DirectionType dir);
 		[Version (since = "44")]
 		public void set_enable_search_bubbles (bool enable_search_bubbles);
 		public void set_font_desc (Pango.FontDescription font_desc);
@@ -3734,6 +3736,9 @@ namespace Ide {
 		public void reload ();
 		public void reload_ignoring_cache ();
 		public void set_show_toolbar (bool show_toolbar);
+		[NoAccessorMethod]
+		[Version (since = "44")]
+		public bool enable_javascript { get; set; }
 		public bool show_toolbar { get; set; }
 	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_id = "ide_workbench_get_type ()")]
@@ -3880,7 +3885,8 @@ namespace Ide {
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_cname = "IdeCodeActionInterface", type_id = "ide_code_action_get_type ()")]
 	public interface CodeAction : GLib.Object {
 		public abstract async bool execute_async (GLib.Cancellable? cancellable) throws GLib.Error;
-		public abstract unowned string get_title ();
+		public abstract string get_title ();
+		public abstract string title { owned get; }
 	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_cname = "IdeCodeActionProviderInterface", type_id = "ide_code_action_provider_get_type ()")]
 	public interface CodeActionProvider : GLib.Object {
@@ -4965,6 +4971,8 @@ namespace Ide {
 	public static Ide.SymbolKind lsp_decode_symbol_kind (uint kind);
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h")]
 	public static Ide.TextEdit? lsp_decode_text_edit (GLib.Variant text_edit, GLib.File gfile);
+	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h")]
+	public static void lsp_plugin_register_types (Peas.ObjectModule object_module);
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h")]
 	public static bool panel_position_get_area (Panel.Position self, out Panel.Area? area);
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h")]
