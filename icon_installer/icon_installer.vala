@@ -48,40 +48,37 @@ public class IconInstallerPane : Ide.Pane {
 public class IconInstallerDialogSelectComponent : Gtk.Box {
     private Gtk.CheckButton[] check_marks;
     private string[] paths;
+
     public IconInstallerDialogSelectComponent (File workdir) {
         this.orientation = Gtk.Orientation.VERTICAL;
         try {
             var resources = this.find_path_to_gresource (workdir);
             foreach (var p in resources) {
                 var path = workdir.get_relative_path (p);
-                var row = new Adw.ActionRow ();
-                row.title = path;
-                var c = new Gtk.CheckButton ();
-                c.get_style_context ().add_class ("round");
-                if (this.check_marks.length > 0)
-                    c.group = this.check_marks[0];
-                else
-                    c.active = true;
-                this.check_marks += c;
-                this.paths += path;
-                row.add_prefix (c);
-                this.append (row);
+                this.append_row (path);
             }
             if (this.check_marks.length == 0) {
                 var path = "data/resources.gresource.xml";
-                var row = new Adw.ActionRow ();
-                row.title = path;
-                var c = new Gtk.CheckButton ();
-                c.get_style_context ().add_class ("round");
-                c.active = true;
-                this.check_marks += c;
-                this.paths += path;
-                row.add_prefix (c);
-                this.append (row);
+                this.append_row (path);
             }
         } catch (Error e) {
             error ("OOPS: %s", e.message);
         }
+    }
+
+    private void append_row (string path) {
+        var row = new Adw.ActionRow ();
+        row.title = path;
+        var c = new Gtk.CheckButton ();
+        c.get_style_context ().add_class ("round");
+        if (this.check_marks.length > 0)
+            c.group = this.check_marks[0];
+        else
+            c.active = true;
+        this.check_marks += c;
+        this.paths += path;
+        row.add_prefix (c);
+        this.append (row);
     }
 
     File[] find_path_to_gresource (File curr_dir) throws Error {
@@ -115,11 +112,11 @@ public class IconInstallerDialogSelectComponent : Gtk.Box {
 public class IconInstallerDialog : Adw.Window {
     public IconInstallerDialog (string icon, File workdir) {
         var ekc = new Gtk.EventControllerKey ();
-        ekc.key_released.connect ((v,c,s) => {
+        ekc.key_released.connect ((v, c, s) => {
             if (v == Gdk.Key.Escape)
                 this.close ();
         });
-        ((Gtk.Widget)this).add_controller (ekc);
+        ((Gtk.Widget) this).add_controller (ekc);
         var select_component = new IconInstallerDialogSelectComponent (workdir);
         select_component.vexpand = true;
         var sc = new Gtk.ScrolledWindow ();
