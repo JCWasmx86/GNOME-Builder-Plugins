@@ -539,6 +539,7 @@ namespace GitGui {
                 });
                 child.add_controller (ekc);
                 cont.get_style_context ().add_class ("suggested-action");
+                cont.sensitive = false;
                 header.pack_end (cont);
                 box.append (header);
                 child.hexpand = true;
@@ -549,6 +550,9 @@ namespace GitGui {
                 child.get_style_context ().add_provider (provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
                 sc = new Gtk.ScrolledWindow ();
                 sc.child = child;
+                child.buffer.changed.connect (() => {
+                    cont.sensitive = child.buffer.text.strip () != "";
+                });
                 box.append (sc);
                 stack.add_named (box, "write");
             }
