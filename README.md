@@ -9,7 +9,7 @@ guaranteed.
 ```
 # If you have Fedora 37
 sudo dnf install git vala meson gcc libgee-devel json-glib-devel gtk4-devel gtksourceview5-devel libadwaita-devel libpeas-devel template-glib-devel g++ libsoup3-devel
-# or if you have Ubuntu 22.10
+# or if you have Ubuntu 22.10 (Tested: That it compiles)
 sudo apt install git valac meson gcc libgee-0.8-dev libjson-glib-dev libgtk-4-dev libgtksourceview-5-dev libadwaita-1-dev libpeas-dev libtemplate-glib-1.0-dev g++ libsoup-3.0-dev zip
 git clone https://github.com/JCWasmx86/GNOME-Builder-Plugins
 cd GNOME-Builder-Plugins
