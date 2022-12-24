@@ -879,6 +879,7 @@ namespace GitGui {
         public RevisionView (File workdir, string file) {
             this.box = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
             this.file = workdir.get_relative_path (File.new_for_path (file));
+            this.title = "Revisions of %s".printf (this.file);
             this.workdir = workdir.get_path ();
             this.view = new GtkSource.View ();
             var provider = new Gtk.CssProvider ();
