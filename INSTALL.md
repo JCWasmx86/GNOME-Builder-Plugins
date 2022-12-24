@@ -29,6 +29,8 @@
 - Install swift using your distro's package manager
 ## Swift-format
 - Install [Swift-Format](https://github.com/apple/swift-format) manually
+## Swift-lint
+- Install [SwiftLint](https://github.com/realm/SwiftLint) manually
 ## Texlab
 - Install [texlab](https://github.com/latex-lsp/texlab)
 - Copy it to `/usr/bin/`, so you have the file `/usr/bin/texlab` 
