@@ -915,9 +915,15 @@ namespace GitGui {
             var row = new Adw.ActionRow ();
             row.title = Markup.escape_text (summary);
             row.subtitle = hash;
+            row.has_tooltip = true;
             var gc = new Gtk.GestureClick ();
             gc.released.connect (() => {
                 this.show_file (hash);
+            });
+            row.query_tooltip.connect ((x,y,kt,t) => {
+                var commit_message = get_stdout (new string[] { "git", "show", hash, "--pretty=format:%B", "--no-patch" }, this.workdir).strip ();
+                t.set_text (commit_message);
+                return true;
             });
             row.add_controller (gc);
             this.box.append (row);
