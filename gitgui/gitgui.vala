@@ -565,8 +565,6 @@ namespace GitGui {
         internal signal void committed ();
     }
 
-
-
     static string get_stdout (string[] args, string dir) {
         try {
             string sout, serr;
