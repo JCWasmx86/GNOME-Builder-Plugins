@@ -62,7 +62,7 @@ dependencies = [
     meson.get_compiler('vala').find_library('vte-3.91', dirs: vapi_dir),
 ]
 
-gnome = import('gnome')
+gnome = import('gnome', required: false)
 plugins = []
 tgts = []
 enabled_plugins = []
