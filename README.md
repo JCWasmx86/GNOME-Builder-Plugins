@@ -46,7 +46,6 @@ unzip dist.zip
 | pylint          | Integration with Pylint                                                                                                       | ✅ |
 | shfmt           | Shfmt integration                                                                                                             | ❌ |
 | sourcekit       | Integration for Sourcekit, the Swift language server                                                                          | ✅ |
-| sqlconnections  | Allows you to create the config for sqls using a GUI (Disabled by default, enable by using `-Dplugin_sqlconnections=enabled`) |    |
 | sqls            | Integration for the SQL language server                                                                                       | ✅ |
 | stack           | Integration for the stack buildsystem                                                                                         | ✅ |
 | swift           | Integration for the swift buildsystem                                                                                         | ✅ |

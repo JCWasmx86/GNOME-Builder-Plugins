@@ -72,9 +72,6 @@ if get_option('smart').enabled()
     enabled_plugins += 'xmlfmt'
     enabled_plugins += 'markdown'
     enabled_plugins += 'gitgui'
-    if get_option('experimental')
-        enabled_plugins += 'sqlconnections'
-    endif
     progs = [
         'cabal',
         'clangd',
@@ -159,10 +156,6 @@ else
     if get_option('plugin_sourcekit').enabled()
         subdir('sourcekit')
         plugins += 'sourcekit.plugin'
-    endif
-    if get_option('plugin_sqlconnections').enabled()
-        subdir('sqlconnections')
-        plugins += 'sqlconnections.plugin'
     endif
     if get_option('plugin_sqls').enabled()
         subdir('sqls')
