@@ -73,9 +73,12 @@ namespace GitGui {
                 info ("FD: %d", ifd);
                 if (ifd == -1)
                     return;
+                var full_path = dir + "/.git/config";
+                var index_path = dir + "/.git/index";
+                var refs_path = dir + "/.git/logs/refs/heads/";
+                var git_path = dir + "/.git/";
                 // This is cursed
                 while (true) {
-                    var full_path = dir + "/.git/config";
                     info ("Waiting for %s", full_path);
                     while (true) {
                         Posix.Stat buf;
@@ -90,13 +93,13 @@ namespace GitGui {
                     var mtime = buf.st_mtime;
                     var ino = buf.st_ino;
                     Posix.Stat idx_buf;
-                    Posix.stat (dir + "/.git/index", out idx_buf);
+                    Posix.stat (index_path, out idx_buf);
                     var mtime_idx = idx_buf.st_mtime;
                     Posix.Stat heads_buf;
-                    Posix.stat (dir + "/.git/logs/refs/heads/", out heads_buf);
+                    Posix.stat (refs_path, out heads_buf);
                     var mtime_heads = heads_buf.st_mtime;
                     var ino_heads = heads_buf.st_ino;
-                    var fd = Linux.inotify_add_watch (ifd, dir + "/.git/",
+                    var fd = Linux.inotify_add_watch (ifd, git_path,
                                                       Linux.InotifyMaskFlags.ACCESS | Linux.InotifyMaskFlags.MODIFY | Linux.InotifyMaskFlags.ATTRIB
                                                       | Linux.InotifyMaskFlags.CLOSE_WRITE | Linux.InotifyMaskFlags.CLOSE_NOWRITE
                                                       | Linux.InotifyMaskFlags.OPEN | Linux.InotifyMaskFlags.MOVED_FROM
@@ -108,9 +111,9 @@ namespace GitGui {
                         Posix.read (ifd, &evt, sizeof (Linux.InotifyEvent) + Posix.Limits.NAME_MAX + 1);
                         var r = Posix.stat (full_path, out buf);
                         var updated_config = r == 0 && buf.st_ino == ino && buf.st_mtime > mtime;
-                        r = Posix.stat (dir + "/.git/index", out idx_buf);
+                        r = Posix.stat (index_path, out idx_buf);
                         var updated_index = r == 0 && idx_buf.st_mtime > mtime_idx;
-                        r = Posix.stat (dir + "/.git/logs/refs/heads/", out heads_buf);
+                        r = Posix.stat (refs_path, out heads_buf);
                         var updated_heads = r == 0 && heads_buf.st_ino == ino_heads && heads_buf.st_mtime > mtime_heads;
                         if (evt.len > 0) {
                             info ("Event: %s (0x%x)", (string) evt.name, evt.mask);
