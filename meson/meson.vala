@@ -21,12 +21,19 @@
 extern void bind_client (Ide.Object self);
 
 public class MesonService : Ide.LspService {
+#if LS_NAME == 1
+    string LS_NAME = "Swift-MesonLSP";
+#else
+    string LS_NAME = "meson_lsp";
+#endif
     construct {
         this.search_path = new string[] { "/usr/local/bin", "/usr/bin", "/var/run/host/usr/bin", "/var/run/host/usr/local/bin" };
-        this.set_program ("meson_lsp");
+        this.set_program (LS_NAME);
     }
 
     public override void prepare_run_context (Ide.Pipeline pipeline, Ide.RunContext run_context) {
+        if (LS_NAME == "Swift-MesonLSP")
+            run_context.append_argv ("--lsp");
     }
 
     public override void configure_client (Ide.LspClient client) {
