@@ -44,6 +44,7 @@ inc = include_directories(
     'include/vte-2.91',
     'include/webkitgtk-6.0',
 )
+vala_compiler = meson.get_compiler('vala')
 dependencies = [
     dependency('gee-0.8'),
     dependency('gio-2.0'),
@@ -56,10 +57,10 @@ dependencies = [
     dependency('libpeas-1.0'),
     dependency('libsoup-3.0'),
     dependency('template-glib-1.0'),
-    meson.get_compiler('vala').find_library('ide', dirs: vapi_dir),
-    meson.get_compiler('vala').find_library('linux'),
-    meson.get_compiler('vala').find_library('panel-1', dirs: vapi_dir),
-    meson.get_compiler('vala').find_library('vte-3.91', dirs: vapi_dir),
+    vala_compiler.find_library('ide', dirs: vapi_dir),
+    vala_compiler.find_library('linux'),
+    vala_compiler.find_library('panel-1', dirs: vapi_dir),
+    vala_compiler.find_library('vte-3.91', dirs: vapi_dir),
 ]
 
 gnome = import('gnome', required: false)
