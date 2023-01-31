@@ -67,6 +67,7 @@ gnome = import('gnome', required: false)
 plugins = []
 tgts = []
 enabled_plugins = []
+use_swift_meson_lsp = get_option('use_swift_meson_lsp')
 
 if get_option('smart').enabled()
     enabled_plugins += 'icon_installer'
@@ -88,6 +89,12 @@ if get_option('smart').enabled()
     foreach prog : progs
         p = find_program(prog, required: false)
         if p.found()
+            if prog == 'muon' and use_swift_meson_lsp
+                message(
+                    'Disabling muon plugin, as you use the Swift meson language server that supports formatting',
+                )
+                continue
+            endif
             enabled_plugins += prog
         endif
     endforeach
@@ -142,7 +149,7 @@ else
         subdir('meson')
         plugins += 'meson.plugin'
     endif
-    if get_option('plugin_muon').enabled()
+    if get_option('plugin_muon').enabled() and not use_swift_meson_lsp
         subdir('muon')
         plugins += 'muon.plugin'
     endif
@@ -241,3 +248,4 @@ custom_target(
     install: false,
     build_by_default: true,
 )
+

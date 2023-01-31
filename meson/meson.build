@@ -11,5 +11,5 @@ tgts += shared_module(
     include_directories: inc,
     install: true,
     install_dir: install_dir,
-    vala_args: get_option('use_swift_meson_lsp') ? '--define=LS_NAME=1' : '--define=FOO'
+    vala_args: get_option('use_swift_meson_lsp') ? '--define=LS_NAME=1' : '--define=FOO',
 )

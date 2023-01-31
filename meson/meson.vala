@@ -66,10 +66,21 @@ public class MesonHighlighter : Ide.LspHighlighter {
     }
 }
 
+#if LS_NAME == 1
+public class MesonFormatter : Ide.LspFormatter, Ide.Formatter {
+    public void load () {
+        bind_client (this);
+    }
+}
+#endif
+
 public void peas_register_types (TypeModule module) {
     var obj = (Peas.ObjectModule) module;
     obj.register_extension_type (typeof (Ide.DiagnosticProvider), typeof (MesonDiagnosticProvider));
     obj.register_extension_type (typeof (Ide.SymbolResolver), typeof (MesonSymbolResolver));
     obj.register_extension_type (typeof (GtkSource.HoverProvider), typeof (MesonHoverProvider));
     obj.register_extension_type (typeof (Ide.Highlighter), typeof (MesonHighlighter));
+#if LS_NAME == 1
+    obj.register_extension_type (typeof (Ide.Formatter), typeof (MesonFormatter));
+#endif
 }
