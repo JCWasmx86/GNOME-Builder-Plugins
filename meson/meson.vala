@@ -72,6 +72,12 @@ public class MesonFormatter : Ide.LspFormatter, Ide.Formatter {
         bind_client (this);
     }
 }
+
+class MesonCompletionProvider : Ide.LspCompletionProvider, GtkSource.CompletionProvider {
+    public override void load () {
+        bind_client (this);
+    }
+}
 #endif
 
 public void peas_register_types (TypeModule module) {
@@ -82,5 +88,6 @@ public void peas_register_types (TypeModule module) {
     obj.register_extension_type (typeof (Ide.Highlighter), typeof (MesonHighlighter));
 #if LS_NAME == 1
     obj.register_extension_type (typeof (Ide.Formatter), typeof (MesonFormatter));
+    obj.register_extension_type (typeof (GtkSource.CompletionProvider), typeof (MesonCompletionProvider));
 #endif
 }
