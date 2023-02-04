@@ -43,6 +43,8 @@ namespace Panel {
 		public int start_width { get; set; }
 		[NoAccessorMethod]
 		public int top_height { get; set; }
+		[Version (since = "1.2")]
+		public signal bool adopt_widget (Panel.Widget widget);
 		public virtual signal void panel_drag_begin (Panel.Widget widget);
 		public virtual signal void panel_drag_end (Panel.Widget widget);
 	}
@@ -63,6 +65,8 @@ namespace Panel {
 		public int get_requested_size ();
 		public unowned Panel.Widget? get_visible_child ();
 		public void remove (Panel.Widget panel);
+		[Version (since = "1.2")]
+		public void set_child_pinned (Panel.Widget child, bool pinned);
 		public void set_header (Panel.FrameHeader? header);
 		public void set_placeholder (Gtk.Widget? placeholder);
 		public void set_requested_size (int requested_size);
@@ -71,6 +75,10 @@ namespace Panel {
 		public bool empty { get; }
 		public Gtk.Widget placeholder { get; set; }
 		public Panel.Widget visible_child { get; set; }
+		[Version (since = "1.2")]
+		public virtual signal bool adopt_widget (Panel.Widget widget);
+		[Version (since = "1.2")]
+		public virtual signal void page_closed (Panel.Widget widget);
 	}
 	[CCode (cheader_filename = "libpanel.h", type_id = "panel_frame_header_bar_get_type ()")]
 	public class FrameHeaderBar : Gtk.Widget, Gtk.Accessible, Gtk.Buildable, Gtk.ConstraintTarget, Panel.FrameHeader {

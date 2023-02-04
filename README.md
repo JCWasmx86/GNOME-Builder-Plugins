@@ -65,6 +65,7 @@ unzip dist.zip
 	- `get_build_flags_async`: virtual
 	- `get_build_flags_for_files_async`: virtual
 	- `get_project_version`: virtual
+	- `get_srcdir`: virtual
 	- `supports_language`: virtual
 	- `supports_toolchain`: virtual
 - Ide.WorkspaceAddin:

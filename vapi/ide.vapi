@@ -63,6 +63,7 @@ namespace Ide {
 		[NoAccessorMethod]
 		public Pango.FontDescription system_font { owned get; }
 		public string system_font_name { get; }
+		public signal bool show_help ();
 	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_id = "ide_binding_group_get_type ()")]
 	public class BindingGroup : GLib.Object {
@@ -1056,6 +1057,14 @@ namespace Ide {
 		[NoAccessorMethod]
 		public string title { owned get; set; }
 	}
+	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_id = "ide_file_search_preview_get_type ()")]
+	public sealed class FileSearchPreview : Ide.SearchPreview, Gtk.Accessible, Gtk.Buildable, Gtk.ConstraintTarget {
+		[CCode (has_construct_function = false, type = "IdeSearchPreview*")]
+		public FileSearchPreview (GLib.File file);
+		public void scroll_to (Ide.Location location);
+		[NoAccessorMethod]
+		public GLib.File file { owned get; construct; }
+	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_id = "ide_file_settings_get_type ()")]
 	public class FileSettings : Ide.Object {
 		[CCode (has_construct_function = false)]
@@ -1342,7 +1351,7 @@ namespace Ide {
 		[CCode (has_construct_function = false)]
 		protected HtmlGenerator ();
 		[CCode (has_construct_function = false)]
-		protected HtmlGenerator.for_buffer (Gtk.TextBuffer buffer);
+		HtmlGenerator.for_buffer (Gtk.TextBuffer buffer);
 		public virtual async GLib.Bytes generate_async (GLib.Cancellable? cancellable) throws GLib.Error;
 		public unowned string get_base_uri ();
 		public void set_base_uri (string base_uri);
@@ -1798,7 +1807,7 @@ namespace Ide {
 		public virtual signal Ide.Page create_split ();
 	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_id = "ide_pane_get_type ()")]
-	public class Pane : Panel.Widget, Gtk.Accessible, Gtk.Buildable, Gtk.ConstraintTarget, Ide.PopoverPositioner {
+	public class Pane : Panel.Widget, Gtk.Accessible, Gtk.Buildable, Gtk.ConstraintTarget {
 		[CCode (has_construct_function = false, type = "GtkWidget*")]
 		public Pane ();
 		public void destroy ();
@@ -2445,8 +2454,9 @@ namespace Ide {
 		public SearchEngine ();
 		public void add_provider (Ide.SearchProvider provider);
 		public bool get_busy ();
+		public GLib.ListModel list_providers ();
 		public void remove_provider (Ide.SearchProvider provider);
-		public async Ide.SearchResults search_async (string query, uint max_results, GLib.Cancellable? cancellable) throws GLib.Error;
+		public async Ide.SearchResults search_async (Ide.SearchCategory category, string query, uint max_results, GLib.Cancellable? cancellable) throws GLib.Error;
 		public bool busy { get; }
 	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_id = "ide_search_entry_get_type ()")]
@@ -2460,8 +2470,28 @@ namespace Ide {
 	public sealed class SearchPopover : Gtk.Popover, Gtk.Accessible, Gtk.Buildable, Gtk.ConstraintTarget, Gtk.Native, Gtk.ShortcutManager {
 		[CCode (has_construct_function = false)]
 		protected SearchPopover ();
+		public bool get_show_preview ();
+		public void set_show_preview (bool show_preview);
 		[NoAccessorMethod]
 		public Ide.SearchEngine search_engine { owned get; construct; }
+		public bool show_preview { get; set; }
+	}
+	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_id = "ide_search_preview_get_type ()")]
+	public class SearchPreview : Gtk.Widget, Gtk.Accessible, Gtk.Buildable, Gtk.ConstraintTarget {
+		[CCode (has_construct_function = false, type = "GtkWidget*")]
+		public SearchPreview ();
+		public unowned Gtk.Widget? get_child ();
+		public double get_progress ();
+		public unowned string get_subtitle ();
+		public unowned string get_title ();
+		public void set_child (Gtk.Widget child);
+		public void set_progress (double progress);
+		public void set_subtitle (string title);
+		public void set_title (string title);
+		public Gtk.Widget child { get; set; }
+		public double progress { get; set; }
+		public string subtitle { get; set; }
+		public string title { get; set; }
 	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_id = "ide_search_result_get_type ()")]
 	public class SearchResult : GLib.Object {
@@ -2478,6 +2508,7 @@ namespace Ide {
 		public unowned string get_title ();
 		public bool get_use_markup ();
 		public bool get_use_underline ();
+		public virtual Ide.SearchPreview? load_preview (Ide.Context context);
 		[NoWrapper]
 		public virtual bool matches (string query);
 		public void set_accelerator (string accelerator);
@@ -2607,9 +2638,10 @@ namespace Ide {
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", has_type_id = false)]
 	[Compact]
 	public class ShortcutInfo {
+		public static void @foreach (GLib.ListModel shortcuts, Ide.ShortcutInfoFunc func);
 		public unowned string get_accelerator ();
 		public unowned string get_action_name ();
-		public GLib.Variant get_action_target ();
+		public unowned GLib.Variant? get_action_target ();
 		public unowned string get_group ();
 		public unowned string get_icon_name ();
 		public unowned string get_page ();
@@ -2670,7 +2702,6 @@ namespace Ide {
 		public void add_controller (int priority, owned Gtk.EventController controller);
 		public void append_menu (GLib.MenuModel menu_model);
 		public string dup_position_label ();
-		[Version (since = "44")]
 		public bool get_enable_search_bubbles ();
 		public unowned Pango.FontDescription get_font_desc ();
 		public bool get_highlight_current_line ();
@@ -2686,13 +2717,11 @@ namespace Ide {
 		public void remove_controller (Gtk.EventController controller);
 		public void remove_menu (GLib.MenuModel menu_model);
 		public void scroll_to_insert (Gtk.DirectionType dir);
-		[Version (since = "44")]
 		public void set_enable_search_bubbles (bool enable_search_bubbles);
 		public void set_font_desc (Pango.FontDescription font_desc);
 		public void set_highlight_current_line (bool highlight_current_line);
 		public void set_insert_matching_brace (bool insert_matching_brace);
 		public void set_overwrite_braces (bool overwrite_braces);
-		public bool enable_search_bubbles { get; set; }
 		public Pango.FontDescription font_desc { get; set; }
 		[NoAccessorMethod]
 		public int font_scale { get; set; }
@@ -3115,16 +3144,28 @@ namespace Ide {
 		public signal void transfer_failed (Ide.Transfer transfer, GLib.Error reason);
 	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_id = "ide_tree_get_type ()")]
-	public class Tree : Gtk.TreeView, Gtk.Accessible, Gtk.Buildable, Gtk.ConstraintTarget, Gtk.Scrollable {
-		[CCode (has_construct_function = false, type = "GtkWidget*")]
+	public class Tree : Gtk.Widget, Gtk.Accessible, Gtk.Buildable, Gtk.ConstraintTarget {
+		[CCode (has_construct_function = false)]
 		public Tree ();
 		public void collapse_node (Ide.TreeNode node);
 		public void expand_node (Ide.TreeNode node);
+		public async bool expand_node_async (Ide.TreeNode node, GLib.Cancellable? cancellable) throws GLib.Error;
+		public void expand_to_node (Ide.TreeNode node);
+		public unowned GLib.MenuModel? get_menu_model ();
+		public static GLib.Resource get_resource ();
+		public unowned Ide.TreeNode? get_root ();
 		public unowned Ide.TreeNode? get_selected_node ();
-		public bool node_expanded (Ide.TreeNode node);
-		public void select_node (Ide.TreeNode node);
-		public void set_context_menu (GLib.Menu menu);
+		public void invalidate_all ();
+		public bool is_node_expanded (Ide.TreeNode node);
+		public void set_menu_model (GLib.MenuModel menu_model);
+		public void set_root (Ide.TreeNode root);
+		public void set_selected_node (Ide.TreeNode? node);
 		public void show_popover_at_node (Ide.TreeNode node, Gtk.Popover popover);
+		[NoAccessorMethod]
+		public string kind { owned get; construct; }
+		public GLib.MenuModel menu_model { get; set; }
+		public Ide.TreeNode root { get; set; }
+		public Ide.TreeNode selected_node { get; set; }
 	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_id = "ide_tree_expander_get_type ()")]
 	public sealed class TreeExpander : Gtk.Widget, Gtk.Accessible, Gtk.Buildable, Gtk.ConstraintTarget {
@@ -3137,6 +3178,7 @@ namespace Ide {
 		public unowned GLib.MenuModel? get_menu_model ();
 		public unowned Gtk.Widget? get_suffix ();
 		public unowned string get_title ();
+		public bool get_use_markup ();
 		public void set_expanded_icon (GLib.Icon icon);
 		public void set_expanded_icon_name (string expanded_icon_name);
 		public void set_icon (GLib.Icon icon);
@@ -3145,6 +3187,8 @@ namespace Ide {
 		public void set_menu_model (GLib.MenuModel menu_model);
 		public void set_suffix (Gtk.Widget suffix);
 		public void set_title (string title);
+		public void set_use_markup (bool use_markup);
+		public void show_popover (Gtk.Popover popover);
 		[NoAccessorMethod]
 		public bool expanded { get; }
 		public GLib.Icon expanded_icon { get; set; }
@@ -3156,95 +3200,70 @@ namespace Ide {
 		public GLib.MenuModel menu_model { get; set; }
 		public Gtk.Widget suffix { get; set; }
 		public string title { get; set; }
-	}
-	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_id = "ide_tree_model_get_type ()")]
-	public sealed class TreeModel : Ide.Object, Gtk.TreeDragDest, Gtk.TreeDragSource, Gtk.TreeModel {
-		[CCode (has_construct_function = false)]
-		protected TreeModel ();
-		public async bool expand_async (Ide.TreeNode node, GLib.Cancellable? cancellable) throws GLib.Error;
-		public bool get_iter_for_node (out Gtk.TreeIter iter, Ide.TreeNode node);
-		public unowned string? get_kind ();
-		public unowned Ide.TreeNode? get_node (Gtk.TreeIter iter);
-		public Gtk.TreePath? get_path_for_node (Ide.TreeNode node);
-		public unowned Ide.TreeNode get_root ();
-		public unowned Ide.Tree get_tree ();
-		public void invalidate (Ide.TreeNode? node);
-		public void set_kind (string kind);
-		public void set_root (Ide.TreeNode root);
-		public string kind { get; set; }
-		public Ide.TreeNode root { get; set; }
-		public Ide.Tree tree { get; construct; }
+		public bool use_markup { get; set; }
 	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_id = "ide_tree_node_get_type ()")]
-	public sealed class TreeNode : GLib.Object {
+	public class TreeNode : GLib.Object, GLib.ListModel {
 		[CCode (has_construct_function = false)]
 		public TreeNode ();
-		public void add_emblem (GLib.Emblem emblem);
-		public void append (Ide.TreeNode child);
-		public unowned Gdk.RGBA? get_background_rgba ();
 		public bool get_children_possible ();
-		public unowned string? get_display_name ();
+		public bool get_destroy_item ();
 		public unowned GLib.Icon? get_expanded_icon ();
+		public unowned Ide.TreeNode? get_first_child ();
 		public Ide.TreeNodeFlags get_flags ();
-		public unowned Gdk.RGBA? get_foreground_rgba ();
 		public bool get_has_error ();
 		public unowned GLib.Icon? get_icon ();
-		public uint get_index ();
 		public bool get_is_header ();
-		public unowned GLib.Object? get_item ();
+		[CCode (cname = "ide_tree_node_get_item")]
+		public GLib.Object? get_item1 ();
+		public unowned Ide.TreeNode? get_last_child ();
 		public uint get_n_children ();
-		public unowned Ide.TreeNode? get_next ();
-		public unowned Ide.TreeNode? get_nth_child (uint index_);
+		public unowned Ide.TreeNode? get_next_sibling ();
 		public unowned Ide.TreeNode? get_parent ();
-		public Gtk.TreePath? get_path ();
-		public unowned Ide.TreeNode? get_previous ();
+		public unowned Ide.TreeNode? get_prev_sibling ();
 		public bool get_reset_on_collapse ();
-		public unowned Ide.TreeNode? get_root ();
-		public unowned string get_tag ();
+		public unowned Ide.TreeNode get_root ();
+		public unowned string get_title ();
 		public bool get_use_markup ();
-		public bool has_child ();
 		public bool holds (GLib.Type type);
-		public void insert_after (Ide.TreeNode child);
-		public void insert_before (Ide.TreeNode child);
+		public void insert_after (Ide.TreeNode parent, Ide.TreeNode previous_sibling);
+		public void insert_before (Ide.TreeNode parent, Ide.TreeNode next_sibling);
 		public void insert_sorted (Ide.TreeNode child, Ide.TreeNodeCompare cmpfn);
-		public bool is_empty ();
-		public bool is_first ();
-		public bool is_last ();
-		public bool is_root ();
-		public bool is_selected ();
-		public bool is_tag (string tag);
-		public void prepend (Ide.TreeNode child);
 		public void remove (Ide.TreeNode child);
-		public void set_background_rgba (Gdk.RGBA background_rgba);
 		public void set_children_possible (bool children_possible);
-		public void set_display_name (string display_name);
-		public void set_expanded_icon (GLib.Icon? expanded_icon);
-		public void set_expanded_icon_name (string? expanded_icon_name);
+		public void set_destroy_item (bool destroy_item);
+		public void set_expanded_icon (GLib.Icon expanded_icon);
+		public void set_expanded_icon_name (string expanded_icon_name);
 		public void set_flags (Ide.TreeNodeFlags flags);
-		public void set_foreground_rgba (Gdk.RGBA foreground_rgba);
 		public void set_has_error (bool has_error);
-		public void set_icon (GLib.Icon? icon);
-		public void set_icon_name (string? icon_name);
-		public void set_is_header (bool header);
-		public void set_item (void* item);
+		public void set_icon (GLib.Icon icon);
+		public void set_icon_name (string icon_name);
+		public void set_is_header (bool is_header);
+		public void set_item (GLib.Object? item);
+		public void set_parent (Ide.TreeNode node);
 		public void set_reset_on_collapse (bool reset_on_collapse);
-		public void set_tag (string tag);
+		public void set_title (string title);
 		public void set_use_markup (bool use_markup);
 		public void traverse (GLib.TraverseType traverse_type, GLib.TraverseFlags traverse_flags, int max_depth, Ide.TreeTraverseFunc traverse_func);
+		public void unparent ();
 		public bool children_possible { get; set; }
-		[NoAccessorMethod]
 		public bool destroy_item { get; set; }
-		public string display_name { get; set; }
 		public GLib.Icon expanded_icon { get; set; }
 		public string expanded_icon_name { set; }
+		public Ide.TreeNodeFlags flags { get; set; }
 		public bool has_error { get; set; }
 		public GLib.Icon icon { get; set; }
 		public string icon_name { set; }
 		public bool is_header { get; set; }
-		public GLib.Object item { get; set; }
+		[NoAccessorMethod]
+		public GLib.Object item { owned get; set; }
+		[NoAccessorMethod]
+		public bool loading { get; }
+		public GLib.Object parent { get; set; }
 		public bool reset_on_collapse { get; set; }
-		public string tag { get; set; }
+		public string title { get; set; }
 		public bool use_markup { get; set; }
+		public signal bool show_popover (Gtk.Popover object);
 	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", ref_function = "ide_triplet_ref", type_id = "ide_triplet_get_type ()", unref_function = "ide_triplet_unref")]
 	[Compact]
@@ -3819,6 +3838,8 @@ namespace Ide {
 		public void uninhibit_logout ();
 		public Ide.Context context { get; }
 		public string id { get; set; }
+		[NoAccessorMethod]
+		public Ide.SearchPopover search_popover { owned get; }
 	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_cname = "IdeApplicationAddinInterface", type_id = "ide_application_addin_get_type ()")]
 	public interface ApplicationAddin : GLib.Object {
@@ -3848,13 +3869,14 @@ namespace Ide {
 		public static unowned Ide.BuildSystem? from_context (Ide.Context context);
 		[CCode (array_length = false, array_null_terminated = true)]
 		public virtual async string[] get_build_flags_async (GLib.File file, GLib.Cancellable? cancellable) throws GLib.Error;
-		public async GLib.HashTable<Ide.File,string[]> get_build_flags_for_dir_async (GLib.File directory, GLib.Cancellable? cancellable) throws GLib.Error;
+		public virtual async GLib.HashTable<Ide.File,string[]> get_build_flags_for_dir_async (GLib.File directory, GLib.Cancellable? cancellable) throws GLib.Error;
 		public virtual async GLib.HashTable<Ide.File,string[]> get_build_flags_for_files_async (GLib.GenericArray<GLib.File> files, GLib.Cancellable? cancellable) throws GLib.Error;
 		public abstract string get_builddir (Ide.Pipeline pipeline);
 		public abstract string get_display_name ();
 		public abstract string get_id ();
 		public abstract int get_priority ();
 		public virtual string? get_project_version ();
+		public virtual string get_srcdir ();
 		public virtual bool supports_language (string language);
 		public virtual bool supports_toolchain (Ide.Toolchain toolchain);
 		[NoAccessorMethod]
@@ -3886,7 +3908,7 @@ namespace Ide {
 	public interface CodeAction : GLib.Object {
 		public abstract async bool execute_async (GLib.Cancellable? cancellable) throws GLib.Error;
 		public abstract string get_title ();
-		public abstract string title { owned get; }
+		public abstract string title { owned get; construct; }
 	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_cname = "IdeCodeActionProviderInterface", type_id = "ide_code_action_provider_get_type ()")]
 	public interface CodeActionProvider : GLib.Object {
@@ -4001,10 +4023,6 @@ namespace Ide {
 		public void track (uint stage_id);
 		public abstract void unload (Ide.Pipeline pipeline);
 	}
-	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_cname = "IdePopoverPositionerInterface", type_id = "ide_popover_positioner_get_type ()")]
-	public interface PopoverPositioner : Gtk.Widget {
-		public abstract void present (Gtk.Popover popover, Gtk.Widget relative_to, Gdk.Rectangle pointing_to);
-	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_cname = "IdeProjectTreeAddinInterface", type_id = "ide_project_tree_addin_get_type ()")]
 	public interface ProjectTreeAddin : GLib.Object {
 		public abstract void load (Ide.Tree tree);
@@ -4032,6 +4050,9 @@ namespace Ide {
 	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_cname = "IdeSearchProviderInterface", type_id = "ide_search_provider_get_type ()")]
 	public interface SearchProvider : Ide.Object {
+		public abstract GLib.Icon? dup_icon ();
+		public abstract string dup_title ();
+		public abstract Ide.SearchCategory get_category ();
 		public abstract void load ();
 		public abstract async GLib.ListModel search_async (string query, uint max_results, GLib.Cancellable? cancellable, out bool truncated) throws GLib.Error;
 		public abstract void unload ();
@@ -4102,16 +4123,15 @@ namespace Ide {
 		public abstract void build_children (Ide.TreeNode node);
 		public abstract async bool build_children_async (Ide.TreeNode node, GLib.Cancellable? cancellable) throws GLib.Error;
 		public abstract void build_node (Ide.TreeNode node);
-		public abstract void cell_data_func (Ide.TreeNode node, Gtk.CellRenderer cell);
-		public abstract void load (Ide.Tree tree, Ide.TreeModel model);
+		public abstract void load (Ide.Tree tree);
 		public abstract bool node_activated (Ide.Tree tree, Ide.TreeNode node);
 		public abstract void node_collapsed (Ide.TreeNode node);
-		public abstract bool node_draggable (Ide.TreeNode node);
-		public abstract bool node_droppable (Ide.TreeNode drag_node, Ide.TreeNode drop_node, GLib.Value value);
-		public abstract async bool node_dropped_async (Ide.TreeNode drag_node, Ide.TreeNode drop_node, GLib.Value value, Gdk.DragAction actions, GLib.Cancellable? cancellable) throws GLib.Error;
+		[Version (since = "44")]
+		public abstract Gdk.ContentProvider? node_draggable (Ide.TreeNode node);
+		public abstract async bool node_dropped_async (Gtk.DropTarget drop_target, Ide.TreeNode drop_node, GLib.Cancellable? cancellable) throws GLib.Error;
 		public abstract void node_expanded (Ide.TreeNode node);
 		public abstract void selection_changed (Ide.TreeNode selection);
-		public abstract void unload (Ide.Tree tree, Ide.TreeModel model);
+		public abstract void unload (Ide.Tree tree);
 	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_cname = "IdeVcsInterface", type_id = "ide_vcs_get_type ()")]
 	public interface Vcs : Ide.Object {
@@ -4517,6 +4537,15 @@ namespace Ide {
 		AUTO,
 		ALWAYS
 	}
+	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", cprefix = "IDE_SEARCH_CATEGORY_", type_id = "ide_search_category_get_type ()")]
+	public enum SearchCategory {
+		EVERYTHING,
+		ACTIONS,
+		COMMANDS,
+		FILES,
+		SYMBOLS,
+		OTHER
+	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", cprefix = "IDE_SPACES_STYLE_", type_id = "ide_spaces_style_get_type ()")]
 	[Flags]
 	public enum SpacesStyle {
@@ -4633,7 +4662,7 @@ namespace Ide {
 		UNKNOWN,
 		CONNECTION_IS_METERED
 	}
-	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", cprefix = "IDE_TREE_NODE_FLAGS_", has_type_id = false)]
+	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", cprefix = "IDE_TREE_NODE_FLAGS_", type_id = "ide_tree_node_flags_get_type ()")]
 	[Flags]
 	public enum TreeNodeFlags {
 		NONE,
@@ -4642,7 +4671,7 @@ namespace Ide {
 		CHANGED,
 		REMOVED
 	}
-	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", cprefix = "IDE_TREE_NODE_VISIT_", has_type_id = false)]
+	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", cprefix = "IDE_TREE_NODE_VISIT_", type_id = "ide_tree_node_visit_get_type ()")]
 	public enum TreeNodeVisit {
 		BREAK,
 		CONTINUE,
@@ -4820,6 +4849,8 @@ namespace Ide {
 	public const string TOOLCHAIN_TOOL_PKG_CONFIG;
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", cname = "IDE_TOOLCHAIN_TOOL_STRIP")]
 	public const string TOOLCHAIN_TOOL_STRIP;
+	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", cname = "IDE_TREE_NODE_FLAGS_VCS_MASK")]
+	public const int TREE_NODE_FLAGS_VCS_MASK;
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", cname = "IDE_VERSION")]
 	public const double VERSION;
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", cname = "IDE_VERSION_S")]
@@ -5015,6 +5046,9 @@ namespace Ide {
 	public static bool shell_supports_dash_c (string shell);
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h")]
 	public static bool shell_supports_dash_login (string shell);
+	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h")]
+	[Version (replacement = "ShortcutInfo.foreach")]
+	public static void shortcut_info_foreach (GLib.ListModel shortcuts, Ide.ShortcutInfoFunc func);
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h")]
 	public static void show_tweaks (Ide.Context context, string page);
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h")]

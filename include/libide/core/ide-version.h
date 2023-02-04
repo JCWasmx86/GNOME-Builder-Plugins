@@ -37,7 +37,7 @@
  *
  * The build type of the installed build.
  */
-#define IDE_BUILD_TYPE "debug"
+#define IDE_BUILD_TYPE "debugoptimized"
 
 /**
  * IDE_BUILD_CHANNEL:
@@ -45,7 +45,7 @@
  * The release channel of Builder. This should be a string such as
  * "other", "flatpak-stable", or "flatpak-nightly".
  */
-#define IDE_BUILD_CHANNEL "other"
+#define IDE_BUILD_CHANNEL "flatpak-nightly"
 
 /**
  * IDE_MAJOR_VERSION:
@@ -66,7 +66,7 @@
  *
  * libide version.
  */
-#define IDE_VERSION 44.alpha
+#define IDE_VERSION 44.beta
 
 /**
  * IDE_VERSION_S:
@@ -74,7 +74,7 @@
  * libide version, encoded as a string, useful for printing and
  * concatenation.
  */
-#define IDE_VERSION_S "44.alpha"
+#define IDE_VERSION_S "44.beta"
 
 #define IDE_ENCODE_VERSION(major,minor,micro) \
         ((major) << 24 | (minor) << 16 | (micro) << 8)

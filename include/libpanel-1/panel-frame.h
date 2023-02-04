@@ -35,8 +35,13 @@ struct _PanelFrameClass
 {
   GtkWidgetClass parent_class;
 
+  void     (*page_closed)    (PanelFrame   *self,
+                              PanelWidget  *widget);
+  gboolean (*adopt_widget)   (PanelFrame   *self,
+                              PanelWidget  *widget);
+
   /*< private >*/
-  gpointer _reserved[8];
+  gpointer _reserved[6];
 };
 
 PANEL_AVAILABLE_IN_ALL
@@ -65,6 +70,10 @@ void               panel_frame_set_visible_child  (PanelFrame       *self,
                                                    PanelWidget      *widget);
 PANEL_AVAILABLE_IN_ALL
 PanelWidget       *panel_frame_get_visible_child  (PanelFrame       *self);
+PANEL_AVAILABLE_IN_1_2
+void               panel_frame_set_child_pinned   (PanelFrame       *self,
+                                                   PanelWidget      *child,
+                                                   gboolean          pinned);
 PANEL_AVAILABLE_IN_ALL
 PanelWidget       *panel_frame_get_page           (PanelFrame       *self,
                                                    guint             n);

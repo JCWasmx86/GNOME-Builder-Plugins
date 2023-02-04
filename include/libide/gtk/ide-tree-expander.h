@@ -71,5 +71,13 @@ void            ide_tree_expander_set_list_row           (IdeTreeExpander *self,
                                                           GtkTreeListRow  *list_row);
 IDE_AVAILABLE_IN_ALL
 gpointer        ide_tree_expander_get_item               (IdeTreeExpander *self);
+IDE_AVAILABLE_IN_44
+gboolean        ide_tree_expander_get_use_markup         (IdeTreeExpander *self);
+IDE_AVAILABLE_IN_44
+void            ide_tree_expander_set_use_markup         (IdeTreeExpander *self,
+                                                          gboolean         use_markup);
+IDE_AVAILABLE_IN_44
+void            ide_tree_expander_show_popover           (IdeTreeExpander *self,
+                                                          GtkPopover      *popover);
 
 G_END_DECLS
