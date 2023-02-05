@@ -21,7 +21,7 @@ jobs:
           podman --version
           DOCKER_BUILDKIT=1 docker build --file Dockerfile --output out .
           sudo cp out/dist.zip /dist.zip
-          DOCKER_BUILDKIT=1 docker build --file Dockerfile --output out2 .
+          DOCKER_BUILDKIT=1 docker build --file Dockerfile.ubuntu --output out2 .
           sudo cp out2/dist.zip /dist_ubuntu.zip
       - uses: actions/upload-artifact@v3
         with:
