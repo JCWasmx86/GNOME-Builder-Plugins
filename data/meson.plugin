@@ -11,5 +11,6 @@ X-Symbol-Resolver-Languages=meson
 X-Symbol-Resolver-Languages-Priority=800
 X-Highlighter-Languages=meson
 X-Highlighter-Languages-Priority=100
+X-Formatter-Languages=meson
+X-Completion-Provider-Languages=meson
 X-Builder-ABI=@BUILDER_ABI@
-@EXTRA_LINE@

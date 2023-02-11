@@ -42,7 +42,6 @@ unzip dist.zip
 | icon_installer  | Allow installing icons easily in your project                                                                                 |    |
 | markdown        | Indenter for Markdown                                                                                                         |    |
 | meson           | Integration for my meson language server                                                                                      | ❌ |
-| muon            | Format `meson.build` files using muon                                                                                         | ✅ |
 | pylint          | Integration with Pylint                                                                                                       | ✅ |
 | shfmt           | Shfmt integration                                                                                                             | ❌ |
 | sourcekit       | Integration for Sourcekit, the Swift language server                                                                          | ✅ |

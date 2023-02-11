@@ -21,19 +21,13 @@
 extern void bind_client (Ide.Object self);
 
 public class MesonService : Ide.LspService {
-#if LS_NAME == 1
-    string LS_NAME = "Swift-MesonLSP";
-#else
-    string LS_NAME = "meson_lsp";
-#endif
     construct {
         this.search_path = new string[] { "/usr/local/bin", "/usr/bin", "/var/run/host/usr/bin", "/var/run/host/usr/local/bin" };
-        this.set_program (LS_NAME);
+        this.set_program ("Swift-MesonLSP");
     }
 
     public override void prepare_run_context (Ide.Pipeline pipeline, Ide.RunContext run_context) {
-        if (LS_NAME == "Swift-MesonLSP")
-            run_context.append_argv ("--lsp");
+        run_context.append_argv ("--lsp");
     }
 
     public override void configure_client (Ide.LspClient client) {
@@ -66,7 +60,6 @@ public class MesonHighlighter : Ide.LspHighlighter {
     }
 }
 
-#if LS_NAME == 1
 public class MesonFormatter : Ide.LspFormatter, Ide.Formatter {
     public void load () {
         bind_client (this);
@@ -78,7 +71,6 @@ class MesonCompletionProvider : Ide.LspCompletionProvider, GtkSource.CompletionP
         bind_client (this);
     }
 }
-#endif
 
 public void peas_register_types (TypeModule module) {
     var obj = (Peas.ObjectModule) module;
@@ -86,8 +78,6 @@ public void peas_register_types (TypeModule module) {
     obj.register_extension_type (typeof (Ide.SymbolResolver), typeof (MesonSymbolResolver));
     obj.register_extension_type (typeof (GtkSource.HoverProvider), typeof (MesonHoverProvider));
     obj.register_extension_type (typeof (Ide.Highlighter), typeof (MesonHighlighter));
-#if LS_NAME == 1
     obj.register_extension_type (typeof (Ide.Formatter), typeof (MesonFormatter));
     obj.register_extension_type (typeof (GtkSource.CompletionProvider), typeof (MesonCompletionProvider));
-#endif
 }
