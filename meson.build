@@ -92,8 +92,7 @@ if get_option('smart').enabled()
     endforeach
     spec_progs = {
         'haskell-language-server-wrapper': 'hls',
-        'meson_lsp': 'meson',
-        'sourcekit-lsp': 'sourcekit',
+        'Swift-MesonLSP': 'meson',
         'swift-format': 'swift-format',
         'swift': 'swift-templates',
         'swiftlint': 'swift-lint',
@@ -148,10 +147,6 @@ else
     if get_option('plugin_shfmt').enabled()
         subdir('shfmt')
         plugins += 'shfmt.plugin'
-    endif
-    if get_option('plugin_sourcekit').enabled()
-        subdir('sourcekit')
-        plugins += 'sourcekit.plugin'
     endif
     if get_option('plugin_sqls').enabled()
         subdir('sqls')
