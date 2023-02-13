@@ -10,15 +10,10 @@
 ## Hadolint
 - Install [Hadolint](https://github.com/hadolint/hadolint)
 ## Meson
-- Install [MesonLSP](https://github.com/jcwasmx86/mesonlsp), it is work-in-progress!
-## Pylint
-- Install pylint using your distro's package manager
-- `/usr/bin/pylint` must exist (Other paths may work, too)
+- Install [MesonLSP](https://github.com/JCWasmx86/Swift-MesonLSP)
 ## Shfmt
 - Install shfmt using your distro's package manager
 - `/usr/bin/shfmt` must exist (Other paths may work, too)
-## Sourcekit
-- Install sourcekit-lsp using your distro's package manager
 ## Sqls
 - Install [sqls](https://github.com/lighttiger2505/sqls)
 - `sqls` must be on the path

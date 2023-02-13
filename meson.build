@@ -77,7 +77,6 @@ if get_option('smart').enabled()
         'cabal',
         'clangd',
         'hadolint',
-        'pylint',
         'shfmt',
         'sqls',
         'stack',
@@ -139,10 +138,6 @@ else
     if get_option('plugin_meson').enabled()
         subdir('meson')
         plugins += 'meson.plugin'
-    endif
-    if get_option('plugin_pylint').enabled()
-        subdir('pylint')
-        plugins += 'pylint.plugin'
     endif
     if get_option('plugin_shfmt').enabled()
         subdir('shfmt')
