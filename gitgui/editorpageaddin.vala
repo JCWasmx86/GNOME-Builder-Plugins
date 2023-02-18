@@ -108,8 +108,8 @@ namespace GitGui {
             this.map.add_action (blame);
             var revisions = new SimpleAction ("revisions", null);
             revisions.activate.connect (() => {
-                var hashs = get_stdout (new string[] { "git", "log", "--format=%h|||%s", this.file.get_path () }, this.file.get_parent ().get_path ()).strip ();
-                var split = hashs.split ("\n");
+                var hashes = get_stdout (new string[] { "git", "log", "--format=%h|||%s", this.file.get_path () }, this.file.get_parent ().get_path ()).strip ();
+                var split = hashes.split ("\n");
                 var win = new RevisionView (this.get_context ().workdir, this.file.get_path ());
                 win.present ();
                 foreach (var h in split) {
