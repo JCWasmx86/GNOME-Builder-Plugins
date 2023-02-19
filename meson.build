@@ -76,7 +76,6 @@ if get_option('smart').enabled()
     progs = [
         'cabal',
         'clangd',
-        'hadolint',
         'shfmt',
         'sqls',
         'stack',
@@ -118,10 +117,6 @@ else
     if get_option('plugin_gitgui').enabled()
         subdir('gitgui')
         plugins += 'gitgui.plugin'
-    endif
-    if get_option('plugin_hadolint').enabled()
-        subdir('hadolint')
-        plugins += 'hadolint.plugin'
     endif
     if get_option('plugin_hls').enabled()
         subdir('hls')

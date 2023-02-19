@@ -37,7 +37,7 @@ unzip dist.zip
 | cabal           | Integration for the cabal buildsystem                                                                                         | ✅ |
 | clangd          | (Copied from upstream, converted to Vala): Clangd integration                                                                 | ❌ |
 | gitgui          | A small git integration                                                                                                       | ❌ |
-| hadolint        | Integration for Hadolint, the Dockerfile linter                                                                               | ✅ |
+| hadolint        | Integration for Hadolint, the Dockerfile linter                                                                               | 🎉 |
 | hls             | Integration for the Haskell Language Server                                                                                   | ✅ |
 | icon_installer  | Allow installing icons easily in your project                                                                                 |    |
 | markdown        | Indenter for Markdown                                                                                                         |    |
@@ -55,6 +55,7 @@ unzip dist.zip
 
 - ✅: Yes
 - ❌: No
+- 🎉: Is upstream
 - Empty: Time will tell
 
 ## Changes to ide.vapi
