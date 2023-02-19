@@ -43,7 +43,6 @@ unzip dist.zip
 | markdown        | Indenter for Markdown                                                                                                         |    |
 | meson           | Integration for my meson language server                                                                                      | ❌ |
 | shfmt           | Shfmt integration                                                                                                             | ❌ |
-| sourcekit       | Integration for Sourcekit, the Swift language server                                                                          | ✅ |
 | sqls            | Integration for the SQL language server                                                                                       | ✅ |
 | stack           | Integration for the stack buildsystem                                                                                         | ✅ |
 | swift           | Integration for the swift buildsystem                                                                                         | ✅ |
