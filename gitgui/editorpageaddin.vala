@@ -90,22 +90,6 @@ namespace GitGui {
 
         construct {
             this.map = new GLib.SimpleActionGroup ();
-            var blame = new SimpleAction ("blame", null);
-            blame.activate.connect (() => {
-                Gtk.TextIter start, end;
-                var non_zero = this.view.buffer.get_selection_bounds (out start, out end);
-                var lines = new uint64[0];
-                if (!non_zero) {
-                    lines += start.get_line () + 1;
-                } else {
-                    for (var i = start.get_line (); i <= end.get_line (); i++)
-                        lines += (i + 1);
-                }
-                foreach (var i in lines)
-                    critical ("Blaming %llu", i);
-                // TODO: Now render it.
-            });
-            this.map.add_action (blame);
             var revisions = new SimpleAction ("revisions", null);
             revisions.activate.connect (() => {
                 var hashes = get_stdout (new string[] { "git", "log", "--format=%h|||%s", this.file.get_path () }, this.file.get_parent ().get_path ()).strip ();
@@ -134,15 +118,11 @@ namespace GitGui {
             this.view = page.view;
             this.file = page.get_file ();
             var model = new GLib.Menu ();
-            var mi = new GLib.MenuItem ("Blame line(s)", "page.gitgui.blame");
-            model.append_item (mi);
-            mi = new GLib.MenuItem ("Show older revisions of this file", "page.gitgui.revisions");
+            var mi = new GLib.MenuItem ("Show older revisions of this file", "page.gitgui.revisions");
             model.append_item (mi);
             view.append_menu (model);
             view.populate_menu.connect (() => {
-                var s = this.map.lookup_action ("blame");
-                ((SimpleAction) s).set_enabled (true);
-                s = this.map.lookup_action ("revisions");
+                var s = this.map.lookup_action ("revisions");
                 ((SimpleAction) s).set_enabled (true);
             });
         }
