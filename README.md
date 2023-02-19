@@ -49,7 +49,7 @@ unzip dist.zip
 | swift-format    | Integration for swift-formatter                                                                                               | ✅ |
 | swift-templates | Extends the CreateProject-Dialog to add Swift-Support                                                                         | ✅ |
 | swift-lint      | Integration for swift-lint                                                                                                    | ✅ |
-| texlab          | LaTeX integration (Disabled by default, enable by using `-Dplugin_texlab=enabled`)                                            | ❌ |
+| texlab          | LaTeX integration                                                                                                             | ❌ |
 | xmlfmt          | Formatter for XML                                                                                                             | ✅ |
 
 - ✅: Yes
