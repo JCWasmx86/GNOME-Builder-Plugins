@@ -36,11 +36,11 @@ unzip dist.zip
 |-----------------|:--------------:|:-----------------------------------------------------------------------------------------------------------------:|
 | cabal           | Integration for the cabal buildsystem                                                                                         | ✅ |
 | clangd          | (Copied from upstream, converted to Vala): Clangd integration                                                                 | ❌ |
-| gitgui          | A small git integration                                                                                                       | ❌ |
+| gitgui          | A small git integration                                                                                                       | ❓ |
 | hadolint        | Integration for Hadolint, the Dockerfile linter                                                                               | 🎉 |
 | hls             | Integration for the Haskell Language Server                                                                                   | ✅ |
 | icon_installer  | Allow installing icons easily in your project                                                                                 |    |
-| markdown        | Indenter for Markdown                                                                                                         |    |
+| markdown        | Indenter for Markdown                                                                                                         | ✅ |
 | meson           | Integration for my meson language server                                                                                      | ❌ |
 | shfmt           | Shfmt integration                                                                                                             | ❌ |
 | sqls            | Integration for the SQL language server                                                                                       | ❌ |
@@ -54,6 +54,7 @@ unzip dist.zip
 
 - ✅: Yes
 - ❌: No
+- ❓: Parts are planned
 - 🎉: Is upstream
 - Empty: Time will tell
 
