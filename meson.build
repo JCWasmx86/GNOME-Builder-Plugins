@@ -70,7 +70,6 @@ enabled_plugins = []
 
 if get_option('smart').enabled()
     enabled_plugins += 'icon_installer'
-    enabled_plugins += 'xmlfmt'
     enabled_plugins += 'gitgui'
     progs = [
         'cabal',
@@ -155,10 +154,6 @@ else
     if get_option('plugin_texlab').enabled()
         subdir('texlab')
         plugins += 'texlab.plugin'
-    endif
-    if get_option('plugin_xmlfmt').enabled()
-        subdir('xmlfmt')
-        plugins += 'xmlfmt.plugin'
     endif
 endif
 
