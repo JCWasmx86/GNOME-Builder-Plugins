@@ -71,7 +71,6 @@ enabled_plugins = []
 if get_option('smart').enabled()
     enabled_plugins += 'icon_installer'
     enabled_plugins += 'xmlfmt'
-    enabled_plugins += 'markdown'
     enabled_plugins += 'gitgui'
     progs = [
         'cabal',
@@ -125,10 +124,6 @@ else
     if get_option('plugin_icon_installer').enabled()
         subdir('icon_installer')
         plugins += 'icon_installer.plugin'
-    endif
-    if get_option('plugin_markdown').enabled()
-        subdir('markdown')
-        plugins += 'markdown.plugin'
     endif
     if get_option('plugin_meson').enabled()
         subdir('meson')
