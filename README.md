@@ -46,7 +46,7 @@ unzip dist.zip
 | sqls            | Integration for the SQL language server                                                                                       | ❌ |
 | stack           | Integration for the stack buildsystem                                                                                         | ✅ |
 | swift           | Integration for the swift buildsystem                                                                                         | ✅ |
-| swift-format    | Integration for swift-formatter                                                                                               | ✅ |
+| swift-format    | Integration for swift-formatter                                                                                               | 🎉 |
 | swift-templates | Extends the CreateProject-Dialog to add Swift-Support                                                                         | ✅ |
 | swift-lint      | Integration for swift-lint                                                                                                    | ✅ |
 | texlab          | LaTeX integration                                                                                                             | ❌ |

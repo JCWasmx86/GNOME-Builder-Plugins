@@ -90,7 +90,6 @@ if get_option('smart').enabled()
     spec_progs = {
         'haskell-language-server-wrapper': 'hls',
         'Swift-MesonLSP': 'meson',
-        'swift-format': 'swift-format',
         'swift': 'swift-templates',
         'swiftlint': 'swift-lint',
     }
@@ -144,10 +143,6 @@ else
     if get_option('plugin_swift').enabled()
         subdir('swift')
         plugins += 'swift.plugin'
-    endif
-    if get_option('plugin_swift_format').enabled()
-        subdir('swift-format')
-        plugins += 'swift-format.plugin'
     endif
     if get_option('plugin_swift_lint').enabled()
         subdir('swift-lint')
