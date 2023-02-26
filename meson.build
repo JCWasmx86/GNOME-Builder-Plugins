@@ -72,7 +72,6 @@ if get_option('smart').enabled()
     enabled_plugins += 'icon_installer'
     enabled_plugins += 'gitgui'
     progs = [
-        'cabal',
         'clangd',
         'shfmt',
         'sqls',
@@ -103,10 +102,6 @@ if get_option('smart').enabled()
         plugins += (x + '.plugin')
     endforeach
 else
-    if get_option('plugin_cabal').enabled()
-        subdir('cabal')
-        plugins += 'cabal.plugin'
-    endif
     if get_option('plugin_clangd').enabled()
         subdir('clangd')
         plugins += 'clangd.plugin'

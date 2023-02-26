@@ -1,6 +1,3 @@
-## Cabal
-- Install using [GHCup](https://www.haskell.org/ghcup/)
-- `/home/user/.ghcup/bin/cabal` must exist
 ## Clangd
 - Install [Clangd](https://clangd.llvm.org/) using your distro's package manager
 - `/usr/bin/clangd` must exist (Other paths may work, too)

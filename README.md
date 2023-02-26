@@ -34,7 +34,6 @@ unzip dist.zip
 ## Plugins
 | Name            | Description    | Will attempt to upstream? |
 |-----------------|:--------------:|:-----------------------------------------------------------------------------------------------------------------:|
-| cabal           | Integration for the cabal buildsystem                                                                                         | ✅ |
 | clangd          | (Copied from upstream, converted to Vala): Clangd integration                                                                 | ❌ |
 | gitgui          | A small git integration                                                                                                       | ❓ |
 | hadolint        | Integration for Hadolint, the Dockerfile linter                                                                               | 🎉 |
