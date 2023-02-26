@@ -6,8 +6,6 @@
 ## Shfmt
 - Install shfmt using your distro's package manager
 - `/usr/bin/shfmt` must exist (Other paths may work, too)
-## Swift
-- Install swift using your distro's package manager
 ## Swift-lint
 - Install [SwiftLint](https://github.com/realm/SwiftLint) manually
 ## Texlab

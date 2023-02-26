@@ -74,7 +74,6 @@ if get_option('smart').enabled()
     progs = [
         'clangd',
         'shfmt',
-        'swift',
         'texlab',
     ]
     foreach prog : progs
@@ -118,10 +117,6 @@ else
     if get_option('plugin_shfmt').enabled()
         subdir('shfmt')
         plugins += 'shfmt.plugin'
-    endif
-    if get_option('plugin_swift').enabled()
-        subdir('swift')
-        plugins += 'swift.plugin'
     endif
     if get_option('plugin_swift_lint').enabled()
         subdir('swift-lint')
