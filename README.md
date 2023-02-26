@@ -42,7 +42,6 @@ unzip dist.zip
 | meson           | Integration for my meson language server                                                                                      | ❌ |
 | shfmt           | Shfmt integration                                                                                                             | ❌ |
 | sqls            | Integration for the SQL language server                                                                                       | ❌ |
-| stack           | Integration for the stack buildsystem                                                                                         | ✅ |
 | swift           | Integration for the swift buildsystem                                                                                         | ✅ |
 | swift-format    | Integration for swift-formatter                                                                                               | 🎉 |
 | swift-templates | Extends the CreateProject-Dialog to add Swift-Support                                                                         | ✅ |
