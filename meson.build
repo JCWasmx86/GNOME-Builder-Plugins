@@ -74,8 +74,6 @@ if get_option('smart').enabled()
     progs = [
         'clangd',
         'shfmt',
-        'sqls',
-        'stack',
         'swift',
         'texlab',
     ]
@@ -120,14 +118,6 @@ else
     if get_option('plugin_shfmt').enabled()
         subdir('shfmt')
         plugins += 'shfmt.plugin'
-    endif
-    if get_option('plugin_sqls').enabled()
-        subdir('sqls')
-        plugins += 'sqls.plugin'
-    endif
-    if get_option('plugin_stack').enabled()
-        subdir('stack')
-        plugins += 'stack.plugin'
     endif
     if get_option('plugin_swift').enabled()
         subdir('swift')
