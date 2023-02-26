@@ -4,8 +4,6 @@
 ## HLS
 - Install [Haskell Language Server](https://haskell-language-server.readthedocs.io/en/latest/index.html) using [GHCup](https://www.haskell.org/ghcup/)
 - `/home/user/.ghcup/bin/haskell-language-server-wrapper` must exist
-## Hadolint
-- Install [Hadolint](https://github.com/hadolint/hadolint)
 ## Meson
 - Install [MesonLSP](https://github.com/JCWasmx86/Swift-MesonLSP)
 ## Shfmt
