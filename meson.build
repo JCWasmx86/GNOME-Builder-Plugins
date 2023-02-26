@@ -86,7 +86,6 @@ if get_option('smart').enabled()
         endif
     endforeach
     spec_progs = {
-        'haskell-language-server-wrapper': 'hls',
         'Swift-MesonLSP': 'meson',
         'swift': 'swift-templates',
         'swiftlint': 'swift-lint',
@@ -109,10 +108,6 @@ else
     if get_option('plugin_gitgui').enabled()
         subdir('gitgui')
         plugins += 'gitgui.plugin'
-    endif
-    if get_option('plugin_hls').enabled()
-        subdir('hls')
-        plugins += 'hls.plugin'
     endif
     if get_option('plugin_icon_installer').enabled()
         subdir('icon_installer')

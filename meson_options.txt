@@ -4,7 +4,6 @@ option('smart', type: 'feature', value: 'disabled', description: 'Autodetect whi
 option('experimental', type: 'boolean', value: false)
 option('plugin_clangd', type: 'feature', value: 'enabled')
 option('plugin_gitgui', type: 'feature', value: 'enabled')
-option('plugin_hls', type: 'feature', value: 'enabled')
 option('plugin_icon_installer', type: 'feature', value: 'enabled')
 option('plugin_meson', type: 'feature', value: 'enabled')
 option('plugin_shfmt', type: 'feature', value: 'enabled')

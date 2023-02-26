@@ -37,7 +37,6 @@ unzip dist.zip
 | clangd          | (Copied from upstream, converted to Vala): Clangd integration                                                                 | ❌ |
 | gitgui          | A small git integration                                                                                                       | ❓ |
 | hadolint        | Integration for Hadolint, the Dockerfile linter                                                                               | 🎉 |
-| hls             | Integration for the Haskell Language Server                                                                                   | ✅ |
 | icon_installer  | Allow installing icons easily in your project                                                                                 |    |
 | markdown        | Indenter for Markdown                                                                                                         | 🎉 |
 | meson           | Integration for my meson language server                                                                                      | ❌ |

@@ -1,9 +1,6 @@
 ## Clangd
 - Install [Clangd](https://clangd.llvm.org/) using your distro's package manager
 - `/usr/bin/clangd` must exist (Other paths may work, too)
-## HLS
-- Install [Haskell Language Server](https://haskell-language-server.readthedocs.io/en/latest/index.html) using [GHCup](https://www.haskell.org/ghcup/)
-- `/home/user/.ghcup/bin/haskell-language-server-wrapper` must exist
 ## Meson
 - Install [MesonLSP](https://github.com/JCWasmx86/Swift-MesonLSP)
 ## Shfmt
