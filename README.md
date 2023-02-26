@@ -41,7 +41,6 @@ unzip dist.zip
 | markdown        | Indenter for Markdown                                                                                                         | 🎉 |
 | meson           | Integration for my meson language server                                                                                      | ❌ |
 | shfmt           | Shfmt integration                                                                                                             | ❌ |
-| sqls            | Integration for the SQL language server                                                                                       | ❌ |
 | swift           | Integration for the swift buildsystem                                                                                         | ✅ |
 | swift-format    | Integration for swift-formatter                                                                                               | 🎉 |
 | swift-templates | Extends the CreateProject-Dialog to add Swift-Support                                                                         | ✅ |
