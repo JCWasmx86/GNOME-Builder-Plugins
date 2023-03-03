@@ -44,7 +44,7 @@ unzip dist.zip
 | swift           | Integration for the swift buildsystem                                                                                         | 🎉 |
 | swift-format    | Integration for swift-formatter                                                                                               | 🎉 |
 | swift-templates | Extends the CreateProject-Dialog to add Swift-Support                                                                         | ✅ |
-| swift-lint      | Integration for swift-lint                                                                                                    | ✅ |
+| swift-lint      | Integration for swift-lint                                                                                                    | 🎉 |
 | texlab          | LaTeX integration                                                                                                             | ❌ |
 | xmlfmt          | Formatter for XML                                                                                                             | 🎉 |
 

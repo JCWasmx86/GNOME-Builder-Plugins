@@ -85,7 +85,6 @@ if get_option('smart').enabled()
     spec_progs = {
         'Swift-MesonLSP': 'meson',
         'swift': 'swift-templates',
-        'swiftlint': 'swift-lint',
     }
     foreach prog, plugin : spec_progs
         p = find_program(prog, required: false)
@@ -117,10 +116,6 @@ else
     if get_option('plugin_shfmt').enabled()
         subdir('shfmt')
         plugins += 'shfmt.plugin'
-    endif
-    if get_option('plugin_swift_lint').enabled()
-        subdir('swift-lint')
-        plugins += 'swift-lint.plugin'
     endif
     if get_option('plugin_swift_templates').enabled()
         subdir('swift-templates')
