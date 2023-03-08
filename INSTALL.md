@@ -8,4 +8,4 @@
 - `/usr/bin/shfmt` must exist (Other paths may work, too)
 ## Texlab
 - Install [texlab](https://github.com/latex-lsp/texlab)
-- Copy it to `/usr/bin/`, so you have the file `/usr/bin/texlab` 
+- Copy it to `/usr/bin/`, so you have the file `/usr/bin/texlab`
