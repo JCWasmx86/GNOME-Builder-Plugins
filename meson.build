@@ -75,6 +75,7 @@ if get_option('smart').enabled()
         'clangd',
         'shfmt',
         'texlab',
+        'scriptdir',
     ]
     foreach prog : progs
         p = find_program(prog, required: false)
@@ -112,6 +113,10 @@ else
     if get_option('plugin_meson').enabled()
         subdir('meson')
         plugins += 'meson.plugin'
+    endif
+    if get_option('plugin_scriptdir').enabled()
+        subdir('scriptdir')
+        plugins += 'scriptdir.plugin'
     endif
     if get_option('plugin_shfmt').enabled()
         subdir('shfmt')

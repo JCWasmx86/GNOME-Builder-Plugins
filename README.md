@@ -40,6 +40,7 @@ unzip dist.zip
 | icon_installer  | Allow installing icons easily in your project                                                                                 |    |
 | markdown        | Indenter for Markdown                                                                                                         | 🎉 |
 | meson           | Integration for my meson language server                                                                                      | ❌ |
+| scriptdir       | Allows you to execute predefined scripts from `~/.local/share/gnome-builder/scripts` for e.g. common tasks                    |    |
 | shfmt           | Shfmt integration                                                                                                             | ❌ |
 | swift           | Integration for the swift buildsystem                                                                                         | 🎉 |
 | swift-format    | Integration for swift-formatter                                                                                               | 🎉 |
