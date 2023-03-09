@@ -125,7 +125,7 @@ namespace ScriptDir {
             res += "PATH=/app/bin:/usr/bin:/usr/local/bin:/var/run/host/usr/bin/:/var/run/host/usr/local/bin/";
             vte.vexpand = true;
             vte.hexpand = true;
-            vte.spawn_async (Vte.PtyFlags.DEFAULT, cwd, { "flatpak-spawn", "--host", "-v", e.path }, res, 0, null, int.MAX, null, null);
+            vte.spawn_async (Vte.PtyFlags.DEFAULT, cwd, { "flatpak-spawn", "--host", e.path }, res, 0, null, int.MAX, null, null);
             var sc = new Gtk.ScrolledWindow ();
             sc.child = vte;
             this.child = sc;
