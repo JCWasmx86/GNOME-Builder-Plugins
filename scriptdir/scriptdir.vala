@@ -110,6 +110,9 @@ namespace ScriptDir {
             var listview = new Gtk.ListView (this.selection_model, this.factory);
             sc.child = listview;
             this.child = sc;
+            listview.activate.connect (idx => {
+                // Nothing
+            });
         }
     }
 
