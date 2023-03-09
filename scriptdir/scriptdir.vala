@@ -20,7 +20,6 @@
 [CCode (cname = "scriptdir_get_resource")]
 public static extern Resource scriptdir_get_resource ();
 
-// TODO: Several files
 namespace ScriptDir {
     public class WorkspaceAddin : GLib.Object, Ide.WorkspaceAddin {
         public void page_changed (Ide.Page? page) {
