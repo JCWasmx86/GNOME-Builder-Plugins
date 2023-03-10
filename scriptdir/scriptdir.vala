@@ -91,14 +91,9 @@ namespace ScriptDir {
             this.factory = new Gtk.SignalListItemFactory ();
             this.selection_model = new Gtk.SingleSelection (this.model);
             this.factory.setup.connect (item => {
-                item.set_child (new ScriptEntryRow ());
-            });
-            this.factory.bind.connect (item => {
-                var script = (ScriptEntry) item.get_item ();
-                var row = (ScriptEntryRow) item.get_child ();
-                row.set_title (script.name);
-                row.set_subtitle (script.description);
+                var row = new ScriptEntryRow ();
                 row.btn.clicked.connect (() => {
+                    var script = (ScriptEntry) item.get_item ();
                     info ("Executing script \"%s\"", script.name);
                     var sip = new ScriptIdePage (this.cwd, script);
                     var p = new Panel.Position ();
@@ -106,6 +101,13 @@ namespace ScriptDir {
                     sip.raise ();
                     sip.grab_focus ();
                 });
+                item.set_child (row);
+            });
+            this.factory.bind.connect (item => {
+                var script = (ScriptEntry) item.get_item ();
+                var row = (ScriptEntryRow) item.get_child ();
+                row.set_title (script.name);
+                row.set_subtitle (script.description);
             });
             var sc = new Gtk.ScrolledWindow ();
             var listview = new Gtk.ListView (this.selection_model, this.factory);
