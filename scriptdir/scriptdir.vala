@@ -99,6 +99,7 @@ namespace ScriptDir {
                 row.set_title (script.name);
                 row.set_subtitle (script.description);
                 row.btn.clicked.connect (() => {
+                    info ("Executing script \"%s\"", script.name);
                     var sip = new ScriptIdePage (this.cwd, script);
                     var p = new Panel.Position ();
                     workspace.add_page (sip, p);
