@@ -5,19 +5,14 @@ project(
     version: '0.1.0',
     meson_version: '>= 0.60.0',
 )
-is_flatpak = get_option('flatpak_build')
-if not is_flatpak
-    c = run_command('whoami', check: true)
-    assert(c.returncode() == 0, 'whoami failed????')
-    user_name = c.stdout().strip()
-    if user_name == 'root'
-        warning('Don\'t run as root!')
-        install_dir = '/root/.local/share/gnome-builder/plugins'
-    else
-        install_dir = '/home' / user_name / '.local/share/gnome-builder/plugins'
-    endif
+c = run_command('whoami', check: true)
+assert(c.returncode() == 0, 'whoami failed????')
+user_name = c.stdout().strip()
+if user_name == 'root'
+    warning('Don\'t run as root!')
+    install_dir = '/root/.local/share/gnome-builder/plugins'
 else
-    install_dir = get_option('prefix')
+    install_dir = '/home' / user_name / '.local/share/gnome-builder/plugins'
 endif
 vapi_dir = meson.current_source_dir() / 'vapi'
 add_project_arguments(['--vapidir', vapi_dir], language: 'vala')
