@@ -142,7 +142,10 @@ namespace ScriptDir {
             this.btn = new Gtk.Button.from_icon_name ("execute-from-symbolic");
             btn.hexpand = false;
             btn.vexpand = false;
+            btn.valign = Gtk.Align.CENTER;
+            btn.halign = Gtk.Align.CENTER;
             btn.set_size_request (16, 16);
+            btn.get_style_context ().add_class ("flat");
             this.add_suffix (btn);
         }
     }
