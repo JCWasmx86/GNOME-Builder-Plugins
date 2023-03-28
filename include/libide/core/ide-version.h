@@ -52,7 +52,7 @@
  *
  * libide major version component (e.g. 43 if %IDE_VERSION is 43.1)
  */
-#define IDE_MAJOR_VERSION 44
+#define IDE_MAJOR_VERSION 45
 
 /**
  * IDE_MINOR_VERSION:
@@ -66,7 +66,7 @@
  *
  * libide version.
  */
-#define IDE_VERSION 44.beta
+#define IDE_VERSION 45.alpha
 
 /**
  * IDE_VERSION_S:
@@ -74,7 +74,7 @@
  * libide version, encoded as a string, useful for printing and
  * concatenation.
  */
-#define IDE_VERSION_S "44.beta"
+#define IDE_VERSION_S "45.alpha"
 
 #define IDE_ENCODE_VERSION(major,minor,micro) \
         ((major) << 24 | (minor) << 16 | (micro) << 8)

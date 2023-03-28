@@ -21,6 +21,7 @@
 #pragma once
 
 #include <gio/gio.h>
+#include <libdex.h>
 
 #define IDE_CORE_INSIDE
 
@@ -32,6 +33,7 @@
 #include "ide-global.h"
 #include "ide-gsettings-action-group.h"
 #include "ide-log.h"
+#include "ide-log-item.h"
 #include "ide-macros.h"
 #include "ide-notification.h"
 #include "ide-notifications.h"

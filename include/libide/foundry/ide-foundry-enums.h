@@ -44,6 +44,12 @@ _IDE_EXTERN
 GType ide_run_command_kind_get_type (void);
 #define IDE_TYPE_RUN_COMMAND_KIND (ide_run_command_kind_get_type())
 
+/* enumerations from "ide-run-context.h" */
+
+_IDE_EXTERN
+GType ide_run_context_shell_get_type (void);
+#define IDE_TYPE_RUN_CONTEXT_SHELL (ide_run_context_shell_get_type())
+
 /* enumerations from "ide-runtime.h" */
 
 _IDE_EXTERN

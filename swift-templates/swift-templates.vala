@@ -87,7 +87,7 @@ public class SwiftLibraryTemplate : Ide.ProjectTemplate {
 internal Ide.RunContext create_context (string path, string id) {
     var ret = new Ide.RunContext ();
     ret.push_host ();
-    ret.push_shell (true);
+    ret.push_shell (Ide.RunContextShell.DEFAULT);
     ret.append_args (new string[] { "swift", "package", "init", "--type", id });
     warning (path);
     ret.set_cwd (path);
