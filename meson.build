@@ -19,7 +19,6 @@ add_project_arguments(['--vapidir', vapi_dir], language: 'vala')
 add_project_arguments(['-g3'], language: 'c')
 
 inc = include_directories(
-    'include/libpeas',
     'include/libdex-1',
     'include/libide',
     'include/libide/code',
@@ -43,6 +42,7 @@ inc = include_directories(
     'include/libide/vcs',
     'include/libide/webkit',
     'include/libpanel-1',
+    'include/libpeas',
     'include/vte-2.91',
     'include/webkitgtk-6.0',
 )
@@ -59,11 +59,11 @@ dependencies = [
     dependency('libsoup-3.0'),
     dependency('template-glib-1.0'),
     vala_compiler.find_library('ide', dirs: vapi_dir),
+    vala_compiler.find_library('libdex', dirs: vapi_dir),
     vala_compiler.find_library('linux'),
     vala_compiler.find_library('panel-1', dirs: vapi_dir),
-    vala_compiler.find_library('vte-3.91', dirs: vapi_dir),
     vala_compiler.find_library('peas', dirs: vapi_dir),
-    vala_compiler.find_library('libdex', dirs: vapi_dir),
+    vala_compiler.find_library('vte-3.91', dirs: vapi_dir),
 ]
 
 gnome = import('gnome', required: false)
