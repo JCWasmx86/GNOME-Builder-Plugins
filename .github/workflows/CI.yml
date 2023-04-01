@@ -17,6 +17,7 @@ jobs:
     - uses: flatpak/flatpak-github-actions/flatpak-builder@v4
       with:
         bundle: org.gnome.Builder.Plugin.JCWasmx86Plugins
+        build-bundle: false
         manifest-path: org.gnome.Builder.Plugin.JCWasmx86Plugins.json
         cache-key: flatpak-builder-${{ github.sha }}
         repository-name: gnome-nightly
