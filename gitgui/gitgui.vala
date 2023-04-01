@@ -548,7 +548,7 @@ namespace GitGui {
                 child.hexpand = true;
                 child.vexpand = true;
                 var provider = new Gtk.CssProvider ();
-                provider.load_from_data ("textview{font-family: Monospace;}".data);
+                provider.load_from_data ("textview{font-family: Monospace;}");
                 child.input_hints = Gtk.InputHints.EMOJI | Gtk.InputHints.SPELLCHECK | Gtk.InputHints.WORD_COMPLETION | Gtk.InputHints.UPPERCASE_SENTENCES;
                 child.get_style_context ().add_provider (provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
                 sc = new Gtk.ScrolledWindow ();

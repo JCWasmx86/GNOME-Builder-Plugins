@@ -31,7 +31,7 @@ namespace GitGui {
             this.workdir = workdir.get_path ();
             this.view = new GtkSource.View ();
             var provider = new Gtk.CssProvider ();
-            provider.load_from_data ("textview{font-family: Monospace;}".data);
+            provider.load_from_data ("textview{font-family: Monospace;}");
             this.view.get_style_context ().add_provider (provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
             this.view.set_show_line_numbers (true);
             this.view.editable = false;
