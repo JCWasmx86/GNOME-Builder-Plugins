@@ -107,8 +107,8 @@ namespace GitGui {
                                                       | Linux.InotifyMaskFlags.DELETE | Linux.InotifyMaskFlags.DELETE_SELF
                                                       | Linux.InotifyMaskFlags.MOVE_SELF);
                     while (true) {
-                        Linux.InotifyEvent evt = { 0 };
-                        Posix.read (ifd, &evt, sizeof (Linux.InotifyEvent) + Posix.Limits.NAME_MAX + 1);
+                        Linux.InotifyEvent *evt = Posix.malloc (sizeof (Linux.InotifyEvent) + Posix.Limits.NAME_MAX + 1);
+                        Posix.read (ifd, evt, sizeof (Linux.InotifyEvent) + Posix.Limits.NAME_MAX + 1);
                         var r = Posix.stat (full_path, out buf);
                         var updated_config = r == 0 && buf.st_ino == ino && buf.st_mtime > mtime;
                         r = Posix.stat (index_path, out idx_buf);
@@ -140,6 +140,7 @@ namespace GitGui {
                                 info ("Unhandled event: %u", evt.mask);
                             }
                         }
+                      Posix.free(evt);
                     }
                     Linux.inotify_rm_watch (ifd, fd);
                 }
