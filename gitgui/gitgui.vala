@@ -549,7 +549,7 @@ namespace GitGui {
                 child.hexpand = true;
                 child.vexpand = true;
                 var provider = new Gtk.CssProvider ();
-                #if FLATPAK == true
+                #if FLATPAK
                     provider.load_from_data ("textview{font-family: Monospace;}");
                 #else
                     provider.load_from_data ("textview{font-family: Monospace;}".data);

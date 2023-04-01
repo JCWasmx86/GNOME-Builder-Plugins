@@ -31,6 +31,9 @@
       "builddir": true,
       "buildsystem": "meson",
       "no-make-install": true,
+      "config-opts": [
+        "-Dflatpak=true"
+      ],
       "sources": [
         {
           "type": "git",

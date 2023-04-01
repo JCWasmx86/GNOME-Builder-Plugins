@@ -31,7 +31,7 @@ namespace GitGui {
             this.workdir = workdir.get_path ();
             this.view = new GtkSource.View ();
             var provider = new Gtk.CssProvider ();
-            #if FLATPAK == true
+            #if FLATPAK
                 provider.load_from_data ("textview{font-family: Monospace;}");
             #else
                 provider.load_from_data ("textview{font-family: Monospace;}".data);
