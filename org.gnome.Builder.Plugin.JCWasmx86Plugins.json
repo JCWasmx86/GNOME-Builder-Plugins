@@ -44,7 +44,7 @@
       "post-install": [
         "install -v -d ${FLATPAK_DEST}/lib/gnome-builder/plugins",
         "install -v -Dm755 libclangd_gb.so libgitgui.so libicon_installer.so libmesonlsp.so libscriptdir.so libshfmt.so libswift-templates.so libtexlab.so ${FLATPAK_DEST}/lib/gnome-builder/plugins",
-        "install -v -Dm755 clangd.plugin gitgui.plugin icon_installer.plugin meson.plugin scriptdir.plugin shfmt.plugin swift-templates.plugin texlab.plugin ${FLATPAK_DEST}/lib/gnome-builder/plugins"
+        "install -v -Dm644 clangd.plugin gitgui.plugin icon_installer.plugin meson.plugin scriptdir.plugin shfmt.plugin swift-templates.plugin texlab.plugin ${FLATPAK_DEST}/lib/gnome-builder/plugins"
       ]
     }
   ]
