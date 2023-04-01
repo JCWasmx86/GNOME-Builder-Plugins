@@ -14,9 +14,9 @@ jobs:
         run: |
           sudo apt update
           sudo apt install flatpak flatpak-builder
-          flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-          flatpak remote-add --if-not-exists gnome-nightly https://nightly.gnome.org/gnome-nightly.flatpakrepo
-          flatpak install org.gnome.Builder.Devel
+          flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+          flatpak remote-add --user --if-not-exists gnome-nightly https://nightly.gnome.org/gnome-nightly.flatpakrepo
+          flatpak install --user org.gnome.Builder.Devel
           flatpak-builder repo org.gnome.Builder.Plugin.JCWasmx86Plugins.json --force-clean --install --user
   build:
     runs-on: ubuntu-22.04
