@@ -93,7 +93,7 @@ namespace ScriptDir {
             this.factory.setup.connect (item => {
                 var row = new ScriptEntryRow ();
                 row.btn.clicked.connect (() => {
-                    var script = (ScriptEntry) item.get_item ();
+                    var script = (ScriptEntry) (item.get_item ());
                     info ("Executing script \"%s\"", script.name);
                     var sip = new ScriptIdePage (this.cwd, script);
                     var p = new Panel.Position ();
@@ -104,8 +104,8 @@ namespace ScriptDir {
                 item.set_child (row);
             });
             this.factory.bind.connect (item => {
-                var script = (ScriptEntry) item.get_item ();
-                var row = (ScriptEntryRow) item.get_child ();
+                var script = (ScriptEntry) (item.get_item ());
+                var row = (ScriptEntryRow) (item.get_child ());
                 row.set_title (script.name);
                 row.set_subtitle (script.description);
             });
