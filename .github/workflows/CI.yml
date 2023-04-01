@@ -12,6 +12,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Flatpak build
         run: |
+          sudo apt update
           sudo apt install flatpak flatpak-builder
           flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
           flatpak remote-add --if-not-exists gnome-nightly https://nightly.gnome.org/gnome-nightly.flatpakrepo
