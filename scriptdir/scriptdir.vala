@@ -93,7 +93,7 @@ namespace ScriptDir {
             this.factory.setup.connect (item => {
                 var row = new ScriptEntryRow ();
                 row.btn.clicked.connect (() => {
-                    var script = (ScriptEntry) (((Gtk.ListItem)item).get_item ());
+                    var script = (ScriptEntry) (((Gtk.ListItem) item).get_item ());
                     info ("Executing script \"%s\"", script.name);
                     var sip = new ScriptIdePage (this.cwd, script);
                     var p = new Panel.Position ();
@@ -101,11 +101,11 @@ namespace ScriptDir {
                     sip.raise ();
                     sip.grab_focus ();
                 });
-                item.set_child (row);
+                ((Gtk.ListItem) item).set_child (row);
             });
             this.factory.bind.connect (item => {
-                var script = (ScriptEntry) (((Gtk.ListItem)item).get_item ());
-                var row = (ScriptEntryRow) (((Gtk.ListItem)item).get_child ());
+                var script = (ScriptEntry) (((Gtk.ListItem) item).get_item ());
+                var row = (ScriptEntryRow) (((Gtk.ListItem) item).get_child ());
                 row.set_title (script.name);
                 row.set_subtitle (script.description);
             });
@@ -190,3 +190,4 @@ public void peas_register_types (TypeModule module) {
     var obj = (Peas.ObjectModule) module;
     obj.register_extension_type (typeof (Ide.WorkspaceAddin), typeof (ScriptDir.WorkspaceAddin));
 }
+
