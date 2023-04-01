@@ -16,7 +16,7 @@ else
 endif
 vapi_dir = meson.current_source_dir() / 'vapi'
 add_project_arguments(['--vapidir', vapi_dir], language: 'vala')
-add_project_arguments(['-g3'], language: 'c')
+add_project_arguments(['-g3', '-I', '/app/include/template-glib-1.0'], language: 'c')
 
 inc = include_directories(
     'include/libdex-1',
