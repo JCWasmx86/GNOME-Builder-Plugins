@@ -7,19 +7,16 @@ on:
   workflow_dispatch:
 jobs:
   flatpakbuild:
-    name: "Flatpak"
-    runs-on: ubuntu-latest
-    container:
-      image: bilelmoussaoui/flatpak-github-actions:gnome-nightly
-      options: --privileged
+    runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v2
-    - uses: flatpak/flatpak-github-actions/flatpak-builder@v4
-      with:
-        manifest-path: org.gnome.Builder.Plugin.JCWasmx86Plugins.json
-        cache-key: flatpak-builder-${{ github.sha }}
-        repository-name: gnome-nightly
-
+      - uses: actions/checkout@v3
+      - name: Flatpak build
+        run: |
+          sudo apt install flatpak flatpak-builder
+          flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+          flatpak remote-add --if-not-exists gnome-nightly https://nightly.gnome.org/gnome-nightly.flatpakrepo
+          flatpak install org.gnome.Builder.Devel
+          flatpak-builder repo org.gnome.Builder.Plugin.JCWasmx86Plugins.json --force-clean --install --user
   build:
     runs-on: ubuntu-22.04
     steps:
