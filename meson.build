@@ -43,6 +43,7 @@ inc = include_directories(
     'include/libide/webkit',
     'include/libpanel-1',
     'include/libpeas',
+    'include/template-glib-1.0',
     'include/vte-2.91',
     'include/webkitgtk-6.0',
 )

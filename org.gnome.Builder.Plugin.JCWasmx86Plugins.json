@@ -1,0 +1,48 @@
+{
+  "app-id": "org.gnome.Builder.Plugin.JCWasmx86Plugins",
+  "runtime": "org.gnome.Builder.Devel",
+  "runtime-version": "master",
+  "sdk": "org.gnome.Sdk//master",
+  "build-extension": true,
+  "finish-args": [
+    "--share=network",
+    "--share=ipc",
+    "--socket=fallback-x11",
+    "--device=dri",
+    "--socket=wayland"
+  ],
+  "cleanup": [
+    "/include",
+    "/lib/pkgconfig",
+    "/man",
+    "/share/doc",
+    "/share/gtk-doc",
+    "/share/man",
+    "/share/pkgconfig",
+    "*.la",
+    "*.a"
+  ],
+  "build-options": {
+    "prefix": "/app/lib/gnome-builder/plugins"
+  },
+  "modules": [
+    {
+      "name": "org.gnome.builder.plugin.jcwasmx86plugins",
+      "builddir": true,
+      "buildsystem": "meson",
+      "no-make-install": true,
+      "sources": [
+        {
+          "type": "git",
+          "url": "https://github.com/JCWasmx86/GNOME-Builder-Plugins",
+          "branch": "main"
+        }
+      ],
+      "post-install": [
+        "install -v -d ${FLATPAK_DEST}/lib/gnome-builder/plugins",
+        "install -v -Dm755 libtestplugin.so ${FLATPAK_DEST}/lib/gnome-builder/plugins",
+        "install -v -Dm755 test.plugin ${FLATPAK_DEST}/lib/gnome-builder/plugins"
+      ]
+    }
+  ]
+}
