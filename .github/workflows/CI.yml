@@ -6,6 +6,20 @@ on:
     branches: [ "main" ]
   workflow_dispatch:
 jobs:
+  flatpakbuild:
+    name: "Flatpak"
+    runs-on: ubuntu-latest
+    container:
+      image: bilelmoussaoui/flatpak-github-actions:gnome-nightly
+      options: --privileged
+    steps:
+    - uses: actions/checkout@v2
+    - uses: flatpak/flatpak-github-actions/flatpak-builder@v4
+      with:
+        bundle: org.gnome.Builder.Plugin.JCWasmx86Plugins
+        manifest-path: org.gnome.Builder.Plugin.JCWasmx86Plugins.json
+        cache-key: flatpak-builder-${{ github.sha }}
+
   build:
     runs-on: ubuntu-22.04
     steps:
