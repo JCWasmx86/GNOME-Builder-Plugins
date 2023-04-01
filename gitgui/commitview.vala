@@ -39,7 +39,11 @@ namespace GitGui {
             this.view.hexpand = true;
             this.view.set_show_line_numbers (true);
             var provider = new Gtk.CssProvider ();
-            provider.load_from_data ("textview{font-family: Monospace;}");
+            #if FLATPAK == true
+                provider.load_from_data ("textview{font-family: Monospace;}");
+            #else
+                provider.load_from_data ("textview{font-family: Monospace;}".data);
+            #endif
             this.view.get_style_context ().add_provider (provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
             var sc = new Gtk.ScrolledWindow ();
             this.overview = new CommitOverview (c);
@@ -230,7 +234,11 @@ namespace GitGui {
             this.append (sc);
             sc = new Gtk.ScrolledWindow ();
             var provider = new Gtk.CssProvider ();
-            provider.load_from_data ("textview{font-family: Monospace;}");
+            #if FLATPAK == true
+                provider.load_from_data ("textview{font-family: Monospace;}");
+            #else
+                provider.load_from_data ("textview{font-family: Monospace;}".data);
+            #endif
             this.view.get_style_context ().add_provider (provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
             sc.child = this.view;
             this.view.set_show_line_numbers (true);

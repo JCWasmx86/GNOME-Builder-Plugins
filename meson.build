@@ -15,6 +15,7 @@ else
     install_dir = '/home' / user_name / '.local/share/gnome-builder/plugins'
 endif
 vapi_dir = meson.current_source_dir() / 'vapi'
+add_project_arguments(['-D', 'FLATPAK=' + get_option('flatpak').to_string()], language: 'vala')
 add_project_arguments(['--vapidir', vapi_dir], language: 'vala')
 add_project_arguments(['-g3'], language: 'c')
 
