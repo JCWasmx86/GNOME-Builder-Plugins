@@ -57,12 +57,12 @@ dependencies = [
     dependency('json-glib-1.0'),
     dependency('libadwaita-1', version: '>=1.2.0'),
     dependency('libsoup-3.0'),
-    dependency('template-glib-1.0'),
     vala_compiler.find_library('ide', dirs: vapi_dir),
     vala_compiler.find_library('libdex', dirs: vapi_dir),
     vala_compiler.find_library('linux'),
     vala_compiler.find_library('panel-1', dirs: vapi_dir),
     vala_compiler.find_library('peas', dirs: vapi_dir),
+    vala_compiler.find_library('template-glib-1.0', dirs: vapi_dir),
     vala_compiler.find_library('vte-3.91', dirs: vapi_dir),
 ]
 
