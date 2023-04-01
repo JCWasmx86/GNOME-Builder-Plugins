@@ -19,6 +19,8 @@ jobs:
         bundle: org.gnome.Builder.Plugin.JCWasmx86Plugins
         manifest-path: org.gnome.Builder.Plugin.JCWasmx86Plugins.json
         cache-key: flatpak-builder-${{ github.sha }}
+        repository-name: gnome-nightly
+        repository-url: https://nightly.gnome.org/gnome-nightly.flatpakrepo
 
   build:
     runs-on: ubuntu-22.04
