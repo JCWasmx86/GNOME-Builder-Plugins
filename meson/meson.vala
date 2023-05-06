@@ -34,6 +34,12 @@ public class MesonService : Ide.LspService {
     }
 }
 
+class MesonCodeActionProvider : Ide.LspCodeActionProvider, Ide.CodeActionProvider {
+    public void load () {
+        bind_client (this);
+    }
+}
+
 public sealed class MesonDiagnosticProvider : Ide.LspDiagnosticProvider, Ide.DiagnosticProvider {
     public void load () {
         bind_client (this);
@@ -73,6 +79,7 @@ class MesonCompletionProvider : Ide.LspCompletionProvider, GtkSource.CompletionP
 
 public void peas_register_types (TypeModule module) {
     var obj = (Peas.ObjectModule) module;
+    obj.register_extension_type (typeof (Ide.CodeActionProvider), typeof (MesonCodeActionProvider));
     obj.register_extension_type (typeof (Ide.DiagnosticProvider), typeof (MesonDiagnosticProvider));
     obj.register_extension_type (typeof (Ide.SymbolResolver), typeof (MesonSymbolResolver));
     obj.register_extension_type (typeof (GtkSource.HoverProvider), typeof (MesonHoverProvider));
