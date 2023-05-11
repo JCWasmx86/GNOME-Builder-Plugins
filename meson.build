@@ -22,8 +22,6 @@ add_project_arguments(['--vapidir', vapi_dir], language: 'vala')
 add_project_arguments(['-g3'], language: 'c')
 
 inc = include_directories(
-    'include/libdex-1',
-    'include/libide',
     'include/libide/code',
     'include/libide/core',
     'include/libide/debugger',
@@ -44,6 +42,8 @@ inc = include_directories(
     'include/libide/tweaks',
     'include/libide/vcs',
     'include/libide/webkit',
+    'include/libdex-1',
+    'include/libide',
     'include/libpanel-1',
     'include/libpeas',
     'include/template-glib-1.0',
