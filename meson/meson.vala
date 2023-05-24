@@ -77,13 +77,20 @@ class MesonCompletionProvider : Ide.LspCompletionProvider, GtkSource.CompletionP
     }
 }
 
+public class MesonRenameProvider : Ide.LspRenameProvider, Ide.RenameProvider {
+    public void load () {
+        bind_client (this);
+    }
+}
+
 public void peas_register_types (TypeModule module) {
     var obj = (Peas.ObjectModule) module;
+    obj.register_extension_type (typeof (GtkSource.CompletionProvider), typeof (MesonCompletionProvider));
+    obj.register_extension_type (typeof (GtkSource.HoverProvider), typeof (MesonHoverProvider));
     obj.register_extension_type (typeof (Ide.CodeActionProvider), typeof (MesonCodeActionProvider));
     obj.register_extension_type (typeof (Ide.DiagnosticProvider), typeof (MesonDiagnosticProvider));
-    obj.register_extension_type (typeof (Ide.SymbolResolver), typeof (MesonSymbolResolver));
-    obj.register_extension_type (typeof (GtkSource.HoverProvider), typeof (MesonHoverProvider));
-    obj.register_extension_type (typeof (Ide.Highlighter), typeof (MesonHighlighter));
     obj.register_extension_type (typeof (Ide.Formatter), typeof (MesonFormatter));
-    obj.register_extension_type (typeof (GtkSource.CompletionProvider), typeof (MesonCompletionProvider));
+    obj.register_extension_type (typeof (Ide.Highlighter), typeof (MesonHighlighter));
+    obj.register_extension_type (typeof (Ide.RenameProvider), typeof (MesonRenameProvider));
+    obj.register_extension_type (typeof (Ide.SymbolResolver), typeof (MesonSymbolResolver));
 }
