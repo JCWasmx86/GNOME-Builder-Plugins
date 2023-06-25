@@ -1,6 +1,7 @@
 option('builder_abi', type: 'string', value: '45', description: 'The ABI to use')
 option('compress', type: 'feature', value: 'enabled', description: 'Whether to compress the plugins using eu-elfcompress')
 option('flatpak', type: 'boolean', value: false, description: 'Whether this is a flatpak build or a bare-metal build')
+option('plugin_callhierarchy', type: 'feature', value: 'enabled')
 option('plugin_clangd', type: 'feature', value: 'enabled')
 option('plugin_gitgui', type: 'feature', value: 'enabled')
 option('plugin_icon_installer', type: 'feature', value: 'enabled')

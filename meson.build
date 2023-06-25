@@ -59,6 +59,7 @@ dependencies = [
     dependency('gtk4'),
     dependency('gtksourceview-5'),
     dependency('json-glib-1.0'),
+    dependency('jsonrpc-glib-1.0'),
     dependency('libadwaita-1', version: '>=1.2.0'),
     dependency('libsoup-3.0'),
     vala_compiler.find_library('ide', dirs: vapi_dir),
@@ -79,6 +80,7 @@ if get_option('smart').enabled()
     enabled_plugins += 'icon_installer'
     enabled_plugins += 'gitgui'
     progs = [
+        'callhierarchy',
         'clangd',
         'shfmt',
         'texlab',
@@ -105,6 +107,10 @@ if get_option('smart').enabled()
         plugins += (x + '.plugin')
     endforeach
 else
+    if get_option('plugin_callhierarchy').enabled()
+        subdir('callhierarchy')
+        plugins += 'callhierarchy.plugin'
+    endif
     if get_option('plugin_clangd').enabled()
         subdir('clangd')
         plugins += 'clangd.plugin'
