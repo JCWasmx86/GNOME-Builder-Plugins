@@ -21,7 +21,8 @@ using Jsonrpc;
 
 [CCode (cname = "wrap_call_async_finish")]
 extern GLib.Variant ? wrap_call_async_finish (Ide.LspClient client, GLib.AsyncResult result) throws GLib.Error;
-
+[CCode (cname = "callhierarchy_get_resource")]
+public static extern Resource callhierarchy_get_resource ();
 
 namespace CallHierarchy {
     // From VLS
@@ -81,7 +82,7 @@ namespace CallHierarchy {
         }
 
         public CallHierarchyPanel (Ide.Workspace workspace, string dir) {
-            Gtk.IconTheme.get_for_display (Gdk.Display.get_default ()).add_resource_path ("/plugins/scriptdir/icons");
+            Gtk.IconTheme.get_for_display (Gdk.Display.get_default ()).add_resource_path ("/plugins/callhierarchy/icons");
             this.directory = dir;
             this.view = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
             this.incoming = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
@@ -330,6 +331,8 @@ namespace CallHierarchy {
 }
 
 public void peas_register_types (TypeModule module) {
+    var r = callhierarchy_get_resource ();
+    GLib.resources_register (r);
     var obj = (Peas.ObjectModule) module;
     obj.register_extension_type (typeof (Ide.WorkspaceAddin), typeof (CallHierarchy.WorkspaceAddin));
     obj.register_extension_type (typeof (Ide.EditorPageAddin), typeof (CallHierarchy.CallHierarchyPageAddin));
