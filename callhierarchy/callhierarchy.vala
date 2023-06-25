@@ -126,7 +126,7 @@ namespace CallHierarchy {
         public CallHierarchyItem item;
         public Ide.Buffer buffer;
 
-        public CHIData(Ide.LspClient client, Ide.Buffer buffer, GLib.Variant variant, CallHierarchyItem item) {
+        public CHIData (Ide.LspClient client, Ide.Buffer buffer, GLib.Variant variant, CallHierarchyItem item) {
             this.client = client;
             this.buffer = buffer;
             this.variant = variant;
@@ -138,6 +138,7 @@ namespace CallHierarchy {
         private SimpleActionGroup map;
         private Ide.SourceView view;
         private unowned GLib.File file;
+        private Ide.Workspace workspace;
 
         construct {
             this.map = new GLib.SimpleActionGroup ();
@@ -193,8 +194,8 @@ namespace CallHierarchy {
                             break;
                         }
                         var chi = (CallHierarchyItem) Json.gobject_deserialize (typeof (CallHierarchyItem), Json.gvariant_serialize (child));
-                        root_list_store_i.append (new CHIData(client, buffer, child, chi));
-                        root_list_store_o.append (new CHIData(client, buffer, child, chi));
+                        root_list_store_i.append (new CHIData (client, buffer, child, chi));
+                        root_list_store_o.append (new CHIData (client, buffer, child, chi));
                     }
                     var tlm_i = new Gtk.TreeListModel (root_list_store_i, true, false, list_incoming);
                     INCOMING.append (create_view (tlm_i));
@@ -206,29 +207,35 @@ namespace CallHierarchy {
             });
         }
 
-        private Gtk.ListView create_view(Gtk.TreeListModel model) {
+        private Gtk.ListView create_view (Gtk.TreeListModel model) {
             var factory = new Gtk.SignalListItemFactory ();
             factory.setup.connect (item => {
                 var expander = new Gtk.TreeExpander ();
-                var lbl = new Gtk.Label("");
+                var lbl = new Gtk.Label ("");
                 expander.child = lbl;
                 item.set_child (expander);
             });
-            factory.bind.connect(item => {
+            factory.bind.connect (item => {
                 var chi = (CHIData) (((Gtk.ListItem) item).get_item ());
                 var expander = (Gtk.TreeExpander) (((Gtk.ListItem) item).get_child ());
                 var lbl = expander.child;
                 expander.list_row = model.get_row (item.position);
-                ((Gtk.Label)lbl).set_label (chi.item.name);
+                ((Gtk.Label) lbl).set_label (chi.item.name);
                 if (chi.item.detail != null)
-                    ((Gtk.Label)lbl).tooltip_text = chi.item.detail;
+                    ((Gtk.Label) lbl).tooltip_text = chi.item.detail;
             });
             var list = new Gtk.ListView (new Gtk.SingleSelection (model), factory);
+            list.activate.connect (idx => {
+                var item = (CHIData) list.model.get_item (idx);
+                var f = File.new_for_path (Uri.parse (item.item.uri, UriFlags.NONE).get_path ());
+                var p = item.item.range.start;
+                Ide.editor_focus_location (workspace, null, new Ide.Location (f, (int) p.line, (int) p.character));
+            });
             return list;
         }
 
-        private ListModel? list_outgoing(Object item) {
-            var chi = (CHIData)item;
+        private ListModel ? list_outgoing (Object item) {
+            var chi = (CHIData) item;
             var ls = new GLib.ListStore (typeof (CHIData));
             var builder = new VariantBuilder (new VariantType ("a{sv}"));
             builder.add ("{sv}", "item", chi.variant);
@@ -243,8 +250,8 @@ namespace CallHierarchy {
                             break;
                         }
                         var chi1 = (CallHierarchyOutgoingCall) Json.gobject_deserialize (typeof (CallHierarchyOutgoingCall), Json.gvariant_serialize (child));
-                        var raw = new CHIData(chi.client, chi.buffer, extract_from_gvariant (child, "to"), chi1.to);
-                        ls.append(raw);
+                        var raw = new CHIData (chi.client, chi.buffer, extract_from_gvariant (child, "to"), chi1.to);
+                        ls.append (raw);
                     }
                 } catch (Error e) {
                     critical ("%s", e.message);
@@ -253,8 +260,8 @@ namespace CallHierarchy {
             return new Gtk.TreeListModel (ls, true, false, list_outgoing);
         }
 
-        private ListModel? list_incoming(Object item) {
-            var chi = (CHIData)item;
+        private ListModel ? list_incoming (Object item) {
+            var chi = (CHIData) item;
             var ls = new GLib.ListStore (typeof (CHIData));
             var builder = new VariantBuilder (new VariantType ("a{sv}"));
             builder.add ("{sv}", "item", chi.variant);
@@ -269,8 +276,8 @@ namespace CallHierarchy {
                             break;
                         }
                         var chi1 = (CallHierarchyIncomingCall) Json.gobject_deserialize (typeof (CallHierarchyIncomingCall), Json.gvariant_serialize (child));
-                        var raw = new CHIData(chi.client, chi.buffer, extract_from_gvariant (child, "from"), chi1.from);
-                        ls.append(raw);
+                        var raw = new CHIData (chi.client, chi.buffer, extract_from_gvariant (child, "from"), chi1.from);
+                        ls.append (raw);
                     }
                 } catch (Error e) {
                     critical ("%s", e.message);
@@ -299,6 +306,7 @@ namespace CallHierarchy {
         }
 
         public void load (Ide.EditorPage page) {
+            this.workspace = Ide.widget_get_workspace (page);
             this.view = page.view;
             this.file = page.get_file ();
             var model = new GLib.Menu ();
