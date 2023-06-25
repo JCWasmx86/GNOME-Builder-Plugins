@@ -93,12 +93,14 @@ namespace CallHierarchy {
             var b = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 2);
             b.append (new Gtk.Image.from_icon_name ("call-received-symbolic"));
             b.append (new Gtk.Label ("Incoming calls"));
-            b.vexpand = true;
+            b.vexpand = false;
+            b.hexpand = true;
             this.incoming.append (b);
             b = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 2);
             b.append (new Gtk.Image.from_icon_name ("call-made-symbolic"));
             b.append (new Gtk.Label ("Outgoing calls"));
-            b.vexpand = true;
+            b.vexpand = false;
+            b.hexpand = true;
             this.outgoing.append (b);
             INCOMING = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
             INCOMING.vexpand = true;
