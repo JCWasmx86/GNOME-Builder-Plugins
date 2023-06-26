@@ -1,7 +1,7 @@
 FROM ubuntu:22.10 AS stage1
 WORKDIR /app
 RUN apt update && \
-    apt install git valac meson gcc libgee-0.8-dev libjson-glib-dev libgtk-4-dev libgtksourceview-5-dev libadwaita-1-dev libpeas-dev libtemplate-glib-1.0-dev g++ libsoup-3.0-dev zip -y &&\
+    apt install git valac meson gcc libgee-0.8-dev libjson-glib-dev libgtk-4-dev libgtksourceview-5-dev libadwaita-1-dev libpeas-dev libjsonrpc-glib-1.0-dev libtemplate-glib-1.0-dev g++ libsoup-3.0-dev zip -y &&\
     apt clean &&\
     git clone https://github.com/JCWasmx86/GNOME-Builder-Plugins
 WORKDIR /app/GNOME-Builder-Plugins
