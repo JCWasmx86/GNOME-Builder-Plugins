@@ -1,0 +1,11 @@
+[Plugin]
+Authors=JCWasmx86
+Copyright=JCWasmx86
+Description=Language server integration for GtkCssLanguageServer
+Loader=C
+Module=gtkcsslanguageserver
+Name=MesonLSP
+X-Category=lsps
+X-Diagnostic-Provider-Languages=css
+X-Diagnostic-Provider-Languages-Priority=200
+X-Builder-ABI=@BUILDER_ABI@

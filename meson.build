@@ -79,9 +79,10 @@ enabled_plugins = []
 if get_option('smart').enabled()
     enabled_plugins += 'icon_installer'
     enabled_plugins += 'gitgui'
+    enabled_plugins += 'callhierarchy'
     progs = [
-        'callhierarchy',
         'clangd',
+        'gtkcsslanguageserver',
         'shfmt',
         'texlab',
         'scriptdir',
@@ -118,6 +119,10 @@ else
     if get_option('plugin_gitgui').enabled()
         subdir('gitgui')
         plugins += 'gitgui.plugin'
+    endif
+    if get_option('plugin_gtkcsslanguageserver').enabled()
+        subdir('gtkcsslanguageserver')
+        plugins += 'gtkcsslanguageserver.plugin'
     endif
     if get_option('plugin_icon_installer').enabled()
         subdir('icon_installer')
