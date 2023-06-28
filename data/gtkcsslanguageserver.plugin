@@ -8,4 +8,5 @@ Name=MesonLSP
 X-Category=lsps
 X-Diagnostic-Provider-Languages=css
 X-Diagnostic-Provider-Languages-Priority=200
+X-Hover-Provider-Languages=css
 X-Builder-ABI=@BUILDER_ABI@

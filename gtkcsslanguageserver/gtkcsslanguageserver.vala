@@ -41,7 +41,16 @@ class GtkCSSLanguageServerDiagnosticProvider : Ide.LspDiagnosticProvider, Ide.Di
     }
 }
 
+public class GtkCSSLanguageServerHoverProvider : Ide.LspHoverProvider, GtkSource.HoverProvider {
+    public override void prepare () {
+        this.priority = 80000;
+        this.category = "GTK-CSS";
+        bind_client (this);
+    }
+}
+
 public void peas_register_types (TypeModule module) {
     var obj = (Peas.ObjectModule) module;
     obj.register_extension_type (typeof (Ide.DiagnosticProvider), typeof (GtkCSSLanguageServerDiagnosticProvider));
+    obj.register_extension_type (typeof (GtkSource.HoverProvider), typeof (GtkCSSLanguageServerHoverProvider));
 }
