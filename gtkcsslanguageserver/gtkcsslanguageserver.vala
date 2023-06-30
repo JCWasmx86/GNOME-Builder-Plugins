@@ -49,8 +49,16 @@ public class GtkCSSLanguageServerHoverProvider : Ide.LspHoverProvider, GtkSource
     }
 }
 
+
+public class GtkCSSLanguageServerSymbolResolver : Ide.LspSymbolResolver, Ide.SymbolResolver {
+    public void load () {
+        bind_client (this);
+    }
+}
+
 public void peas_register_types (TypeModule module) {
     var obj = (Peas.ObjectModule) module;
     obj.register_extension_type (typeof (Ide.DiagnosticProvider), typeof (GtkCSSLanguageServerDiagnosticProvider));
     obj.register_extension_type (typeof (GtkSource.HoverProvider), typeof (GtkCSSLanguageServerHoverProvider));
+    obj.register_extension_type (typeof (Ide.SymbolResolver), typeof (GtkCSSLanguageServerSymbolResolver));
 }
