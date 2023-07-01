@@ -32,22 +32,24 @@ unzip dist.zip
 ```
 
 ## Plugins
-| Name            | Description    | Will attempt to upstream? |
-|-----------------|:--------------:|:----------------------------------------------------------------------------------------------:|
-| clangd          | (Copied from upstream, converted to Vala): Clangd integration                                              | ❌ |
-| gitgui          | A small git integration                                                                                    | ❓ |
-| hadolint        | Integration for Hadolint, the Dockerfile linter                                                            | 🎉 |
-| icon_installer  | Allow installing icons easily in your project                                                              |    |
-| markdown        | Indenter for Markdown                                                                                      | 🎉 |
-| meson           | Integration for my meson language server                                                                   | ✅ |
-| scriptdir       | Allows you to execute predefined scripts from `~/.local/share/gnome-builder/scripts` for e.g. common tasks |    |
-| shfmt           | Shfmt integration                                                                                          | ❌ |
-| swift           | Integration for the swift buildsystem                                                                      | 🎉 |
-| swift-format    | Integration for swift-formatter                                                                            | 🎉 |
-| swift-templates | Extends the CreateProject-Dialog to add Swift-Support                                                      | ✅ |
-| swift-lint      | Integration for swift-lint                                                                                 | 🎉 |
-| texlab          | LaTeX integration                                                                                          | ❌ |
-| xmlfmt          | Formatter for XML                                                                                          | 🎉 |
+| Name                 | Description    | Will attempt to upstream? |
+|----------------------|:--------------:|:----------------------------------------------------------------------------------------------:|
+| callhierarchy        | Uses LSPs to get the call hierachy of a function/method                                                    | ❌ |
+| clangd               | (Copied from upstream, converted to Vala): Clangd integration                                              | ❌ |
+| gitgui               | A small git integration                                                                                    | ❓ |
+| hadolint             | Integration for Hadolint, the Dockerfile linter                                                            | 🎉 |
+| gtkcsslanguageserver | Integration for gtkcsslanguageserver                                                                       | ✅ |
+| icon_installer       | Allow installing icons easily in your project                                                              |    |
+| markdown             | Indenter for Markdown                                                                                      | 🎉 |
+| meson                | Integration for my meson language server                                                                   | ✅ |
+| scriptdir            | Allows you to execute predefined scripts from `~/.local/share/gnome-builder/scripts` for e.g. common tasks |    |
+| shfmt                | Shfmt integration                                                                                          | ❌ |
+| swift                | Integration for the swift buildsystem                                                                      | 🎉 |
+| swift-format         | Integration for swift-formatter                                                                            | 🎉 |
+| swift-templates      | Extends the CreateProject-Dialog to add Swift-Support                                                      | ✅ |
+| swift-lint           | Integration for swift-lint                                                                                 | 🎉 |
+| texlab               | LaTeX integration                                                                                          | ❌ |
+| xmlfmt               | Formatter for XML                                                                                          | 🎉 |
 
 - ✅: Yes
 - ❌: No
