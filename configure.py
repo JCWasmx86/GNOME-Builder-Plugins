@@ -44,6 +44,8 @@ def main():
         )
     ]
     answers = inquirer.prompt(questions)
+    if answers is None:
+        return
     to_install = answers["plugins"]
     plugins_to_disable = set(plugins)
     for plugin in to_install:
