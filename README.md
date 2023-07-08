@@ -5,6 +5,7 @@ guaranteed.
 
 
 ## Install
+For configuring you can use the `configure.py` script, too.
 ### Without docker
 ```
 # If you have Fedora 37
