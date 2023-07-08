@@ -6,6 +6,7 @@ Loader=C
 Module=gtkcsslanguageserver
 Name=MesonLSP
 X-Category=lsps
+X-Completion-Provider-Languages=css
 X-Diagnostic-Provider-Languages=css
 X-Diagnostic-Provider-Languages-Priority=200
 X-Hover-Provider-Languages=css

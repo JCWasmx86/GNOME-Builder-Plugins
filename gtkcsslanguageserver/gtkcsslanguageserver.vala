@@ -35,6 +35,12 @@ class GtkCSSLanguageServerService : Ide.LspService {
     }
 }
 
+class GtkCSSLanguageServerCompletionProvider : Ide.LspCompletionProvider, GtkSource.CompletionProvider {
+    public override void load () {
+        bind_client (this);
+    }
+}
+
 class GtkCSSLanguageServerDiagnosticProvider : Ide.LspDiagnosticProvider, Ide.DiagnosticProvider {
     public void load () {
         bind_client (this);
@@ -58,6 +64,7 @@ public class GtkCSSLanguageServerSymbolResolver : Ide.LspSymbolResolver, Ide.Sym
 
 public void peas_register_types (TypeModule module) {
     var obj = (Peas.ObjectModule) module;
+    obj.register_extension_type (typeof (GtkSource.CompletionProvider), typeof (GtkCSSLanguageServerCompletionProvider));
     obj.register_extension_type (typeof (Ide.DiagnosticProvider), typeof (GtkCSSLanguageServerDiagnosticProvider));
     obj.register_extension_type (typeof (GtkSource.HoverProvider), typeof (GtkCSSLanguageServerHoverProvider));
     obj.register_extension_type (typeof (Ide.SymbolResolver), typeof (GtkCSSLanguageServerSymbolResolver));
