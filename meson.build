@@ -150,6 +150,10 @@ else
     endif
 endif
 
+if plugins.length() == 0
+    error('No plugins enabled!')
+endif
+
 subdir('data')
 copied_tgts = []
 cp = find_program('cp')
