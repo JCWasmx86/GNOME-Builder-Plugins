@@ -1,0 +1,19 @@
+[Plugin]
+Authors=JCWasmx86 <JCWasmx86@t-online.de>
+Copyright=Copyright © 2023 JCWasmx86
+Description=Provides Pyright integration
+Loader=C
+Module=pyright
+Name=Pyright
+X-Category=lsps
+X-Code-Action-Languages=python,python3
+X-Completion-Provider-Languages=python,python3
+X-Diagnostic-Provider-Languages=python,python3
+X-Diagnostic-Provider-Languages-Priority=200
+X-Formatter-Languages=python,python3
+X-Highlighter-Languages=python,python3
+X-Hover-Provider-Languages=python,python3
+X-Rename-Provider-Languages=python,python3
+X-Symbol-Resolver-Languages=python,python3
+X-Symbol-Resolver-Languages-Priority=200
+X-Builder-ABI=@BUILDER_ABI@

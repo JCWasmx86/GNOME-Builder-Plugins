@@ -80,12 +80,13 @@ if get_option('smart').enabled()
     enabled_plugins += 'icon_installer'
     enabled_plugins += 'gitgui'
     enabled_plugins += 'callhierarchy'
+    enabled_plugins += 'scriptdir'
     progs = [
         'clangd',
         'gtkcsslanguageserver',
+        'pyright',
         'shfmt',
         'texlab',
-        'scriptdir',
     ]
     foreach prog : progs
         p = find_program(prog, required: false)
@@ -131,6 +132,10 @@ else
     if get_option('plugin_meson').enabled()
         subdir('meson')
         plugins += 'meson.plugin'
+    endif
+    if get_option('plugin_pyright').enabled()
+        subdir('pyright')
+        plugins += 'pyright.plugin'
     endif
     if get_option('plugin_scriptdir').enabled()
         subdir('scriptdir')
