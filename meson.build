@@ -95,7 +95,6 @@ if get_option('smart').enabled()
         endif
     endforeach
     spec_progs = {
-        'Swift-MesonLSP': 'meson',
         'swift': 'swift-templates',
     }
     foreach prog, plugin : spec_progs
@@ -128,10 +127,6 @@ else
     if get_option('plugin_icon_installer').enabled()
         subdir('icon_installer')
         plugins += 'icon_installer.plugin'
-    endif
-    if get_option('plugin_meson').enabled()
-        subdir('meson')
-        plugins += 'meson.plugin'
     endif
     if get_option('plugin_pyright').enabled()
         subdir('pyright')
