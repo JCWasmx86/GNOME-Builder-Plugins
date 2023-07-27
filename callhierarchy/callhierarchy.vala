@@ -19,7 +19,6 @@
  */
 using Jsonrpc;
 
-// TODO: Deduplicate
 // TODO: Rename plugin to "hierarchies"
 
 [CCode (cname = "wrap_call_async_finish")]
@@ -92,8 +91,30 @@ namespace CallHierarchy {
         private Gtk.Box subtypes;
 
         construct {
-            this.title = "Callhierarchy";
+            this.title = "Hierarchies";
             this.icon_name = "call-start-symbolic";
+        }
+
+        private Gtk.Box create_box (string icon, string label) {
+            var b = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 2);
+            b.append (new Gtk.Image.from_icon_name (icon));
+            b.append (new Gtk.Label (label));
+            b.vexpand = false;
+            b.hexpand = true;
+            return b;
+        }
+
+        private Gtk.Box create_empty_box () {
+            var b = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
+            b.vexpand = true;
+            b.hexpand = true;
+            return b;
+        }
+
+        private Gtk.ScrolledWindow wrap_scrollable (Gtk.Box b) {
+            var s = new Gtk.ScrolledWindow ();
+            s.child = b;
+            return s;
         }
 
         public CallHierarchyPanel (Ide.Workspace workspace, string dir) {
@@ -110,56 +131,21 @@ namespace CallHierarchy {
             this.supertypes.vexpand = true;
             this.view.append (this.incoming);
             this.view.append (this.outgoing);
+            this.view.append (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
             this.view.append (this.supertypes);
             this.view.append (this.subtypes);
-            var b = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 2);
-            b.append (new Gtk.Image.from_icon_name ("call-received-symbolic"));
-            b.append (new Gtk.Label ("Incoming calls"));
-            b.vexpand = false;
-            b.hexpand = true;
-            this.incoming.append (b);
-            b = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 2);
-            b.append (new Gtk.Image.from_icon_name ("call-made-symbolic"));
-            b.append (new Gtk.Label ("Outgoing calls"));
-            b.vexpand = false;
-            b.hexpand = true;
-            this.outgoing.append (b);
-            b = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 2);
-            b.append (new Gtk.Image.from_icon_name ("call-made-symbolic"));
-            b.append (new Gtk.Label ("Parent types"));
-            b.vexpand = false;
-            b.hexpand = true;
-            this.supertypes.append (b);
-            b = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 2);
-            b.append (new Gtk.Image.from_icon_name ("call-received-symbolic"));
-            b.append (new Gtk.Label ("Subtypes"));
-            b.vexpand = false;
-            b.hexpand = true;
-            this.subtypes.append (b);
-            INCOMING = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
-            INCOMING.vexpand = true;
-            INCOMING.hexpand = true;
-            OUTGOING = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
-            OUTGOING.vexpand = true;
-            OUTGOING.hexpand = true;
-            SUB_TYPES = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
-            SUB_TYPES.vexpand = true;
-            SUB_TYPES.hexpand = true;
-            SUPER_TYPES = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
-            SUPER_TYPES.vexpand = true;
-            SUPER_TYPES.hexpand = true;
-            var s = new Gtk.ScrolledWindow ();
-            s.child = INCOMING;
-            this.incoming.append (s);
-            s = new Gtk.ScrolledWindow ();
-            s.child = OUTGOING;
-            this.outgoing.append (s);
-            s = new Gtk.ScrolledWindow ();
-            s.child = SUPER_TYPES;
-            this.supertypes.append (s);
-            s = new Gtk.ScrolledWindow ();
-            s.child = SUB_TYPES;
-            this.subtypes.append (s);
+            this.incoming.append (create_box ("call-received-symbolic", "Incoming calls"));
+            this.outgoing.append (create_box ("call-made-symbolic", "Outgoing calls"));
+            this.supertypes.append (create_box ("call-made-symbolic", "Parent types"));
+            this.subtypes.append (create_box ("call-received-symbolic", "Subtypes"));
+            INCOMING = create_empty_box ();
+            OUTGOING = create_empty_box ();
+            SUB_TYPES = create_empty_box ();
+            SUPER_TYPES = create_empty_box ();
+            this.incoming.append (wrap_scrollable (INCOMING));
+            this.outgoing.append (wrap_scrollable (OUTGOING));
+            this.supertypes.append (wrap_scrollable (SUPER_TYPES));
+            this.subtypes.append (wrap_scrollable (SUB_TYPES));
             this.realize.connect (() => {
                 var sc = new Gtk.ScrolledWindow ();
                 sc.child = view;
@@ -206,36 +192,37 @@ namespace CallHierarchy {
             this.map = new GLib.SimpleActionGroup ();
             var hierarchy = new SimpleAction ("callhierarchy", null);
             hierarchy.activate.connect (() => {
-                var buffer = this.view.buffer as Ide.Buffer;
-                if (buffer == null)
+                var client = fetch_client ();
+                if (client == null)
                     return;
-                var rp = buffer.get_rename_provider ();
-                if (rp == null)
-                    return;
-                var rplsp = rp as Ide.LspRenameProvider;
-                if (rplsp == null)
-                    return;
-                var client = rplsp.client;
+                var buffer = (Ide.Buffer) this.view.buffer;
                 this.create_call_hierarchy (buffer, client);
             });
             hierarchy.set_enabled (true);
             this.map.add_action (hierarchy);
             var types = new SimpleAction ("typehierarchy", null);
             types.activate.connect (() => {
-                var buffer = this.view.buffer as Ide.Buffer;
-                if (buffer == null)
+                var client = fetch_client ();
+                if (client == null)
                     return;
-                var rp = buffer.get_rename_provider ();
-                if (rp == null)
-                    return;
-                var rplsp = rp as Ide.LspRenameProvider;
-                if (rplsp == null)
-                    return;
-                var client = rplsp.client;
+                var buffer = (Ide.Buffer) this.view.buffer;
                 this.create_type_hierarchy (buffer, client);
             });
             types.set_enabled (true);
             this.map.add_action (types);
+        }
+
+        private Ide.LspClient? fetch_client () {
+            var buffer = this.view.buffer as Ide.Buffer;
+            if (buffer == null)
+                return null;
+            var rp = buffer.get_rename_provider ();
+            if (rp == null)
+                return null;
+            var rplsp = rp as Ide.LspRenameProvider;
+            if (rplsp == null)
+                return null;
+            return rplsp.client;
         }
 
         private void create_type_hierarchy (Ide.Buffer buffer, Ide.LspClient client) {
@@ -295,15 +282,7 @@ namespace CallHierarchy {
                 try {
                     var ret = wrap_call_async_finish ((Ide.LspClient) obj, res);
                     var iter = ret.iterator ();
-                    while (true) {
-                        var child = iter.next_value ();
-                        if (child == null) {
-                            break;
-                        }
-                        var chi1 = (TypeHierarchyItem) Json.gobject_deserialize (typeof (TypeHierarchyItem), Json.gvariant_serialize (child));
-                        var raw = new THIData (thi.client, thi.buffer, child, chi1);
-                        ls.append (raw);
-                    }
+                    list_type_hierarchy_items (ls, thi, iter);
                 } catch (Error e) {
                     critical ("%s", e.message);
                 }
@@ -321,20 +300,24 @@ namespace CallHierarchy {
                 try {
                     var ret = wrap_call_async_finish ((Ide.LspClient) obj, res);
                     var iter = ret.iterator ();
-                    while (true) {
-                        var child = iter.next_value ();
-                        if (child == null) {
-                            break;
-                        }
-                        var chi1 = (TypeHierarchyItem) Json.gobject_deserialize (typeof (TypeHierarchyItem), Json.gvariant_serialize (child));
-                        var raw = new THIData (thi.client, thi.buffer, child, chi1);
-                        ls.append (raw);
-                    }
+                    list_type_hierarchy_items (ls, thi, iter);
                 } catch (Error e) {
                     critical ("%s", e.message);
                 }
             });
             return new Gtk.TreeListModel (ls, true, false, list_subtypes);
+        }
+
+        private void list_type_hierarchy_items (GLib.ListStore ls, THIData thi, GLib.VariantIter iter) {
+            while (true) {
+                var child = iter.next_value ();
+                if (child == null) {
+                    break;
+                }
+                var chi1 = (TypeHierarchyItem) Json.gobject_deserialize (typeof (TypeHierarchyItem), Json.gvariant_serialize (child));
+                var raw = new THIData (thi.client, thi.buffer, child, chi1);
+                ls.append (raw);
+            }
         }
 
         private void create_call_hierarchy (Ide.Buffer buffer, Ide.LspClient client) {
