@@ -19,6 +19,9 @@
  */
 using Jsonrpc;
 
+// TODO: Deduplicate
+// TODO: Rename plugin to "hierarchies"
+
 [CCode (cname = "wrap_call_async_finish")]
 extern GLib.Variant ? wrap_call_async_finish (Ide.LspClient client, GLib.AsyncResult result) throws GLib.Error;
 [CCode (cname = "callhierarchy_get_resource")]
@@ -49,6 +52,14 @@ namespace CallHierarchy {
     class CallHierarchyOutgoingCall : Object {
         public CallHierarchyItem to { get; set; }
     }
+
+    class TypeHierarchyItem : Object {
+        public string name { get; set; }
+        public string? detail { get; set; }
+        public string uri { get; set; }
+        public Range range { get; set; }
+        public Range selectionRange { get; set; }
+    }
     // End from VLS
 
     public class WorkspaceAddin : GLib.Object, Ide.WorkspaceAddin {
@@ -69,12 +80,16 @@ namespace CallHierarchy {
 
     private static Gtk.Box? INCOMING = null;
     private static Gtk.Box? OUTGOING = null;
+    private static Gtk.Box? SUPER_TYPES = null;
+    private static Gtk.Box? SUB_TYPES = null;
 
     public class CallHierarchyPanel : Ide.Pane {
         private string directory;
         private Gtk.Box view;
         private Gtk.Box incoming;
         private Gtk.Box outgoing;
+        private Gtk.Box supertypes;
+        private Gtk.Box subtypes;
 
         construct {
             this.title = "Callhierarchy";
@@ -87,10 +102,16 @@ namespace CallHierarchy {
             this.view = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
             this.incoming = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
             this.outgoing = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
+            this.subtypes = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
+            this.supertypes = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
             this.incoming.vexpand = true;
             this.outgoing.vexpand = true;
+            this.subtypes.vexpand = true;
+            this.supertypes.vexpand = true;
             this.view.append (this.incoming);
             this.view.append (this.outgoing);
+            this.view.append (this.supertypes);
+            this.view.append (this.subtypes);
             var b = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 2);
             b.append (new Gtk.Image.from_icon_name ("call-received-symbolic"));
             b.append (new Gtk.Label ("Incoming calls"));
@@ -103,18 +124,42 @@ namespace CallHierarchy {
             b.vexpand = false;
             b.hexpand = true;
             this.outgoing.append (b);
+            b = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 2);
+            b.append (new Gtk.Image.from_icon_name ("call-made-symbolic"));
+            b.append (new Gtk.Label ("Parent types"));
+            b.vexpand = false;
+            b.hexpand = true;
+            this.supertypes.append (b);
+            b = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 2);
+            b.append (new Gtk.Image.from_icon_name ("call-received-symbolic"));
+            b.append (new Gtk.Label ("Subtypes"));
+            b.vexpand = false;
+            b.hexpand = true;
+            this.subtypes.append (b);
             INCOMING = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
             INCOMING.vexpand = true;
             INCOMING.hexpand = true;
             OUTGOING = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
             OUTGOING.vexpand = true;
             OUTGOING.hexpand = true;
+            SUB_TYPES = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
+            SUB_TYPES.vexpand = true;
+            SUB_TYPES.hexpand = true;
+            SUPER_TYPES = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
+            SUPER_TYPES.vexpand = true;
+            SUPER_TYPES.hexpand = true;
             var s = new Gtk.ScrolledWindow ();
             s.child = INCOMING;
             this.incoming.append (s);
             s = new Gtk.ScrolledWindow ();
             s.child = OUTGOING;
             this.outgoing.append (s);
+            s = new Gtk.ScrolledWindow ();
+            s.child = SUPER_TYPES;
+            this.supertypes.append (s);
+            s = new Gtk.ScrolledWindow ();
+            s.child = SUB_TYPES;
+            this.subtypes.append (s);
             this.realize.connect (() => {
                 var sc = new Gtk.ScrolledWindow ();
                 sc.child = view;
@@ -130,6 +175,20 @@ namespace CallHierarchy {
         public Ide.Buffer buffer;
 
         public CHIData (Ide.LspClient client, Ide.Buffer buffer, GLib.Variant variant, CallHierarchyItem item) {
+            this.client = client;
+            this.buffer = buffer;
+            this.variant = variant;
+            this.item = item;
+        }
+    }
+
+    class THIData : GLib.Object {
+        public Ide.LspClient client;
+        public GLib.Variant variant;
+        public TypeHierarchyItem item;
+        public Ide.Buffer buffer;
+
+        public THIData (Ide.LspClient client, Ide.Buffer buffer, GLib.Variant variant, TypeHierarchyItem item) {
             this.client = client;
             this.buffer = buffer;
             this.variant = variant;
@@ -161,6 +220,121 @@ namespace CallHierarchy {
             });
             hierarchy.set_enabled (true);
             this.map.add_action (hierarchy);
+            var types = new SimpleAction ("typehierarchy", null);
+            types.activate.connect (() => {
+                var buffer = this.view.buffer as Ide.Buffer;
+                if (buffer == null)
+                    return;
+                var rp = buffer.get_rename_provider ();
+                if (rp == null)
+                    return;
+                var rplsp = rp as Ide.LspRenameProvider;
+                if (rplsp == null)
+                    return;
+                var client = rplsp.client;
+                this.create_type_hierarchy (buffer, client);
+            });
+            types.set_enabled (true);
+            this.map.add_action (types);
+        }
+
+        private void create_type_hierarchy (Ide.Buffer buffer, Ide.LspClient client) {
+            var uri = buffer.dup_uri ();
+            var sel = buffer.get_selection_range ();
+            var line = sel.begin.line;
+            var column = sel.begin.line_offset;
+            var p = Jsonrpc.Message.new ("textDocument", "{",
+                                         "uri", Jsonrpc.Message.PutString.create (uri),
+                                         "}",
+                                         "position", "{",
+                                         "line", Jsonrpc.Message.PutInt32.create (line),
+                                         "character", Jsonrpc.Message.PutInt32.create (column),
+                                         "}");
+            client.call_async.begin ("textDocument/prepareTypeHierarchy", p, null, (obj, res) => {
+                try {
+                    var ret = wrap_call_async_finish ((Ide.LspClient) obj, res);
+                    while (true) {
+                        if (SUB_TYPES.get_first_child () == null)
+                            break;
+                        SUB_TYPES.remove (SUB_TYPES.get_first_child ());
+                    }
+                    while (true) {
+                        if (SUPER_TYPES.get_first_child () == null)
+                            break;
+                        SUPER_TYPES.remove (SUPER_TYPES.get_first_child ());
+                    }
+                    var iter = ret.iterator ();
+                    var root_list_store_super = new GLib.ListStore (typeof (THIData));
+                    var root_list_store_sub = new GLib.ListStore (typeof (THIData));
+                    while (true) {
+                        var child = iter.next_value ();
+                        if (child == null) {
+                            break;
+                        }
+                        var chi = (TypeHierarchyItem) Json.gobject_deserialize (typeof (TypeHierarchyItem), Json.gvariant_serialize (child));
+                        root_list_store_super.append (new THIData (client, buffer, child, chi));
+                        root_list_store_sub.append (new THIData (client, buffer, child, chi));
+                    }
+                    var tlm_i = new Gtk.TreeListModel (root_list_store_super, true, false, list_supertypes);
+                    SUPER_TYPES.append (create_type_view (tlm_i));
+                    var tlm_o = new Gtk.TreeListModel (root_list_store_sub, true, false, list_subtypes);
+                    SUB_TYPES.append (create_type_view (tlm_o));
+                } catch (Error e) {
+                    critical ("%s", e.message);
+                }
+            });
+        }
+
+        private ListModel ? list_supertypes (Object item) {
+            var thi = (THIData) item;
+            var ls = new GLib.ListStore (typeof (THIData));
+            var builder = new VariantBuilder (new VariantType ("a{sv}"));
+            builder.add ("{sv}", "item", thi.variant);
+            var p = builder.end ();
+            thi.client.call_async.begin ("typeHierarchy/supertypes", p, null, (obj, res) => {
+                try {
+                    var ret = wrap_call_async_finish ((Ide.LspClient) obj, res);
+                    var iter = ret.iterator ();
+                    while (true) {
+                        var child = iter.next_value ();
+                        if (child == null) {
+                            break;
+                        }
+                        var chi1 = (TypeHierarchyItem) Json.gobject_deserialize (typeof (TypeHierarchyItem), Json.gvariant_serialize (child));
+                        var raw = new THIData (thi.client, thi.buffer, child, chi1);
+                        ls.append (raw);
+                    }
+                } catch (Error e) {
+                    critical ("%s", e.message);
+                }
+            });
+            return new Gtk.TreeListModel (ls, true, false, list_supertypes);
+        }
+
+        private ListModel ? list_subtypes (Object item) {
+            var thi = (THIData) item;
+            var ls = new GLib.ListStore (typeof (THIData));
+            var builder = new VariantBuilder (new VariantType ("a{sv}"));
+            builder.add ("{sv}", "item", thi.variant);
+            var p = builder.end ();
+            thi.client.call_async.begin ("typeHierarchy/subtypes", p, null, (obj, res) => {
+                try {
+                    var ret = wrap_call_async_finish ((Ide.LspClient) obj, res);
+                    var iter = ret.iterator ();
+                    while (true) {
+                        var child = iter.next_value ();
+                        if (child == null) {
+                            break;
+                        }
+                        var chi1 = (TypeHierarchyItem) Json.gobject_deserialize (typeof (TypeHierarchyItem), Json.gvariant_serialize (child));
+                        var raw = new THIData (thi.client, thi.buffer, child, chi1);
+                        ls.append (raw);
+                    }
+                } catch (Error e) {
+                    critical ("%s", e.message);
+                }
+            });
+            return new Gtk.TreeListModel (ls, true, false, list_subtypes);
         }
 
         private void create_call_hierarchy (Ide.Buffer buffer, Ide.LspClient client) {
@@ -230,6 +404,33 @@ namespace CallHierarchy {
             var list = new Gtk.ListView (new Gtk.SingleSelection (model), factory);
             list.activate.connect (idx => {
                 var item = (CHIData) list.model.get_item (idx);
+                var f = File.new_for_path (Uri.parse (item.item.uri, UriFlags.NONE).get_path ());
+                var p = item.item.range.start;
+                Ide.editor_focus_location (workspace, null, new Ide.Location (f, (int) p.line, (int) p.character));
+            });
+            return list;
+        }
+
+        private Gtk.ListView create_type_view (Gtk.TreeListModel model) {
+            var factory = new Gtk.SignalListItemFactory ();
+            factory.setup.connect (item => {
+                var expander = new Gtk.TreeExpander ();
+                var lbl = new Gtk.Label ("");
+                expander.child = lbl;
+                item.set_child (expander);
+            });
+            factory.bind.connect (item => {
+                var chi = (THIData) (((Gtk.ListItem) item).get_item ());
+                var expander = (Gtk.TreeExpander) (((Gtk.ListItem) item).get_child ());
+                var lbl = expander.child;
+                expander.list_row = model.get_row (item.position);
+                ((Gtk.Label) lbl).set_label (chi.item.name);
+                if (chi.item.detail != null)
+                    ((Gtk.Label) lbl).tooltip_text = chi.item.detail;
+            });
+            var list = new Gtk.ListView (new Gtk.SingleSelection (model), factory);
+            list.activate.connect (idx => {
+                var item = (THIData) list.model.get_item (idx);
                 var f = File.new_for_path (Uri.parse (item.item.uri, UriFlags.NONE).get_path ());
                 var p = item.item.range.start;
                 Ide.editor_focus_location (workspace, null, new Ide.Location (f, (int) p.line, (int) p.character));
@@ -315,9 +516,13 @@ namespace CallHierarchy {
             var model = new GLib.Menu ();
             var mi = new GLib.MenuItem ("Show call hierarchy", "page.callhierarchy.callhierarchy");
             model.append_item (mi);
+            mi = new GLib.MenuItem ("Show type hierarchy", "page.callhierarchy.typehierarchy");
+            model.append_item (mi);
             view.append_menu (model);
             view.populate_menu.connect (() => {
                 var s = this.map.lookup_action ("callhierarchy");
+                ((SimpleAction) s).set_enabled (true);
+                s = this.map.lookup_action ("typehierarchy");
                 ((SimpleAction) s).set_enabled (true);
             });
         }
