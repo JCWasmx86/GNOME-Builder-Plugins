@@ -79,7 +79,7 @@ enabled_plugins = []
 if get_option('smart').enabled()
     enabled_plugins += 'icon_installer'
     enabled_plugins += 'gitgui'
-    enabled_plugins += 'callhierarchy'
+    enabled_plugins += 'hierarchies'
     enabled_plugins += 'scriptdir'
     progs = [
         'clangd',
@@ -108,9 +108,9 @@ if get_option('smart').enabled()
         plugins += (x + '.plugin')
     endforeach
 else
-    if get_option('plugin_callhierarchy').enabled()
-        subdir('callhierarchy')
-        plugins += 'callhierarchy.plugin'
+    if get_option('plugin_hierarchies').enabled()
+        subdir('hierarchies')
+        plugins += 'hierarchies.plugin'
     endif
     if get_option('plugin_clangd').enabled()
         subdir('clangd')

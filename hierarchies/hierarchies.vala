@@ -19,14 +19,12 @@
  */
 using Jsonrpc;
 
-// TODO: Rename plugin to "hierarchies"
-
 [CCode (cname = "wrap_call_async_finish")]
 extern GLib.Variant ? wrap_call_async_finish (Ide.LspClient client, GLib.AsyncResult result) throws GLib.Error;
-[CCode (cname = "callhierarchy_get_resource")]
-public static extern Resource callhierarchy_get_resource ();
+[CCode (cname = "hierarchies_get_resource")]
+public static extern Resource hierarchies_get_resource ();
 
-namespace CallHierarchy {
+namespace Hierarchies {
     // From VLS
     class Position : Object {
         public uint line { get; set; default = -1; }
@@ -73,7 +71,7 @@ namespace CallHierarchy {
             pos.set_area (Panel.Area.START);
             pos.set_row (0);
             pos.set_depth (3);
-            workspace.add_pane (new CallHierarchyPanel (workspace, workspace.context.workdir.get_path ()), pos);
+            workspace.add_pane (new HierarchiesPanel (workspace, workspace.context.workdir.get_path ()), pos);
         }
     }
 
@@ -82,7 +80,7 @@ namespace CallHierarchy {
     private static Gtk.Box? SUPER_TYPES = null;
     private static Gtk.Box? SUB_TYPES = null;
 
-    public class CallHierarchyPanel : Ide.Pane {
+    public class HierarchiesPanel : Ide.Pane {
         private string directory;
         private Gtk.Box view;
         private Gtk.Box incoming;
@@ -117,8 +115,8 @@ namespace CallHierarchy {
             return s;
         }
 
-        public CallHierarchyPanel (Ide.Workspace workspace, string dir) {
-            Gtk.IconTheme.get_for_display (Gdk.Display.get_default ()).add_resource_path ("/plugins/callhierarchy/icons");
+        public HierarchiesPanel (Ide.Workspace workspace, string dir) {
+            Gtk.IconTheme.get_for_display (Gdk.Display.get_default ()).add_resource_path ("/plugins/hierarchies/icons");
             this.directory = dir;
             this.view = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
             this.incoming = new Gtk.Box (Gtk.Orientation.VERTICAL, 2);
@@ -182,7 +180,7 @@ namespace CallHierarchy {
         }
     }
 
-    public class CallHierarchyPageAddin : Ide.Object, Ide.EditorPageAddin {
+    public class HierarchiesPageAddin : Ide.Object, Ide.EditorPageAddin {
         private SimpleActionGroup map;
         private Ide.SourceView view;
         private unowned GLib.File file;
@@ -497,9 +495,9 @@ namespace CallHierarchy {
             this.view = page.view;
             this.file = page.get_file ();
             var model = new GLib.Menu ();
-            var mi = new GLib.MenuItem ("Show call hierarchy", "page.callhierarchy.callhierarchy");
+            var mi = new GLib.MenuItem ("Show call hierarchy", "page.hierarchies.callhierarchy");
             model.append_item (mi);
-            mi = new GLib.MenuItem ("Show type hierarchy", "page.callhierarchy.typehierarchy");
+            mi = new GLib.MenuItem ("Show type hierarchy", "page.hierarchies.typehierarchy");
             model.append_item (mi);
             view.append_menu (model);
             view.populate_menu.connect (() => {
@@ -519,9 +517,9 @@ namespace CallHierarchy {
 }
 
 public void peas_register_types (TypeModule module) {
-    var r = callhierarchy_get_resource ();
+    var r = hierarchies_get_resource ();
     GLib.resources_register (r);
     var obj = (Peas.ObjectModule) module;
-    obj.register_extension_type (typeof (Ide.WorkspaceAddin), typeof (CallHierarchy.WorkspaceAddin));
-    obj.register_extension_type (typeof (Ide.EditorPageAddin), typeof (CallHierarchy.CallHierarchyPageAddin));
+    obj.register_extension_type (typeof (Ide.WorkspaceAddin), typeof (Hierarchies.WorkspaceAddin));
+    obj.register_extension_type (typeof (Ide.EditorPageAddin), typeof (Hierarchies.HierarchiesPageAddin));
 }

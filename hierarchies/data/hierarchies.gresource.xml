@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <gresource prefix="/plugins/callhierarchy/">
+  <gresource prefix="/plugins/hierarchies/">
     <file preprocess="xml-stripblanks">icons/scalable/actions/call-made-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/actions/call-received-symbolic.svg</file>
   </gresource>
