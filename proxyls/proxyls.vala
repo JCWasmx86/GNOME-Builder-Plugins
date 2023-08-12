@@ -27,7 +27,6 @@ class ProxyLSService : Ide.LspService {
     }
 
     public override void prepare_run_context (Ide.Pipeline pipeline, Ide.RunContext run_context) {
-        run_context.append_argv ("--stdio");
     }
 
     public override void configure_client (Ide.LspClient client) {
