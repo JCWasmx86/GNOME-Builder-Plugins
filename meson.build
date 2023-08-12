@@ -96,6 +96,7 @@ if get_option('smart').enabled()
     endforeach
     spec_progs = {
         'swift': 'swift-templates',
+        'proxy-ls': 'proxyls',
     }
     foreach prog, plugin : spec_progs
         p = find_program(prog, required: false)
@@ -127,6 +128,10 @@ else
     if get_option('plugin_icon_installer').enabled()
         subdir('icon_installer')
         plugins += 'icon_installer.plugin'
+    endif
+    if get_option('plugin_proxyls').enabled()
+        subdir('proxyls')
+        plugins += 'proxyls.plugin'
     endif
     if get_option('plugin_pyright').enabled()
         subdir('pyright')
