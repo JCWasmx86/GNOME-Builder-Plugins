@@ -32,7 +32,6 @@
 #include "ide-lsp-completion-item.h"
 #include "ide-lsp-completion-provider.h"
 #include "ide-lsp-completion-results.h"
-#include "ide-lsp-configuration-item.h"
 #include "ide-lsp-diagnostic.h"
 #include "ide-lsp-diagnostic-provider.h"
 #include "ide-lsp-enums.h"

@@ -33,36 +33,6 @@ class PyrightService : Ide.LspService {
     public override void configure_client (Ide.LspClient client) {
         client.add_language ("python");
         client.add_language ("python3");
-        client.load_configuration.connect (items => {
-            critical ("Got %d items", items.length);
-            items.foreach(ptr => {
-				var obj = (Ide.LspConfigurationItem)ptr;
-				critical ("%s %s", obj.get_section(), obj.get_scope_uri ());
-			});
-            var ret = new GLib.Variant?[0];
-            foreach (var ptr in items.data) {
-                var i = (Ide.LspConfigurationItem)ptr;
-                if (i.get_section () == null) {
-                    ret += new GLib.Variant.maybe (VariantType.VARIANT, null);
-                    continue;
-                }
-                if (i.get_section () == "python.analysis") {
-                    var builder = new VariantBuilder (new VariantType ("a{sv}") );
-	                builder.add ("{sv}", "logLevel", new Variant.string ("Trace"));
-	                builder.add ("{sv}", "typeCheckingMode", new Variant.string ("Strict"));
-                    ret += builder.end ();
-                    continue;
-                }
-                ret += new GLib.Variant.maybe (VariantType.VARIANT, null);
-            }
-            var builder = new VariantBuilder (new VariantType ("a*"));
-            foreach (var v in ret) {
-                builder.add ("*", v);
-            }
-            var ret_v = builder.end ();
-            critical (">> %s", ret_v.print (true));
-            return ret_v;
-	});
     }
 }
 

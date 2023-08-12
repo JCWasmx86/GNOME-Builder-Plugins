@@ -1436,11 +1436,6 @@ namespace Ide {
 		public uint severity { get; construct; }
 	}
 	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_id = "ide_lsp_client_get_type ()")]
-	public class LspConfigurationItem : GLib.Object {
-		public unowned string? get_section ();
-		public unowned string? get_scope_uri ();
-	}
-	[CCode (cheader_filename = "libide-code.h,libide-core.h,libide-debugger.h,libide-editor.h,libide-foundry.h,libide-greeter.h,libide-gtk.h,libide-gui.h,libide-io.h,libide-lsp.h,libide-plugins.h,libide-projects.h,libide-search.h,libide-sourceview.h,libide-terminal.h,libide-threading.h,libide-tree.h,libide-tweaks.h,libide-vcs.h,libide-webkit.h", type_id = "ide_lsp_client_get_type ()")]
 	public class LspClient : Ide.Object {
 		[CCode (has_construct_function = false)]
 		public LspClient (GLib.IOStream io_stream);
@@ -1469,7 +1464,7 @@ namespace Ide {
 		[NoAccessorMethod]
 		public bool use_markdown_in_diagnostics { get; set; }
 		public virtual signal void initialized ();
-		public virtual signal GLib.Variant? load_configuration (GLib.PtrArray items);
+		public virtual signal GLib.Variant load_configuration ();
 		public virtual signal void notification (string method, GLib.Variant @params);
 		public virtual signal void published_diagnostics (GLib.File file, Ide.Diagnostics diagnostics);
 		public virtual signal bool supports_language (string language_id);
