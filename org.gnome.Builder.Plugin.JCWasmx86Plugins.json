@@ -1,5 +1,5 @@
 {
-  "app-id": "org.gnome.Builder.Plugin.JCWasmx86Plugins",
+  "id": "org.gnome.Builder.Plugin.JCWasmx86Plugins",
   "runtime": "org.gnome.Builder.Devel",
   "runtime-version": "master",
   "sdk": "org.gnome.Sdk//master",
