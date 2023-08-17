@@ -74,12 +74,6 @@ public class ProxyLSHoverProvider : Ide.LspHoverProvider, GtkSource.HoverProvide
     }
 }
 
-public class ProxyLSRenameProvider : Ide.LspRenameProvider, Ide.RenameProvider {
-    public void load () {
-        bind_client (this);
-    }
-}
-
 public class ProxyLSSymbolResolver : Ide.LspSymbolResolver, Ide.SymbolResolver {
     public void load () {
         bind_client (this);
@@ -94,6 +88,5 @@ public void peas_register_types (TypeModule module) {
     obj.register_extension_type (typeof (Ide.Formatter), typeof (ProxyLSFormatter));
     obj.register_extension_type (typeof (Ide.Highlighter), typeof (ProxyLSHighlighter));
     obj.register_extension_type (typeof (GtkSource.HoverProvider), typeof (ProxyLSHoverProvider));
-    obj.register_extension_type (typeof (Ide.RenameProvider), typeof (ProxyLSRenameProvider));
     obj.register_extension_type (typeof (Ide.SymbolResolver), typeof (ProxyLSSymbolResolver));
 }

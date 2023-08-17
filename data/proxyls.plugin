@@ -13,7 +13,6 @@ X-Diagnostic-Provider-Languages-Priority=200
 X-Formatter-Languages=json,yaml,xml
 X-Highlighter-Languages=json,yaml,xml
 X-Hover-Provider-Languages=json,yaml,xml
-X-Rename-Provider-Languages=json,yaml,xml
 X-Symbol-Resolver-Languages=json,yaml,xml
 X-Symbol-Resolver-Languages-Priority=200
 X-Builder-ABI=@BUILDER_ABI@
