@@ -33,6 +33,8 @@ class ProxyLSService : Ide.LspService {
         client.add_language ("xml");
         client.add_language ("json");
         client.add_language ("yaml");
+        client.add_language ("python");
+        client.add_language ("python3");
     }
 }
 
