@@ -35,6 +35,7 @@ class ProxyLSService : Ide.LspService {
         client.add_language ("yaml");
         client.add_language ("python");
         client.add_language ("python3");
+        client.add_language ("js");
     }
 }
 
@@ -71,7 +72,13 @@ class ProxyLSHighlighter : Ide.LspHighlighter, Ide.Highlighter {
 public class ProxyLSHoverProvider : Ide.LspHoverProvider, GtkSource.HoverProvider {
     public override void prepare () {
         this.priority = 80000;
-        this.category = "Clang";
+        this.category = "ProxyLS";
+        bind_client (this);
+    }
+}
+
+public class ProxyLSRenameProvider : Ide.LspRenameProvider, Ide.RenameProvider {
+    public void load () {
         bind_client (this);
     }
 }
@@ -89,6 +96,7 @@ public void peas_register_types (TypeModule module) {
     obj.register_extension_type (typeof (Ide.DiagnosticProvider), typeof (ProxyLSDiagnosticProvider));
     obj.register_extension_type (typeof (Ide.Formatter), typeof (ProxyLSFormatter));
     obj.register_extension_type (typeof (Ide.Highlighter), typeof (ProxyLSHighlighter));
+    obj.register_extension_type (typeof (Ide.RenameProvider), typeof (ProxyLSRenameProvider));
     obj.register_extension_type (typeof (GtkSource.HoverProvider), typeof (ProxyLSHoverProvider));
     obj.register_extension_type (typeof (Ide.SymbolResolver), typeof (ProxyLSSymbolResolver));
 }
