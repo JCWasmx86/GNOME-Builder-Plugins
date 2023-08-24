@@ -62,10 +62,17 @@ public class GtkCSSLanguageServerSymbolResolver : Ide.LspSymbolResolver, Ide.Sym
     }
 }
 
+class GtkCSSLanguageServerFormatter : Ide.LspFormatter, Ide.Formatter {
+    public void load () {
+        bind_client (this);
+    }
+}
+
 public void peas_register_types (TypeModule module) {
     var obj = (Peas.ObjectModule) module;
     obj.register_extension_type (typeof (GtkSource.CompletionProvider), typeof (GtkCSSLanguageServerCompletionProvider));
     obj.register_extension_type (typeof (Ide.DiagnosticProvider), typeof (GtkCSSLanguageServerDiagnosticProvider));
     obj.register_extension_type (typeof (GtkSource.HoverProvider), typeof (GtkCSSLanguageServerHoverProvider));
     obj.register_extension_type (typeof (Ide.SymbolResolver), typeof (GtkCSSLanguageServerSymbolResolver));
+    obj.register_extension_type (typeof (Ide.Formatter), typeof (GtkCSSLanguageServerFormatter));
 }

@@ -9,6 +9,7 @@ X-Category=lsps
 X-Completion-Provider-Languages=css
 X-Diagnostic-Provider-Languages=css
 X-Diagnostic-Provider-Languages-Priority=200
+X-Formatter-Languages=css
 X-Hover-Provider-Languages=css
 X-Symbol-Resolver-Languages=css
 X-Symbol-Resolver-Languages-Priority=200
